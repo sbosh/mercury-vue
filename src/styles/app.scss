@@ -2,57 +2,93 @@ body {
   margin: 0;
   padding: 0;
 }
-header {
-  border-bottom: 1px solid #cfcfcf;
 
-  nav {
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+}
+
+header { 
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  nav { 
+    height: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    max-width: 1200px;
-    margin: auto;
+    flex-direction: column;
   }
 
-  ul {
-    margin: 0;
-    padding: 0;
+  ul { 
 
-    li {
-      list-style: none;
-      display: inline-block;
+    li { 
 
-      a {
-        display: block;
-        padding: 20px;
-        text-decoration: none;
+      a { 
+      }
+    }
+  }
+} 
+
+.home-slider {
+  background-image: url(../images/building01.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+}
+
+.toggle-header {
+  box-shadow: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  margin: auto;
+
+  .button { 
+    width: 71px;
+    height: 71px;
+    background-color: #f8f8f8;
+    border-radius: 50%;
+    position: relative;
+
+    span {
+      display: block;
+      width: 27px;
+      height: 2px;
+      background-color: #000000;
+      position: absolute;
+
+      &:nth-child(1){
+        top: 20px;
+      }
+      &:nth-child(2){
+        top: 40px;
       }
     }
   }
 }
 
-footer {
-  border-top: 1px solid #cfcfcf;
-
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    ul {
-      padding: 0;
-      margin: auto;
-      text-align: center;
-
-      li {
-        list-style: none;
-        display: inline-block;
-
-        a {
-          padding: 20px;
-          display: block;
-          text-decoration: none;
-        }
-      }
-    }
+.lines {
+  span {
+    width: 1px;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    background: rgba(#979797, .37);
+    display: block;
+  }
+  .line-1 {
+    left: 192px; 
+    transition: bottom .3s;
+  }
+  .line-2 {
+    left: 50%;
+    transition: bottom .6s;
+  }
+  .line-3 {
+    right: 192px; 
+    transition: bottom .9s;
   }
 }

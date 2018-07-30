@@ -1,5 +1,7 @@
 <template>
   <footer>
+    <hr>
+    <h2>footer</h2>
     <nav>
       <ul>
         <router-link tag="li" :to="'/' + lang"><a href="#!">Home</a></router-link>
