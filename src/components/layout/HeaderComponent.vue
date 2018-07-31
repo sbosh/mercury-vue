@@ -2,18 +2,18 @@
   <header v-bind:class="{ active: isActive }">
     <nav>
       <ul>
-        <li><router-link :to="'/' + lang">Home</router-link></li>
-        <li><router-link :to="'/' + lang + '/about'">About</router-link></li>
+        <router-link :to="'/' + lang">Home</router-link>
+        <router-link :to="'/' + lang + '/about'">About</router-link>
       </ul>
-      <!-- <button class="toggle-header"
+      <button class="toggle-header"
         @click="isActive = !isActive"
         v-bind:class="{ active: isActive }">
         <div class="button">
           <span></span>
           <span></span>
         </div>
+        <span>Меню</span>
       </button>
-      <span>Меню</span> -->
       <ul class="lng">
         <li v-if="lang === 'bg'" ><a href="#!" @click="changeLang('en', $event)">en</a></li>
         <li v-else><a href="#!" @click="changeLang('bg', $event)">bg</a></li>

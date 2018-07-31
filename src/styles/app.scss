@@ -8,10 +8,11 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 header { 
-  // position: fixed;
-  // right: 0;
-  // top: 0;
-  // bottom: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: red;
 
   nav { 
     height: 100%;
@@ -22,6 +23,7 @@ header {
   }
 
   ul { 
+    transform: translateX(200px);
 
     li { 
 
@@ -31,64 +33,97 @@ header {
   }
 } 
 
-// .home-slider {
-//   background-image: url(../images/building01.jpg);
-//   background-position: center;
-//   background-size: cover;
-//   height: 100vh;
-// }
+.home-slider {
+  background-image: url(../images/building01.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
 
-// .toggle-header {
-//   box-shadow: none;
-//   border: none;
-//   outline: none;
-//   background: transparent;
-//   cursor: pointer;
-//   margin: auto;
+  .caption {
+    padding-left: 190px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
 
-//   .button { 
-//     width: 71px;
-//     height: 71px;
-//     background-color: #f8f8f8;
-//     border-radius: 50%;
-//     position: relative;
+    .title {
+      color: #fff; 
+      font-family: Montserrat;
+      font-size: 42px;
+      font-weight: 700;
+      line-height: 55px;
+    }
+  }
+}
 
-//     span {
-//       display: block;
-//       width: 27px;
-//       height: 2px;
-//       background-color: #000000;
-//       position: absolute;
+.btn {
+  border: 1px solid #fff;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  display: inline-block;
+}
 
-//       &:nth-child(1){
-//         top: 20px;
-//       }
-//       &:nth-child(2){
-//         top: 40px;
-//       }
-//     }
-//   }
-// }
+.toggle-header {
+  box-shadow: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  margin: auto;
 
-// .lines {
-//   span {
-//     width: 1px;
-//     position: absolute;
-//     bottom: 0;
-//     top: 0;
-//     background: rgba(#979797, .37);
-//     display: block;
-//   }
-//   .line-1 {
-//     left: 192px; 
-//     transition: bottom .3s;
-//   }
-//   .line-2 {
-//     left: 50%;
-//     transition: bottom .6s;
-//   }
-//   .line-3 {
-//     right: 192px; 
-//     transition: bottom .9s;
-//   }
-// }
+  .button { 
+    width: 71px;
+    height: 71px;
+    background-color: #f8f8f8;
+    border-radius: 50%;
+    position: relative;
+
+    span {
+      display: block;
+      width: 27px;
+      height: 2px;
+      background-color: #000000;
+      position: absolute;
+      left: 50%;
+      margin-left: -14px;
+
+      &:nth-child(1){
+        top: 30px;
+      }
+      &:nth-child(2){
+        top: 40px;
+      }
+    }
+  }
+}
+
+.lines {
+  span {
+    width: 1px;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    background: rgba(#979797, .37);
+    display: block;
+  }
+  .line-1 {
+    left: 192px; 
+    transition: bottom .3s;
+  }
+  .line-2 {
+    left: 50%;
+    transition: bottom .6s;
+  }
+  .line-3 {
+    right: 192px; 
+    transition: bottom .9s;
+  }
+}
+
+.about-us {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

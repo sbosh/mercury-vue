@@ -1,7 +1,10 @@
 <template>
-  <div>
-    <h1>About</h1>
-    <h2>{{ $t('message') }}</h2>
+  <div class="main-content">
+    <div class="about-us">
+      <h1>About</h1>
+      <h2>{{ $t('message') }}</h2>
+      <p>{{ $t('text') }}</p>
+    </div>
     <footer-component/>
   </div>
 </template>
