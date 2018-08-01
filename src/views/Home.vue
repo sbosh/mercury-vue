@@ -8,7 +8,7 @@
       </div>
       <div class="caption">
         <h2 class="title">Ние имаме различна архитектурна практика</h2>
-        <a href="" class="btn">виж нашите проекти</a>
+        <router-link :to="'/' + lang + '/building-inner'" class="btn">виж нашите проекти</router-link>
       </div>
     </div>
   </div>
@@ -16,6 +16,11 @@
 
 <script>
 export default {
-  name: 'home'
+  name: 'home',
+  computed: {
+    lang () {
+      return this.$i18n.locale
+    }
+  }
 }
 </script>
