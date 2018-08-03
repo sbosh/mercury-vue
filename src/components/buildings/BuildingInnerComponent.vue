@@ -36,12 +36,12 @@ export default {
     setTimeout(function () {
       $this.$el.classList.add('active')
     }, 1000)
-    let animateImg = document.getElementsByClassName('animate-box')
+    let animateBox = document.getElementsByClassName('animate-box')
     window.addEventListener('scroll', function () {
-      for (let index = 0; index < animateImg.length; index++) {
-        let windowBottom = animateImg[index].getBoundingClientRect().bottom
+      for (let index = 0; index < animateBox.length; index++) {
+        let windowBottom = animateBox[index].getBoundingClientRect().bottom
         if (windowBottom - window.innerHeight <= 0) {
-          animateImg[index].classList.add('visible')
+          animateBox[index].classList.add('visible')
         }
       }
     })
