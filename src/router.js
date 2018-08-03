@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
+import Contacts from './views/Contacts.vue'
 import BuildingInnerComponent from './components/buildings/BuildingInnerComponent.vue'
 import { loadLanguageAsync, i18n } from './setup/i18n'
 
@@ -21,9 +22,15 @@ let router = new Router({
       component: About
     },
     {
+      path: '/:lang/contacts',
+      name: 'contacts',
+      component: Contacts
+    },
+    {
       path: '/:lang/building-inner',
       name: 'building-inner',
-      component: BuildingInnerComponent
+      component: BuildingInnerComponent,
+      meta: { transitionName: 'slide' }
     }
   ]
 })

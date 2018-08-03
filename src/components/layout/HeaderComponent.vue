@@ -4,6 +4,7 @@
       <ul>
         <router-link :to="'/' + lang">Home</router-link>
         <router-link :to="'/' + lang + '/about'">About</router-link>
+        <router-link :to="'/' + lang + '/contacts'">Contacts</router-link>
       </ul>
       <button class="toggle-header"
         @click="isActive = !isActive"
