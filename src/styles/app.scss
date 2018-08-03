@@ -13,6 +13,7 @@ header {
   top: 0;
   bottom: 0;
   background: red;
+  z-index: 9999;
 
   nav { 
     height: 100%;
@@ -31,7 +32,7 @@ header {
 } 
 
 .home-slider {
-  background-image: url(../images/building01.jpg);
+  background-image: url(../assets/images/building01.jpg);
   background-position: center;
   background-size: cover;
   height: 100vh;
