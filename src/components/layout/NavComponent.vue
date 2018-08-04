@@ -16,14 +16,9 @@ export default {
 </script>
 
 <style lang="scss">
-  .active-component {
-    .logo {
-      transform: translateX(0);
-    }
-  }
   .logo {
     position: absolute;
-    transform: translateX(-100px);
-    transition: all .6s;
+    top: 30px;
+    left: 45px;
   }
 </style>

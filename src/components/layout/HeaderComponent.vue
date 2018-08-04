@@ -5,22 +5,28 @@
         <div class="content">
           <div class="cols">
             <div class="col">
-              <img src="@/assets/images/logo-nav.png" alt="">
+              <router-link tag="a" :to="'/' + lang"><img src="@/assets/images/logo-nav.png" alt=""></router-link>
             </div>
             <div class="col">
-              <h3><a href="">Настоящи проекти</a></h3>
+              <h3 class="margin-bottom-0"><a href="">Настоящи проекти</a></h3>
               <ul>
-                <router-link :to="'/' + lang">Home</router-link>
-                <router-link :to="'/' + lang + '/about'">About</router-link>
-                <router-link :to="'/' + lang + '/contacts'">Contacts</router-link>
+                <li><a href="">Комплекс Бижу</a><router-link :to="'/' + lang">Home</router-link></li>
+                <li><a href="">Флора Бийч Резорт</a></li>
+                <li><a href="">Комплекс Меркурий Плаза</a></li>
+                <li><a href="">Комплекс Елеганс</a></li>
               </ul>
               <h3><a href="">Завършени проекти</a></h3>
               <h3><a href="">Бъдещи проекти</a></h3>
               <h3><a href="">Новини</a></h3>
             </div>
             <div class="col">
-              <h3><a href="">Контакти</a></h3>
-              <h3><a href="">За компанията</a></h3>
+              <h3><router-link :to="'/' + lang + '/contacts'">Contacts</router-link></h3>
+              <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/about'">{{ $t('about_company') }}</router-link></h3>
+              <ul>
+                <li><router-link :to="'/' + lang + '/about'">За нас</router-link></li>
+                <li><a href="">Услуги</a></li>
+                <li><a href="">История</a></li>
+              </ul>
             </div>
           </div>
           <ul class="lng">
@@ -64,6 +70,15 @@ export default {
       return this.$i18n.locale
     }
   },
+  mounted () {
+    let $this = this
+    let deleteLink = document.querySelectorAll('a')
+    for (let i = 0; i < deleteLink.length; i++) {
+      deleteLink[i].addEventListener('click', function () {
+        $this.isActive = false
+      })
+    }
+  },
   methods: {
     changeLang (lang, event) {
       event.preventDefault()
@@ -77,6 +92,25 @@ export default {
 </script>
 
 <style lang="scss">
+  @keyframes nav-animation {
+    0% {transform: translateX(50%)}
+    100% {transform: translateX(0)}
+  }
+  @keyframes col1-animation {
+    0% {transform: translateX(250px); opacity: 0;}
+    50% {transform: translateX(1100); opacity: 0;}
+    100% {transform: translateX(0); opacity: 1;}
+  }
+  @keyframes col2-animation {
+    0% {transform: translateX(450px); opacity: 0;}
+    50% {transform: translateX(100); opacity: 0;}
+    100% {transform: translateX(0); opacity: 1;}
+  }
+  @keyframes col3-animation {
+    0% {transform: translateX(650px); opacity: 0;}
+    50% {transform: translateX(100); opacity: 0;}
+    100% {transform: translateX(0); opacity: 1;}
+  }
   header {
     position: fixed;
     right: 0;
@@ -84,6 +118,115 @@ export default {
     bottom: 0;
     z-index: 9999;
 
+    .main-navigation {
+      background: rgba(#000, .82);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      height: 100%;
+      transform: translateX(100%);
+      transition: all 1.3s;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        background-color: #232323;
+        height: 100%;
+        width: 85%;
+        transform: translateX(50%);
+        transition: all 2.4s;
+
+        h3, h3 a {
+          color: #fff;
+          font-size: 24px;
+          font-weight: 700;
+          line-height: 35px;
+          text-decoration: none;
+        }
+
+        h3 {
+          margin-bottom: 43px;
+        }
+
+        .margin-bottom-0 {
+          margin-bottom: 0;
+        }
+
+        h3 a {
+          display: inline-block;
+
+          &:after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 4px 0 4px 5px;
+            border-color: transparent transparent transparent #fa6a02;
+            float: right;
+            display: inline-block;
+            margin: 15px 0 0 10px;
+          }
+        }
+
+        .cols {
+          display: flex;
+          flex-direction: row;
+          padding: 110px 30px 50px 30px;
+        }
+
+        .col {
+          opacity: 0;
+          padding: 0 40px 40px;
+          border-right: 1px solid rgba(#979797, .37);
+
+          &:nth-child(1){
+            transform: translateX(250px);
+            transition: all 1.9s;
+          }
+          &:nth-child(2){
+            transform: translateX(450px);
+            transition: all 2.9s;
+          }
+          &:nth-child(3){
+            transform: translateX(600px);
+            transition: all 3.9s;
+            border: none;
+          }
+        }
+
+        .lng {
+          margin-top: auto;
+        }
+
+        ul {
+          margin: 13px 0 30px 0;
+          padding: 0;
+          list-style: none;
+
+          li {
+            display: block;
+            margin-bottom: 16px;
+
+            a {
+              color: #8d8d8d;
+              font-family: 'Fira Sans', sans-serif;
+              font-size: 14px;
+              font-weight: 400;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+
+      .title {
+
+      }
+    }//main-navigation
     nav {
       height: 100%;
       display: flex;
@@ -145,54 +288,24 @@ export default {
         }
       }
     }
-    .main-navigation {
-      background: rgba(#000, .82);
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      left: 100%;
-      transition: all .9s;
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-start;
-      height: 100%;
-
-      .content {
-        display: flex;
-        flex-direction: column;
-        width: 0;
-        background-color: #232323;
-        height: 100%;
-        transition: all 1.2s;
-
-        .cols {
-          display: flex;
-          flex-direction: row;
-        }
-
-        .lng {
-          margin-top: auto;
-        }
-
-        ul {
-          margin: 0;
-          padding: 0;
-          list-style: none;
-        }
-      }
-
-      .title {
-
-      }
-    }//main-navigation
     &.active {
       .main-navigation {
-        left: 0;
-        right: 0;
-
+        transform: translateX(0);
         .content {
-          width: 85%;
+          animation: nav-animation 2.8s forwards;
+        }
+
+        .col {
+          opacity: 1;
+          &:nth-child(1){
+            animation: col3-animation 1.8s forwards;
+          }
+          &:nth-child(2){
+            animation: col3-animation 2.8s forwards;
+          }
+          &:nth-child(3){
+            animation: col3-animation 3.8s forwards;
+          }
         }
       }
     }
