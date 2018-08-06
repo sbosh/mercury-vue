@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', sans-serif;
+  background-color: #f8f8f8;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -14,10 +15,35 @@ h1,h2,h3,h4,h5,h6 {
   background-size: cover;
   height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: center; 
+  .title {
+    margin-bottom: 25px;
+  }
+  .btn {
+    transform: translateY(-250px);
+    transition: all 0.5s;
+  }
+}
 
-  .caption {
-    padding-left: 195px;
+.title-box {
+  overflow: hidden;
+  padding-left: 195px;
+  .title {
+    transition: all 1.0s;
+    transform: translateY(-150px);
+  }
+}
+.active-component {
+  transition: all .3s;
+  padding-right: 195px;
+  
+  .btn {
+    transform: translateY(0);
+  }
+  .title-box {
+    .title {
+      transform: translateY(0);
+    }
   }
 }
 
@@ -84,11 +110,25 @@ h1,h2,h3,h4,h5,h6 {
   border: 1px solid #fff;
   color: #fff;
   text-decoration: none;
-  padding: 10px;
+  padding: 32px 40px;
   display: inline-block;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
+  position: relative;
+  oveflow: hidden;
+
+  .btn-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fa6a02;
+    z-index: -1;
+    transition: all .3s;
+    transform: translateX(-102%); 
+  }
 
   &:after {
     content: '';
@@ -114,6 +154,10 @@ h1,h2,h3,h4,h5,h6 {
   }
 
   &:hover {
+    border-color: #fa6a02;
+    .btn-overlay {
+      transform: translateX(0);
+    }
     &:after {
       width: 60px;
     }
@@ -145,11 +189,4 @@ h1,h2,h3,h4,h5,h6 {
     right: 192px; 
     transition: bottom .9s;
   }
-}
-
-.about-us {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }

@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <nav-component/>
     <header-component/>
     <transition :name="transitionName" mode="out-in" @beforeLeave="beforeLeave" @enter="enter" @afterEnter="afterEnter">
       <router-view/>
@@ -9,11 +8,10 @@
 </template>
 <script>
 import HeaderComponent from '@/components/layout/HeaderComponent'
-import NavComponent from '@/components/layout/NavComponent'
 const DEFAULT_TRANSITION = 'fade'
 export default {
   name: 'app',
-  components: { HeaderComponent, NavComponent },
+  components: { HeaderComponent },
   data () {
     return {
       prevHeight: 0,
@@ -38,7 +36,7 @@ export default {
   methods: {
     beforeLeave (element) {
       this.prevHeight = getComputedStyle(element).height
-      this.$el.classList.remove('active')
+      this.$el.classList.remove('active-component')
     },
     enter (element) {
       const { height } = getComputedStyle(element)

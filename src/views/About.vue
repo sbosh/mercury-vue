@@ -1,9 +1,21 @@
 <template>
   <div class="main-content">
     <div class="about-us">
-      <h1>About</h1>
+      <div class="caption">
+        <div class="title-box">
+          <h1>За компанията</h1>
+          <h2 class="title">Mercury99 е строителна фирма. <br>Ние създаваме иновативни комплекси, сгради.</h2>
+        </div>
+      </div>
       <h2>{{ $t('message') }}</h2>
       <p>{{ $t('text') }}</p>
+      <div class="history">
+        <div class="caption">
+          <div class="title-box">
+            <h2 class="title">История</h2>
+          </div>
+        </div>
+      </div>
     </div>
     <footer-component/>
   </div>
@@ -15,3 +27,34 @@ export default {
   components: { FooterComponent }
 }
 </script>
+
+<style lang="scss">
+  .about-us {
+    background-color: #232323;
+    .caption {
+      .title-box {
+        .title {
+          color: #fff;
+        }
+      }
+    }
+
+    .history {
+      background-color: #f8f8f8;
+
+      .caption {
+        .title-box {
+          .title {
+            color: #2c2c2c;
+            &:after {
+              border-color: #fa6a02;
+            }
+            &:before {
+              background: #8d8d8d;
+            }
+          }
+        }
+      }
+    }//history
+  }
+</style>

@@ -50,11 +50,6 @@ export default {
 </script>
 
 <style lang="scss">
-.text {
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
 .img {
   max-width: 500px;
   margin: 50px auto;

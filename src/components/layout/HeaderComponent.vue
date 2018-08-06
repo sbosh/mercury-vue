@@ -36,7 +36,11 @@
         </div>
       </div>
       <div class="tel">
-        08982212412
+        <a href="tel+359884626391" class="tel-box">
+          <div class="icon"><img src="@/assets/images/phone-icon.svg" alt=""></div>
+          <div class="text">Свържете се с нас</div>
+          <div class="phone">+359 884 626 391</div>
+        </a>
       </div>
       <button class="toggle-header"
         @click="isActive = !isActive"
@@ -92,31 +96,13 @@ export default {
 </script>
 
 <style lang="scss">
-  @keyframes nav-animation {
-    0% {transform: translateX(50%)}
-    100% {transform: translateX(0)}
-  }
-  @keyframes col1-animation {
-    0% {transform: translateX(250px); opacity: 0;}
-    50% {transform: translateX(1100); opacity: 0;}
-    100% {transform: translateX(0); opacity: 1;}
-  }
-  @keyframes col2-animation {
-    0% {transform: translateX(450px); opacity: 0;}
-    50% {transform: translateX(100); opacity: 0;}
-    100% {transform: translateX(0); opacity: 1;}
-  }
-  @keyframes col3-animation {
-    0% {transform: translateX(650px); opacity: 0;}
-    50% {transform: translateX(100); opacity: 0;}
-    100% {transform: translateX(0); opacity: 1;}
-  }
   header {
     position: fixed;
     right: 0;
     top: 0;
     bottom: 0;
     z-index: 9999;
+    background: #fff;
 
     .main-navigation {
       background: rgba(#000, .82);
@@ -222,11 +208,41 @@ export default {
           }
         }
       }
-
-      .title {
-
-      }
     }//main-navigation
+    .tel {
+      .tel-box {
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        transition: all .3s;
+        color: #fff;
+        padding: 30px;
+
+        &:hover {
+          background: #fff;
+          color: #000;
+          .icon {
+            -webkit-animation: ring 1s infinite;
+            -webkit-animation-iteration-count:infinite;
+          }
+        }
+      }
+      .icon {
+        margin-left: auto;
+      }
+      .text {
+        font-family: Montserrat;
+        font-size: 9px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      .phone {
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
     nav {
       height: 100%;
       display: flex;
@@ -241,7 +257,7 @@ export default {
       background: transparent;
       cursor: pointer;
       margin: auto;
-      color: #fff;
+      color: #000;
       font-family: Montserrat;
       font-size: 11px;
       font-weight: 700;
@@ -309,5 +325,78 @@ export default {
         }
       }
     }
+  }
+  @-webkit-keyframes ring {
+    0% {
+    }
+    10% {
+      -webkit-transform:rotate(5deg);
+      -moz-transform:rotate(5deg);
+      -o-transform:rotate(5deg);
+    }
+    20% {
+      -webkit-transform:rotate(-5deg);
+      -moz-transform:rotate(-5deg);
+      -o-transform:rotate(-5deg);
+    }
+    30% {
+      -webkit-transform:rotate(5deg);
+      -moz-transform:rotate(5deg);
+      -o-transform:rotate(5deg);
+    }
+     40% {
+      -webkit-transform:rotate(-5deg);
+      -moz-transform:rotate(-5deg);
+      -o-transform:rotate(-5deg);
+    }
+    50% {
+      -webkit-transform:rotate(5deg);
+      -moz-transform:rotate(5deg);
+      -o-transform:rotate(5deg);
+    }
+     60% {
+      -webkit-transform:rotate(-5deg);
+      -moz-transform:rotate(-5deg);
+      -o-transform:rotate(-5deg);
+    }
+    70% {
+      -webkit-transform:rotate(5deg);
+      -moz-transform:rotate(5deg);
+      -o-transform:rotate(5deg);
+    }
+    80% {
+      -webkit-transform:rotate(-5deg);
+      -moz-transform:rotate(-5deg);
+      -o-transform:rotate(-5deg);
+    }
+    90% {
+      -webkit-transform:rotate(5deg);
+      -moz-transform:rotate(5deg);
+      -o-transform:rotate(5deg);
+    }
+     100% {
+      -webkit-transform:rotate(-5deg);
+      -moz-transform:rotate(-5deg);
+      -o-transform:rotate(-5deg);
+    }
+  }
+  @keyframes nav-animation {
+    0% {transform: translateX(50%)}
+    100% {transform: translateX(0)}
+  }
+  @keyframes col1-animation {
+    0% {transform: translateX(250px); opacity: 0;}
+    50% {transform: translateX(1100); opacity: 0;}
+    100% {transform: translateX(0); opacity: 1;}
+  }
+  @keyframes col2-animation {
+    0% {transform: translateX(450px); opacity: 0;}
+    50% {transform: translateX(100); opacity: 0;}
+    100% {transform: translateX(0); opacity: 1;}
+  }
+  @keyframes col3-animation {
+    0% {transform: translateX(650px); opacity: 0;}
+    50% {transform: translateX(100); opacity: 0;}
+    100% {transform: translateX(0); opacity: 1;}
   }
 </style>
