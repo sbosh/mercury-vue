@@ -102,10 +102,10 @@ export default {
     top: 0;
     bottom: 0;
     z-index: 9999;
-    background: #fff;
+    border-left: 1px solid rgba(#979797, .37);
+    width: 195px;
 
     .main-navigation {
-      background: rgba(#000, .82);
       position: fixed;
       top: 0;
       bottom: 0;
@@ -210,6 +210,7 @@ export default {
       }
     }//main-navigation
     .tel {
+      width: 100%;
       .tel-box {
         text-decoration: none;
         display: flex;
@@ -257,7 +258,7 @@ export default {
       background: transparent;
       cursor: pointer;
       margin: auto;
-      color: #000;
+      color: #fff;
       font-family: Montserrat;
       font-size: 11px;
       font-weight: 700;
@@ -279,12 +280,25 @@ export default {
           position: absolute;
           left: 50%;
           margin-left: -14px;
+          transition: all .3s;
 
           &:nth-child(1){
             top: 30px;
           }
           &:nth-child(2){
             top: 40px;
+          }
+        }
+      }
+      &.active {
+        .button {
+          span:nth-child(1) {
+            top: 35px;
+            transform: rotate(45deg);
+          }
+          span:nth-child(2) {
+            transform: rotate(-45deg);
+            top: 35px;
           }
         }
       }

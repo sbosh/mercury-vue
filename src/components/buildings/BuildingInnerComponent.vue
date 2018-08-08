@@ -1,5 +1,6 @@
 <template>
 <div class="inner-building">
+  <navinner-component/>
   <h3>Inner Building</h3>
   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam amet quam placeat odit molestias est quos, iure sed excepturi delectus, necessitatibus, exercitationem dignissimos. Magni hic consequuntur asperiores modi nostrum minus.</p>
   <img src="@/assets/images/building01.jpg" class="img" alt="">
@@ -29,8 +30,10 @@
 </template>
 
 <script>
+import NavinnerComponent from '@/components/layout/NavinnerComponent'
 export default {
   name: 'building-inner',
+  components: { NavinnerComponent },
   mounted () {
     let $this = this
     setTimeout(function () {
@@ -75,13 +78,11 @@ export default {
   }
 }
 .inner-building {
-  background: #f7f7f7;
-  padding: 100px;
+  padding: 130px 195px 0 195px;
   transition: all 1.4s;
+  background-color: #232323;
 
   &.active {
-    background: #cfcfcf;
-
     .img {
       transform: translateX(0);
       opacity: 1;

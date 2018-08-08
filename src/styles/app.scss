@@ -35,7 +35,6 @@ h1,h2,h3,h4,h5,h6 {
 }
 .active-component {
   transition: all .3s;
-  padding-right: 195px;
   
   .btn {
     transform: translateY(0);
@@ -106,6 +105,10 @@ h1,h2,h3,h4,h5,h6 {
   }
 }
 
+.btn-box {
+  overflow: hidden;
+  margin-left: 195px;
+}
 .btn {
   border: 1px solid #fff;
   color: #fff;
@@ -166,27 +169,4 @@ h1,h2,h3,h4,h5,h6 {
 
 #app {
   overflow-x: hidden;
-}
-
-.lines {
-  span {
-    width: 1px;
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    background: rgba(#979797, .37);
-    display: block;
-  }
-  .line-1 {
-    left: 192px; 
-    transition: bottom .3s;
-  }
-  .line-2 {
-    left: 50%;
-    transition: bottom .6s;
-  }
-  .line-3 {
-    right: 192px; 
-    transition: bottom .9s;
-  }
 }

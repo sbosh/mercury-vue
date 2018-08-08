@@ -2,11 +2,7 @@
   <div class="main-content">
     <nav-component/>
     <div class="home-slider">
-      <div class="lines">
-        <span class="line-1"></span>
-        <span class="line-2"></span>
-        <span class="line-3"></span>
-      </div>
+      <div class="line"></div>
       <div class="caption">
         <div class="title-box">
           <h2 class="title">Ние имаме различна<br> архитектурна практика</h2>
@@ -14,6 +10,11 @@
         <div class="btn-box">
           <router-link :to="'/' + lang + '/building-inner'" class="btn"><div class="btn-overlay"></div>виж нашите проекти</router-link>
         </div>
+      </div>
+      <div class="news-box">
+        <article class="news">
+          <h3><a href=""><span class="icon"></span>Сградата Лазур в ж.к Младост 3 получи Акт 16 <span class="text">Прочети повече</span></a></h3>
+        </article>
       </div>
     </div>
   </div>
@@ -24,6 +25,11 @@ import NavComponent from '@/components/layout/NavComponent'
 export default {
   name: 'home',
   components: { NavComponent },
+  data: function () {
+    return {
+      homeRoute: null
+    }
+  },
   computed: {
     lang () {
       return this.$i18n.locale
@@ -31,3 +37,86 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .news-box {
+    position: absolute;
+    left: 35px;
+    bottom: 0;
+    background: #fff;
+
+    .news {
+      a { 
+        padding: 32px 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #4a4a4a;
+        text-decoration: none;
+        font-family: 'Fira Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        transition: all .3s;
+
+        .icon {
+          width: 31px;
+          height: 26px;
+          display: inline-block;
+          background: url(../assets/images/news-icon.svg) no-repeat center;
+          float: left;
+          margin-right: 15px;
+        }
+
+        .text {
+          color: #8d8d8d;
+          font-family: Montserrat;
+          font-size: 10px;
+          font-weight: 700;
+          text-transform: uppercase;
+          border-left: 1px solid #dfdfdf;
+          padding-left: 18px;
+          margin-left: 50px;
+          display: block;
+
+          &:before {
+            content: '';
+            display: inline-block;
+            float: right;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 4px 0 4px 5px;
+            border-color: transparent transparent transparent #fa6a02;
+            margin-top: 2px;
+            margin-left: 10px;
+            transition: all .3s;
+          }
+        }
+        &:hover {
+          background: #f7f7f7;
+          .text {
+            &:before {
+              margin-left: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .line {
+    background-color: rgba(#979797, .37);
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-100%, -100%);
+    transition: all 1.8s;
+  }
+
+  .active-component {
+    .line {
+      transform: translate(-100%, 0);
+    }
+  }
+</style>

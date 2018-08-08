@@ -1,12 +1,12 @@
 <template>
-  <nav class="nav">
-    <router-link :to="'/' + lang"><img src="@/assets/images/logo.svg" class="logo" alt=""></router-link>
+  <nav class="nav-inner">
+    <router-link :to="'/' + lang"><img src="@/assets/images/logo-flat.png" class="logo" alt=""></router-link>
   </nav>
 </template>
 
 <script>
 export default {
-  name: 'nav-component',
+  name: 'navinner-component',
   computed: {
     lang () {
       return this.$i18n.locale
@@ -15,13 +15,12 @@ export default {
 }
 </script>
 
-<style lang="scss">
-  .nav {
+<style>
+  .nav-inner {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
-    border-right: 1px solid rgba(#979797, .37);
     width: 195px;
     display: flex;
     justify-content: center;

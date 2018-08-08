@@ -1,5 +1,6 @@
 <template>
   <div class="main-content">
+    <navinner-component/>
     <div class="about-us">
       <div class="caption">
         <div class="title-box">
@@ -22,15 +23,18 @@
 </template>
 <script>
 import FooterComponent from '@/components/layout/FooterComponent'
+import NavinnerComponent from '@/components/layout/NavinnerComponent'
 export default {
   name: 'about',
-  components: { FooterComponent }
+  components: { FooterComponent, NavinnerComponent }
 }
 </script>
 
 <style lang="scss">
   .about-us {
     background-color: #232323;
+    padding-top: 120px;
+
     .caption {
       .title-box {
         .title {
