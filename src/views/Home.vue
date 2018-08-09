@@ -42,11 +42,11 @@ export default {
   .news-box {
     position: absolute;
     left: 35px;
+    right: 50%;
     bottom: 0;
     background: #fff;
-
     .news {
-      a { 
+      a {
         padding: 32px 30px;
         display: flex;
         justify-content: center;
@@ -71,6 +71,8 @@ export default {
           color: #8d8d8d;
           font-family: Montserrat;
           font-size: 10px;
+          height: 40px;
+          line-height: 40px;
           font-weight: 700;
           text-transform: uppercase;
           border-left: 1px solid #dfdfdf;
@@ -87,18 +89,13 @@ export default {
             border-style: solid;
             border-width: 4px 0 4px 5px;
             border-color: transparent transparent transparent #fa6a02;
-            margin-top: 2px;
+            margin-top: 14px;
             margin-left: 10px;
             transition: all .3s;
           }
         }
         &:hover {
           background: #f7f7f7;
-          .text {
-            &:before {
-              margin-left: 15px;
-            }
-          }
         }
       }
     }

@@ -27,11 +27,27 @@
                 <li><a href="">Услуги</a></li>
                 <li><a href="">История</a></li>
               </ul>
+              <div class="tel">
+                <a href="tel+359884626391" class="tel-box">
+                  <div class="icon"><img src="@/assets/images/phone-icon.svg" alt=""></div>
+                  <div class="text">Свържете се с нас</div>
+                  <div class="phone">+359 884 626 391</div>
+                </a>
+              </div>
+              <div class="follow-us">
+                <div class="text">Последвайте ни</div>
+                <ul>
+                  <li><a href=""><img src="@/assets/images/fb-icon.svg" alt=""></a></li>
+                  <li><a href=""><img src="@/assets/images/yt-icon.svg" alt=""></a></li>
+                  <li><a href=""><img src="@/assets/images/ln-icon.svg" alt=""></a></li>
+                </ul>
+              </div>
             </div>
           </div>
           <ul class="lng">
             <li v-if="lang === 'bg'" ><a href="#!" @click="changeLang('en', $event)">en</a></li>
             <li v-else><a href="#!" @click="changeLang('bg', $event)">bg</a></li>
+            <li class="imigix">Created by Imigix</li>
           </ul>
         </div>
       </div>
@@ -185,8 +201,81 @@ export default {
           }
         }
 
+        .tel {
+          .tel-box {
+            padding: 0;
+            &:hover{
+              background: transparent;
+              color: #fff;
+            }
+            .icon {
+              margin: 0 auto 10px 0;
+            }
+            .text {
+              margin-bottom: 10px;
+            }
+          }
+        }
+
+        .follow-us {
+          margin: 30px 0 0;
+          .text {
+            color: #fff;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom:  12px;
+          }
+          ul {
+            margin: 0;
+          }
+          li {
+            display: inline-block;
+            margin: 0 15px 0 0;
+            &:last-child {
+              margin-right: 0;
+            }
+            a {
+              border: 1px solid #fff;
+              border-radius: 50%;
+              width: 55px;
+              height: 55px;
+              text-align: center;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              img {
+                display: block;
+                margin: auto;
+              }
+            }
+          }
+        }
+
         .lng {
-          margin-top: auto;
+          margin: auto 0 0 0;
+          padding: 0 40px 40px 70px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          li {
+            margin: 0;
+            padding: 0;
+            a {
+              color: #fff;
+              font-size: 12px;
+              font-weight: 700;
+              text-transform: uppercase;
+              border-bottom: 2px solid #fa6a02;
+              padding: 5px;
+            }
+            &.imigix {
+              margin-left: auto;
+              color: #fff;
+              font-size: 12px;
+              font-weight: 700;
+            }
+          }
         }
 
         ul {
