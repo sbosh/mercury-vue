@@ -2,7 +2,10 @@
 <div class="inner-building">
   <navinner-component/>
   <div class="inner-building-header">
-    <div class="animate-box"><img src="@/assets/images/building01.jpg" class="img" alt=""></div>
+    <div class="animate-box">
+      <img src="@/assets/images/building01.jpg" class="img" alt="">
+    </div>
+    <div class="btn-box"><a href="" class="btn">ВИЖ СХЕМАТА на блока</a></div>
   </div>
   <div class="caption">
     <div class="title-box">
@@ -39,15 +42,16 @@ export default {
 </script>
 
 <style lang="scss">
-.text {
-  padding-left: 195px;
-  p {
-    column-count: 2;
+.caption {
+  .text {
+    padding-left: 195px;
+    p {
+      column-count: 2;
+    }
   }
 }
 .img {
   max-width: 100%;
-  margin: 50px auto;
   display: block;
   transform: translateX(-100px);
   opacity: 0;
@@ -55,13 +59,14 @@ export default {
   transition: all 1.4s;
 }
 .animate-box {
-  margin: 20px auto;
   display: block;
   visibility: hidden;
   opacity: 0;
   transition: all .3s;
   transform: translateX(100px);
-
+  img {
+    display: block;
+  }
   &.visible {
     visibility: visible;
     opacity: 1;
@@ -72,9 +77,17 @@ export default {
   transition: all 1.4s;
   background-color: #232323;
   padding-left: 195px;
+  padding: 130px 0 0 195px;
+  .btn-box {
+    margin-top: -40px;
+    .btn {
+      background-color: #fa6a02;
+      border-color: #fa6a02;
+    }
+  }
 }
 .inner-building {
-  padding: 130px 195px 0 0;
+  padding: 0 195px 0 0;
 
   .caption .title {
     color: #2c2c2c;
