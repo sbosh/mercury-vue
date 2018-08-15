@@ -4,8 +4,11 @@ import router from './router'
 import store from './store'
 import { i18n } from './setup/i18n'
 import './styles/app.scss'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 Vue.config.productionTip = false
+
+Vue.use(VueAwesomeSwiper)
 
 new Vue({
   i18n,

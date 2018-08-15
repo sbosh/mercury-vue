@@ -15,6 +15,42 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos distinctio rerum explicabo dolore cupiditate laudantium? In illo, veniam fuga nam, amet sunt incidunt excepturi rerum rem et aperiam, error ea.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis architecto voluptatem nihil fugit debitis repellendus, molestiae, perferendis adipisci ex, hic voluptate possimus quasi? Excepturi, consequuntur reiciendis obcaecati neque, veniam nostrum!</p>
     </div>
   </div>
+  <div class="about-complex">
+    <div class="box-row">
+      <div class="box">
+        <div class="title">Име на комплекса</div>
+        <div class="text">Комплекс бижу</div>
+      </div>
+      <div class="box">
+        <div class="title">Етажи на сградата</div>
+        <div class="text">6</div>
+      </div>
+      <div class="box">
+        <div class="title">Брой апартаменти</div>
+        <div class="text">87</div>
+      </div>
+      <div class="box">
+        <div class="title">Свободни апартаменти</div>
+        <div class="text">32</div>
+      </div>
+      <div class="box">
+        <div class="title">Година на завършване</div>
+        <div class="text">2019</div>
+      </div>
+    </div>
+  </div>
+  <swiper :options="swiperOption">
+    <swiper-slide>Slide 1</swiper-slide>
+    <swiper-slide>Slide 2</swiper-slide>
+    <swiper-slide>Slide 3</swiper-slide>
+    <swiper-slide>Slide 4</swiper-slide>
+    <swiper-slide>Slide 5</swiper-slide>
+    <swiper-slide>Slide 6</swiper-slide>
+    <swiper-slide>Slide 7</swiper-slide>
+    <swiper-slide>Slide 8</swiper-slide>
+    <swiper-slide>Slide 9</swiper-slide>
+    <swiper-slide>Slide 10</swiper-slide>
+  </swiper>
 </div>
 </template>
 
@@ -23,6 +59,15 @@ import NavinnerComponent from '@/components/layout/NavinnerComponent'
 export default {
   name: 'building-inner',
   components: { NavinnerComponent },
+  data () {
+    return {
+      swiperOption: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        effect: 'fade'
+      }
+    }
+  },
   mounted () {
     let $this = this
     setTimeout(function () {
@@ -42,6 +87,52 @@ export default {
 </script>
 
 <style lang="scss">
+.swiper-slide {
+  width: 80%;
+}
+.swiper-slide:nth-child(2n) {
+  width: 60%;
+}
+.swiper-slide:nth-child(3n) {
+  width: 40%;
+}
+.about-complex {
+  padding: 0 90px;
+  .box-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    .box {
+      padding: 0 10px;
+      border-right: 1px solid #dfdfdf;
+      width: 100%;
+      &:first-child {
+        .text {
+          color: #4a4a4a;
+          font-family: "Exo 2";
+          font-size: 27px;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+      }
+      &:last-child {
+        border-right: 0;
+      }
+      .title {
+        color: #8d8d8d;
+        font-family: "Fira Sans";
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 19px;
+      }
+      .text {
+        color: #484b47;
+        font-size: 64px;
+        font-weight: 700;
+      }
+    }
+  }
+}
 .caption {
   .text {
     padding-left: 195px;
@@ -76,13 +167,15 @@ export default {
 .inner-building-header {
   transition: all 1.4s;
   background-color: #232323;
-  padding-left: 195px;
   padding: 130px 0 0 195px;
+  margin-bottom: 140px;
   .btn-box {
     margin-top: -40px;
+    float: right;
     .btn {
       background-color: #fa6a02;
       border-color: #fa6a02;
+      margin-right: 90px;
     }
   }
 }
