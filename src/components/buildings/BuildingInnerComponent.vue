@@ -39,18 +39,49 @@
       </div>
     </div>
   </div>
-  <swiper :options="swiperOption">
-    <swiper-slide>Slide 1</swiper-slide>
-    <swiper-slide>Slide 2</swiper-slide>
-    <swiper-slide>Slide 3</swiper-slide>
-    <swiper-slide>Slide 4</swiper-slide>
-    <swiper-slide>Slide 5</swiper-slide>
-    <swiper-slide>Slide 6</swiper-slide>
-    <swiper-slide>Slide 7</swiper-slide>
-    <swiper-slide>Slide 8</swiper-slide>
-    <swiper-slide>Slide 9</swiper-slide>
-    <swiper-slide>Slide 10</swiper-slide>
-  </swiper>
+  <div class="gallery-building">
+    <swiper :options="swiperOption">
+      <swiper-slide><img src="@/assets/images/gallery01.jpg" alt=""><div class="progress-bar"></div></swiper-slide>
+      <swiper-slide><img src="@/assets/images/gallery01.jpg" alt=""><div class="progress-bar"></div></swiper-slide>
+      <swiper-slide><img src="@/assets/images/gallery01.jpg" alt=""><div class="progress-bar"></div></swiper-slide>
+    </swiper>
+  </div>
+  <div class="caption">
+    <div class="title-box">
+      <h2 class="title">За<br> локацията</h2>
+    </div>
+  </div>
+  <div class="location">
+    <div class="box">
+      <div class="info">
+        <div class="icon"><img src="@/assets/images/location01.png" alt=""></div>
+        <div class="text">18 минути от центъра</div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="info">
+        <div class="icon"><img src="@/assets/images/location02.png" alt=""></div>
+        <div class="text">6 супермаркета в близост</div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="info">
+        <div class="icon"><img src="@/assets/images/location03.png" alt=""></div>
+        <div class="text">100 метра от метростанция</div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="info">
+        <div class="icon"><img src="@/assets/images/location04.png" alt=""></div>
+        <div class="text">2 училища в района</div>
+      </div>
+    </div>
+  </div>
+  <div class="map">
+    <div class="img-box">
+      <img src="@/assets/images/map.jpg" alt="">
+    </div>
+  </div>
 </div>
 </template>
 
@@ -62,9 +93,23 @@ export default {
   data () {
     return {
       swiperOption: {
-        slidesPerView: 1,
-        spaceBetween: 10,
-        effect: 'fade'
+        slidesPerView: 'auto',
+        spaceBetween: 15,
+        speed: 1000,
+        loop: true,
+        slideToClickedSlide: true,
+        autoplay: {
+          delay: 7000,
+          disableOnInteraction: false
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
       }
     }
   },
@@ -87,17 +132,88 @@ export default {
 </script>
 
 <style lang="scss">
-.swiper-slide {
-  width: 80%;
+.location {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  .box {
+    flex: 1 0 50%;
+    .info {
+      padding: 15px 0;
+      margin-left: 10px;
+      margin-right: 10px;
+      border-bottom: 1px solid #dfdfdf;
+      display: flex;
+      align-items: center;
+    }
+    .text {
+      color: #484b47;
+      font-size: 16px;
+      font-weight: 600;
+      margin-left: 20px;
+    }
+  }
 }
-.swiper-slide:nth-child(2n) {
-  width: 60%;
+.gallery-building {
+  .swiper-slide {
+    width: auto;
+    img {
+      display: block;
+      max-width: 100%;
+    }
+    .progress-bar {
+      position: absolute;
+      left: 80px;
+      right: 80px;
+      bottom: 80px;
+      background: #979797;
+      height: 1px;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-100%);
+      transition: all .3s;
+      &:after {
+        content: '';
+        height: 1px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        background: #fff;
+      }
+    }
+  }
+  .swiper-slide-active {
+    .progress-bar {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+      &:after {
+        animation: progress-animation 7s forwards;
+      }
+    }
+  }
 }
-.swiper-slide:nth-child(3n) {
-  width: 40%;
+@keyframes progress-animation {
+  from {
+    left: 0;
+    width: 0;
+  }
+  to {
+    right: 0;
+    width: 100%;
+  }
 }
 .about-complex {
   padding: 0 90px;
+  margin-top: 100px;
+  margin-bottom: 100px;
   .box-row {
     display: flex;
     justify-content: space-around;
@@ -138,6 +254,8 @@ export default {
     padding-left: 195px;
     p {
       column-count: 2;
+      max-width: 800px;
+      margin: 0 auto;
     }
   }
 }

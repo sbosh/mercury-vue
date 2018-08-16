@@ -5,6 +5,7 @@ import store from './store'
 import { i18n } from './setup/i18n'
 import './styles/app.scss'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 
 Vue.config.productionTip = false
 
