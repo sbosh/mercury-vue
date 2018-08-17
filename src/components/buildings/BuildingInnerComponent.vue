@@ -2,8 +2,8 @@
 <div class="inner-building">
   <navinner-component/>
   <div class="inner-building-header">
-    <div class="animate-box">
-      <img src="@/assets/images/building01.jpg" class="img" alt="">
+    <div class="main-img">
+      <img src="@/assets/images/building01.jpg" alt="">
     </div>
     <div class="btn-box"><a href="" class="btn">ВИЖ СХЕМАТА на блока</a></div>
   </div>
@@ -46,40 +46,51 @@
       <swiper-slide><img src="@/assets/images/gallery01.jpg" alt=""><div class="progress-bar"></div></swiper-slide>
     </swiper>
   </div>
-  <div class="caption">
-    <div class="title-box">
-      <h2 class="title">За<br> локацията</h2>
-    </div>
-  </div>
   <div class="location">
-    <div class="box">
-      <div class="info">
-        <div class="icon"><img src="@/assets/images/location01.png" alt=""></div>
-        <div class="text">18 минути от центъра</div>
+    <div class="caption">
+      <div class="title-box">
+        <h2 class="title">За<br> локацията</h2>
       </div>
     </div>
-    <div class="box">
-      <div class="info">
-        <div class="icon"><img src="@/assets/images/location02.png" alt=""></div>
-        <div class="text">6 супермаркета в близост</div>
+    <div class="box-row">
+      <div class="box">
+        <div class="info">
+          <div class="icon"><img src="@/assets/images/location01.png" alt=""></div>
+          <div class="text">18 минути от центъра</div>
+        </div>
       </div>
-    </div>
-    <div class="box">
-      <div class="info">
-        <div class="icon"><img src="@/assets/images/location03.png" alt=""></div>
-        <div class="text">100 метра от метростанция</div>
+      <div class="box">
+        <div class="info">
+          <div class="icon"><img src="@/assets/images/location02.png" alt=""></div>
+          <div class="text">6 супермаркета в близост</div>
+        </div>
       </div>
-    </div>
-    <div class="box">
-      <div class="info">
-        <div class="icon"><img src="@/assets/images/location04.png" alt=""></div>
-        <div class="text">2 училища в района</div>
+      <div class="box">
+        <div class="info">
+          <div class="icon"><img src="@/assets/images/location03.png" alt=""></div>
+          <div class="text">100 метра от метростанция</div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="info">
+          <div class="icon"><img src="@/assets/images/location04.png" alt=""></div>
+          <div class="text">2 училища в района</div>
+        </div>
       </div>
     </div>
   </div>
   <div class="map">
     <div class="img-box">
+      <a href="" class="btn">бул. „Александър Малинов“ <span>ЗАВЕДИ МЕ НА АДРЕСА</span></a>
       <img src="@/assets/images/map.jpg" alt="">
+      <div class="btn-box"><a href="" class="btn">Виж картата</a></div>
+    </div>
+  </div>
+  <div class="news-inner">
+    <div class="title">Новини</div>
+    <div class="news-swiper">
+      <news-article />
+      <news-article />
     </div>
   </div>
 </div>
@@ -87,9 +98,13 @@
 
 <script>
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
+import NewsArticleComponent from '@/components/news/NewsArticleComponent'
 export default {
   name: 'building-inner',
-  components: { NavinnerComponent },
+  components: {
+    'navinner-component': NavinnerComponent,
+    'news-article': NewsArticleComponent
+  },
   data () {
     return {
       swiperOption: {
@@ -132,16 +147,78 @@ export default {
 </script>
 
 <style lang="scss">
-.location {
+.news-inner {
+  padding: 80px;
+  background-color: #232323;
+  .title {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 80px;
+  }
+}
+.map {
   display: flex;
-  justify-content: center;
-  align-items: baseline;
-  flex-direction: row;
-  flex-wrap: wrap;
-  max-width: 1000px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 100px;
+  .img-box {
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    >.btn {
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      background: #fff;
+      text-transform: none;
+      color: #2c2c2c;
+      font-size: 16px;
+      font-weight: 600;
+      display: block;
+      margin-bottom: -50px;
+      &:before {
+        content: '';
+        width: 17px;
+        height: 22px;
+        float: left;
+        margin: 0 10px 0 0;
+        border: none;
+        background: url('~@/assets/images/location-pin.svg') no-repeat center;
+      }
+      span {
+        float: right;
+      }
+    }
+    .btn-box {
+      margin-top: -40px;
+      .btn {
+        border-color: #fa6a02;
+        background-color: #fa6a02;
+        float: right;
+        margin-right: 90px;
+      }
+    }
+  }//img-box
+}//map
+.location {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  .caption {
+    margin-bottom: 100px;
+  }
+  .box-row {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .box {
     flex: 1 0 50%;
     .info {
@@ -284,7 +361,7 @@ export default {
 }
 .inner-building-header {
   transition: all 1.4s;
-  background-color: #232323;
+  background: linear-gradient(#232323 80%, #232323 80%, #232323 80%, #f8f8f8 20%, #f8f8f8 20%);
   padding: 130px 0 0 195px;
   margin-bottom: 140px;
   .btn-box {
@@ -295,6 +372,10 @@ export default {
       border-color: #fa6a02;
       margin-right: 90px;
     }
+  }
+  .main-img img {
+    max-width: 100%;
+    display: block;
   }
 }
 .inner-building {
