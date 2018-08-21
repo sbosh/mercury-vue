@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Contacts from './views/Contacts.vue'
+import News from './views/News.vue'
 import BuildingInnerComponent from './components/buildings/BuildingInnerComponent.vue'
 import { loadLanguageAsync, i18n } from './setup/i18n'
 
@@ -30,6 +31,12 @@ let router = new Router({
       path: '/:lang/building-inner',
       name: 'building-inner',
       component: BuildingInnerComponent,
+      meta: { transitionName: 'slide' }
+    },
+    {
+      path: '/:lang/news',
+      name: 'news',
+      component: News,
       meta: { transitionName: 'slide' }
     }
   ]

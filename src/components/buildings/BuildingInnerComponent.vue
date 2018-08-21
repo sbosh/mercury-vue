@@ -89,21 +89,25 @@
   <div class="news-inner">
     <div class="title">Новини</div>
     <div class="news-swiper">
-      <news-article />
-      <news-article />
+      <news-listing-swiper :articles="articles" />
     </div>
+  </div>
+  <div class="next-building">
+    <div class="text">Следваща сграда</div>
+    <h2 class="title"><a href="">Комплекс Меркурий Плаза</a></h2>
+    <div class="img-box"><a href=""><img src="@/assets/images/next-building.jpg" alt=""></a></div>
   </div>
 </div>
 </template>
 
 <script>
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
-import NewsArticleComponent from '@/components/news/NewsArticleComponent'
+import NewsListingSwiper from '@/components/news/NewsListingSwiper'
 export default {
   name: 'building-inner',
   components: {
     'navinner-component': NavinnerComponent,
-    'news-article': NewsArticleComponent
+    'news-listing-swiper': NewsListingSwiper
   },
   data () {
     return {
@@ -125,7 +129,41 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
         }
-      }
+      },
+      articles: [
+        {
+          id: 1,
+          image: require('@/assets/images/building01.jpg'),
+          title: 'Title',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis numquam maiores animi cum. Dolorem magni adipisci a est! Fugiat illum tempore iure nesciunt debitis ad nemo distinctio minima, quis amet!',
+          date: '01.02.2018',
+          link: 'https://www.google.com/'
+        },
+        {
+          id: 2,
+          image: require('@/assets/images/building01.jpg'),
+          title: 'Lorem ipsum',
+          description: 'Reiciendis numquam maiores animi cum. Dolorem magni adipisci a est! Fugiat illum tempore iure nesciunt debitis ad nemo distinctio minima, quis amet!',
+          date: '01.02.2018',
+          link: 'https://www.google.com/'
+        },
+        {
+          id: 3,
+          image: require('@/assets/images/building01.jpg'),
+          title: 'Title',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis numquam maiores animi cum. Dolorem magni adipisci a est! Fugiat illum tempore iure nesciunt debitis ad nemo distinctio minima, quis amet!',
+          date: '01.02.2018',
+          link: 'https://www.google.com/'
+        },
+        {
+          id: 4,
+          image: require('@/assets/images/building01.jpg'),
+          title: 'Lorem ipsum',
+          description: 'Reiciendis numquam maiores animi cum. Dolorem magni adipisci a est! Fugiat illum tempore iure nesciunt debitis ad nemo distinctio minima, quis amet!',
+          date: '01.02.2018',
+          link: 'https://www.google.com/'
+        }
+      ]
     }
   },
   mounted () {
@@ -147,6 +185,42 @@ export default {
 </script>
 
 <style lang="scss">
+.next-building {
+  padding: 120px 0 120px 100px;
+  .text {
+    color: #8d8d8d;
+    font-family: Montserrat;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .title,
+  .title a {
+    color: #2c2c2c;
+    font-family: "Exo 2";
+    font-size: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .title {
+    &:after {
+      content: '';
+      width: 181px;
+      border: 1px solid #8d8d8d;
+      display: inline-block;
+    }
+  }
+  .img-box {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 55px;
+
+    a {
+      display: block;
+    }
+  }
+}
 .news-inner {
   padding: 80px;
   background-color: #232323;
@@ -159,7 +233,7 @@ export default {
 }
 .map {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   padding-bottom: 100px;
   .img-box {
@@ -294,7 +368,7 @@ export default {
   .box-row {
     display: flex;
     justify-content: space-around;
-    align-items: baseline;
+    align-items: stretch;
     .box {
       padding: 0 10px;
       border-right: 1px solid #dfdfdf;
@@ -332,7 +406,12 @@ export default {
     p {
       column-count: 2;
       max-width: 800px;
-      margin: 0 auto;
+      margin: 60px auto 10px auto;
+      color: #383838;
+      font-family: "Fira Sans";
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 23px;
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <header v-bind:class="{ active: isActive }">
-    <nav>
+    <nav class="main-nav">
       <div class="main-navigation">
         <div class="content">
           <div class="cols">
@@ -17,7 +17,7 @@
               </ul>
               <h3><a href="">Завършени проекти</a></h3>
               <h3><a href="">Бъдещи проекти</a></h3>
-              <h3><a href="">Новини</a></h3>
+              <h3><router-link :to="'/' + lang + '/news'">Новини</router-link></h3>
             </div>
             <div class="col">
               <h3><router-link :to="'/' + lang + '/contacts'">Contacts</router-link></h3>
@@ -29,7 +29,7 @@
               </ul>
               <div class="tel">
                 <a href="tel+359884626391" class="tel-box">
-                  <div class="icon"><img src="@/assets/images/phone-icon.svg" alt=""></div>
+                  <div class="icon"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></div>
                   <div class="text">Свържете се с нас</div>
                   <div class="phone">+359 884 626 391</div>
                 </a>
@@ -37,9 +37,9 @@
               <div class="follow-us">
                 <div class="text">Последвайте ни</div>
                 <ul>
-                  <li><a href=""><img src="@/assets/images/fb-icon.svg" alt=""></a></li>
-                  <li><a href=""><img src="@/assets/images/yt-icon.svg" alt=""></a></li>
-                  <li><a href=""><img src="@/assets/images/ln-icon.svg" alt=""></a></li>
+                  <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
+                  <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
+                  <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li>
                 </ul>
               </div>
             </div>
@@ -53,7 +53,7 @@
       </div>
       <div class="tel">
         <a href="tel+359884626391" class="tel-box">
-          <div class="icon"><img src="@/assets/images/phone-icon.svg" alt=""></div>
+          <div class="icon"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></div>
           <div class="text">Свържете се с нас</div>
           <div class="phone">+359 884 626 391</div>
         </a>
@@ -68,9 +68,9 @@
         <span>Меню</span>
       </button>
       <ul class="social">
-        <li><a href=""><img src="@/assets/images/fb-icon.svg" alt=""></a></li>
-        <li><a href=""><img src="@/assets/images/yt-icon.svg" alt=""></a></li>
-        <li><a href=""><img src="@/assets/images/ln-icon.svg" alt=""></a></li>
+        <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
+        <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
+        <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li>
       </ul>
     </nav>
   </header>
@@ -78,6 +78,7 @@
 
 <script>
 import { loadLanguageAsync } from '@/setup/i18n'
+import axios from 'axios'
 export default {
   name: 'header-component',
   data: function () {
@@ -91,6 +92,7 @@ export default {
     }
   },
   mounted () {
+    this.convertSVG()
     let $this = this
     let deleteLink = document.querySelectorAll('a')
     for (let i = 0; i < deleteLink.length; i++) {
@@ -99,12 +101,41 @@ export default {
       })
     }
   },
+  watch: {
+    '$route' (to, from) {
+      if (to.name === 'home') {
+        this.$el.querySelector('.main-nav').classList.add('home-header')
+      } else {
+        this.$el.querySelector('.main-nav').classList.remove('home-header')
+      }
+    }
+  },
   methods: {
     changeLang (lang, event) {
       event.preventDefault()
       let $this = this
       loadLanguageAsync(lang).then(function (lang) {
         $this.$router.push({ name: $this.$router.history.current.name, params: { lang } })
+      })
+    },
+    convertSVG () {
+      document.querySelectorAll('img.svg').forEach((el) => {
+        const imgID = el.getAttribute('id')
+        const imgClass = el.getAttribute('class')
+        const imgURL = el.getAttribute('src')
+        axios.get(imgURL).then((data) => {
+          const parser = new DOMParser()
+          const xmlDoc = parser.parseFromString(data.data, 'text/html')
+          let svg = xmlDoc.querySelector('svg')
+          if (typeof imgID !== 'undefined') {
+            svg.setAttribute('id', imgID)
+          }
+          if (typeof imgClass !== 'undefined') {
+            svg.setAttribute('class', imgClass + ' replaced-svg')
+          }
+          svg.removeAttribute('xmlns:a')
+          el.parentNode.replaceChild(svg, el)
+        })
       })
     }
   }
@@ -120,6 +151,40 @@ export default {
     z-index: 9999;
     border-left: 1px solid rgba(#979797, .37);
     width: 195px;
+    transition-delay: 1s;
+    transition-duration: 1.2s;
+    transition-property: all;
+
+    nav:not(.home-header) {
+      background: #fff;
+      .toggle-header {
+        span {
+          color: #000;
+        }
+      }
+      ul.social {
+        .svg {
+          g use,
+          path {
+            fill: #0f0f0f;
+          }
+        }
+      }
+      .tel {
+        .tel-box {
+          color: #000;
+          .svg {
+            g use,
+            path {
+              fill: #0f0f0f;
+            }
+          }
+          .text {
+            color: #8d8d8d;
+          }
+        }
+      }
+    }
 
     .main-navigation {
       position: fixed;
@@ -204,9 +269,22 @@ export default {
         .tel {
           .tel-box {
             padding: 0;
+            color: #fff;
+            g use,
+            svg {
+              path {
+                fill: #fff;
+              }
+            }
             &:hover{
               background: transparent;
               color: #fff;
+              g use,
+              svg {
+                path {
+                  fill: #fff;
+                }
+              }
             }
             .icon {
               margin: 0 auto 10px 0;
@@ -244,9 +322,21 @@ export default {
               display: flex;
               justify-content: center;
               align-items: center;
+              transition: all .3s;
+              svg,
               img {
                 display: block;
                 margin: auto;
+                transition: all .3s;
+              }
+              &:hover {
+                border-color: #f96902;
+                svg {
+                  g use,
+                  path {
+                    fill: #f96902;
+                  }
+                }
               }
             }
           }
@@ -315,6 +405,12 @@ export default {
           .icon {
             -webkit-animation: ring 1s infinite;
             -webkit-animation-iteration-count:infinite;
+            svg {
+              g use,
+              path {
+                fill: #000;
+              }
+            }
           }
         }
       }
@@ -394,7 +490,7 @@ export default {
     }//toggle-header
     ul.social {
       padding: 0;
-      margin: 0;
+      margin: 0 0 20px 0;
       text-align: center;
 
       li {
