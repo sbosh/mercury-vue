@@ -7,7 +7,10 @@
     :description="article.description"
     :image="article.image"
     :link="article.link"
-    :date="article.date" />
+    :date="article.date"
+    :category="article.category"
+    :icon="article.icon"
+    :whithCategory="whithCategory" />
   </div>
 </template>
 
@@ -18,6 +21,6 @@ export default {
   components: {
     'news-listing-item': NewsListingItem
   },
-  props: ['articles']
+  props: ['articles', 'whithCategory']
 }
 </script>

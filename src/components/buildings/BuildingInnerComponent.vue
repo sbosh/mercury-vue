@@ -1,6 +1,6 @@
 <template>
 <div class="inner-building">
-  <navinner-component/>
+  <navinner-component navigation="buildingNav" :navTitle="title" />
   <div class="inner-building-header">
     <div class="main-img">
       <img src="@/assets/images/building01.jpg" alt="">
@@ -97,20 +97,24 @@
     <h2 class="title"><a href="">Комплекс Меркурий Плаза</a></h2>
     <div class="img-box"><a href=""><img src="@/assets/images/next-building.jpg" alt=""></a></div>
   </div>
+  <footer-component />
 </div>
 </template>
 
 <script>
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import NewsListingSwiper from '@/components/news/NewsListingSwiper'
+import FooterComponent from '@/components/layout/FooterComponent.vue'
 export default {
   name: 'building-inner',
   components: {
     'navinner-component': NavinnerComponent,
-    'news-listing-swiper': NewsListingSwiper
+    'news-listing-swiper': NewsListingSwiper,
+    'footer-component': FooterComponent
   },
   data () {
     return {
+      title: 'Комплекс Бижу',
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 15,
@@ -422,21 +426,6 @@ export default {
   opacity: 0;
   visibility: hidden;
   transition: all 1.4s;
-}
-.animate-box {
-  display: block;
-  visibility: hidden;
-  opacity: 0;
-  transition: all .3s;
-  transform: translateX(100px);
-  img {
-    display: block;
-  }
-  &.visible {
-    visibility: visible;
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 .inner-building-header {
   transition: all 1.4s;

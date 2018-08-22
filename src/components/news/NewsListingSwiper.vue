@@ -110,6 +110,37 @@ export default {
         transition-property: all;
         opacity: 0;
       }
+      .category {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background: #fa6a02;
+        padding: 16px 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 230px;
+        .icon {
+          border: 1px solid #fff;
+          width: 52px;
+          height: 45px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-right: 10px;
+          img {
+            max-width: 65%;
+            margin: auto;
+            display: block;
+          }
+        }
+        .text {
+          color: #fff;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 21px;
+        }
+      }
     }
     .info-box {
       position: relative;
@@ -159,6 +190,15 @@ export default {
           border-color: transparent transparent transparent #fa6902;
           display: inline-block;
           margin: 0 0 0 10px;
+        }
+      }
+    }
+    &.visible {
+      .img-box {
+        img,
+        &:before {
+          transform: translateX(0);
+          opacity: 1;
         }
       }
     }

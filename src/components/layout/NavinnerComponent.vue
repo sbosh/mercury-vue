@@ -2,21 +2,30 @@
   <nav class="nav-inner">
     <nav>
       <router-link :to="'/' + lang"><img src="@/assets/images/logo-flat.png" class="logo" alt=""></router-link>
-      <div class="header-title"><h1 class="title">Комплекс Бижу</h1></div>
-      <ul>
-        <li><a href="">За сградата</a></li>
-        <li><a href="">Локация</a></li>
-        <li><a href="">Галерия</a></li>
-        <li><a href="">Новини</a></li>
-      </ul>
+      <div class="header-title"><h1 class="title">{{ navTitle }}</h1></div>
+      <inner-building-nav v-if="navigation === 'buildingNav'" />
+      <inner-news-nav v-if="navigation === 'newsNav'" />
+      <inner-news-breadcrumbs v-if="navigation === 'newsBreadcrumbs'" />
       <div class="back-btn" @click="routeBack()">Назад</div>
     </nav>
   </nav>
 </template>
 
 <script>
+import InnerBuildingNav from '@/components/navigations/InnerBuildingNav'
+import InnerNewsNav from '@/components/navigations/InnerNewsNav'
+import InnerNewsBreadcrumbs from '@/components/navigations/InnerNewsBreadcrumbs.vue'
 export default {
   name: 'navinner-component',
+  props: [
+    'navigation',
+    'navTitle'
+  ],
+  components: {
+    'inner-building-nav': InnerBuildingNav,
+    'inner-news-nav': InnerNewsNav,
+    'inner-news-breadcrumbs': InnerNewsBreadcrumbs
+  },
   computed: {
     lang () {
       return this.$i18n.locale
@@ -86,8 +95,11 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 0;
+      margin: 0 auto 0 140px;
       li {
         list-style: none;
+        position: relative;
         a {
           color: #fff;
           font-size: 12px;
@@ -95,8 +107,36 @@ export default {
           text-transform: uppercase;
           text-decoration: none;
           padding: 15px;
+          display: block;
         }
-      }
-    }
+        ul {
+          position: absolute;
+          top:-100%;
+          left: 0;
+          background: #fff;
+          display: block;
+          padding: 0;
+          margin: 0;
+          min-width: 220px;
+          visibility: hidden;
+          opacity: 0;
+          transition: all .3s;
+          li {
+            margin: 0;
+            a {
+              color: #000;
+              padding: 10px;
+            }
+          }
+        }//ul
+        &:hover {
+          ul {
+            top: 100%;
+            visibility: visible;
+            opacity: 1;
+          }
+        }
+      }//li
+    }//ul
   }
 </style>
