@@ -84,6 +84,19 @@ export default {
 </script>
 
 <style lang="scss">
+  .active-component {
+    .all-news {
+      .news-listing {
+        .news-article:first-of-type {
+          .img-box:before,
+          .img-box img {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
   .all-news {
     position: relative;
     padding-right: 195px;

@@ -8,34 +8,34 @@
               <router-link tag="a" :to="'/' + lang"><img src="@/assets/images/logo-nav.png" alt=""></router-link>
             </div>
             <div class="col">
-              <h3 class="margin-bottom-0"><a href="">Настоящи проекти</a></h3>
+              <h3 class="margin-bottom-0"><a href="">{{ $t('current_projects') }}</a></h3>
               <ul>
-                <li><a href="">Комплекс Бижу</a><router-link :to="'/' + lang">Home</router-link></li>
+                <li><a href="">Комплекс Бижу</a><router-link :to="'/' + lang">{{ $t('home') }}</router-link></li>
                 <li><a href="">Флора Бийч Резорт</a></li>
                 <li><a href="">Комплекс Меркурий Плаза</a></li>
                 <li><a href="">Комплекс Елеганс</a></li>
               </ul>
-              <h3><a href="">Завършени проекти</a></h3>
-              <h3><a href="">Бъдещи проекти</a></h3>
-              <h3><router-link :to="'/' + lang + '/news'">Новини</router-link></h3>
+              <h3><a href="">{{ $t('completed_projects') }}</a></h3>
+              <h3><a href="">{{ $t('future_projects') }}</a></h3>
+              <h3><router-link :to="'/' + lang + '/news'">{{ $t('news') }}</router-link></h3>
             </div>
             <div class="col">
-              <h3><router-link :to="'/' + lang + '/contacts'">Contacts</router-link></h3>
+              <h3><router-link :to="'/' + lang + '/contacts'">{{ $t('contacts') }}</router-link></h3>
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/about'">{{ $t('about_company') }}</router-link></h3>
               <ul>
-                <li><router-link :to="'/' + lang + '/about'">За нас</router-link></li>
-                <li><a href="">Услуги</a></li>
-                <li><a href="">История</a></li>
+                <li><router-link :to="'/' + lang + '/about'">{{ $t('about_us') }}</router-link></li>
+                <li><a href="">{{ $t('service') }}</a></li>
+                <li><a href="">{{ $t('history') }}</a></li>
               </ul>
               <div class="tel">
                 <a href="tel+359884626391" class="tel-box">
                   <div class="icon"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></div>
-                  <div class="text">Свържете се с нас</div>
+                  <div class="text">{{ $t('contact_us_now') }}</div>
                   <div class="phone">+359 884 626 391</div>
                 </a>
               </div>
               <div class="follow-us">
-                <div class="text">Последвайте ни</div>
+                <div class="text">{{ $t('follow_us') }}</div>
                 <ul>
                   <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
                   <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
@@ -54,7 +54,7 @@
       <div class="tel">
         <a href="tel+359884626391" class="tel-box">
           <div class="icon"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></div>
-          <div class="text">Свържете се с нас</div>
+          <div class="text">{{ $t('contact_us_now') }}</div>
           <div class="phone">+359 884 626 391</div>
         </a>
       </div>
@@ -65,7 +65,7 @@
           <span></span>
           <span></span>
         </div>
-        <span>Меню</span>
+        <span>{{ $t('menu') }}</span>
       </button>
       <ul class="social">
         <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
@@ -185,7 +185,6 @@ export default {
         }
       }
     }
-
     .main-navigation {
       position: fixed;
       top: 0;
@@ -198,7 +197,15 @@ export default {
       display: flex;
       justify-content: flex-end;
       align-items: flex-start;
-
+      &:before {
+        content:'';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: rgba(0,0,0, .8);
+        left: 0;
+      }
       .content {
         display: flex;
         flex-direction: column;
@@ -207,7 +214,6 @@ export default {
         width: 85%;
         transform: translateX(50%);
         transition: all 2.4s;
-
         h3, h3 a {
           color: #fff;
           font-size: 24px;
@@ -215,18 +221,14 @@ export default {
           line-height: 35px;
           text-decoration: none;
         }
-
         h3 {
           margin-bottom: 43px;
         }
-
         .margin-bottom-0 {
           margin-bottom: 0;
         }
-
         h3 a {
           display: inline-block;
-
           &:after {
             content: '';
             width: 0;
@@ -239,7 +241,6 @@ export default {
             margin: 15px 0 0 10px;
           }
         }
-
         .cols {
           display: flex;
           flex-direction: row;
