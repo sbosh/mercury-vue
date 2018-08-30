@@ -1,6 +1,7 @@
 <template>
   <div class="main-content">
-    <nav-component/>
+    <nav-component />
+    <buildings-carousel />
     <div class="home-slider">
       <div class="line"></div>
       <div class="caption">
@@ -22,9 +23,13 @@
 
 <script>
 import NavComponent from '@/components/layout/NavComponent'
+import BuildingsCarouselComponent from '@/components/buildings/BuildingsCarouselComponent'
 export default {
   name: 'home',
-  components: { NavComponent },
+  components: {
+    'nav-component': NavComponent,
+    'buildings-carousel': BuildingsCarouselComponent
+  },
   data: function () {
     return {
       homeRoute: null
@@ -49,7 +54,7 @@ export default {
       a {
         padding: 32px 30px;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         color: #4a4a4a;
         text-decoration: none;
@@ -77,7 +82,7 @@ export default {
           text-transform: uppercase;
           border-left: 1px solid #dfdfdf;
           padding-left: 18px;
-          margin-left: 50px;
+          margin-left: auto;
           display: block;
 
           &:before {

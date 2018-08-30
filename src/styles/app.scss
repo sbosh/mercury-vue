@@ -10,9 +10,8 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .home-slider {
-  background-image: url(../assets/images/building01.jpg);
-  background-position: center;
-  background-size: cover;
+  position: relative;
+  z-index: 100;
   height: 100vh;
   display: flex;
   align-items: center; 

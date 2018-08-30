@@ -5,7 +5,7 @@ import About from './views/About.vue'
 import Contacts from './views/Contacts.vue'
 import News from './views/News.vue'
 import NewsInner from './views/NewsInner.vue'
-import BuildingInnerComponent from './components/buildings/BuildingInnerComponent.vue'
+import BuildingInner from './views/BuildingInner.vue'
 import { loadLanguageAsync, i18n } from './setup/i18n'
 
 Vue.use(Router)
@@ -31,7 +31,7 @@ let router = new Router({
     {
       path: '/:lang/building-inner',
       name: 'building-inner',
-      component: BuildingInnerComponent,
+      component: BuildingInner,
       meta: { transitionName: 'slide' }
     },
     {
