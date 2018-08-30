@@ -9,7 +9,7 @@
           <h2 class="title">Ние имаме различна<br> архитектурна практика</h2>
         </div>
         <div class="btn-box">
-          <router-link :to="'/' + lang + '/building-inner'" class="btn"><div class="btn-overlay"></div>виж нашите проекти</router-link>
+          <router-link :to="'/' + lang + '/buildings'" class="btn"><div class="btn-overlay"></div>виж нашите проекти</router-link>
         </div>
       </div>
       <div class="news-box">
@@ -23,12 +23,12 @@
 
 <script>
 import NavComponent from '@/components/layout/NavComponent'
-import BuildingsCarouselComponent from '@/components/buildings/BuildingsCarouselComponent'
+import BuildingsCarousel from '@/components/buildings/BuildingsCarousel'
 export default {
   name: 'home',
   components: {
     'nav-component': NavComponent,
-    'buildings-carousel': BuildingsCarouselComponent
+    'buildings-carousel': BuildingsCarousel
   },
   data: function () {
     return {

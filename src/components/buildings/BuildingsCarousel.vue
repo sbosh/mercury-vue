@@ -1,27 +1,24 @@
 <template>
   <div class="buildings-carousel">
     <swiper :options="swiperOption">
-      <swiper-slide v-for="building in buildings" :key="building.id"><div class="bg" :style="{ 'background-image': 'url(' + building.bg + ')' }"></div></swiper-slide>
+      <swiper-slide v-for="building in buildings" :key="building.id" >
+        <building-listing-item
+          :title="building.title"
+          :image="building.bg"
+          :link="building.link" />
+      </swiper-slide>
     </swiper>
   </div>
 </template>
 
 <script>
+import BuildingListingItem from './BuildingListingItem'
 export default {
   name: 'buildings-carousel',
+  components: { BuildingListingItem },
+  props: ['buildings'],
   data () {
     return {
-      buildings: [
-        {
-          bg: require('@/assets/images/building01.jpg')
-        },
-        {
-          bg: require('@/assets/images/gallery01.jpg')
-        },
-        {
-          bg: require('@/assets/images/next-building.jpg')
-        }
-      ],
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 0,
