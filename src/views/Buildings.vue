@@ -1,7 +1,7 @@
 <template>
   <div class="main-content">
     <nav-component />
-    <buildings-carousel :buildings="buildings" :fullListing="true" />
+    <buildings-carousel />
   </div>
 </template>
 
@@ -13,27 +13,6 @@ export default {
   components: {
     'nav-component': NavComponent,
     'buildings-carousel': BuildingsCarousel
-  },
-  data () {
-    return {
-      buildings: [
-        {
-          title: 'Title 1',
-          link: 'https://google.com',
-          bg: require('@/assets/images/building01.jpg')
-        },
-        {
-          title: 'Title 2',
-          link: 'https://google.com',
-          bg: require('@/assets/images/gallery01.jpg')
-        },
-        {
-          title: 'Title 3',
-          link: 'https://google.com',
-          bg: require('@/assets/images/next-building.jpg')
-        }
-      ]
-    }
   },
   computed: {
     lang () {

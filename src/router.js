@@ -38,8 +38,7 @@ let router = new Router({
     {
       path: '/:lang/buildings',
       name: 'buildings',
-      component: Buildings,
-      meta: { transitionName: 'slide' }
+      component: Buildings
     },
     {
       path: '/:lang/news',

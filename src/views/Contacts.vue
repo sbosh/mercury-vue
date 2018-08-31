@@ -58,13 +58,48 @@
       </form>
     </div>
     <div class="google-map">
-    <GmapMap
-      :center="{lat:10, lng:10}"
-      :zoom="7"
-      map-type-id="terrain"
-      style="width: 500px; height: 300px"
-    >
-    </GmapMap>
+      <div class="tabs">
+        <div class="nav-tabs">
+          <li class="active"><a href="#tab1">Sofia</a>
+            <div class="dropdown">
+              <div class="address">Адрес</div>
+              <div class="text">София, ул. „Николай Лилиев“ 14</div>
+              <br>
+              <div class="address">Консултант брокер</div>
+              <div class="text">Ани Ботева</div>
+              <div class="phone"><a href="tel:+359884626391">+359 884 626 391</a></div>
+              <div class="text">sales@mercury99.com</div>
+            </div>
+          </li>
+          <li><a href="#tab2">Sunny Beach</a>
+            <div class="dropdown">
+              <div class="address">Адрес</div>
+              <div class="text">София, ул. „Николай Лилиев“ 14</div>
+              <br>
+              <div class="address">Консултант брокер</div>
+              <div class="text">Ани Ботева</div>
+              <div class="phone"><a href="tel:+359884626391">+359 884 626 391</a></div>
+              <div class="text">sales@mercury99.com</div>
+            </div>
+          </li>
+        </div>
+        <div class="tabs-container">
+          <div id="tab1">
+            <GmapMap
+              :center="{lat:42.676590, lng:23.320476}"
+              :zoom="17"
+            >
+            </GmapMap>
+          </div>
+          <div id="tab2">
+            <GmapMap
+              :center="{lat:42.687657, lng:27.705927}"
+              :zoom="17"
+            >
+            </GmapMap>
+          </div>
+        </div>
+      </div>
     </div>
     <footer-component/>
   </div>
@@ -84,6 +119,89 @@ export default {
 </script>
 
 <style lang="scss">
+  .google-map {
+    padding: 0 90px 90px;
+    .vue-map-container {
+      width: 100%;
+      height: 560px;
+    }
+    .tabs {
+      .nav-tabs {
+        padding: 0;
+        margin: 0 0 0 65px;
+        width: 360px;
+        position: relative;
+        >li {
+          list-style: none;
+          display: inline-block;
+          width: 50%;
+          background-color: #fa6a02;
+          >a {
+            display: block;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 31px 0;
+            text-align: center;
+            position: relative;
+            &:after {
+              content: '';
+              position: absolute;
+              top: 15px;
+              bottom: 15px;
+              right: 0;
+              width: 1px;
+              background: rgba(255,255,255, .2);
+            }
+          }
+          &:last-child a:after {
+            display: none;
+          }
+          .dropdown {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 100%;
+            background-color: #232323;
+            z-index: 999;
+            padding: 40px;
+            color: #fff;
+            visibility: hidden;
+            opacity: 0;
+            .address {
+              font-size: 9px;
+              font-weight: 700;
+              text-transform: uppercase;
+              margin-bottom: 7px;
+            }
+            .text {
+              font-size: 14px;
+              font-weight: 600;
+              margin-bottom: 8px;
+            }
+            .phone {
+              margin-bottom: 8px;
+              a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: 700;
+                text-transform: uppercase;
+              }
+            }
+          }
+          &.active {
+            .dropdown {
+              visibility: visible;
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
   .contacts-page {
     padding-top: 190px;
     padding-right: 190px;
@@ -103,7 +221,7 @@ export default {
       padding: 70px 110px;
       position: relative;
       z-index: 10;
-      margin: 0 160px 200px 160px;
+      margin: 0 160px 120px 160px;
 
       h3 {
         color: #2c2c2c;

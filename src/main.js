@@ -16,9 +16,8 @@ Vue.use(VeeValidate)
 
 Vue.use(VueGoogleMaps, {
   load: {
-    apiKey: 'your-google-api-key',
-    libraries: ['places'],
-    useBetaRenderer: false
+    apiKey: 'AIzaSyC8SMJaPNrgBhgYH-g4XbZGIuLqdoaeNK8',
+    libraries: 'places'
   }
 })
 

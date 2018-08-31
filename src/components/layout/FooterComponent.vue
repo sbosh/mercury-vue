@@ -133,10 +133,11 @@ export default {
            transition: all .3s;
           }
           &:hover {
-            border-color: #fa6a02;
+            border-color: #ffffff;
+            background: #ffffff;
             svg path,
             svg g use {
-              fill: #fa6a02;
+              fill: #2c2c2c;
             }
           }
         }

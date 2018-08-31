@@ -103,7 +103,7 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      if (to.name === 'home') {
+      if (to.name === 'home' || to.name === 'buildings') {
         this.$el.querySelector('.main-nav').classList.add('home-header')
       } else {
         this.$el.querySelector('.main-nav').classList.remove('home-header')
