@@ -7,6 +7,7 @@ import News from './views/News.vue'
 import NewsInner from './views/NewsInner.vue'
 import BuildingInner from './views/BuildingInner.vue'
 import Buildings from './views/Buildings.vue'
+import BuildingSort from './views/BuildingSort.vue'
 import { loadLanguageAsync, i18n } from './setup/i18n'
 
 Vue.use(Router)
@@ -30,15 +31,20 @@ let router = new Router({
       component: Contacts
     },
     {
+      path: '/:lang/buildings',
+      name: 'buildings',
+      component: Buildings
+    },
+    {
+      path: '/:lang/building-sort',
+      name: 'building-sort',
+      component: BuildingSort
+    },
+    {
       path: '/:lang/building-inner',
       name: 'building-inner',
       component: BuildingInner,
       meta: { transitionName: 'slide' }
-    },
-    {
-      path: '/:lang/buildings',
-      name: 'buildings',
-      component: Buildings
     },
     {
       path: '/:lang/news',
