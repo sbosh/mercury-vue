@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Meta from 'vue-meta'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Contacts from './views/Contacts.vue'
@@ -11,6 +12,7 @@ import BuildingSort from './views/BuildingSort.vue'
 import { loadLanguageAsync, i18n } from './setup/i18n'
 
 Vue.use(Router)
+Vue.use(Meta)
 
 let router = new Router({
   mode: 'history',

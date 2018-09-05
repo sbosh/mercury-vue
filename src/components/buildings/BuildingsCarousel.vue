@@ -1,16 +1,16 @@
 <template>
   <div class="buildings-carousel">
-    <swiper :options="swiperOption">
+    <swiper :options="this.getSwiperOptions(this.home)">
       <swiper-slide v-for="building in buildings" :key="building.id" >
         <div class="bg" :style="{ 'background-image': 'url(' + building.bg + ')' }">
-          <div class="caption">
+          <div class="caption" v-if="!home">
             <div class="title-box">
               <h2 class="title"><a :href="building.link">{{ building.description }}</a></h2>
             </div>
           </div>
         </div>
       </swiper-slide>
-      <div class="buildings-list">
+      <div class="buildings-list" v-if="!home">
         <h3>{{ $t('current_projects') }}</h3>
         <div class="buildings-titles"></div>
         <div class="buttons">
@@ -18,67 +18,93 @@
           <a href="">{{ $t('completed_projects') }}</a>
         </div>
       </div>
+      <div class="scroll-icon" v-if="!home"><span></span></div>
     </swiper>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'buildings-carousel',
+  props: ['home'],
   data () {
     return {
-      buildingsRoute: null,
-      buildings: [
-        {
-          title: 'Комплекс Бижу',
-          link: 'https://google.com',
-          description: 'Сградата има страхотен изглед към Витоша',
-          bg: require('@/assets/images/building01.jpg')
-        },
-        {
-          title: 'Флора Бийч Резорт',
-          link: 'https://google.com',
-          description: 'Сградата е разположена в ж.к Младост 3',
-          bg: require('@/assets/images/gallery01.jpg')
-        },
-        {
-          title: 'Комплекс Меркурий Плаза',
-          link: 'https://google.com',
-          description: 'В непосредствена близост до НДК',
-          bg: require('@/assets/images/next-building.jpg')
-        },
-        {
-          title: 'Комплекс Елеганс',
-          link: 'https://google.com',
-          description: 'Частен басейн, 50 паркоместа и частна детска площадка',
-          bg: require('@/assets/images/gallery01.jpg')
-        }
-      ],
-      swiperOption: {
+      buildingsRoute: null
+    }
+  },
+  methods: {
+    getSwiperOptions (isHome) {
+      const $this = this
+      let options = {
         slidesPerView: 'auto',
         spaceBetween: 0,
         effect: 'fade',
         speed: 1000,
         loop: true,
         mousewheel: true,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false
-        },
         pagination: {
           el: '.buildings-titles',
-          clickable: true,
+          clickable: false,
           renderBullet (index, className) {
-            return `<div class="${className} building-title"><a href=""><span>${index + 1}</span> Title</a></div>`
+            return `<div class="${className} building-title"><a href="${$this.buildings[index].link}"><span>${index + 1}</span> ${$this.buildings[index].title}</a></div>`
           }
         }
       }
+      if (isHome) {
+        options.autoplay = {
+          delay: 3000,
+          disableOnInteraction: false
+        }
+      }
+      return options
     }
+  },
+  computed: {
+    ...mapState({
+      buildings: state => state.buildings.all
+    })
   }
 }
 </script>
 
 <style lang="scss">
+  .scroll-icon {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%, 200%);
+    transition-delay: 1.5s;
+    transition-duration: .7s;
+    transition-property: all;
+    span {
+      width: 24px;
+      height: 40px;
+      border: 2px solid #fff;
+      display: block;
+      border-radius: 12px;
+      &:after {
+        content: '';
+        border-radius: 12px;
+        width: 4px;
+        height: 12px;
+        background: #fff;
+        position: absolute;
+        left: 50%;
+        top: 7px;
+        margin-left: -2px;
+        animation: bounce-animation .4s linear alternate infinite;
+      }
+    }
+  }
+  .active-component {
+    .scroll-icon {
+    transform: translate(-50%, 0);
+    }
+   .buildings-list {
+    transform: translateY(0);
+   }
+  }
   .buildings-list {
     position: absolute;
     right: 195px;
@@ -86,6 +112,8 @@ export default {
     background: #fff;
     z-index: 999;
     padding: 35px 0;
+    transition: .7s;
+    transform: translateY(100%);
     &:before {
       content: '';
       position: absolute;
@@ -209,6 +237,14 @@ export default {
         display: flex;
         align-items: center;
       }
+    }
+  }
+  @keyframes bounce-animation {
+    0%{
+      transform:translateY(0);
+      }
+    to{
+      transform:translateY(7px);
     }
   }
 </style>

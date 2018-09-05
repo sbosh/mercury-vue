@@ -12,6 +12,10 @@ const DEFAULT_TRANSITION = 'fade'
 export default {
   name: 'app',
   components: { HeaderComponent },
+  metaInfo: {
+    title: 'MERCURY 99',
+    titleTemplate: '%s | Building Company'
+  },
   data () {
     return {
       prevHeight: 0,

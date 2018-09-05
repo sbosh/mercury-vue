@@ -110,6 +110,9 @@ import FooterComponent from '@/components/layout/FooterComponent'
 export default {
   name: 'contacts',
   components: { FooterComponent, NavinnerComponent },
+  metaInfo: {
+    title: 'CONTACTS'
+  },
   data () {
     return {
       title: 'Контакти'

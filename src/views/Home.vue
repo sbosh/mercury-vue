@@ -1,7 +1,7 @@
 <template>
   <div class="main-content">
     <nav-component />
-    <buildings-carousel />
+    <buildings-carousel :home="true" />
     <div class="home-slider">
       <div class="line"></div>
       <div class="caption">
