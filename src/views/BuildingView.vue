@@ -1,0 +1,603 @@
+<template>
+  <div class="main-content">
+    <navinner-component :navTitle="title" />
+    <div class="building-apartments">
+      <div class="img"></div>
+      <div class="all-apartments" v-bind:class="{ active: apartmentsActive }">
+        <div class="table-box">
+          <div class="close" @click="apartmentsActive = false"></div>
+          <div class="table">
+            <div class="thead">
+              <div class="tr">
+                <div class="th">Вход:</div>
+                <div class="th">Ниво:</div>
+                <div class="th">Номер:</div>
+                <div class="th">квадратура:</div>
+                <div class="th">Цена:</div>
+                <div class="th">Статус:</div>
+              </div>
+            </div>
+            <div class="tbody">
+              <div class="tr" v-for="apartment in apartments" :key="apartment.id">
+                <div class="td"><div class="block">{{ apartment.block }}</div></div>
+                <div class="td"><div class="level">{{ apartment.level }}</div></div>
+                <div class="td"><div class="number">{{ apartment.number }}</div></div>
+                <div class="td"><div class="sqm">{{ apartment.sqm }}</div></div>
+                <div class="td"><div class="price">{{ apartment.price }}</div></div>
+                <div class="td"><div class="status">{{ apartment.status }}</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="filters" v-bind:class="{ active: filterActive }">
+        <div class="close" @click="filterActive = false"></div>
+        <div class="filter-row">
+          <div class="filter-box">
+            <div class="text">Брой спални:</div>
+          </div>
+          <div class="filter-box">
+            <div class="input-field">
+              <input type="checkbox" id="one" name="rooms" class="checkbox" />
+              <label for="one">1</label>
+            </div>
+            <div class="input-field">
+              <input type="checkbox" id="two" name="rooms" class="checkbox" />
+              <label for="two">2</label>
+            </div>
+            <div class="input-field">
+              <input type="checkbox" id="three" name="rooms" class="checkbox" />
+              <label for="three">3</label>
+            </div>
+            <div class="input-field">
+              <input type="checkbox" id="four" name="rooms" class="checkbox" />
+              <label for="four">4+</label>
+            </div>
+          </div>
+          <div class="filter-box price-range">
+            <div class="text">Избери цена:</div>
+            <div class="price">
+              <div class="min">5 000</div>
+              <vue-slider
+                ref="slider"
+                v-model="value"
+                :width="400"
+                formatter="{value} euro"
+                :min="5000"
+                :max="140000"
+                :interval="5000" />
+              <div class="max">140 000</div>
+            </div>
+          </div>
+          <div class="filter-box">
+            <input type="submit" class="filter-btn" />
+          </div>
+        </div>
+      </div>
+      <div class="bottom-options">
+        <div class="building-btn">
+          <div class="btn-box"><router-link :to="'/' + lang + '/building-inner'" class="btn">Информация за сградата</router-link></div>
+        </div>
+        <div class="building-filter">
+          <button class="filter-btn" @click="filterActive = !filterActive">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <button class="parking-btn" @click="apartmentsActive = !apartmentsActive"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import vueSlider from 'vue-slider-component'
+import NavinnerComponent from '@/components/layout/NavinnerComponent'
+export default {
+  name: 'building-view',
+  components: { NavinnerComponent, vueSlider },
+  data () {
+    return {
+      value: 1,
+      apartmentsActive: false,
+      filterActive: false,
+      title: 'Комплекс Бижу',
+      apartments: [
+        {
+          block: 'A',
+          level: '-1',
+          number: '3',
+          sqm: '16.4 m2',
+          price: '16 000',
+          status: 'свободен'
+        },
+        {
+          block: 'A',
+          level: '10',
+          number: '63',
+          sqm: '19.4 m2',
+          price: '26 500',
+          status: 'Закупен'
+        },
+        {
+          block: 'A',
+          level: '-1',
+          number: '3',
+          sqm: '16.4 m2',
+          price: '16 000',
+          status: 'свободен'
+        },
+        {
+          block: 'A',
+          level: '-1',
+          number: '3',
+          sqm: '16.4 m2',
+          price: '16 000',
+          status: 'свободен'
+        },
+        {
+          block: 'A',
+          level: '10',
+          number: '63',
+          sqm: '19.4 m2',
+          price: '26 500',
+          status: 'Закупен'
+        },
+        {
+          block: 'A',
+          level: '-1',
+          number: '3',
+          sqm: '16.4 m2',
+          price: '16 000',
+          status: 'свободен'
+        },
+        {
+          block: 'A',
+          level: '-1',
+          number: '3',
+          sqm: '16.4 m2',
+          price: '16 000',
+          status: 'свободен'
+        },
+        {
+          block: 'A',
+          level: '10',
+          number: '63',
+          sqm: '19.4 m2',
+          price: '26 500',
+          status: 'Закупен'
+        },
+        {
+          block: 'A',
+          level: '-1',
+          number: '3',
+          sqm: '16.4 m2',
+          price: '16 000',
+          status: 'свободен'
+        },
+        {
+          block: 'A',
+          level: '-1',
+          number: '3',
+          sqm: '16.4 m2',
+          price: '16 000',
+          status: 'свободен'
+        },
+        {
+          block: 'A',
+          level: '10',
+          number: '63',
+          sqm: '19.4 m2',
+          price: '26 500',
+          status: 'Закупен'
+        },
+        {
+          block: 'A',
+          level: '-1',
+          number: '3',
+          sqm: '16.4 m2',
+          price: '16 000',
+          status: 'свободен'
+        },
+        {
+          block: 'A',
+          level: '-1',
+          number: '3',
+          sqm: '16.4 m2',
+          price: '16 000',
+          status: 'свободен'
+        },
+        {
+          block: 'A',
+          level: '10',
+          number: '63',
+          sqm: '19.4 m2',
+          price: '26 500',
+          status: 'Закупен'
+        },
+        {
+          block: 'A',
+          level: '-1',
+          number: '3',
+          sqm: '16.4 m2',
+          price: '16 000',
+          status: 'свободен'
+        },
+        {
+          block: 'A',
+          level: '-1',
+          number: '3',
+          sqm: '16.4 m2',
+          price: '16 000',
+          status: 'свободен'
+        },
+        {
+          block: 'A',
+          level: '10',
+          number: '63',
+          sqm: '19.4 m2',
+          price: '26 500',
+          status: 'Закупен'
+        },
+        {
+          block: 'A',
+          level: '-1',
+          number: '3',
+          sqm: '16.4 m2',
+          price: '16 000',
+          status: 'свободен'
+        }
+      ]
+    }
+  },
+  computed: {
+    lang () {
+      return this.$i18n.locale
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+  .filters {
+    position: absolute;
+    left: 40px;
+    right: 235px;
+    bottom: 0;
+    background: #232323;
+    min-height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transform: translateY(100%);
+    transition: all .7s;
+    .close {
+      position: absolute;
+      right: 25px;
+      top: 25px;
+      width: 20px;
+      height: 20px;
+      background: #fff url(../assets/images/close-apms-icon.svg) no-repeat center center;
+      cursor: pointer;
+      z-index: 999;
+    }
+    &.active {
+      transform: translateY(0);
+      bottom: 40px;
+    }
+    .price {
+      position: relative;
+      .min, .max {
+        color: #8d8d8d;
+        font-family: "Fira Sans";
+        font-size: 11px;
+        font-weight: 500;
+        position: absolute;
+        bottom: -10px;
+      }
+      .min {
+        left: 10px;
+      }
+      .max {
+        right: 10px;
+      }
+    }
+    .vue-slider-component {
+      width: 400px;
+    }
+    .vue-slider-component .vue-slider-tooltip {
+      padding: 20px;
+      border-radius: 0;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .vue-slider-component .vue-slider-tooltip,
+    .vue-slider-component .vue-slider-process {
+      background-color: #fa6a02;
+      border-color: #fa6a02;
+    }
+    .filter-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+      .filter-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        &.price-range {
+          margin-left: 50px;
+          margin-right: 50px;
+        }
+      }
+      .text {
+        color: #8d8d8d;
+        font-family: "Fira Sans";
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        margin-right: 10px;
+      }
+    }
+    .input-field {
+      margin: 0 5px;
+      label {
+        width: 55px;
+        height: 58px;
+        line-height: 60px;
+        border: 1px solid rgba(#aea9a9, .2);
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        display: block;
+        cursor: pointer;
+        text-align: center;
+      }
+      input[type=checkbox] {
+        display: none;
+        &:checked + label {
+          color: #fff;
+          border: 1px solid #6e6d6d;
+        }
+      }
+    }
+    .filter-btn {
+      background: url(../assets/images/src-icon.svg) no-repeat center;
+      outline: none;
+      box-shadow: none;
+      width: 58px;
+      height: 58px;
+      border: 1px solid #fa6a02;
+      font-size: 0;
+    }
+  }
+  .building-apartments {
+    overflow: hidden;
+    height: 100vh;
+    position: relative;
+    background: url(../assets/images/building01.jpg);
+    .building-btn {
+      margin: auto 0 0 0;
+    }
+    .btn-box {
+      margin: 0;
+      .btn {
+        background-color: #ffffff;
+        color: #4a4a4a;
+        &:hover {
+          border-color: #fff;
+        }
+        &:before {
+          border-color: transparent transparent transparent #4a4a4a;
+        }
+        &:after {
+          background-color: #4a4a4a;
+        }
+      }
+    }
+    .bottom-options {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 45px 235px 45px 40px;
+      z-index: 999;
+      .building-filter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        button {
+          border-radius: 50%;
+          width: 70px;
+          height: 70px;
+          border: none;
+          box-shadow: none;
+          outline: none;
+          cursor: pointer;
+        }
+        .parking-btn {
+          background-color: #ffffff;
+          background-image: url(../assets/images/p-icon.svg);
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+        .filter-btn {
+          background-color: #232323;
+          position: relative;
+          margin-bottom: 23px;
+          span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: #fff;
+            position: absolute;
+            left: 50%;
+            margin-left: -12px;
+            &:after {
+              content: '';
+              position: absolute;
+              top: -3px;
+              width: 3px;
+              height: 3px;
+              border: 2px solid #fff;
+              background-color: #232323;
+              border-radius: 50%;
+              transition: all .3s;
+            }
+            &:nth-child(1) {
+              top: 27px;
+              &:after {
+                left: 3px;
+              }
+            }
+            &:nth-child(2) {
+              top: 35px;
+              &:after {
+                left: 15px;
+              }
+            }
+            &:nth-child(3) {
+              top: 44px;
+              &:after {
+                left: 7px;
+              }
+            }
+          }
+          &:hover {
+            span {
+              &:nth-child(1) {
+                &:after {
+                  left: 13px;
+                }
+              }
+              &:nth-child(2) {
+                &:after {
+                  left: 5px;
+                }
+              }
+              &:nth-child(3) {
+                &:after {
+                  left: 17px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .all-apartments {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 1000;
+      padding-right: 195px;
+      transform: translateX(100%);
+      transition: all .6s;
+      width: 50%;
+      &.active {
+        transform: translateX(0);
+      }
+    }
+    .table-box {
+      height: 100vh;
+      position: relative;
+      .close {
+        width: 20px;
+        height: 20px;
+        background: #fff url(../assets/images/close-apms-icon.svg) no-repeat center center;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        z-index: 999;
+      }
+    }
+    .table {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      .td, .th {
+        border: none;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      .thead {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #232323;
+        .tr {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: row;
+        }
+        .th {
+          color: #8d8d8d;
+          font-family: 'Fira Sans', sans-serif;
+          font-size: 11px;
+          font-weight: 500;
+          width: 100%;
+          padding: 34px 0;
+        }
+      }
+      .tbody {
+        overflow-x: auto;
+        height: 100%;
+        background-color: #f8f8f8;
+        .tr {
+          border-bottom: 1px solid #e7e7e7;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: row;
+          &:first-child {
+            margin-top: 80px;
+          }
+          .td {
+            color: #000000;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            padding: 40px 0;
+            text-align: center;
+            div {
+              margin: auto;
+            }
+            .number {
+              width: 33px;
+              height: 33px;
+              border-radius: 50%;
+              border: 1px solid #979797;
+              text-align: center;
+              line-height: 34px;
+              font-size: 13px;
+            }
+            .sqm {
+              color: #8e8e8e;
+              font-size: 16px;
+              font-weight: 400;
+            }
+            .status {
+              font-size: 11px;
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
+  }
+</style>

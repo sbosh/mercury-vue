@@ -48,6 +48,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 999;
 
     .logo {
       margin: 30px 0 0 40px;
