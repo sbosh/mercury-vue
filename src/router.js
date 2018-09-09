@@ -9,6 +9,7 @@ import NewsInner from './views/NewsInner.vue'
 import BuildingInner from './views/BuildingInner.vue'
 import Buildings from './views/Buildings.vue'
 import BuildingSort from './views/BuildingSort.vue'
+import BuildingView from './views/BuildingView.vue'
 import { loadLanguageAsync, i18n } from './setup/i18n'
 
 Vue.use(Router)
@@ -46,6 +47,12 @@ let router = new Router({
       path: '/:lang/building-inner',
       name: 'building-inner',
       component: BuildingInner,
+      meta: { transitionName: 'slide' }
+    },
+    {
+      path: '/:lang/building-view',
+      name: 'building-view',
+      component: BuildingView,
       meta: { transitionName: 'slide' }
     },
     {

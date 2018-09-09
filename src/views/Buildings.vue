@@ -13,11 +13,6 @@ export default {
   components: {
     'nav-component': NavComponent,
     'buildings-carousel': BuildingsCarousel
-  },
-  computed: {
-    lang () {
-      return this.$i18n.locale
-    }
   }
 }
 </script>
