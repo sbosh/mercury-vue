@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Meta from 'vue-meta'
 import Home from './views/Home.vue'
+import Error404 from './views/Error404.vue'
 import About from './views/About.vue'
 import Contacts from './views/Contacts.vue'
 import News from './views/News.vue'
@@ -66,6 +67,11 @@ let router = new Router({
       name: 'news-inner',
       component: NewsInner,
       meta: { transitionName: 'slide' }
+    },
+    {
+      path: '/:lang/*',
+      name: 'error404',
+      component: Error404
     }
   ]
 })
