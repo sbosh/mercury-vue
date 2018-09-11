@@ -237,6 +237,9 @@ export default {
   }
   .btn-box {
     margin: 0;
+    transition: all .7s;
+    transform: translateX(-150%);
+    opacity: 0;
     .btn {
       background-color: #ffffff;
       color: #4a4a4a;
@@ -274,17 +277,22 @@ export default {
         box-shadow: none;
         outline: none;
         cursor: pointer;
+        transition-property: all;
+        transition-duration: .9s;
+        transform: translateX(250%);
       }
       .parking-btn {
         background-color: #ffffff;
         background-image: url(../assets/images/p-icon.svg);
         background-repeat: no-repeat;
         background-position: center;
+        transition-delay: .6s;
       }
       .filter-btn {
         background-color: #232323;
         position: relative;
         margin-bottom: 23px;
+        transition-delay: 1s;
         span {
           display: block;
           width: 24px;
@@ -446,6 +454,15 @@ export default {
           }
         }
       }
+    }
+  }
+}
+.active-component {
+  .building-apartments {
+    .bottom-options .building-filter button,
+    .btn-box {
+      transform: translate(0);
+      opacity: 1;
     }
   }
 }

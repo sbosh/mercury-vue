@@ -8,15 +8,15 @@
               <router-link tag="a" :to="'/' + lang"><img src="@/assets/images/logo-nav.png" alt=""></router-link>
             </div>
             <div class="col">
-              <h3 class="margin-bottom-0"><a href="">{{ $t('current_projects') }}</a></h3>
+              <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/buildings'">{{ $t('current_projects') }}</router-link></h3>
               <ul>
                 <li><a href="">Комплекс Бижу</a><router-link :to="'/' + lang">{{ $t('home') }}</router-link></li>
                 <li><a href="">Флора Бийч Резорт</a></li>
                 <li><a href="">Комплекс Меркурий Плаза</a></li>
                 <li><a href="">Комплекс Елеганс</a></li>
               </ul>
-              <h3><a href="">{{ $t('completed_projects') }}</a></h3>
-              <h3><a href="">{{ $t('future_projects') }}</a></h3>
+              <h3><router-link :to="'/' + lang + '/building-sort'">{{ $t('completed_projects') }}</router-link></h3>
+              <h3><router-link :to="'/' + lang + '/building-sort'">{{ $t('future_projects') }}</router-link></h3>
               <h3><router-link :to="'/' + lang + '/news'">{{ $t('news') }}</router-link></h3>
             </div>
             <div class="col">
@@ -508,19 +508,19 @@ export default {
       .main-navigation {
         transform: translateX(0);
         .content {
-          animation: nav-animation 2.8s forwards;
+          animation: nav-animation 1s forwards;
         }
 
         .col {
           opacity: 1;
           &:nth-child(1){
-            animation: col3-animation 1.8s forwards;
+            animation: col3-animation .8s forwards;
           }
           &:nth-child(2){
-            animation: col3-animation 2.8s forwards;
+            animation: col3-animation 1.8s forwards;
           }
           &:nth-child(3){
-            animation: col3-animation 3.8s forwards;
+            animation: col3-animation 2.8s forwards;
           }
         }
       }
