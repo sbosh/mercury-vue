@@ -59,8 +59,8 @@
     </div>
     <div class="google-map">
       <div class="tabs">
-        <div class="nav-tabs">
-          <li class="active"><a href="#tab1">Sofia</a>
+        <ul class="nav-tabs">
+          <li class="active" @click="tabActive($event, 'tab1')"><a href="">Sofia</a>
             <div class="dropdown">
               <div class="address">Адрес</div>
               <div class="text">София, ул. „Николай Лилиев“ 14</div>
@@ -71,7 +71,7 @@
               <div class="text">sales@mercury99.com</div>
             </div>
           </li>
-          <li><a href="#tab2">Sunny Beach</a>
+          <li @click="tabActive($event, 'tab2')"><a href="">Sunny Beach</a>
             <div class="dropdown">
               <div class="address">Адрес</div>
               <div class="text">София, ул. „Николай Лилиев“ 14</div>
@@ -82,20 +82,29 @@
               <div class="text">sales@mercury99.com</div>
             </div>
           </li>
-        </div>
+        </ul>
         <div class="tabs-container">
-          <div id="tab1">
+          <div id="tab1" v-if="tab1">
             <GmapMap
               :center="{lat:42.676590, lng:23.320476}"
               :zoom="17"
             >
+              <GmapMarker
+                :position="{lat:42.676590, lng:23.320476}"
+                :icon="'https://cdn3.iconfinder.com/data/icons/flat-icons-web/40/Location-128.png'"
+              />
             </GmapMap>
           </div>
-          <div id="tab2">
+          <div id="tab2" v-if="tab2">
             <GmapMap
               :center="{lat:42.687657, lng:27.705927}"
               :zoom="17"
+              :icon="'https://cdn3.iconfinder.com/data/icons/flat-icons-web/40/Location-128.png'"
             >
+              <GmapMarker
+                :position="{lat:42.687657, lng:27.705927}"
+                :icon="'https://cdn3.iconfinder.com/data/icons/flat-icons-web/40/Location-128.png'"
+              />
             </GmapMap>
           </div>
         </div>
@@ -115,7 +124,25 @@ export default {
   },
   data () {
     return {
-      title: 'Контакти'
+      title: 'Контакти',
+      tab1: true,
+      tab2: false
+    }
+  },
+  methods: {
+    tabActive (e, tab) {
+      e.preventDefault()
+      let tabs = this.$el.querySelectorAll('.nav-tabs li')
+      tabs[0].classList.remove('active')
+      tabs[1].classList.remove('active')
+      e.currentTarget.classList.add('active')
+      if (tab === 'tab1') {
+        this.tab1 = true
+        this.tab2 = false
+      } else {
+        this.tab1 = false
+        this.tab2 = true
+      }
     }
   }
 }
@@ -158,6 +185,21 @@ export default {
               width: 1px;
               background: rgba(255,255,255, .2);
             }
+            &:before {
+              content: '';
+              position: absolute;
+              bottom: -17px;
+              margin-left: -16px;
+              left: 50%;
+              width: 0;
+              height: 0;
+              border-style: solid;
+              border-width: 17px 16px 0 16px;
+              border-color: #fa6902 transparent transparent transparent;
+              display: block;
+              z-index: 9999;
+              opacity: 0;
+            }
           }
           &:last-child a:after {
             display: none;
@@ -196,6 +238,11 @@ export default {
             }
           }
           &.active {
+            a {
+              &:before {
+                opacity: 1;
+              }
+            }
             .dropdown {
               visibility: visible;
               opacity: 1;
@@ -267,6 +314,12 @@ export default {
       outline: none;
       resize: none;
       width: 100%;
+      &:focus {
+        border-color: #fa6a02;
+      }
+      &.error {
+        border-color: #e41616;
+      }
       &.send {
         padding: 20px 30px;
         color: #fff;
@@ -278,6 +331,9 @@ export default {
         min-width: 200px;
         margin-top: 30px;
       }
+    }
+    textarea {
+      min-height: 161px;
     }
     &.radio-group {
       input[type=radio]{

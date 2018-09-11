@@ -26,5 +26,6 @@ new Vue({
   beforeCreate () {
     this.$store.cache.dispatch('fetchArticles')
     this.$store.cache.dispatch('fetchBuildings')
+    this.$store.cache.dispatch('fetchApartments')
   }
 }).$mount('#app')
