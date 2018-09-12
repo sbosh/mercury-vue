@@ -99,13 +99,15 @@ export default {
 </script>
 
 <style lang="scss">
-.img-box {
-  position: relative;
-  z-index: 100;
-  img {
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
+.building-apartments {
+  .img-box {
+    position: relative;
+    z-index: 100;
+    img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
   }
 }
 .filters {
