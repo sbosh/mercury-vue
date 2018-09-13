@@ -12,6 +12,7 @@ import Buildings from './views/Buildings.vue'
 import BuildingSort from './views/BuildingSort.vue'
 import BuildingView from './views/BuildingView.vue'
 import Floor from './views/Floor.vue'
+import Apartment from './views/Apartment.vue'
 import { loadLanguageAsync, i18n } from './setup/i18n'
 
 Vue.use(Router)
@@ -61,6 +62,12 @@ let router = new Router({
       path: '/:lang/floor',
       name: 'floor',
       component: Floor,
+      meta: { transitionName: 'slide' }
+    },
+    {
+      path: '/:lang/apartment',
+      name: 'apartment',
+      component: Apartment,
       meta: { transitionName: 'slide' }
     },
     {
