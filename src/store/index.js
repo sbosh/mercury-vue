@@ -5,6 +5,7 @@ import vuexCache from 'vuex-cache'
 import articles from './modules/articles'
 import buildings from './modules/buildings'
 import apartments from './modules/apartments'
+import floors from './modules/floors'
 
 Vue.use(Vuex)
 
@@ -13,7 +14,8 @@ export default new Vuex.Store({
   modules: {
     articles,
     apartments,
-    buildings
+    buildings,
+    floors
   },
   plugins: [vuexCache],
   strict: debug

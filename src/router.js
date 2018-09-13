@@ -11,6 +11,7 @@ import BuildingInner from './views/BuildingInner.vue'
 import Buildings from './views/Buildings.vue'
 import BuildingSort from './views/BuildingSort.vue'
 import BuildingView from './views/BuildingView.vue'
+import Floor from './views/Floor.vue'
 import { loadLanguageAsync, i18n } from './setup/i18n'
 
 Vue.use(Router)
@@ -54,6 +55,12 @@ let router = new Router({
       path: '/:lang/building-view',
       name: 'building-view',
       component: BuildingView,
+      meta: { transitionName: 'slide' }
+    },
+    {
+      path: '/:lang/floor',
+      name: 'floor',
+      component: Floor,
       meta: { transitionName: 'slide' }
     },
     {

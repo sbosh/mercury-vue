@@ -7,28 +7,28 @@ const actions = {
     commit('setBuildings', [
       {
         title: 'Комплекс Бижу',
-        link: 'https://google.com',
+        link: '/:lang/building-inner',
         description: 'Сградата има страхотен изглед към Витоша',
         bg: require('@/assets/images/building01.jpg'),
         location: 'бул. „Александър Малинов“ 35'
       },
       {
         title: 'Флора Бийч Резорт',
-        link: 'https://google.com',
+        link: '/:lang/building-inner',
         description: 'Сградата е разположена в ж.к Младост 3',
         bg: require('@/assets/images/gallery01.jpg'),
         location: 'бул. Джеймс Баучер 5'
       },
       {
         title: 'Комплекс Меркурий Плаза',
-        link: 'https://google.com',
+        link: '/:lang/building-inner',
         description: 'В непосредствена близост до НДК',
         bg: require('@/assets/images/next-building.jpg'),
         location: 'ул. „Петър Дъртлиев“ 2'
       },
       {
         title: 'Комплекс Елеганс',
-        link: 'https://google.com',
+        link: '/:lang/building-inner',
         description: 'Частен басейн, 50 паркоместа и частна детска площадка',
         bg: require('@/assets/images/gallery01.jpg'),
         location: 'бул. „Янко Сакъзов“ 15'
