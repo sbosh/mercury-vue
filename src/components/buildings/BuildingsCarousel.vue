@@ -14,8 +14,8 @@
         <h3>{{ $t('current_projects') }}</h3>
         <div class="buildings-titles"></div>
         <div class="buttons">
-          <a href="">{{ $t('future_projects') }}</a>
-          <a href="">{{ $t('completed_projects') }}</a>
+          <router-link :to="'/' + lang + '/building-sort'">{{ $t('future_projects') }}</router-link>
+          <router-link :to="'/' + lang + '/building-sort'">{{ $t('completed_projects') }}</router-link>
         </div>
       </div>
       <div class="scroll-icon" v-if="!home"><span></span></div>
@@ -43,6 +43,9 @@ export default {
         speed: 1000,
         loop: true,
         mousewheel: true,
+        keyboard: {
+          enabled: true
+        },
         pagination: {
           el: '.buildings-titles',
           clickable: false,
@@ -61,6 +64,9 @@ export default {
     }
   },
   computed: {
+    lang () {
+      return this.$i18n.locale
+    },
     ...mapState({
       buildings: state => state.buildings.all
     })

@@ -28,19 +28,32 @@
           <div class="title"><h1>3-стаен апартамент</h1></div>
           <div class="sqm">86,4 m2</div>
         </div>
+        <div class="right">
+          <div class="">
+            <div class="text">Обща цена:</div>
+            <div class="price">82 000 <div class="currency drop-arrow">euro <span class="dropdown">bgn</span></div></div>
+          </div>
+          <div>
+            <div class="text">цена на m²:</div>
+            <div class="price">870 <div class="currency">eur</div></div>
+          </div>
+        </div>
       </div>
       <div class="apartment-content">
         <div class="sidebar">
           <h3>Информация за апартамента</h3>
-          <ol>
+          <ul>
             <li>Всекидневна <span>29 m²</span></li>
             <li>Всекидневна <span>29 m²</span></li>
             <li>Спалня 2 <span>15 m²</span></li>
             <li>Баня с wc <span>13.3 m²</span></li>
             <li>Wc <span>3.4 m²</span></li>
             <li>Тераса <span>5 m²</span></li>
-          </ol>
+          </ul>
           <a href="" class="btn">Изпрати запитване</a>
+          <div class="donwload-pdf">
+            <a href="" class="btn-pdf">Изтегли PDF на апартамента</a>
+          </div>
         </div>
         <div class="apartment-florplan">
           <img src="@/assets/images/apartment.png" alt="">
@@ -69,31 +82,130 @@ export default {
   flex-direction: column;
   padding-left: 250px;
   padding-right: 250px;
+  height: 100%;
+  min-height: 100vh;
   .apartment-header {
     width: 100%;
     border-bottom: 1px solid #dfdfdf;
     padding: 30px 0;
+    margin-bottom: 50px;
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+    .left {
+      margin-right: auto;
+      .sqm {
+        font-weight: 600;
+        color: #8d8d8d;
+        font-size: 20px;
+      }
+    }
+    .right {
+      display: flex;
+      margin-left: auto;
+      margin-top: auto;
+      >div:first-of-type {
+        border-right: 1px solid #dfdfdf;
+        padding-right: 40px;
+        padding-left: 0;
+      }
+      >div {
+        padding-left: 40px;
+      }
+      .text {
+        color: #8d8d8d;
+        font-family: "Fira Sans";
+        font-size: 10px;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+      .price {
+        color: #000;
+        font-size: 24px;
+        font-weight: 600;
+        .currency {
+          font-weight: 300;
+          position: relative;
+          display: inline-block;
+          &.drop-arrow {
+            &:after {
+              content: '';
+              width: 0;
+              height: 0;
+              border-style: solid;
+              border-width: 6px 4px 0 4px;
+              border-color: #fa6902 transparent transparent transparent;
+              margin-top: 12px;
+              margin-left: 10px;
+              float: right;
+              display: inline-block;
+              transition: all .3s;
+            }
+          }
+          &:hover {
+            .dropdown {
+              visibility: visible;
+              opacity: 1;
+            }
+            &.drop-arrow:after {
+              transform: rotate(90deg);
+            }
+          }
+          .dropdown {
+            position: absolute;
+            left: 0;
+            top: 100%;
+            visibility: hidden;
+            opacity: 0;
+            transition: all .3s;
+          }
+        }
+      }
+    }
   }
   .apartment-content {
     display: flex;
     justify-content: space-around;
     flex-direction: row-reverse;
     align-items: stretch;
+    margin-bottom: auto;
+    .apartment-florplan {
+    }
     .sidebar {
       display: flex;
       justify-content: space-around;
       flex-direction: column;
-      ol {
+      padding-left: 40px;
+      ul {
+        counter-reset: counter;
+        padding: 0;
+        margin: 0;
         li {
           color: #4a4a4a;
           font-family: "Fira Sans";
           font-size: 13px;
           font-weight: 500;
           margin-bottom: 4px;
+          list-style: none;
+          display: flex;
+          align-items: center;
+          &:nth-child(even) {
+            background: #f2f2f2;
+          }
+          &:before {
+            counter-increment: counter;
+            content: counters(counter,".");
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            color: #fff;
+            background-color: #fa6a02;
+            text-align: center;
+            margin-right: 9px;
+            display: inline-block;
+          }
           span {
-            float: right;
+            margin-left: auto;
           }
         }
       }
@@ -101,9 +213,50 @@ export default {
         color: #000;
         border-color: #fa6a02;
         padding: 20px;
+        display: inline-block;
+        margin-right: auto;
+        width: auto;
+        text-align: center;
+        transition: all .3s;
+        &:hover {
+          color: #fff;
+          background: #fa6a02;
+        }
         &:after,
         &:before {
           display: none;
+        }
+      }
+      .donwload-pdf {
+        .btn-pdf {
+          color: #000;
+          font-family: "Fira Sans";
+          font-size: 13px;
+          font-weight: 400;
+          line-height: 17px;
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          &:before {
+            content: '';
+            width: 54px;
+            height: 53px;
+            background-color: #eee;
+            background-image: url(~@/assets/images/arrow-pdf.svg);
+            background-position: center center;
+            background-repeat: no-repeat;
+            display: inline-block;
+            margin-right: 18px;
+            border: 1px solid transparent;
+            transition: all .3s;
+          }
+          &:hover {
+            text-decoration: underline;
+            &:before {
+              background-position: center 16px;
+              border-color: #fa6a02;
+            }
+          }
         }
       }
     }
@@ -158,7 +311,7 @@ export default {
     background-color: #eeeeee;
     display: block;
     padding: 20px 15px;
-    text-align: center;
+    text-align: left;
     cursor: pointer;
     margin-top: 10px;
     &:before {
@@ -178,6 +331,7 @@ export default {
       font-size: 11px;
       font-weight: 500;
       text-transform: uppercase;
+      margin-bottom: 10px;
     }
     img {
       max-width: 100%;

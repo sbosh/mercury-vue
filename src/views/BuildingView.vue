@@ -2,7 +2,9 @@
   <div class="main-content">
     <navinner-component :navTitle="title" />
     <div class="building-apartments">
-      <div class="img-box"><img src="~@/assets/images/building01.jpg" alt=""></div>
+      <div class="img-box">
+        <img src="~@/assets/images/building01.jpg" alt="">
+      </div>
       <filtered-apartments
         @clicked="isFiltred = false"
         :isFiltred="isFiltred"

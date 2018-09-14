@@ -5,7 +5,7 @@
     <div class="main-img">
       <img src="@/assets/images/building01.jpg" alt="">
     </div>
-    <div class="btn-box"><a href="" class="btn">ВИЖ СХЕМАТА на блока</a></div>
+    <div class="btn-box"><router-link :to="'/' + lang + '/building-view'" class="btn">ВИЖ СХЕМАТА на блока</router-link></div>
   </div>
   <div class="caption">
     <div class="title-box">
@@ -184,6 +184,11 @@ export default {
         }
       }
     })
+  },
+  computed: {
+    lang () {
+      return this.$i18n.locale
+    }
   }
 }
 </script>

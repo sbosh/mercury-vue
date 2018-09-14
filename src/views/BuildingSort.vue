@@ -5,12 +5,12 @@
       <swiper :options="swiperOptions">
         <swiper-slide v-for="building in buildings" :key="building.id" >
           <div class="building-item">
-            <div class="img-box"><img :src="building.bg" alt=""></div>
+            <div class="img-box"><a :href="building.link"><img :src="building.bg" alt=""></a></div>
             <div class="caption">
               <div class="title-box">
                 <h2 class="title"><a :href="building.link">{{ building.description }}</a></h2>
                 <div class="location-info">{{ building.location }}</div>
-                <div class="btn-box"><a href="" :herf="building.link" class="btn">Виж</a></div>
+                <div class="btn-box"><a :href="building.link" class="btn">Виж</a></div>
               </div>
             </div>
           </div>

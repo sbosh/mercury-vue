@@ -74,17 +74,18 @@ export default {
   height: 100vh;
   text-align: center;
   position: relative;
+  .img-box {
+    margin-bottom: 50px;
+  }
 }
 .floor-paggination {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 50px;
   z-index: 999;
   text-align: center;
-  transform: rotate(90deg) translateX(250px);
-  width: 100vh !important;
-  height: 100vw;
+  margin: auto !important;
   .swiper-pagination-bullet {
     color: #000;
     font-size: 48px;
@@ -99,10 +100,6 @@ export default {
     background-color: transparent;
     outline: none;
     border: 1px solid transparent;
-    span {
-      display: block;
-      transform: rotate(-90deg);
-    }
     &.swiper-pagination-bullet-active {
       color: #fa6a02;
       border-color: #fa6a02;
@@ -117,6 +114,7 @@ export default {
   left: 0;
   top: 0;
   bottom: 0;
+  z-index: 1001;
   display: flex;
   justify-content: space-between;
   align-items: center;
