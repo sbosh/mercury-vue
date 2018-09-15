@@ -7,6 +7,7 @@ import './styles/app.scss'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import headroom from 'vue-headroom'
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -17,6 +18,7 @@ Vue.use(VueGoogleMaps, {
 Vue.config.productionTip = false
 
 Vue.use(VueAwesomeSwiper)
+Vue.use(headroom)
 
 new Vue({
   i18n,

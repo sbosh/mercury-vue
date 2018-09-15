@@ -1,55 +1,22 @@
+import ArticleService from '@/services/ArticleService'
+import HTTP from '@/api/http'
+
+const articleService = new ArticleService(HTTP)
+
 const state = {
   all: []
 }
 
 const actions = {
   fetchArticles ({ commit }) {
-    commit('setArticles', [
-      {
-        id: 1,
-        image: require('@/assets/images/building01.jpg'),
-        title: 'Title',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis numquam maiores animi cum. Dolorem magni adipisci a est! Fugiat illum tempore iure nesciunt debitis ad nemo distinctio minima, quis amet!',
-        date: '01.02.2018',
-        link: 'https://www.google.com',
-        category: 'Комплекс Бижу',
-        icon: require('@/assets/images/category01.svg')
-      },
-      {
-        id: 2,
-        image: require('@/assets/images/building01.jpg'),
-        title: 'Lorem ipsum',
-        description: 'Reiciendis numquam maiores animi cum. Dolorem magni adipisci a est! Fugiat illum tempore iure nesciunt debitis ad nemo distinctio minima, quis amet!',
-        date: '01.02.2018',
-        link: 'https://www.google.com',
-        category: 'Комплекс Бижу',
-        icon: require('@/assets/images/category02.svg')
-      },
-      {
-        id: 3,
-        image: require('@/assets/images/building01.jpg'),
-        title: 'Title',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis numquam maiores animi cum. Dolorem magni adipisci a est! Fugiat illum tempore iure nesciunt debitis ad nemo distinctio minima, quis amet!',
-        date: '01.02.2018',
-        link: 'https://www.google.com',
-        category: 'Комплекс Бижу',
-        icon: require('@/assets/images/category01.svg')
-      },
-      {
-        id: 4,
-        image: require('@/assets/images/building01.jpg'),
-        title: 'Lorem ipsum',
-        description: 'Reiciendis numquam maiores animi cum. Dolorem magni adipisci a est! Fugiat illum tempore iure nesciunt debitis ad nemo distinctio minima, quis amet!',
-        date: '01.02.2018',
-        link: 'https://www.google.com',
-        category: 'Комплекс Бижу',
-        icon: require('@/assets/images/category02.svg')
-      }
-    ])
+    articleService.getArticles('/posts/token/mitko').then(({ data }) => commit('setArticles', data.data))
   }
 }
 
 const getters = {
+  getArticles (state) {
+    return state.all
+  },
   getArticle (state) {
     return (id, slug) => {
       return state.all.find(article => article.id === id && article.slug_en === slug) ||
@@ -67,6 +34,6 @@ const mutations = {
 export default {
   state,
   actions,
-  mutations,
-  getters
+  getters,
+  mutations
 }

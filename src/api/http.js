@@ -1,7 +1,7 @@
 import axios from 'axios'
 export default (() => {
   const instance = axios.create({
-    baseURL: 'http://service.area52.bg/api',
+    baseURL: 'http://mercury-api.imigix.com/api',
     withCredentials: false,
     timeout: 5000,
     headers: {

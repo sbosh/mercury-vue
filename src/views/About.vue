@@ -1,6 +1,6 @@
 <template>
   <div class="main-content about-us">
-    <navinner-component />
+    <navinner-component navigation="aboutNav" :navTitle="title" />
     <company-component />
     <service-component />
     <history-component />
@@ -15,7 +15,16 @@ import HistoryComponent from '@/components/about/HistoryComponent'
 import CompanyComponent from '@/components/about/CompanyComponent'
 export default {
   name: 'about',
-  components: { FooterComponent, NavinnerComponent, ServiceComponent, HistoryComponent, CompanyComponent }
+  components: { FooterComponent, NavinnerComponent, ServiceComponent, HistoryComponent, CompanyComponent },
+  data () {
+    return {
+      title: 'За нас'
+    }
+  },
+  metaInfo: {
+    title: 'About us',
+    titleTemplate: '%s | MERCURY 99 Building Company'
+  }
 }
 </script>
 

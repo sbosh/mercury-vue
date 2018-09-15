@@ -19,7 +19,7 @@
       <div class="compass"><img src="@/assets/images/compass.svg" alt=""></div>
     </div>
     <div class="floor-info">
-      <swiper :options="swiperOptions">
+      <swiper :options="swiperOptions" style="display: none;">
         <swiper-slide v-for="floor in floors" :key="floor.id">
           <div class="img-box"><img :src="floor.florplan" alt=""></div>
           <div class="available-apartments" :data-available="floor.available"></div>
@@ -76,6 +76,14 @@ export default {
   position: relative;
   .img-box {
     margin-bottom: 50px;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+    svg polygon:hover {
+      opacity: .3;
+      fill: #fa6a02;
+    }
   }
 }
 .floor-paggination {

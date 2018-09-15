@@ -31,12 +31,12 @@ export default {
   },
   data () {
     return {
-      title: '',
+      title: 'Бъдещи / Минали Комплекс',
       swiperOptions: {
         slidesPerView: 'auto',
         spaceBetween: 0,
         effect: 'fade',
-        speed: 1000,
+        speed: 3000,
         loop: true,
         mousewheel: true,
         pagination: {
@@ -111,7 +111,7 @@ export default {
   padding: 0 200px;
   .img-box {
     width: 50%;
-    height: 80vh;
+    height: 60vh;
     position: relative;
     overflow: hidden;
     &:before {

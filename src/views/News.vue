@@ -1,6 +1,6 @@
 <template>
   <div class="all-news">
-    <navinner-component navigation="newsNav" :navTitle="title" />
+    <navinner-component :navTitle="title" />
     <div class="caption">
       <div class="title-box"><h2 class="title">Всички</h2></div>
     </div>
@@ -28,6 +28,11 @@ export default {
       title: 'Новини'
     }
   },
+  computed: {
+    ...mapState({
+      articles: state => state.articles.all
+    })
+  },
   mounted () {
     let animateBox = document.getElementsByClassName('animate-box')
     window.addEventListener('scroll', function () {
@@ -37,11 +42,6 @@ export default {
           animateBox[index].classList.add('visible')
         }
       }
-    })
-  },
-  computed: {
-    ...mapState({
-      articles: state => state.articles.all
     })
   }
 }

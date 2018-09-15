@@ -7,7 +7,7 @@
     </div>
     <div class="btn-box"><router-link :to="'/' + lang + '/building-view'" class="btn">ВИЖ СХЕМАТА на блока</router-link></div>
   </div>
-  <div class="caption">
+  <div class="caption" id="about">
     <div class="title-box">
       <h2 class="title">За<br> сградата</h2>
     </div>
@@ -39,14 +39,14 @@
       </div>
     </div>
   </div>
-  <div class="gallery-building">
+  <div class="gallery-building" id="gallery">
     <swiper :options="swiperOption">
       <swiper-slide><img src="@/assets/images/gallery01.jpg" alt=""><div class="progress-bar"></div></swiper-slide>
       <swiper-slide><img src="@/assets/images/gallery01.jpg" alt=""><div class="progress-bar"></div></swiper-slide>
       <swiper-slide><img src="@/assets/images/gallery01.jpg" alt=""><div class="progress-bar"></div></swiper-slide>
     </swiper>
   </div>
-  <div class="location">
+  <div class="location" id="location">
     <div class="caption">
       <div class="title-box">
         <h2 class="title">За<br> локацията</h2>
@@ -86,7 +86,7 @@
       <div class="btn-box"><a href="" class="btn">Виж картата</a></div>
     </div>
   </div>
-  <div class="news-inner">
+  <div class="news-inner" id="news">
     <div class="title">Новини</div>
     <div class="news-swiper">
       <news-listing-swiper :articles="articles" />

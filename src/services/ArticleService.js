@@ -1,10 +1,10 @@
-export default class ArticleSerivce {
+export default class ArticleService {
   constructor (http) {
     this.http = http
   }
 
-  get () {
-    return this.http.get('/articles')
+  getArticles () {
+    return this.http.get('/posts/token/mitko')
       .catch((error) => { throw new Error(error) })
   }
 }
