@@ -3,7 +3,7 @@
     <swiper :options="swiperOption">
       <swiper-slide v-for="article in articles" :key="article.id" >
         <news-listing-item
-          :title="article.title"
+          :posttitle="article.title"
           :description="article.description"
           :image="article.image"
           :link="article.link"
