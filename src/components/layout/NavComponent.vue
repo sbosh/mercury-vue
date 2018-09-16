@@ -1,6 +1,6 @@
 <template>
   <nav class="nav">
-    <router-link :to="'/' + lang"><img src="@/assets/images/logo.svg" class="logo" alt=""></router-link>
+    <router-link :to="'/' + lang" class="inner-logo"><img src="@/assets/images/logo-white.svg" alt=""></router-link>
   </nav>
 </template>
 
@@ -28,5 +28,10 @@ export default {
     justify-content: center;
     align-items: flex-start;
     padding-top: 30px;
+    .inner-logo {
+      img {
+        max-width: 100px;
+      }
+    }
   }
 </style>

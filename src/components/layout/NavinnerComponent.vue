@@ -1,7 +1,7 @@
 <template>
   <headroom>
     <nav class="nav-inner">
-      <router-link :to="'/' + lang" class="inner-logo"><img src="@/assets/images/logo-flat.png" class="logo" alt=""></router-link>
+      <router-link :to="'/' + lang" class="inner-logo"><img src="@/assets/images/logo-white.svg" class="logo" alt=""></router-link>
       <div class="header-title"><h1 class="title">{{ navTitle }}</h1></div>
       <inner-building-nav v-if="navigation === 'buildingNav'" />
       <inner-about-nav v-if="navigation === 'aboutNav'" />
@@ -66,6 +66,9 @@ export default {
   align-items: center;
   .inner-logo {
     transition: all .3s;
+    img {
+      max-width: 100px;
+    }
   }
   .logo {
     margin: 30px 0 0 40px;

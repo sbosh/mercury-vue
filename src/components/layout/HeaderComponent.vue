@@ -5,7 +5,7 @@
         <div class="content">
           <div class="cols">
             <div class="col">
-              <router-link tag="a" :to="'/' + lang"><img src="@/assets/images/logo-nav.png" alt=""></router-link>
+              <router-link tag="a" :to="'/' + lang" class="main-nav-logo"><img src="@/assets/images/logo-nav.png" alt=""></router-link>
             </div>
             <div class="col">
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/buildings'">{{ $t('current_projects') }}</router-link></h3>
@@ -154,7 +154,11 @@ header {
   transition-delay: 1s;
   transition-duration: 1.2s;
   transition-property: all;
-
+  .main-nav-logo {
+    img {
+      max-width: 165px;
+    }
+  }
   nav:not(.home-header) {
     background: #fff;
     .toggle-header {

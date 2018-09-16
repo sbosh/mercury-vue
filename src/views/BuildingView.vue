@@ -4,6 +4,11 @@
     <div class="building-apartments">
       <div class="img-box">
         <img src="~@/assets/images/build-starlight.jpg" alt="">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          viewBox="0 0 552 555" style="enable-background:new 0 0 552 555;" xml:space="preserve">
+          <polygon class="st0" points="331.3,295.3 332,311 396.3,308 389.3,288.3 "/>
+          <polygon class="st0" points="254.3,259.3 255,275 319.3,272 312.3,252.3 "/>
+        </svg>
       </div>
       <filtered-apartments
         @clicked="isFiltred = false"
@@ -236,7 +241,7 @@ export default {
   height: 100vh;
   position: relative;
   background: url(../assets/images/building01.jpg);
-  z-index: 9999;
+  z-index: 9998;
   .building-btn {
     margin: auto 0 0 0;
   }
