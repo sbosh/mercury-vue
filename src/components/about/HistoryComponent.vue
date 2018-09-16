@@ -13,14 +13,14 @@
         </div>
         <swiper-slide>
           <div class="year">2017</div>
-          <div class="img-box"><img src="@/assets/images/history-img.jpg" alt=""></div>
+          <div class="img-box"><img src="@/assets/images/story1.jpg" alt=""></div>
           <div class="text">
             <p>В рамките на 3 години Mercury99 пуска в експлоатация 4 нови сгради на територията на град София с общо над 250 реализирани апартаменти в тях. До края на 2017 броят на реализираните апартаменти ще надхвърли 350.</p>
           </div>
         </swiper-slide>
         <swiper-slide>
           <div class="year">2018</div>
-          <div class="img-box"><img src="@/assets/images/history-img.jpg" alt=""></div>
+          <div class="img-box"><img src="@/assets/images/story1.jpg" alt=""></div>
           <div class="text">
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta voluptates quasi itaque molestias laboriosam id suscipit quisquam enim, aspernatur nulla. Explicabo delectus sapiente nobis deleniti, fuga eos ducimus impedit libero.</p>
           </div>

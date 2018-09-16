@@ -3,7 +3,7 @@
   <navinner-component navigation="buildingNav" :navTitle="title" />
   <div class="inner-building-header">
     <div class="main-img">
-      <img src="@/assets/images/building01.jpg" alt="">
+      <img src="@/assets/images/build-starlight.jpg" alt="">
     </div>
     <div class="btn-box"><router-link :to="'/' + lang + '/building-view'" class="btn">ВИЖ СХЕМАТА на блока</router-link></div>
   </div>
@@ -42,7 +42,7 @@
   <div class="gallery-building" id="gallery">
     <swiper :options="swiperOption">
       <swiper-slide><img src="@/assets/images/gallery01.jpg" alt=""><div class="progress-bar"></div></swiper-slide>
-      <swiper-slide><img src="@/assets/images/gallery01.jpg" alt=""><div class="progress-bar"></div></swiper-slide>
+      <swiper-slide><img src="@/assets/images/gallery02.jpg" alt=""><div class="progress-bar"></div></swiper-slide>
       <swiper-slide><img src="@/assets/images/gallery01.jpg" alt=""><div class="progress-bar"></div></swiper-slide>
     </swiper>
   </div>

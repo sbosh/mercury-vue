@@ -3,7 +3,7 @@
     <navinner-component :navTitle="title" />
     <div class="building-apartments">
       <div class="img-box">
-        <img src="~@/assets/images/building01.jpg" alt="">
+        <img src="~@/assets/images/build-starlight.jpg" alt="">
       </div>
       <filtered-apartments
         @clicked="isFiltred = false"

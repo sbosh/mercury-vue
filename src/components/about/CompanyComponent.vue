@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="img-box">
-      <img src="@/assets/images/company-img.jpg" alt="">
+      <img src="@/assets/images/about-team.jpg" alt="">
     </div>
     <div class="caption">
       <div class="title-box">

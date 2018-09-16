@@ -16,22 +16,8 @@ const actions = {
         title: 'Флора Бийч Резорт',
         link: '/:lang/building-inner',
         description: 'Сградата е разположена в ж.к Младост 3',
-        bg: require('@/assets/images/gallery01.jpg'),
+        bg: require('@/assets/images/building02.jpg'),
         location: 'бул. Джеймс Баучер 5'
-      },
-      {
-        title: 'Комплекс Меркурий Плаза',
-        link: '/:lang/building-inner',
-        description: 'В непосредствена близост до НДК',
-        bg: require('@/assets/images/next-building.jpg'),
-        location: 'ул. „Петър Дъртлиев“ 2'
-      },
-      {
-        title: 'Комплекс Елеганс',
-        link: '/:lang/building-inner',
-        description: 'Частен басейн, 50 паркоместа и частна детска площадка',
-        bg: require('@/assets/images/gallery01.jpg'),
-        location: 'бул. „Янко Сакъзов“ 15'
       }
     ])
   }
