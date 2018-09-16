@@ -19,6 +19,6 @@
 <script>
 export default {
   name: 'news-listing-item',
-  props: ['posttitle', 'description', 'date', 'image', 'link', 'icon', 'category', 'whithCategory']
+  props: ['title', 'description', 'date', 'image', 'link', 'icon', 'category', 'whithCategory']
 }
 </script>

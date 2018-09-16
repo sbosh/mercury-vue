@@ -236,6 +236,7 @@ export default {
   height: 100vh;
   position: relative;
   background: url(../assets/images/building01.jpg);
+  z-index: 9999;
   .building-btn {
     margin: auto 0 0 0;
   }
@@ -362,7 +363,7 @@ export default {
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: 1000;
+    z-index: 9999;
     padding-right: 195px;
     transform: translateX(100%);
     transition: all .6s;

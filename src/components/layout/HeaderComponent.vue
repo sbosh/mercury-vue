@@ -197,6 +197,7 @@ header {
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
+    z-index: 100;
     &:before {
       content:'';
       position: absolute;
@@ -271,6 +272,9 @@ header {
         .tel-box {
           padding: 0;
           color: #fff;
+          &:before {
+            display: none;
+          }
           g use,
           svg {
             path {
@@ -391,6 +395,8 @@ header {
   }//main-navigation
   .tel {
     width: 100%;
+    z-index: 50;
+    position: relative;
     .tel-box {
       text-decoration: none;
       display: flex;
@@ -399,10 +405,24 @@ header {
       transition: all .3s;
       color: #fff;
       padding: 30px;
-
-      &:hover {
+      position: relative;
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        transition: all .3s;
         background: #fff;
+        transform: translateY(-100%);
+        z-index: -1;
+      }
+      &:hover {
         color: #000;
+        &:before {
+          transform: translateY(0);
+        }
         .icon {
           -webkit-animation: ring 1s infinite;
           -webkit-animation-iteration-count:infinite;
@@ -449,7 +469,7 @@ header {
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-
+    z-index: 150;
     .button {
       width: 71px;
       height: 71px;
@@ -486,6 +506,9 @@ header {
           transform: rotate(-45deg);
           top: 35px;
         }
+      }
+      span {
+        color: #fff !important;
       }
     }
   }//toggle-header

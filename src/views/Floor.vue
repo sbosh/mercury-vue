@@ -2,7 +2,7 @@
   <div class="floor-plan">
     <div class="left-sidebar">
       <div class="top">
-        <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.png" class="logo" alt=""></router-link>
+        <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
         <div class="back-btn">Към сградата</div>
       </div>
       <div class="available-from">
@@ -132,10 +132,15 @@ export default {
   box-sizing: border-box;
   padding-bottom: 40px;
   padding-top: 30px;
+  transition: all .3s;
+  transform: translateX(-195px);
   .router-link-active {
     margin: 40px auto;
     display: block;
     text-align: center;
+    img {
+      max-width: 100px;
+    }
   }
   .back-btn {
     color: #000;
@@ -200,6 +205,22 @@ export default {
         font-weight: 600;
       }
     }
+  }
+}
+.active-component {
+  .left-sidebar {
+    transform: translateX(0);
+    .compass {
+      animation: rotate-animation 1.3s linear;
+    }
+  }
+}
+@keyframes rotate-animation {
+  0% {
+    transform: rotate(0)
+  }
+  100% {
+    transform: rotate(360deg)
   }
 }
 </style>

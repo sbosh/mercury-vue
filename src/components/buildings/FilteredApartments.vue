@@ -2,7 +2,7 @@
   <div class="filtered-apartments" v-bind:class="{ active: isFiltred }">
     <div class="left-sidebar">
       <div class="top">
-        <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.png" class="logo" alt=""></router-link>
+        <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
         <div class="back-btn" @click="closed">Към сградата</div>
       </div>
       <div class="available-from"><div class="text">Налични <br>апартаменти</div><span>{{ filtrApartments(priceFrom, priceTo, rooms).length }}</span> / <span>{{ count }}</span></div>
@@ -61,6 +61,9 @@ export default {
     margin: 40px auto;
     display: block;
     text-align: center;
+    img {
+      max-width: 100px;
+    }
   }
   .back-btn {
     color: #000;

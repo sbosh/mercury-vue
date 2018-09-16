@@ -8,6 +8,7 @@
       <inner-news-nav v-if="navigation === 'newsNav'" />
       <inner-news-breadcrumbs v-if="navigation === 'newsBreadcrumbs'" />
       <div class="back-btn" @click="routeBack()">Назад</div>
+      <div class="scroll-top" @click="scrollTop()">нагоре</div>
     </nav>
   </headroom>
 </template>
@@ -43,12 +44,21 @@ export default {
   methods: {
     routeBack () {
       this.$router.go(-1)
+    },
+    scrollTop () {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
     }
   }
 }
 </script>
 
 <style lang="scss">
+.scroll-top {
+  display: none;
+}
 .nav-inner {
   padding-right: 195px;
   display: flex;
@@ -109,7 +119,7 @@ export default {
       a {
         color: #fff;
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 600;
         text-transform: uppercase;
         text-decoration: none;
         padding: 15px;
@@ -159,6 +169,12 @@ export default {
   .back-btn {
     display: none;
   }
+  .scroll-top {
+    display: block;
+    margin-right: 20px;
+    color: #fff;
+    cursor: pointer;
+  }
   .nav-inner {
     ul {
       li {
@@ -173,6 +189,10 @@ export default {
             background-color: #fa6a02;
             border-color: #fa6a02;
             padding: 20px 15px;
+            &:after,
+            &:before {
+              display: none;
+            }
           }
         }
       }

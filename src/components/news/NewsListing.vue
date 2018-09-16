@@ -3,7 +3,7 @@
     <news-listing-item
     v-for="article in articles"
     :key="article.id"
-    :posttitle="article.title_bg"
+    :title="article.title_bg"
     :description="article.annonce_bg"
     :image="article.image"
     :link="article.slug_bg"

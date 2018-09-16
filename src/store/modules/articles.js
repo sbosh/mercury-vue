@@ -15,7 +15,10 @@ const actions = {
 
 const getters = {
   getArticles (state) {
-    return state.all
+    return (id, slug) => {
+      return state.all.find(article => article.id === id && article.slug_en === slug) ||
+        state.all.find(article => article.id === id && article.slug_bg === slug)
+    }
   },
   getArticle (state) {
     return (id, slug) => {
