@@ -2,13 +2,13 @@
   <headroom>
     <nav class="nav-inner">
       <router-link :to="'/' + lang" class="inner-logo"><img src="@/assets/images/logo-flat.png" class="logo" alt=""></router-link>
-      <div class="header-title" v-if="!title"><h1 class="title">{{ navTitle }}</h1></div>
+      <div class="header-title"><h1 class="title">{{ navTitle }}</h1></div>
       <inner-building-nav v-if="navigation === 'buildingNav'" />
       <inner-about-nav v-if="navigation === 'aboutNav'" />
       <inner-news-nav v-if="navigation === 'newsNav'" />
       <inner-news-breadcrumbs v-if="navigation === 'newsBreadcrumbs'" />
       <div class="back-btn" @click="routeBack()">Назад</div>
-      <div class="scroll-top" @click="scrollTop()">нагоре</div>
+      <div class="scroll-top" @click="scrollTop()"></div>
     </nav>
   </headroom>
 </template>
@@ -174,6 +174,9 @@ export default {
     margin-right: 20px;
     color: #fff;
     cursor: pointer;
+    background: url(~@/assets/images/arrow-top.svg) no-repeat center;
+    width: 50px;
+    height: 50px;
   }
   .nav-inner {
     ul {

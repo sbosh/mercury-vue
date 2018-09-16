@@ -1,1 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2" height="28" viewBox="0 0 2 28"><defs><path id="n1m3a" d="M981.17 724h9.8v19.65h-9.8z"/><path id="n1m3c" d="M981.32 743.5c.1.1.24.15.37.15a.5.5 0 0 0 .37-.16l8.76-9.27c.2-.22.2-.57 0-.78l-8.76-9.28a.5.5 0 0 0-.74 0c-.2.22-.2.56 0 .78l8.4 8.89-8.4 8.89c-.2.21-.2.56 0 .77"/><path id="n1m3d" d="M990.12 734.32h-26.65a.48.48 0 0 1-.47-.5c0-.27.2-.49.47-.49h26.65c.26 0 .47.22.47.5 0 .27-.21.49-.47.49"/><clipPath id="n1m3b"><use xlink:href="#n1m3a"/></clipPath></defs><g><g transform="translate(-977 -719)"/><g clip-path="url(#n1m3b)" transform="translate(-977 -719)"><use fill="#fa6a02" xlink:href="#n1m3c"/></g><g transform="translate(-977 -719)"><use fill="#fa6a02" xlink:href="#n1m3d"/></g></g></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="29px" viewBox="0 0 21 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 6</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Project-apartament-scheme" transform="translate(-967.000000, -719.000000)" fill="#FA6A02">
+            <g id="Group-6" transform="translate(977.500000, 734.000000) rotate(-270.000000) translate(-977.500000, -734.000000) translate(963.000000, 724.000000)">
+                <g id="Group-3" transform="translate(18.148148, 0.000055)">
+                    <path d="M0.177784444,19.4941106 C0.279051111,19.6012792 0.411791852,19.6549184 0.544428889,19.6549184 C0.677117778,19.6549184 0.809806667,19.6012792 0.911125185,19.4941106 L9.67408815,10.2156792 C9.87651778,10.0012871 9.87651778,9.65364784 9.67408815,9.43914588 L0.911125185,0.160769412 C0.70854,-0.0536227451 0.380317778,-0.0536227451 0.177732593,0.160769412 C-0.024697037,0.375161569 -0.024697037,0.722800784 0.177732593,0.937247843 L8.57410296,9.82746745 L0.177784444,18.7176322 C-0.024697037,18.9320792 -0.024697037,19.2797184 0.177784444,19.4941106" id="Fill-1"></path>
+                </g>
+                <path d="M27.1185185,10.3216235 L0.466666667,10.3216235 C0.208911111,10.3216235 0,10.1004235 0,9.82750588 C0,9.55458824 0.208911111,9.33338824 0.466666667,9.33338824 L27.1185185,9.33338824 C27.3762741,9.33338824 27.5851852,9.55458824 27.5851852,9.82750588 C27.5851852,10.1004235 27.3762741,10.3216235 27.1185185,10.3216235" id="Fill-4"></path>
+            </g>
+        </g>
+    </g>
+</svg>
