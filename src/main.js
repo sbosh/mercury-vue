@@ -8,6 +8,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import headroom from 'vue-headroom'
+import VueMq from 'vue-mq'
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -19,6 +20,13 @@ Vue.config.productionTip = false
 
 Vue.use(VueAwesomeSwiper)
 Vue.use(headroom)
+Vue.use(VueMq, {
+  breakpoints: {
+    sm: 768,
+    md: 1280,
+    lg: Infinity
+  }
+})
 
 new Vue({
   i18n,

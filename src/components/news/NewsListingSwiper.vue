@@ -3,10 +3,11 @@
     <swiper :options="swiperOption">
       <swiper-slide v-for="article in articles" :key="article.id" >
         <news-listing-item
-          :title="article.title"
-          :description="article.description"
+          :id="article.id"
+          :title="article[$t('i18n_title')]"
+          :description="article[$t('i18n_annonce')]"
           :image="article.image"
-          :link="article.link"
+          :link="article[$t('i18n_slug')]"
           :date="article.date" />
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>

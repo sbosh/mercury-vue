@@ -6,12 +6,12 @@ import messages from '@/locales'
 Vue.use(VueI18n)
 
 export const i18n = new VueI18n({
-  locale: 'en',
-  fallbackLocale: 'en',
+  locale: 'bg',
+  fallbackLocale: 'bg',
   messages
 })
 
-const loadedLanguages = ['en']
+const loadedLanguages = ['bg']
 
 function setI18nLanguage (lang) {
   i18n.locale = lang

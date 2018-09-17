@@ -1,11 +1,27 @@
 <template>
-  <header v-bind:class="{ active: isActive }" class="header">
+  <header v-bind:class="{ active: isActive }" class="header-mobile">
+    <router-link tag="a" :to="'/' + lang" class="main-nav-logo"><img src="@/assets/images/logo-mobile.png" alt=""></router-link>
+    <ul class="lng">
+      <li v-if="lang === 'bg'" ><a href="#!" @click="changeLang('en', $event)">en</a></li>
+      <li v-else><a href="#!" @click="changeLang('bg', $event)">bg</a></li>
+    </ul>
+    <button class="toggle-header"
+      @click="isActive = !isActive"
+      v-bind:class="{ active: isActive }">
+      <div class="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+    <div class="tel">
+      <a href="tel+359884626391" class="tel-box"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></a>
+    </div>
     <nav class="main-nav">
       <div class="main-navigation">
         <div class="content">
           <div class="cols">
             <div class="col">
-              <router-link tag="a" :to="'/' + lang" class="main-nav-logo"><img src="@/assets/images/logo-nav.png" alt=""></router-link>
             </div>
             <div class="col">
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/buildings'">{{ $t('current_projects') }}</router-link></h3>
@@ -27,13 +43,6 @@
                 <li><a href="">{{ $t('service') }}</a></li>
                 <li><a href="">{{ $t('history') }}</a></li>
               </ul>
-              <div class="tel">
-                <a href="tel+359884626391" class="tel-box">
-                  <div class="icon"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></div>
-                  <div class="text">{{ $t('contact_us_now') }}</div>
-                  <div class="phone">+359 884 626 391</div>
-                </a>
-              </div>
               <div class="follow-us">
                 <div class="text">{{ $t('follow_us') }}</div>
                 <ul>
@@ -44,34 +53,8 @@
               </div>
             </div>
           </div>
-          <ul class="lng">
-            <li v-if="lang === 'bg'" ><a href="#!" @click="changeLang('en', $event)">en</a></li>
-            <li v-else><a href="#!" @click="changeLang('bg', $event)">bg</a></li>
-            <li class="imigix">Created by Imigix</li>
-          </ul>
         </div>
       </div>
-      <div class="tel">
-        <a href="tel+359884626391" class="tel-box">
-          <div class="icon"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></div>
-          <div class="text">{{ $t('contact_us_now') }}</div>
-          <div class="phone">+359 884 626 391</div>
-        </a>
-      </div>
-      <button class="toggle-header"
-        @click="isActive = !isActive"
-        v-bind:class="{ active: isActive }">
-        <div class="button">
-          <span></span>
-          <span></span>
-        </div>
-        <span>{{ $t('menu') }}</span>
-      </button>
-      <ul class="social">
-        <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
-        <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
-        <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li>
-      </ul>
     </nav>
   </header>
 </template>
@@ -80,7 +63,7 @@
 import { loadLanguageAsync } from '@/setup/i18n'
 import axios from 'axios'
 export default {
-  name: 'header-component',
+  name: 'header-mobile',
   data: function () {
     return {
       isActive: false
@@ -143,49 +126,134 @@ export default {
 </script>
 
 <style lang="scss">
-.header {
+.header-mobile {
   position: fixed;
   right: 0;
   top: 0;
-  bottom: 0;
+  left: 25px;
+  padding: 10px 25px 10px 0;
   z-index: 99999;
-  border-left: 1px solid rgba(#979797, .37);
-  width: 195px;
   transition-delay: 1s;
   transition-duration: 1.2s;
   transition-property: all;
-  .main-nav-logo {
-    img {
-      max-width: 165px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 2px solid rgba(255,255,255, .2);
+  .tel {
+    z-index: 150;
+    position: relative;
+    .tel-box {
+      width: 38px;
+      height: 38px;
+      background-color: #fa6a02;
+      display: block;
+      border-radius: 50%;
+      .svg {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        -webkit-animation: ring 1.5s 4;
+      }
     }
   }
-  nav:not(.home-header) {
-    background: #fff;
-    .toggle-header {
+  .main-nav-logo {
+    display: block;
+    margin-bottom: -10px;
+    img {
+      max-width: 125px;
+    }
+  }
+  .toggle-header {
+    box-shadow: none;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    z-index: 150;
+    margin-left: auto;
+    border-right: 1px solid rgba(255,255,255, .2);
+    margin-right: 20px;
+    padding: 0;
+    .button {
+      width: 46px;
+      height: 24px;
+      position: relative;
       span {
-        color: #000;
-      }
-    }
-    ul.social {
-      .svg {
-        g use,
-        path {
-          fill: #0f0f0f;
+        display: block;
+        width: 23px;
+        height: 2px;
+        background-color: #fff;
+        position: absolute;
+        left: 50%;
+        margin-left: -14px;
+        transition: all .3s;
+        &:nth-child(1){
+          top: 2px;
+        }
+        &:nth-child(2){
+          top: 11px;
+        }
+        &:nth-child(3){
+          top: 21px;
+          width: 17px;
+          right: 50%;
+          left: inherit;
+          margin: 0 -9px 0 0;
         }
       }
     }
-    .tel {
-      .tel-box {
-        color: #000;
-        .svg {
-          g use,
-          path {
-            fill: #0f0f0f;
-          }
+    &.active {
+      .button {
+        span:nth-child(1) {
+          top: 12px;
+          transform: rotate(45deg);
         }
-        .text {
-          color: #8d8d8d;
+        span:nth-child(2) {
+          transform: rotate(-45deg);
+          top: 12px;
         }
+        span:nth-child(3) {
+          visibility: hidden;
+          opacity: 0;
+          transform: scale(0);
+        }
+      }
+      span {
+        color: #fff !important;
+      }
+    }
+  }//toggle-header
+  .lng {
+    margin-left: auto;
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(-50px);
+    position: relative;
+    z-index: 150;
+    li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      a {
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-bottom: 2px solid #fa6a02;
+        padding: 5px;
+        text-decoration: none;
+        margin-top: -3px;
+      }
+      &.imigix {
+        margin-left: auto;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
       }
     }
   }
@@ -195,7 +263,6 @@ export default {
     bottom: 0;
     right: 0;
     left: 0;
-    height: 100%;
     transform: translateX(100%);
     transition: all 1.3s;
     display: flex;
@@ -216,18 +283,18 @@ export default {
       flex-direction: column;
       background-color: #232323;
       height: 100%;
-      width: 85%;
+      width: 100%;
       transform: translateX(50%);
       transition: all 2.4s;
       h3, h3 a {
         color: #fff;
-        font-size: 24px;
+        font-size: 17px;
         font-weight: 700;
         line-height: 35px;
         text-decoration: none;
       }
       h3 {
-        margin-bottom: 43px;
+        margin-bottom: 8px;
       }
       .margin-bottom-0 {
         margin-bottom: 0;
@@ -248,15 +315,12 @@ export default {
       }
       .cols {
         display: flex;
-        flex-direction: row;
-        padding: 110px 30px 50px 30px;
+        flex-direction: column;
+        padding: 60px 20px 20px 20px;
       }
-
       .col {
         opacity: 0;
-        padding: 0 40px 40px;
-        border-right: 1px solid rgba(#979797, .37);
-
+        padding: 0;
         &:nth-child(1){
           transform: translateX(250px);
           transition: all 1.9s;
@@ -271,47 +335,16 @@ export default {
           border: none;
         }
       }
-
-      .tel {
-        .tel-box {
-          padding: 0;
-          color: #fff;
-          &:before {
-            display: none;
-          }
-          g use,
-          svg {
-            path {
-              fill: #fff;
-            }
-          }
-          &:hover{
-            background: transparent;
-            color: #fff;
-            g use,
-            svg {
-              path {
-                fill: #fff;
-              }
-            }
-          }
-          .icon {
-            margin: 0 auto 10px 0;
-          }
-          .text {
-            margin-bottom: 10px;
-          }
-        }
-      }
-
       .follow-us {
         margin: 30px 0 0;
+        padding-top: 15px;
+        border-top: 1px solid rgba(#979797, .37);
         .text {
           color: #fff;
           font-size: 9px;
           font-weight: 700;
           text-transform: uppercase;
-          margin-bottom:  12px;
+          margin-bottom:  15px;
         }
         ul {
           margin: 0;
@@ -325,8 +358,8 @@ export default {
           a {
             border: 1px solid #fff;
             border-radius: 50%;
-            width: 55px;
-            height: 55px;
+            width: 45px;
+            height: 45px;
             text-align: center;
             display: flex;
             justify-content: center;
@@ -338,54 +371,16 @@ export default {
               margin: auto;
               transition: all .3s;
             }
-            &:hover {
-              border-color: #f96902;
-              svg {
-                g use,
-                path {
-                  fill: #f96902;
-                }
-              }
-            }
           }
         }
       }
-
-      .lng {
-        margin: auto 0 0 0;
-        padding: 0 40px 40px 70px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        li {
-          margin: 0;
-          padding: 0;
-          a {
-            color: #fff;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-bottom: 2px solid #fa6a02;
-            padding: 5px;
-          }
-          &.imigix {
-            margin-left: auto;
-            color: #fff;
-            font-size: 12px;
-            font-weight: 700;
-          }
-        }
-      }
-
       ul {
-        margin: 13px 0 30px 0;
+        margin: 0 0 10px 0;
         padding: 0;
         list-style: none;
-
         li {
           display: block;
           margin-bottom: 16px;
-
           a {
             color: #8d8d8d;
             font-family: 'Fira Sans', sans-serif;
@@ -397,63 +392,6 @@ export default {
       }
     }
   }//main-navigation
-  .tel {
-    width: 100%;
-    z-index: 50;
-    position: relative;
-    .tel-box {
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      transition: all .3s;
-      color: #fff;
-      padding: 30px;
-      position: relative;
-      &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        transition: all .3s;
-        background: #fff;
-        transform: translateY(-100%);
-        z-index: -1;
-      }
-      &:hover {
-        color: #000;
-        &:before {
-          transform: translateY(0);
-        }
-        .icon {
-          -webkit-animation: ring 1s infinite;
-          -webkit-animation-iteration-count:infinite;
-          svg {
-            g use,
-            path {
-              fill: #000;
-            }
-          }
-        }
-      }
-    }
-    .icon {
-      margin-left: auto;
-    }
-    .text {
-      font-family: Montserrat;
-      font-size: 9px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-    .phone {
-      font-size: 15px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-  }
   nav {
     height: 100%;
     display: flex;
@@ -461,83 +399,17 @@ export default {
     align-items: center;
     flex-direction: column;
   }
-  .toggle-header {
-    box-shadow: none;
-    border: none;
-    outline: none;
-    background: transparent;
-    cursor: pointer;
-    margin: auto;
-    color: #fff;
-    font-family: Montserrat;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    z-index: 150;
-    .button {
-      width: 71px;
-      height: 71px;
-      background-color: #f8f8f8;
-      border-radius: 50%;
-      position: relative;
-      margin-bottom: 12px;
-
-      span {
-        display: block;
-        width: 27px;
-        height: 2px;
-        background-color: #000000;
-        position: absolute;
-        left: 50%;
-        margin-left: -14px;
-        transition: all .3s;
-
-        &:nth-child(1){
-          top: 30px;
-        }
-        &:nth-child(2){
-          top: 40px;
-        }
-      }
-    }
-    &.active {
-      .button {
-        span:nth-child(1) {
-          top: 35px;
-          transform: rotate(45deg);
-        }
-        span:nth-child(2) {
-          transform: rotate(-45deg);
-          top: 35px;
-        }
-      }
-      span {
-        color: #fff !important;
-      }
-    }
-  }//toggle-header
-  ul.social {
-    padding: 0;
-    margin: 0 0 20px 0;
-    text-align: center;
-
-    li {
-      list-style: none;
-      dispaly: inline-block;
-
-      a {
-        display: block;
-        padding: 17px;
-      }
-    }
-  }
   &.active {
+    .lng {
+      transform: translate(0);
+      opacity: 1;
+      visibility: visible;
+    }
     .main-navigation {
       transform: translateX(0);
       .content {
         animation: nav-animation 1s forwards;
       }
-
       .col {
         opacity: 1;
         &:nth-child(1){

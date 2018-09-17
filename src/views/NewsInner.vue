@@ -1,19 +1,19 @@
 <template>
   <div class="news-inner-article">
     <navinner-component navigation="newsBreadcrumbs"/>
-    <div class="container">
+    <div class="container" v-if="article">
       <div class="caption">
         <div class="box-title">
-          <h2 class="title">{{ title }}</h2>
+          <h2 class="title">{{ article[$t('i18n_title')] }}</h2>
         </div>
       </div>
       <article class="news-article news-article-content animate-box">
-        <div class="date">{{ date }}</div>
+        <div class="date">{{ article.date }}</div>
         <div class="img-box">
-          <img :src="image" alt="">
+          <img :src="article.image" alt="">
         </div>
         <div class="info-box">
-          <p v-html="description"></p>
+          <p v-html="article[$t('i18n_annonce')]"></p>
         </div>
       </article>
       <div class="related-news">
@@ -28,11 +28,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import NewsListingSwiper from '@/components/news/NewsListingSwiper'
 import FooterComponent from '@/components/layout/FooterComponent.vue'
 export default {
-  name: 'news-inner',
+  name: 'article',
   components: {
     'navinner-component': NavinnerComponent,
     'news-listing-swiper': NewsListingSwiper,
@@ -40,14 +41,6 @@ export default {
   },
   data () {
     return {
-      id: 1,
-      image: require('@/assets/images/building01.jpg'),
-      title: 'Вече сме на акт 16',
-      description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <br><br> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor <b>invidunt</b> ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <ul><li>list 1</li><li>list 2</li></ul>',
-      date: '01.02.2018',
-      link: 'https://www.google.com',
-      category: 'Комплекс Бижу',
-      icon: require('@/assets/images/category01.svg'),
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 15,
@@ -66,41 +59,15 @@ export default {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
         }
-      },
-      articles: [
-        {
-          id: 1,
-          image: require('@/assets/images/building01.jpg'),
-          title: 'Title',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis numquam maiores animi cum. Dolorem magni adipisci a est! Fugiat illum tempore iure nesciunt debitis ad nemo distinctio minima, quis amet!',
-          date: '01.02.2018',
-          link: 'https://www.google.com/'
-        },
-        {
-          id: 2,
-          image: require('@/assets/images/building01.jpg'),
-          title: 'Lorem ipsum',
-          description: 'Reiciendis numquam maiores animi cum. Dolorem magni adipisci a est! Fugiat illum tempore iure nesciunt debitis ad nemo distinctio minima, quis amet!',
-          date: '01.02.2018',
-          link: 'https://www.google.com/'
-        },
-        {
-          id: 3,
-          image: require('@/assets/images/building01.jpg'),
-          title: 'Title',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis numquam maiores animi cum. Dolorem magni adipisci a est! Fugiat illum tempore iure nesciunt debitis ad nemo distinctio minima, quis amet!',
-          date: '01.02.2018',
-          link: 'https://www.google.com/'
-        },
-        {
-          id: 4,
-          image: require('@/assets/images/building01.jpg'),
-          title: 'Lorem ipsum',
-          description: 'Reiciendis numquam maiores animi cum. Dolorem magni adipisci a est! Fugiat illum tempore iure nesciunt debitis ad nemo distinctio minima, quis amet!',
-          date: '01.02.2018',
-          link: 'https://www.google.com/'
-        }
-      ]
+      }
+    }
+  },
+  computed: {
+    ...mapState({
+      articles: state => state.articles.all
+    }),
+    article: function () {
+      return this.$store.getters.getArticle(Number(this.$route.params.id), this.$route.params.slug)
     }
   }
 }
@@ -179,7 +146,7 @@ export default {
         .img-box {
           margin-bottom: 30px;
         }
-        .article-title a, 
+        .article-title a,
         .article-title {
           color: #2c2c2c;
           line-height: 26px;

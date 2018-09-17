@@ -3,14 +3,16 @@
     <news-listing-item
     v-for="article in articles"
     :key="article.id"
-    :title="article.title_bg"
-    :description="article.annonce_bg"
+    :id="article.id"
+    :title="article[$t('i18n_title')]"
+    :description="article[$t('i18n_annonce')]"
     :image="article.image"
-    :link="article.slug_bg"
+    :link="article[$t('i18n_slug')]"
     :date="article.date"
     :category="article.category"
     :icon="article.icon"
     :whithCategory="whithCategory" />
+    <h1 style="color: #000;">{{ $t('i18n_title') }}</h1>
   </div>
 </template>
 

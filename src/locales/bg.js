@@ -11,5 +11,11 @@ export default {
   home: 'Начало',
   news: 'Новини',
   completed_projects: 'Завършени проекти',
-  future_projects: 'Бъдещи проекти'
+  future_projects: 'Бъдещи проекти',
+  i18n_title: 'title_bg',
+  i18n_annonce: 'annonce_bg',
+  i18n_description: 'description_bg',
+  i18n_slug: 'slug_bg',
+  i18n_seo_title: 'seo_title_bg',
+  i18n_seo_description: 'seo_description_bg'
 }

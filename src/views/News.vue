@@ -1,6 +1,6 @@
 <template>
   <div class="all-news">
-    <navinner-component :navTitle="title" />
+    <navinner-component :navTitle="page_title" />
     <div class="caption">
       <div class="title-box"><h2 class="title">Всички</h2></div>
     </div>
@@ -25,13 +25,25 @@ export default {
   },
   data () {
     return {
-      title: 'Новини'
+      page_title: 'Новини'
     }
   },
   computed: {
     ...mapState({
       articles: state => state.articles.all
-    })
+    }),
+    title: function () {
+      return this.$i18n.locale === 'en' ? 'title_en' : 'title_bg'
+    },
+    description: function () {
+      return this.$i18n.locale === 'en' ? 'description_en' : 'description_bg'
+    },
+    seoTitle: function () {
+      return this.$i18n.locale === 'en' ? 'seo_title_en' : 'seo_title_bg'
+    },
+    seoDescription: function () {
+      return this.$i18n.locale === 'en' ? 'seo_description_en' : 'seo_description_bg'
+    }
   },
   mounted () {
     let animateBox = document.getElementsByClassName('animate-box')

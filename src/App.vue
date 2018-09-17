@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <header-component/>
+    <mq-layout mq="md+"><header-component /></mq-layout>
+    <mq-layout mq="sm"><header-mobile /></mq-layout>
     <transition :name="transitionName" mode="out-in" @beforeLeave="beforeLeave" @enter="enter" @afterEnter="afterEnter">
       <router-view/>
     </transition>
@@ -8,10 +9,11 @@
 </template>
 <script>
 import HeaderComponent from '@/components/layout/HeaderComponent'
+import HeaderMobile from '@/components/mobile/HeaderMobile'
 const DEFAULT_TRANSITION = 'fade'
 export default {
   name: 'app',
-  components: { HeaderComponent },
+  components: { HeaderComponent, HeaderMobile },
   metaInfo: {
     title: 'MERCURY 99',
     titleTemplate: '%s | Building Company'

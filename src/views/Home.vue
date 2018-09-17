@@ -13,11 +13,13 @@
         </div>
       </div>
     </div>
-    <div class="news-box">
-      <article class="news">
-        <h3><a href=""><span class="icon"></span>Сградата Лазур в ж.к Младост 3 получи Акт 16 <span class="text">Прочети повече</span></a></h3>
-      </article>
-    </div>
+    <mq-layout mq="md+">
+      <div class="news-box">
+        <article class="news">
+          <h3><a href=""><span class="icon"></span>Сградата Лазур в ж.к Младост 3 получи Акт 16 <span class="text">Прочети повече</span></a></h3>
+        </article>
+      </div>
+    </mq-layout>
   </div>
 </template>
 
@@ -115,10 +117,29 @@ export default {
   left: 50%;
   transform: translate(-100%, -100%);
   transition: all 1.8s;
+  @media screen and(max-width: 768px) {
+    display: none;
+  }
 }
 .active-component {
   .line {
     transform: translate(-100%, 0);
+  }
+}
+@media screen and(max-width: 768px){
+  .home-slider {
+    .caption {
+      .title-box {
+        padding-left: 20px;
+        .title {
+          font-size: 26px;
+          line-height: 34px;
+        }
+      }
+      .btn-box {
+        margin-left: 20px;
+      }
+    }
   }
 }
 </style>

@@ -77,8 +77,8 @@ let router = new Router({
       meta: { transitionName: 'slide' }
     },
     {
-      path: '/:lang/news-inner/:id/:slug',
-      name: 'news-inner',
+      path: '/:lang/article/:id/:slug',
+      name: 'article',
       component: NewsInner,
       meta: { transitionName: 'slide' }
     },
@@ -91,13 +91,15 @@ let router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  window.scrollTo(0, 0)
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
   if (!to.params.lang) {
     let name = to.name ? to.name : 'home'
     router.push({ name, params: { lang: i18n.locale } })
     return
   }
-
   let lang = to.params.lang
   loadLanguageAsync(lang).then(() => next())
 })
