@@ -127,7 +127,7 @@ export default {
 
 <style lang="scss">
 .header-mobile {
-  position: fixed;
+  position: absolute;
   right: 0;
   top: 0;
   left: 25px;
@@ -175,8 +175,8 @@ export default {
     font-weight: 700;
     text-transform: uppercase;
     z-index: 150;
-    margin-left: auto;
     border-right: 1px solid rgba(255,255,255, .2);
+    margin-left: 10px;
     margin-right: 20px;
     padding: 0;
     .button {
@@ -232,9 +232,10 @@ export default {
     margin-left: auto;
     visibility: hidden;
     opacity: 0;
-    transform: translate(-50px);
     position: relative;
     z-index: 150;
+    transform: translate(-50px);
+    transition: all .3s;
     li {
       margin: 0;
       padding: 0;

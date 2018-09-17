@@ -1,11 +1,15 @@
 <template>
-  <div class="all-news">
-    <navinner-component :navTitle="page_title" />
-    <div class="caption">
-      <div class="title-box"><h2 class="title">Всички</h2></div>
-    </div>
-    <div class="container">
-      <news-listing :articles="articles" :whithCategory="true" />
+  <div class="main-content">
+    <div class="all-news">
+      <navinner-component :navTitle="page_title" />
+      <mq-layout mq="md+">
+        <div class="caption">
+          <div class="title-box"><h2 class="title">Всички</h2></div>
+        </div>
+      </mq-layout>
+      <div class="container">
+        <news-listing :articles="articles" :whithCategory="true" />
+      </div>
     </div>
     <footer-component />
   </div>
@@ -60,64 +64,81 @@ export default {
 </script>
 
 <style lang="scss">
-  .active-component {
-    .all-news {
-      .news-listing {
-        .news-article:first-of-type {
-          .img-box:before,
-          .img-box img {
-            transform: translateX(0);
-            opacity: 1;
-          }
+.active-component {
+  .all-news {
+    .news-listing {
+      .news-article:first-of-type {
+        .img-box:before,
+        .img-box img {
+          transform: translateX(0);
+          opacity: 1;
         }
       }
     }
   }
-  .all-news {
-    position: relative;
-    padding-right: 195px;
-    padding-top: 200px;
-    .caption {
-      margin-bottom: 50px;
-      .title:after {
-        border-color: #fa6902;
+}
+.all-news {
+  position: relative;
+  padding-right: 195px;
+  padding-top: 200px;
+  .caption {
+    margin-bottom: 50px;
+    .title:after {
+      border-color: #fa6902;
+    }
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 450px;
+    background-color: #232323;
+  }
+  .container {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .news-article {
+    margin-bottom: 70px;
+    &:first-child {
+      .date {
+        color: #fff;
       }
     }
+    .date {
+      color: #2c2c2c;
+    }
+    .article-title,
+    .article-title a {
+      color: #2c2c2c;
+      font-weight: 700;
+    }
+    p {
+      font-size: 17px;
+    }
+  }
+  @media screen and(max-width: 768px) {
+    padding: 90px 25px 25px;
     &:before {
-      content: '';
-      position: absolute;
-      z-index: 0;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 450px;
-      background-color: #232323;
+      height: 250px;
     }
     .container {
-      max-width: 1100px;
-      width: 100%;
-      margin: 0 auto;
-      padding-left: 20px;
-      padding-right: 20px;
+      padding: 0;
     }
     .news-article {
-      margin-bottom: 70px;
-      &:first-child {
-        .date {
-          color: #fff;
-        }
+      p {
+        font-size: 16px;
       }
       .date {
-        color: #2c2c2c;
-      }
-      .article-title,
-      .article-title a {
-        color: #2c2c2c;
-        font-weight: 700;
-      }
-      p {
-        font-size: 17px;
+        color: #fff;
       }
     }
   }
+}
 </style>

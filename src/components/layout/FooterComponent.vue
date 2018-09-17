@@ -1,18 +1,20 @@
 <template>
   <footer>
-    <div class="logo"><a href=""><img src="@/assets/images/logo-footer.svg" alt=""></a></div>
-    <nav>
-      <ul class="footer-top-nav">
-        <li><a href="">Настоящи проекти</a></li>
-        <li><a href="">Завършени проекти</a></li>
-        <li><a href="">Бъдещи проекти</a></li>
-      </ul>
-      <ul class="footer-second-nav">
-        <router-link tag="li" :to="'/' + lang + '/aboutus'"><a href="">За компанията</a></router-link>
-        <router-link tag="li" :to="'/' + lang + '/contacts'"><a href="">Контакти</a></router-link>
-        <router-link tag="li" :to="'/' + lang + '/news'"><a href="">Новини</a></router-link>
-      </ul>
-    </nav>
+    <div class="logo"><a href=""><img src="@/assets/images/logo-white-text.svg" alt=""></a></div>
+    <mq-layout mq="md+">
+      <nav>
+        <ul class="footer-top-nav">
+          <li><a href="">Настоящи проекти</a></li>
+          <li><a href="">Завършени проекти</a></li>
+          <li><a href="">Бъдещи проекти</a></li>
+        </ul>
+        <ul class="footer-second-nav">
+          <router-link tag="li" :to="'/' + lang + '/aboutus'"><a href="">За компанията</a></router-link>
+          <router-link tag="li" :to="'/' + lang + '/contacts'"><a href="">Контакти</a></router-link>
+          <router-link tag="li" :to="'/' + lang + '/news'"><a href="">Новини</a></router-link>
+        </ul>
+      </nav>
+    </mq-layout>
     <ul class="footer-bottom-nav">
       <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
       <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
@@ -68,6 +70,9 @@ export default {
     .logo {
       margin: 0 auto 60px auto;
       text-align: center;
+      img {
+        max-width: 100px;
+      }
     }
     nav {
       border-bottom: 1px solid rgba(#979797, .37);

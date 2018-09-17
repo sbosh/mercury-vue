@@ -12,7 +12,6 @@
     :category="article.category"
     :icon="article.icon"
     :whithCategory="whithCategory" />
-    <h1 style="color: #000;">{{ $t('i18n_title') }}</h1>
   </div>
 </template>
 

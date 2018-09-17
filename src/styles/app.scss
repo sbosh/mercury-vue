@@ -45,6 +45,10 @@ h1,h2,h3,h4,h5,h6 {
   }
 }
 
+.mr-auto {
+  margin-right: auto;
+}
+
 @keyframes title-animation-line {
   from   { right: 2000px; }
   to { right: 100%; }

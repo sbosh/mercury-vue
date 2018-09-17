@@ -1,12 +1,14 @@
 <template>
   <headroom>
     <nav class="nav-inner">
-      <router-link :to="'/' + lang" class="inner-logo"><img src="@/assets/images/logo-white.svg" class="logo" alt=""></router-link>
+      <mq-layout mq="md+"><router-link :to="'/' + lang" class="inner-logo"><img src="@/assets/images/logo-white.svg" class="logo" alt=""></router-link></mq-layout>
       <div class="header-title"><h1 class="title">{{ navTitle }}</h1></div>
-      <inner-building-nav v-if="navigation === 'buildingNav'" />
-      <inner-about-nav v-if="navigation === 'aboutNav'" />
-      <inner-news-nav v-if="navigation === 'newsNav'" />
-      <inner-news-breadcrumbs v-if="navigation === 'newsBreadcrumbs'" />
+      <mq-layout mq="md+" class="mr-auto">
+        <inner-building-nav v-if="navigation === 'buildingNav'" />
+        <inner-about-nav v-if="navigation === 'aboutNav'" />
+        <inner-news-nav v-if="navigation === 'newsNav'" />
+        <inner-news-breadcrumbs v-if="navigation === 'newsBreadcrumbs'" />
+      </mq-layout>
       <div class="back-btn" @click="routeBack()">Назад</div>
       <div class="scroll-top" @click="scrollTop()"></div>
     </nav>
@@ -208,5 +210,27 @@ export default {
 .headroom--unpinned,
 .headroom--not-top {
   transform: translate3d(0px, 0, 0px) !important;
+}
+@media screen and(max-width: 768px) {
+  .headroom {
+    position: relative !important;
+    transform: translate3d(0px, 0px, 0px) !important;
+    top: inherit !important;
+    left: inherit !important;
+    right: inherit !important;
+    margin-bottom: 20px;
+    .nav-inner {
+      padding-right: 0;
+      .header-title {
+        margin-left: 0;
+      }
+      .back-btn {
+        margin-right: 0;
+      }
+    }
+  }
+  .headroom--not-top .scroll-top {
+    display: none;
+  }
 }
 </style>
