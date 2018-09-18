@@ -1,8 +1,8 @@
 <template>
   <ul>
-    <li><a href="">За нас</a></li>
-    <li><a href="">Услуги</a></li>
-    <li><a href="">История</a></li>
+    <li><a href="#company">$t За нас</a></li>
+    <li><a href="#services">$t Услуги</a></li>
+    <li><a href="#history">$t История</a></li>
   </ul>
 </template>
 

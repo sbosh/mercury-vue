@@ -4,10 +4,10 @@
       <swiper-slide v-for="article in articles" :key="article.id" >
         <news-listing-item
           :id="article.id"
-          :title="article[$t('i18n_title')]"
-          :description="article[$t('i18n_annonce')]"
+          :title="article['title_' + $i18n.locale]"
+          :description="article['annonce_' + $i18n.locale]"
           :image="article.image"
-          :link="article[$t('i18n_slug')]"
+          :link="article['slug_' + $i18n.locale]"
           :date="article.date" />
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>

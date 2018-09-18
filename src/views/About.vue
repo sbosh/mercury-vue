@@ -1,9 +1,9 @@
 <template>
   <div class="main-content about-us">
     <navinner-component navigation="aboutNav" :navTitle="title" />
-    <company-component />
-    <service-component />
-    <history-component />
+    <company-component id="company" />
+    <service-component id="services" />
+    <history-component id="history" />
     <footer-component />
   </div>
 </template>

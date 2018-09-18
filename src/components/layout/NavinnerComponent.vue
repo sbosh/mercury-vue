@@ -84,7 +84,6 @@ export default {
   }
   .header-title {
     margin-left: 80px;
-    margin-right: auto;
     .title {
       color: #fff;
       font-family: 'Exo 2', sans-serif;

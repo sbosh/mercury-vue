@@ -12,7 +12,7 @@ import VueMq from 'vue-mq'
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyC8SMJaPNrgBhgYH-g4XbZGIuLqdoaeNK8'
+    key: 'AIzaSyDQU830d2yJlr3kJ3VvQpKTRWTRtF4gT7g'
   }
 })
 
@@ -38,5 +38,9 @@ new Vue({
     this.$store.cache.dispatch('fetchApartments')
     this.$store.cache.dispatch('fetchBuildings')
     this.$store.cache.dispatch('fetchFloors')
+    this.$store.cache.dispatch('fetchHomePage')
+    this.$store.cache.dispatch('fetchNewsPage')
+    this.$store.cache.dispatch('fetchCurrentBuildingsPage')
+    this.$store.cache.dispatch('fetchContactsPage')
   }
 }).$mount('#app')

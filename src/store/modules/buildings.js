@@ -6,6 +6,7 @@ const actions = {
   fetchBuildings ({ commit }) {
     commit('setBuildings', [
       {
+        id: '1',
         title: 'Комплекс Бижу',
         link: '/:lang/building-inner',
         description: 'Сградата има страхотен изглед към Витоша',
@@ -13,6 +14,7 @@ const actions = {
         location: 'бул. „Александър Малинов“ 35'
       },
       {
+        id: '2',
         title: 'Флора Бийч Резорт',
         link: '/:lang/building-inner',
         description: 'Сградата е разположена в ж.к Младост 3',

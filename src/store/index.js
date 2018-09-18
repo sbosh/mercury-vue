@@ -6,6 +6,7 @@ import articles from './modules/articles'
 import buildings from './modules/buildings'
 import apartments from './modules/apartments'
 import floors from './modules/floors'
+import pages from './modules/pages'
 
 Vue.use(Vuex)
 
@@ -15,7 +16,8 @@ export default new Vuex.Store({
     articles,
     apartments,
     buildings,
-    floors
+    floors,
+    pages
   },
   plugins: [vuexCache],
   strict: debug

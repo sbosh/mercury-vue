@@ -5,7 +5,7 @@
       <div class="container" v-if="article">
         <div class="caption">
           <div class="box-title">
-            <h2 class="title">{{ article[$t('i18n_title')] }}</h2>
+            <h2 class="title">{{ article['title_' + $i18n.locale] }}</h2>
           </div>
         </div>
         <article class="news-article news-article-content animate-box">
@@ -14,7 +14,7 @@
             <img :src="article.image" alt="">
           </div>
           <div class="info-box">
-            <p v-html="article[$t('i18n_annonce')]"></p>
+            <p v-html="article['annonce_' + $i18n.locale]"></p>
           </div>
         </article>
         <div class="related-news">

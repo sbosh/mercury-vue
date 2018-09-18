@@ -295,7 +295,7 @@ export default {
         text-decoration: none;
       }
       h3 {
-        margin-bottom: 8px;
+        margin-bottom: 0;
       }
       .margin-bottom-0 {
         margin-bottom: 0;

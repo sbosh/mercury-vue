@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import NavComponent from '@/components/layout/NavComponent'
 import BuildingsCarousel from '@/components/buildings/BuildingsCarousel'
 export default {
@@ -32,12 +33,20 @@ export default {
     'nav-component': NavComponent,
     'buildings-carousel': BuildingsCarousel
   },
+  metaInfo () {
+    return {
+      title: this.home ? this.home['seo_title_' + this.$i18n.locale] : ''
+    }
+  },
   data: function () {
     return {
       homeRoute: null
     }
   },
   computed: {
+    ...mapState({
+      home: state => state.pages.home
+    }),
     lang () {
       return this.$i18n.locale
     }

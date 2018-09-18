@@ -9,7 +9,7 @@
           <li><a href="">Бъдещи проекти</a></li>
         </ul>
         <ul class="footer-second-nav">
-          <router-link tag="li" :to="'/' + lang + '/aboutus'"><a href="">За компанията</a></router-link>
+          <router-link tag="li" :to="'/' + lang + '/about'"><a href="">За компанията</a></router-link>
           <router-link tag="li" :to="'/' + lang + '/contacts'"><a href="">Контакти</a></router-link>
           <router-link tag="li" :to="'/' + lang + '/news'"><a href="">Новини</a></router-link>
         </ul>
@@ -54,7 +54,7 @@ export default {
             svg.setAttribute('class', imgClass + ' replaced-svg')
           }
           svg.removeAttribute('xmlns:a')
-          el.parentNode.replaceChild(svg, el)
+          if (el && el.parentNode && el.parentNode.replaceChild) el.parentNode.replaceChild(svg, el)
         })
       })
     }

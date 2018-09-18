@@ -11,7 +11,7 @@
         </div>
       </swiper-slide>
       <div class="buildings-list" v-if="!home">
-        <h3>{{ $t('current_projects') }}</h3>
+        <h3>{{pageTitle}}</h3>
         <div class="buildings-titles"></div>
         <div class="buttons">
           <router-link :to="'/' + lang + '/building-sort'">{{ $t('future_projects') }}</router-link>
@@ -27,7 +27,7 @@
 import { mapState } from 'vuex'
 export default {
   name: 'buildings-carousel',
-  props: ['home'],
+  props: ['home', 'pageTitle'],
   data () {
     return {
       buildingsRoute: null

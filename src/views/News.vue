@@ -1,12 +1,12 @@
 <template>
   <div class="main-content">
     <div class="all-news">
-      <navinner-component :navTitle="page_title" />
-      <mq-layout mq="md+">
+      <navinner-component :navTitle="news['title_' + $i18n.locale]" />
+      <!-- <mq-layout mq="md+">
         <div class="caption">
           <div class="title-box"><h2 class="title">Всички</h2></div>
         </div>
-      </mq-layout>
+      </mq-layout> -->
       <div class="container">
         <news-listing :articles="articles" :whithCategory="true" />
       </div>
@@ -27,27 +27,16 @@ export default {
     'news-listing': NewsListing,
     'footer-component': FooterComponent
   },
-  data () {
+  metaInfo () {
     return {
-      page_title: 'Новини'
+      title: this.news ? this.news['seo_title_' + this.$i18n.locale] : ''
     }
   },
   computed: {
     ...mapState({
-      articles: state => state.articles.all
-    }),
-    title: function () {
-      return this.$i18n.locale === 'en' ? 'title_en' : 'title_bg'
-    },
-    description: function () {
-      return this.$i18n.locale === 'en' ? 'description_en' : 'description_bg'
-    },
-    seoTitle: function () {
-      return this.$i18n.locale === 'en' ? 'seo_title_en' : 'seo_title_bg'
-    },
-    seoDescription: function () {
-      return this.$i18n.locale === 'en' ? 'seo_description_en' : 'seo_description_bg'
-    }
+      articles: state => state.articles.all,
+      news: state => state.pages.news
+    })
   },
   mounted () {
     let animateBox = document.getElementsByClassName('animate-box')

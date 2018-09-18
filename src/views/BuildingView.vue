@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <navinner-component :navTitle="title" />
+    <mq-layout mq="md+"><navinner-component :navTitle="title" /></mq-layout>
     <div class="building-apartments">
       <div class="img-box">
         <img src="~@/assets/images/build-starlight.jpg" alt="">
