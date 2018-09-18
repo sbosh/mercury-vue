@@ -11,6 +11,7 @@ import BuildingInner from './views/BuildingInner.vue'
 import Buildings from './views/Buildings.vue'
 import BuildingSort from './views/BuildingSort.vue'
 import BuildingView from './views/BuildingView.vue'
+import FutureBuildings from './views/FutureBuildings.vue'
 import Floor from './views/Floor.vue'
 import Apartment from './views/Apartment.vue'
 import { loadLanguageAsync, i18n } from './setup/i18n'
@@ -45,6 +46,11 @@ let router = new Router({
       path: '/:lang/building-sort',
       name: 'building-sort',
       component: BuildingSort
+    },
+    {
+      path: '/:lang/future-buildings',
+      name: 'future-buildings',
+      component: FutureBuildings
     },
     {
       path: '/:lang/building-inner',

@@ -7,6 +7,7 @@ const state = {
   home: [],
   news: [],
   currentBuildings: [],
+  futureBuildings: [],
   contacts: []
 }
 
@@ -19,6 +20,9 @@ const actions = {
   },
   fetchCurrentBuildingsPage ({ commit }) {
     pagesService.getCurrentBuildingsPage().then(({ data }) => commit('setCurrentBuildings', data.data))
+  },
+  fetchFutureBuildingsPage ({ commit }) {
+    pagesService.getFutureBuildingsPage().then(({ data }) => commit('setFutureBuildings', data.data))
   },
   fetchContactsPage ({ commit }) {
     pagesService.getContactsPage().then(({ data }) => commit('setContacts', data.data))
@@ -37,6 +41,9 @@ const mutations = {
   },
   setCurrentBuildings (state, currentBuildings) {
     state.currentBuildings = currentBuildings
+  },
+  setFutureBuildings (state, futureBuildings) {
+    state.futureBuildings = futureBuildings
   },
   setContacts (state, contacts) {
     state.contacts = contacts

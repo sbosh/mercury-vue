@@ -11,11 +11,5 @@ export default {
   home: 'Home',
   news: 'News',
   completed_projects: 'Completed projects',
-  future_projects: 'Future projects',
-  i18n_title: 'title_en',
-  i18n_annonce: 'annonce_en',
-  i18n_description: 'description_en',
-  i18n_slug: 'slug_en',
-  i18n_seo_title: 'seo_title_en',
-  i18n_seo_description: 'seo_description_en'
+  future_projects: 'Future projects'
 }
