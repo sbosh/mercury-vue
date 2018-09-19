@@ -12,7 +12,7 @@ import NavComponent from '@/components/layout/NavComponent'
 import BuildingsCarousel from '@/components/buildings/BuildingsCarousel'
 import BuildingsMobile from '@/components/mobile/BuildingsMobile.vue'
 export default {
-  name: 'buildings-listing',
+  name: 'current-buildings',
   components: {
     'nav-component': NavComponent,
     'buildings-carousel': BuildingsCarousel,

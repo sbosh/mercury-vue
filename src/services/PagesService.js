@@ -23,6 +23,11 @@ export default class PagesService {
       .catch((error) => { throw new Error(error) })
   }
 
+  getFinishedBuildingsPage () {
+    return this.http.get('/page/type/finished-projects/mitko')
+      .catch((error) => { throw new Error(error) })
+  }
+
   getContactsPage () {
     return this.http.get('/page/type/contacts/mitko')
       .catch((error) => { throw new Error(error) })

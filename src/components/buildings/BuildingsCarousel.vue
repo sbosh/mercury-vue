@@ -14,7 +14,7 @@
         <h3>{{pageTitle}}</h3>
         <div class="buildings-titles"></div>
         <div class="buttons">
-          <router-link :to="'/' + lang + '/building-sort'">{{ $t('future_projects') }}</router-link>
+          <router-link :to="'/' + lang + '/future-buildings'">{{ $t('future_projects') }}</router-link>
           <router-link :to="'/' + lang + '/building-sort'">{{ $t('completed_projects') }}</router-link>
         </div>
       </div>

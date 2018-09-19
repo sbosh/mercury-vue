@@ -1,7 +1,7 @@
 <template>
   <div class="main-content">
     <mq-layout mq="m+">
-      <navinner-component :navTitle="this.futureBuildings['title_' + this.$i18n.locale]" />
+      <navinner-component :navTitle="this.finishedBuildings['title_' + this.$i18n.locale]" />
       <div class="buildings building-sort">
         <swiper :options="swiperOptions">
           <swiper-slide v-for="building in buildings" :key="building.id" >
@@ -21,7 +21,7 @@
       </div>
     </mq-layout>
     <mq-layout mq="sm">
-      <futurebuildings-mobile :pageTitle="this.futureBuildings['title_' + this.$i18n.locale]" />
+      <finishedbuildings-mobile :pageTitle="this.finishedBuildings['title_' + this.$i18n.locale]" />
     </mq-layout>
   </div>
 </template>
@@ -29,16 +29,15 @@
 <script>
 import { mapGetters, mapState } from 'vuex'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
-import FutureBuildingsMobile from '@/components/mobile/FutureBuildingsMobile'
+import FinishedBuildingsMobile from '@/components/mobile/FinishedBuildingsMobile'
 export default {
-  name: 'future-buildings',
+  name: 'finished-buildings',
   components: {
     'navinner-component': NavinnerComponent,
-    'futurebuildings-mobile': FutureBuildingsMobile
+    'finishedbuildings-mobile': FinishedBuildingsMobile
   },
   data () {
     return {
-      title: 'future buildings',
       swiperOptions: {
         slidesPerView: 'auto',
         spaceBetween: 0,
@@ -61,7 +60,7 @@ export default {
       buildings: 'getSortedBuildings'
     }),
     ...mapState({
-      futureBuildings: state => state.pages.futureBuildings
+      finishedBuildings: state => state.pages.finishedBuildings
     })
   }
 }

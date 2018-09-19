@@ -9,7 +9,7 @@
           <h2 class="title">Ние имаме различна<br> архитектурна практика</h2>
         </div>
         <div class="btn-box">
-          <router-link :to="'/' + lang + '/buildings'" class="btn"><div class="btn-overlay"></div>виж нашите проекти</router-link>
+          <router-link :to="'/' + lang + '/current-buildings'" class="btn"><div class="btn-overlay"></div>виж нашите проекти</router-link>
         </div>
       </div>
     </div>

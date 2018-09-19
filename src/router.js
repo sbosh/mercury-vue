@@ -8,10 +8,11 @@ import Contacts from './views/Contacts.vue'
 import News from './views/News.vue'
 import NewsInner from './views/NewsInner.vue'
 import BuildingInner from './views/BuildingInner.vue'
-import Buildings from './views/Buildings.vue'
+import CurrentBuildings from './views/CurrentBuildings.vue'
 import BuildingSort from './views/BuildingSort.vue'
 import BuildingView from './views/BuildingView.vue'
 import FutureBuildings from './views/FutureBuildings.vue'
+import FinishedBuildings from './views/FinishedBuildings.vue'
 import Floor from './views/Floor.vue'
 import Apartment from './views/Apartment.vue'
 import { loadLanguageAsync, i18n } from './setup/i18n'
@@ -38,9 +39,9 @@ let router = new Router({
       component: Contacts
     },
     {
-      path: '/:lang/buildings',
-      name: 'buildings',
-      component: Buildings
+      path: '/:lang/current-buildings',
+      name: 'current-buildings',
+      component: CurrentBuildings
     },
     {
       path: '/:lang/building-sort',
@@ -51,6 +52,11 @@ let router = new Router({
       path: '/:lang/future-buildings',
       name: 'future-buildings',
       component: FutureBuildings
+    },
+    {
+      path: '/:lang/finished-buildings',
+      name: 'finished-buildings',
+      component: FinishedBuildings
     },
     {
       path: '/:lang/building-inner',
