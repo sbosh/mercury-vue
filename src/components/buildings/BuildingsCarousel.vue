@@ -50,7 +50,7 @@ export default {
           el: '.buildings-titles',
           clickable: false,
           renderBullet (index, className) {
-            return `<div class="${className} building-title"><a href="${$this.buildings[index].link}"><span>${index + 1}</span> ${$this.buildings[index].title}</a></div>`
+            return `<div class="${className} building-title"><a class="fake-router-link" href="${$this.buildings[index].link}"><span>${index + 1}</span> ${$this.buildings[index].title}</a></div>`
           }
         }
       }

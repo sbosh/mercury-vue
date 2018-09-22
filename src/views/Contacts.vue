@@ -3,60 +3,7 @@
     <div class="contacts-page">
       <navinner-component :navTitle="contacts['title_' + $i18n.locale]"  />
       <div class="contacts-us">
-        <form action="">
-          <h3>Пиши ни</h3>
-          <div class="form-row radio-checkbox-row">
-            <div class="form-group radio-group">
-              <input type="radio" id="input_property" name="reason" class="form-element" />
-              <label for="input_property">Запитване свързано с закупуване на жилище</label>
-            </div>
-            <hr>
-            <div class="form-group radio-group">
-              <input type="radio" id="input_company" name="reason" class="form-element" />
-              <label for="input_company">Запитване към компанията</label>
-            </div>
-            <hr>
-            <div class="form-group radio-group">
-              <input type="radio" id="input_team" name="reason" class="form-element" />
-              <label for="input_team">Присъедини се към нашият екип</label>
-            </div>
-          </div>
-          <h3>Име</h3>
-          <div class="form-row">
-            <div class="form-group">
-              <input type="text" name="name" class="form-element" placeholder="Вашето име *" />
-            </div>
-            <div class="form-group">
-              <input type="text" name="company" class="form-element" placeholder="Име на вашата компания">
-            </div>
-          </div>
-          <h3>Информация</h3>
-          <div class="form-row">
-            <div class="form-group">
-              <input type="email" name="email" class="form-element" placeholder="Е-mail *" />
-            </div>
-            <div class="form-group">
-              <input type="tel" name="" class="form-element" placeholder="Телефон">
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <input type="text" name="address" class="form-element" placeholder="Адрес" />
-            </div>
-            <div class="form-group">
-              <input type="text" name="time" class="form-element" placeholder="Удобно време за разговор">
-            </div>
-          </div>
-          <h3>Съобщение</h3>
-          <div class="form-row">
-            <div class="form-group">
-              <textarea name="message" class="form-element"></textarea>
-            </div>
-          </div>
-          <div class="form-group">
-            <input type="submit" class="send form-element" value="send">
-          </div>
-        </form>
+        <contact-form></contact-form>
       </div>
       <div class="google-map">
         <div class="tabs">
@@ -117,11 +64,12 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import ContactForm from '@/components/contactForm/ContactForm'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import FooterComponent from '@/components/layout/FooterComponent'
 export default {
   name: 'contacts',
-  components: { FooterComponent, NavinnerComponent },
+  components: { FooterComponent, NavinnerComponent, ContactForm },
   metaInfo () {
     return {
       title: this.contacts ? this.contacts['seo_title_' + this.$i18n.locale] : ''
