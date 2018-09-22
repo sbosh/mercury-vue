@@ -90,7 +90,7 @@ let router = new Router({
     },
     {
       path: '/:lang/article/:id/:slug',
-      name: 'article',
+      name: 'article-inner',
       component: NewsInner,
       meta: { transitionName: 'slide' }
     },

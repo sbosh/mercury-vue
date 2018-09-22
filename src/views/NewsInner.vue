@@ -35,7 +35,7 @@ import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import NewsListingSwiper from '@/components/news/NewsListingSwiper'
 import FooterComponent from '@/components/layout/FooterComponent.vue'
 export default {
-  name: 'article',
+  name: 'article-inner',
   components: {
     'navinner-component': NavinnerComponent,
     'news-listing-swiper': NewsListingSwiper,
