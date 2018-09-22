@@ -4,7 +4,7 @@ export default class ArticleService {
   }
 
   getArticles () {
-    return this.http.get('/posts/mitko')
+    return this.http.get('/posts')
       .catch((error) => { throw new Error(error) })
   }
 }

@@ -7,7 +7,8 @@ export default (() => {
     headers: {
       'Accept': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer mitko'
     }
   })
 
