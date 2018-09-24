@@ -9,6 +9,8 @@ import 'swiper/dist/css/swiper.css'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import headroom from 'vue-headroom'
 import VueMq from 'vue-mq'
+import VTooltip from 'v-tooltip'
+Vue.use(VTooltip)
 
 Vue.use(VueGoogleMaps, {
   load: {

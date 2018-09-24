@@ -4,10 +4,10 @@
     <div class="building-apartments">
       <div class="img-box">
         <img src="~@/assets/images/build-starlight.jpg" alt="">
-        <svg v-if="floors" width="500" height="500" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        <svg v-if="floors" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
           viewBox="0 0 552 555" style="enable-background:new 0 0 552 555;" xml:space="preserve">
-          <a v-for="floor in floors" :key="floor.id" :xlink:href="'/' + $i18n.locale + '/floor/' + floor.id + '/' + floor['slug_' + $i18n.locale]" >
-            <path class="st0" :d="floor.coords"/>
+          <a v-for="floor in floors" :key="floor.id" :xlink:href="'/' + $i18n.locale + '/floor/' + floor.id + '/' + floor['slug_' + $i18n.locale]" v-tooltip="{content: 'Floor ID: ' + floor.id}">
+            <path class="st0" :d="floor.coords" />
           </a>
         </svg>
       </div>
@@ -112,6 +112,13 @@ export default {
 </script>
 
 <style lang="scss">
+.tooltip {
+  .tooltip-inner {
+    background: #fff;
+    padding: 15px;
+    color: #000;
+  }
+}
 .building-apartments {
   .img-box {
     img {
@@ -120,12 +127,13 @@ export default {
       object-fit: cover;
     }
     svg {
+      width: 100%;
+      height: 100%;
       position: absolute;
       left: 0;
       top: 0;
       right: 0;
       bottom: 0;
-      z-index: 9999;
       path,
       polygon {
         transition: all .3s;
