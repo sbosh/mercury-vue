@@ -15,8 +15,8 @@
                 <li><a href="">Комплекс Меркурий Плаза</a></li>
                 <li><a href="">Комплекс Елеганс</a></li>
               </ul>
-              <h3><router-link :to="'/' + lang + '/building-sort'">{{ $t('completed_projects') }}</router-link></h3>
-              <h3><router-link :to="'/' + lang + '/building-sort'">{{ $t('future_projects') }}</router-link></h3>
+              <h3><router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link></h3>
+              <h3><router-link :to="'/' + lang + '/future-buildings'">{{ $t('future_projects') }}</router-link></h3>
               <h3><router-link :to="'/' + lang + '/news'">{{ $t('news') }}</router-link></h3>
             </div>
             <div class="col">

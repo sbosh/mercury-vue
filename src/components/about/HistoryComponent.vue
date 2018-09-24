@@ -161,5 +161,47 @@ export default {
       }
     }
   }
+  @media screen and(max-width: 768px) {
+    padding: 50px 25px;
+    .caption {
+      margin-bottom: 25px;
+      .title-box {
+        padding-left: 45px;
+        margin-left: -25px;
+        .title {
+          margin-bottom: 25px;
+          &:before {
+            margin-right: 25px;
+          }
+          &:after {
+            margin-right: 12px;
+          }
+        }
+      }
+    }
+    .history-slider {
+      padding: 0;
+      .swiper-nav {
+        .next-el,
+        .prev-el {
+          width: 100px;
+          background-size: 100%;
+        }
+      }
+      .year {
+        font-size: 30px;
+      }
+      .text {
+        padding: 0;
+        &:before {
+          display: none;
+        }
+        p {
+          font-size: 18px;
+          line-height: 26px;
+        }
+      }
+    }
+  }
 }
 </style>

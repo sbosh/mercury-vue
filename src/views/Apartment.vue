@@ -1,8 +1,8 @@
 <template>
-  <div class="apartment-inner">
-    <div class="left-sidebar">
+  <div class="apartment-inner" v-if="apartment">
+    <mq-layout mq="md+" class="left-sidebar">
       <div class="top">
-        <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.png" class="logo" alt=""></router-link>
+        <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
         <div class="back-btn">Към сградата</div>
         <div class="back-btn">Към етажа</div>
       </div>
@@ -21,21 +21,21 @@
         <div class="text">Етажно разположение:</div>
         <img src="@/assets/images/floor-plan.png" alt="">
       </div>
-    </div>
+    </mq-layout>
     <div class="apartment-info">
       <div class="apartment-header">
         <div class="left">
-          <div class="title"><h1>3-стаен апартамент</h1></div>
-          <div class="sqm">86,4 m2</div>
+          <div class="title"><h1>{{ apartment.rooms }} - стаен апартамент</h1></div>
+          <div class="sqm">{{ apartment.living_area }} m2</div>
         </div>
         <div class="right">
           <div class="">
             <div class="text">Обща цена:</div>
-            <div class="price">82 000 <div class="currency drop-arrow">euro <span class="dropdown">bgn</span></div></div>
+            <div class="price">{{ apartment.price }} <div class="currency drop-arrow">euro <span class="dropdown">bgn</span></div></div>
           </div>
           <div>
             <div class="text">цена на m²:</div>
-            <div class="price">870 <div class="currency">eur</div></div>
+            <div class="price">{{ apartment.price_m2 }} <div class="currency">eur</div></div>
           </div>
         </div>
       </div>
@@ -50,10 +50,18 @@
             <li>Wc <span>3.4 m²</span></li>
             <li>Тераса <span>5 m²</span></li>
           </ul>
+          <mq-layout mq="sm" class="status-mobile">
+            <div class="text">Статус</div>
+            <div class="status available">Свободен</div>
+          </mq-layout>
           <a href="" class="btn">Изпрати запитване</a>
           <div class="donwload-pdf">
             <a href="" class="btn-pdf">Изтегли PDF на апартамента</a>
           </div>
+          <mq-layout mq="sm" class="buttons">
+            <a href="" class="btn">Към сградата</a>
+            <a href="" class="btn">Към етажа</a>
+          </mq-layout>
         </div>
         <div class="apartment-florplan">
           <img src="@/assets/images/apartment.png" alt="">
@@ -66,9 +74,17 @@
 <script>
 export default {
   name: 'apartment',
+  metaInfo () {
+    return {
+      title: this.apartment ? this.apartment['seo_title_' + this.$i18n.locale] : ''
+    }
+  },
   computed: {
     lang () {
       return this.$i18n.locale
+    },
+    apartment: function () {
+      return this.$store.getters.getApartment(Number(this.$route.params.id), this.$route.params.slug)
     }
   }
 }
@@ -170,6 +186,10 @@ export default {
     align-items: stretch;
     margin-bottom: auto;
     .apartment-florplan {
+      img,
+      svg {
+        max-width: 100%;
+      }
     }
     .sidebar {
       display: flex;
@@ -261,6 +281,105 @@ export default {
       }
     }
   }
+  @media screen and(max-width: 768px) {
+    padding: 0 25px;
+    .apartment-header {
+      flex-direction: column;
+      padding: 0;
+      margin: 0 0 30px 0;
+      .left {
+        margin: 0 0 30px 0;
+        width: 100%;
+        .sqm {
+          color: #2c2c2c;
+          font-size: 14px;
+          font-weight: 700;
+          line-height: 25px;
+        }
+      }
+      .right {
+        margin: 0 0 20px 0;
+        >div {
+          padding: 0;
+        }
+        >div:last-of-type {
+          padding-left: 24px;
+        }
+        .price {
+          color: #000;
+          font-size: 20px;
+          font-weight: 600;
+        }
+      }
+      .title {
+        h1 {
+          color: #2c2c2c;
+          font-size: 20px;
+          font-weight: 700;
+          line-height: 25px;
+        }
+      }
+    }
+    .apartment-content {
+      flex-direction: column-reverse;
+      .sidebar {
+        margin-top: 40px;
+        padding-left: 0;
+        h3 {
+          color: #2c2c2c;
+          font-size: 17px;
+          font-weight: 700;
+          line-height: 24px;
+          margin-bottom: 20px;
+        }
+        ul {
+          margin-bottom: 20px;
+        }
+        .btn {
+          width: 100%;
+          font-size: 10px;
+          font-weight: 700;
+          text-transform: uppercase;
+          box-sizing: border-box;
+          padding: 25px 20px;
+          margin: 30px 0;
+        }
+        .status-mobile {
+          .text {
+            color: #8d8d8d;
+            font-family: "Fira Sans";
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+          }
+          .status {
+            color: #22a314;
+            font-size: 17px;
+            font-weight: 600;
+            text-transform: none;
+          }
+        }
+        .buttons {
+          border-top: 1px solid rgba(#979797, .37);
+          margin-top: 30px;
+          padding: 30px 0;
+          display: flex;
+          justify-content: space-between;
+          .btn {
+            width: 47%;
+            background-color: #eee;
+            border-color: #eee;
+            color: #000;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
 }
 .apartment-inner {
   .status {
@@ -279,6 +398,9 @@ export default {
       font-size: 20px;
       font-weight: 600;
     }
+  }
+  @media screen and (max-width: 768px ) {
+    margin-top: 90px;
   }
 }
 .left-sidebar {

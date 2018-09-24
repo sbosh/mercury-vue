@@ -32,4 +32,9 @@ export default class PagesService {
     return this.http.get('/page/type/contacts')
       .catch((error) => { throw new Error(error) })
   }
+
+  getAboutPage () {
+    return this.http.get('/page/type/about')
+      .catch((error) => { throw new Error(error) })
+  }
 }

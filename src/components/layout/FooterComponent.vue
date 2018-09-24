@@ -67,6 +67,9 @@ footer {
   background-color: #232323;
   padding: 80px 0;
   position: relative;
+  @media screen and(min-width:769px) {
+    padding-right: 195px;
+  }
   .logo {
     margin: 0 auto 60px auto;
     text-align: center;

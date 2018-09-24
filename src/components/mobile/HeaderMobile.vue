@@ -401,6 +401,11 @@ export default {
     flex-direction: column;
   }
   &.active {
+    position: fixed;
+    .main-nav-logo {
+      position: relative;
+      z-index: 999;
+    }
     .lng {
       transform: translate(0);
       opacity: 1;

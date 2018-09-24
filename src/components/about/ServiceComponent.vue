@@ -122,5 +122,33 @@ export default {
       }
     }
   }
+  @media screen and(max-width: 768px) {
+    padding: 50px 25px;
+    .caption {
+      flex: 1 0 100%;
+      .title-box {
+        padding-left: 45px;
+        margin-left: -25px;
+        .title {
+          margin-bottom: 25px;
+          &:before {
+            margin-right: 25px;
+          }
+          &:after {
+            margin-right: 12px;
+          }
+        }
+      }
+    }
+    .all-services {
+      flex: 1 0 100%;
+      ul {
+        padding-left: 0;
+      }
+    }
+    .description {
+      padding-left: 0;
+    }
+  }
 }
 </style>

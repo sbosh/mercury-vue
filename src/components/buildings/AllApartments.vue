@@ -7,7 +7,7 @@
           <div class="tr">
             <div class="th">Вход:</div>
             <div class="th">Ниво:</div>
-            <div class="th">Номер:</div>
+            <div class="th">Номер: (id)</div>
             <div class="th">квадратура:</div>
             <div class="th">Цена:</div>
             <div class="th">Статус:</div>
@@ -15,14 +15,14 @@
         </div>
         <div class="tbody">
           {{ filtrApartments(10000, 180000, [4]) }}
-          <div class="tr" v-for="apartment in apartments" :key="apartment.id">
+          <router-link :to="'/' + $i18n.locale + '/apartment/' + apartment.id + '/' + apartment['slug_' + $i18n.locale]" class="tr" v-for="apartment in apartments" :key="apartment.id">
             <div class="td"><div class="block">{{ apartment.block }}</div></div>
-            <div class="td"><div class="level">{{ apartment.level }}</div></div>
-            <div class="td"><div class="number">{{ apartment.number }}</div></div>
-            <div class="td"><div class="sqm">{{ apartment.sqm }}</div></div>
+            <div class="td"><div class="level">{{ apartment.floor_for_filters }}</div></div>
+            <div class="td"><div class="number">{{ apartment.id }}</div></div>
+            <div class="td"><div class="sqm">{{ apartment.total_area }}</div></div>
             <div class="td"><div class="price">{{ apartment.price }}</div></div>
             <div class="td"><div class="status">{{ apartment.status }}</div></div>
-          </div>
+          </router-link>
         </div>
       </div>
     </div>

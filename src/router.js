@@ -71,13 +71,13 @@ let router = new Router({
       meta: { transitionName: 'slide' }
     },
     {
-      path: '/:lang/floor',
+      path: '/:lang/floor/:id/:slug',
       name: 'floor',
       component: Floor,
       meta: { transitionName: 'slide' }
     },
     {
-      path: '/:lang/apartment',
+      path: '/:lang/apartment/:id/:slug',
       name: 'apartment',
       component: Apartment,
       meta: { transitionName: 'slide' }

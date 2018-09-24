@@ -1,6 +1,7 @@
 <template>
   <div class="main-content about-us">
-    <navinner-component navigation="aboutNav" :navTitle="title" />
+    <mq-layout mq="md+"><navinner-component navigation="aboutNav" :navTitle="about['title_' + $i18n.locale]" /></mq-layout>
+    <mq-layout mq="sm" class="mobile-header"><h1 class="title">{{about['title_' + $i18n.locale]}}</h1></mq-layout>
     <company-component id="company" />
     <service-component id="services" />
     <history-component id="history" />
@@ -8,6 +9,7 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import FooterComponent from '@/components/layout/FooterComponent'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import ServiceComponent from '@/components/about/ServiceComponent'
@@ -21,13 +23,26 @@ export default {
       title: 'За нас'
     }
   },
-  metaInfo: {
-    title: 'About us',
-    titleTemplate: '%s | MERCURY 99 Building Company'
+  metaInfo () {
+    return {
+      title: this.about ? this.about['seo_title_' + this.$i18n.locale] : ''
+    }
+  },
+  computed: {
+    ...mapState({
+      about: state => state.pages.about
+    })
   }
 }
 </script>
 
 <style lang="scss">
-
+.mobile-header {
+  background: #232323;
+  padding: 90px 25px 25px;
+  .title {
+    color: #fff;
+    font-size: 34px;
+  }
+}
 </style>

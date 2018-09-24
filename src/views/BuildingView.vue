@@ -1,13 +1,14 @@
 <template>
   <div class="main-content">
-    <mq-layout mq="md+"><navinner-component :navTitle="title" /></mq-layout>
+    <mq-layout mq="md+" class="building-view-header"><navinner-component :navTitle="title" /></mq-layout>
     <div class="building-apartments">
       <div class="img-box">
         <img src="~@/assets/images/build-starlight.jpg" alt="">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        <svg v-if="floors" width="500" height="500" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
           viewBox="0 0 552 555" style="enable-background:new 0 0 552 555;" xml:space="preserve">
-          <polygon class="st0" points="331.3,295.3 332,311 396.3,308 389.3,288.3 "/>
-          <polygon class="st0" points="254.3,259.3 255,275 319.3,272 312.3,252.3 "/>
+          <a v-for="floor in floors" :key="floor.id" :xlink:href="'/' + $i18n.locale + '/floor/' + floor.id + '/' + floor['slug_' + $i18n.locale]" >
+            <path class="st0" :d="floor.coords"/>
+          </a>
         </svg>
       </div>
       <filtered-apartments
@@ -79,6 +80,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import vueSlider from 'vue-slider-component'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import FilteredApartments from '@/components/buildings/FilteredApartments'
@@ -100,7 +102,11 @@ export default {
   computed: {
     lang () {
       return this.$i18n.locale
-    }
+    },
+    ...mapState({
+      apartments: state => state.apartments.all,
+      floors: state => state.floors.all
+    })
   }
 }
 </script>
@@ -108,12 +114,25 @@ export default {
 <style lang="scss">
 .building-apartments {
   .img-box {
-    position: relative;
-    z-index: 100;
     img {
       width: 100vw;
       height: 100vh;
       object-fit: cover;
+    }
+    svg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9999;
+      path,
+      polygon {
+        transition: all .3s;
+        &:hover {
+          opacity: .8;
+        }
+      }
     }
   }
 }
@@ -241,7 +260,6 @@ export default {
   height: 100vh;
   position: relative;
   background: url(../assets/images/building01.jpg);
-  z-index: 9998;
   .building-btn {
     margin: auto 0 0 0;
   }
@@ -431,6 +449,11 @@ export default {
         justify-content: center;
         align-items: center;
         flex-direction: row;
+        text-decoration: none;
+        transition: all .3s;
+        &:hover {
+          background: #f3f3f3;
+        }
         &:first-child {
           margin-top: 80px;
         }
@@ -466,6 +489,9 @@ export default {
       }
     }
   }
+}
+.building-view-header {
+  z-index: 1000;
 }
 .active-component {
   .building-apartments {

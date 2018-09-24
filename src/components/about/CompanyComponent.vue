@@ -91,5 +91,61 @@ export default {
       height: auto;
     }
   }
+  @media screen and(max-width: 768px) {
+    padding: 0 25px;
+    background: #fff;
+    margin-bottom: 0px;
+    margin-top: -1px;
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 360px;
+      background: #232323;
+    }
+    .img-box {
+      margin-bottom: 25px;
+      padding: 0;
+    }
+    div {
+      z-index: 100;
+      position: relative;
+    }
+    .caption {
+      margin-left: -25px;
+      margin-bottom: 30px;
+      .title-box {
+        padding-left: 45px;
+        h3.title {
+          font-size: 30px;
+          line-height: 34px;
+        }
+        .title {
+          margin-bottom: 25px;
+          &:before {
+            margin-right: 25px;
+          }
+          &:after {
+            margin-right: 12px;
+          }
+        }
+        h2 {
+          font-size: 24px;
+          line-height: 28px;
+          font-weight: 500;
+        }
+      }
+    }
+    .description {
+      padding: 25px 0;
+    }
+    blockquote {
+      padding-left: 20px;
+    }
+  }
 }
 </style>

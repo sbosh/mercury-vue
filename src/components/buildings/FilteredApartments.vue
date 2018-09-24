@@ -10,7 +10,7 @@
     </div>
     <div class="apartments-listing">
       <div class="apartments-box" v-for="apartment in filtrApartments(priceFrom, priceTo, rooms)" :key="apartment.id">
-        <a :href="apartment.url"><img :src="apartment.img" alt=""></a>
+        <router-link :to="'/' + $i18n.locale + '/apartment/' + apartment.id + '/' + apartment['slug_' + $i18n.locale]"><img :src="apartment.image" alt="">link</router-link>
         <div class="info">
           <div class="title"><h3>{{ apartment.rooms }}-стане <br>апартамент</h3></div>
           <div class="sqm">{{ apartment.sqm }}</div>
@@ -113,7 +113,7 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 999;
+  z-index: 9999;
   background-color: #f8f8f8;
   transition: all .7s;
   transform: translateX(100%);
