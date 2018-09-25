@@ -4,12 +4,16 @@ import HTTP from '@/api/http'
 const buildingsService = new BuildingsService(HTTP)
 
 const state = {
-  all: []
+  all: [],
+  current: []
 }
 
 const actions = {
   fetchBuildings ({ commit }) {
     buildingsService.getBuildings('/buildings').then(({ data }) => commit('setBuildings', data.data))
+  },
+  fetchCurrentBuildings ({ commit }) {
+    buildingsService.getCurrentBuildings().then(({ data }) => commit('setCurrentBuildings', data.data))
   }
 }
 
@@ -28,6 +32,9 @@ const getters = {
 const mutations = {
   setBuildings (state, buildings) {
     state.all = buildings
+  },
+  setCurrentBuildings (state, current) {
+    state.current = current
   }
 }
 

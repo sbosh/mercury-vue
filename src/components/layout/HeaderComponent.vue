@@ -10,10 +10,9 @@
             <div class="col">
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/current-buildings'">{{ $t('current_projects') }}</router-link></h3>
               <ul>
-                <li><a href="">Комплекс Бижу</a><router-link :to="'/' + lang">{{ $t('home') }}</router-link></li>
-                <li><a href="">Флора Бийч Резорт</a></li>
-                <li><a href="">Комплекс Меркурий Плаза</a></li>
-                <li><a href="">Комплекс Елеганс</a></li>
+                <li v-for="building in current" :key="building.id" >
+                  <router-link :to="'/' + lang + '/building/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
+                </li>
               </ul>
               <h3><router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link></h3>
               <h3><router-link :to="'/' + lang + '/future-buildings'">{{ $t('future_projects') }}</router-link></h3>
@@ -77,6 +76,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { loadLanguageAsync } from '@/setup/i18n'
 import axios from 'axios'
 export default {
@@ -89,7 +89,10 @@ export default {
   computed: {
     lang () {
       return this.$i18n.locale
-    }
+    },
+    ...mapState({
+      current: state => state.buildings.current
+    })
   },
   mounted () {
     this.convertSVG()
@@ -103,7 +106,7 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      if (to.name === 'home' || to.name === 'buildings') {
+      if (to.name === 'home' || to.name === 'current-buildings') {
         this.$el.querySelector('.main-nav').classList.add('home-header')
       } else {
         this.$el.querySelector('.main-nav').classList.remove('home-header')

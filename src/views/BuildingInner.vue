@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <mq-layout mq="md+"><navinner-component navigation="buildingNav" :navTitle="title" /></mq-layout>
+    <mq-layout mq="md+"><navinner-component navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
     <div class="inner-building" v-if="building">
       <div class="inner-building-header">
         <mq-layout mq="sm"><h1 class="page-title">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
@@ -19,7 +19,7 @@
         <div class="box-row">
           <div class="box">
             <div class="title">Име на комплекса</div>
-            <div class="text">Комплекс бижу</div>
+            <div class="text">{{ building['title_' + $i18n.locale] }}</div>
           </div>
           <div class="box">
             <div class="title">Етажи на сградата</div>
