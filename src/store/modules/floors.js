@@ -9,7 +9,7 @@ const state = {
 
 const actions = {
   fetchFloors ({ commit }) {
-    floorsService.getFloors('/floors/mitko').then(({ data }) => commit('setFloors', data.data))
+    floorsService.getFloors('/floors').then(({ data }) => commit('setFloors', data.data))
   }
 }
 

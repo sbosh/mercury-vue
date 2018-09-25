@@ -59,13 +59,13 @@ let router = new Router({
       component: FinishedBuildings
     },
     {
-      path: '/:lang/building-inner',
+      path: '/:lang/building/:building',
       name: 'building-inner',
       component: BuildingInner,
       meta: { transitionName: 'slide' }
     },
     {
-      path: '/:lang/building-view',
+      path: '/:lang/building-view/:building',
       name: 'building-view',
       component: BuildingView,
       meta: { transitionName: 'slide' }
@@ -103,6 +103,9 @@ let router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  if (from.name) {
+    window.fakeRouter = true
+  }
   window.scrollTo({
     top: 0,
     behavior: 'smooth'

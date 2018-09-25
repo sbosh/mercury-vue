@@ -2,20 +2,24 @@
   <div class="buildings-carousel">
     <swiper :options="this.getSwiperOptions(this.home)">
       <swiper-slide v-for="building in buildings" :key="building.id" >
-        <div class="bg" :style="{ 'background-image': 'url(' + building.bg + ')' }">
+        <div class="bg" :style="{ 'background-image': 'url(' + building.image + ')' }">
           <div class="caption" v-if="!home">
             <div class="title-box">
-              <h2 class="title"><a :href="building.link">{{ building.description }}</a></h2>
+              <h2 class="title"><router-link :to="'/' + lang + '/building/' + building['slug_' + $i18n.locale]">{{ building['annonce_' + $i18n.locale] }}</router-link></h2>
             </div>
           </div>
         </div>
       </swiper-slide>
       <div class="buildings-list" v-if="!home">
         <h3>{{pageTitle}}</h3>
-        <div class="buildings-titles"></div>
+        <div class="buildings-titles">
+          <div class="building-title" v-for="(building, index) in buildings" :key="building.id">
+            <router-link :to="'/' + lang + '/building/' + building['slug_' + $i18n.locale]"><span>{{ index + 1 }}</span> {{ building['title_' + $i18n.locale] }}</router-link>
+          </div>
+        </div>
         <div class="buttons">
           <router-link :to="'/' + lang + '/future-buildings'">{{ $t('future_projects') }}</router-link>
-          <router-link :to="'/' + lang + '/building-sort'">{{ $t('completed_projects') }}</router-link>
+          <router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link>
         </div>
       </div>
       <div class="scroll-icon" v-if="!home"><span></span></div>
@@ -35,7 +39,6 @@ export default {
   },
   methods: {
     getSwiperOptions (isHome) {
-      const $this = this
       let options = {
         slidesPerView: 'auto',
         spaceBetween: 0,
@@ -45,13 +48,6 @@ export default {
         mousewheel: true,
         keyboard: {
           enabled: true
-        },
-        pagination: {
-          el: '.buildings-titles',
-          clickable: false,
-          renderBullet (index, className) {
-            return `<div class="${className} building-title"><a class="fake-router-link" href="${$this.buildings[index].link}"><span>${index + 1}</span> ${$this.buildings[index].title}</a></div>`
-          }
         }
       }
       if (isHome) {

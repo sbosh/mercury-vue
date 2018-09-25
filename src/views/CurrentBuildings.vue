@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <nav-component/>
+    <nav-component />
     <mq-layout mq="md+"><buildings-carousel :pageTitle="this.currentBuildings['title_' + this.$i18n.locale]" /></mq-layout>
     <mq-layout mq="sm"><buildings-mobile :pageTitle="this.currentBuildings['title_' + this.$i18n.locale]" /></mq-layout>
   </div>
@@ -17,6 +17,11 @@ export default {
     'nav-component': NavComponent,
     'buildings-carousel': BuildingsCarousel,
     'buildings-mobile': BuildingsMobile
+  },
+  data: function () {
+    return {
+      homeRoute: true
+    }
   },
   metaInfo () {
     return {

@@ -2,13 +2,8 @@
   <div class="main-content">
     <div class="all-news">
       <navinner-component :navTitle="news['title_' + $i18n.locale]" />
-      <!-- <mq-layout mq="md+">
-        <div class="caption">
-          <div class="title-box"><h2 class="title">Всички</h2></div>
-        </div>
-      </mq-layout> -->
       <div class="container">
-        <news-listing :articles="articles" :whithCategory="true" />
+        <news-listing :articles="articles" />
       </div>
     </div>
     <footer-component />

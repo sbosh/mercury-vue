@@ -45,7 +45,9 @@ export default {
   },
   methods: {
     routeBack () {
-      this.$router.go(-1)
+      if (window.fakeRouter) {
+        this.$router.go(-1)
+      }
     },
     scrollTop () {
       window.scrollTo({

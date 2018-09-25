@@ -10,8 +10,7 @@
     :link="article['slug_' + $i18n.locale]"
     :date="article.date"
     :category="article.category"
-    :icon="article.icon"
-    :whithCategory="whithCategory" />
+    :icon="article.icon" />
   </div>
 </template>
 
@@ -22,6 +21,6 @@ export default {
   components: {
     'news-listing-item': NewsListingItem
   },
-  props: ['articles', 'whithCategory']
+  props: ['articles']
 }
 </script>

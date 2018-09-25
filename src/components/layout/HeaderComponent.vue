@@ -8,7 +8,7 @@
               <router-link tag="a" :to="'/' + lang" class="main-nav-logo"><img src="@/assets/images/logo-nav.png" alt=""></router-link>
             </div>
             <div class="col">
-              <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/buildings'">{{ $t('current_projects') }}</router-link></h3>
+              <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/current-buildings'">{{ $t('current_projects') }}</router-link></h3>
               <ul>
                 <li><a href="">Комплекс Бижу</a><router-link :to="'/' + lang">{{ $t('home') }}</router-link></li>
                 <li><a href="">Флора Бийч Резорт</a></li>

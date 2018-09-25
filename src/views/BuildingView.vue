@@ -1,11 +1,10 @@
 <template>
   <div class="main-content">
-    <mq-layout mq="md+" class="building-view-header"><navinner-component :navTitle="title" /></mq-layout>
+    <mq-layout mq="md+" class="building-view-header"><navinner-component :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
     <div class="building-apartments">
       <div class="img-box">
-        <img src="~@/assets/images/build-starlight.jpg" alt="">
-        <svg v-if="floors" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-          viewBox="0 0 552 555" style="enable-background:new 0 0 552 555;" xml:space="preserve">
+        <img :src="building.image" alt="">
+        <svg v-if="floors" width="1920" height="600">
           <a v-for="floor in floors" :key="floor.id" :xlink:href="'/' + $i18n.locale + '/floor/' + floor.id + '/' + floor['slug_' + $i18n.locale]" v-tooltip="{content: 'Floor ID: ' + floor.id}">
             <path class="st0" :d="floor.coords" />
           </a>
@@ -64,7 +63,7 @@
       </div>
       <div class="bottom-options">
         <div class="building-btn">
-          <div class="btn-box"><router-link :to="'/' + lang + '/building-inner'" class="btn">Информация за сградата</router-link></div>
+          <div class="btn-box"><router-link :to="'/' + lang + '/building/' + building['slug_' + $i18n.locale]" class="btn">Информация за сградата</router-link></div>
         </div>
         <div class="building-filter">
           <button class="filter-btn" @click="filterActive = !filterActive">
@@ -94,7 +93,6 @@ export default {
       apartmentsActive: false,
       filterActive: false,
       isFiltred: false,
-      title: 'Комплекс Бижу',
       rooms: [],
       priceFrom: 5000
     }
@@ -106,7 +104,10 @@ export default {
     ...mapState({
       apartments: state => state.apartments.all,
       floors: state => state.floors.all
-    })
+    }),
+    building () {
+      return this.$store.getters.getBuilding(this.$route.params.building)
+    }
   }
 }
 </script>
@@ -130,8 +131,8 @@ export default {
       width: 100%;
       height: 100%;
       position: absolute;
-      left: 0;
       top: 0;
+      left: 0;
       right: 0;
       bottom: 0;
       path,
@@ -267,7 +268,6 @@ export default {
   overflow: hidden;
   height: 100vh;
   position: relative;
-  background: url(../assets/images/building01.jpg);
   .building-btn {
     margin: auto 0 0 0;
   }

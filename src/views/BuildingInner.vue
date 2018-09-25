@@ -1,21 +1,19 @@
 <template>
   <div class="main-content">
     <mq-layout mq="md+"><navinner-component navigation="buildingNav" :navTitle="title" /></mq-layout>
-    <div class="inner-building">
+    <div class="inner-building" v-if="building">
       <div class="inner-building-header">
-        <mq-layout mq="sm"><h1 class="page-title">Комплекс Бижу</h1></mq-layout>
+        <mq-layout mq="sm"><h1 class="page-title">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
         <div class="main-img">
-          <img src="@/assets/images/build-starlight.jpg" alt="">
+          <img :src="building.image" alt="">
         </div>
-        <div class="btn-box"><router-link :to="'/' + lang + '/building-view'" class="btn">ВИЖ СХЕМАТА на блока</router-link></div>
+        <div class="btn-box"><router-link :to="'/' + lang + '/building-view/' + building['slug_' + $i18n.locale]" class="btn">ВИЖ СХЕМАТА на блока</router-link></div>
       </div>
       <div class="caption" id="about">
         <div class="title-box">
           <h2 class="title">За <br> сградата</h2>
         </div>
-        <div class="text">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos distinctio rerum explicabo dolore cupiditate laudantium? In illo, veniam fuga nam, amet sunt incidunt excepturi rerum rem et aperiam, error ea.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis architecto voluptatem nihil fugit debitis repellendus, molestiae, perferendis adipisci ex, hic voluptate possimus quasi? Excepturi, consequuntur reiciendis obcaecati neque, veniam nostrum!</p>
-        </div>
+        <div class="text" v-html="building['text_' + $i18n.locale]"></div>
       </div>
       <div class="about-complex">
         <div class="box-row">
@@ -161,7 +159,10 @@ export default {
     },
     ...mapState({
       articles: state => state.articles.all
-    })
+    }),
+    building () {
+      return this.$store.getters.getBuilding(this.$route.params.building)
+    }
   }
 }
 </script>

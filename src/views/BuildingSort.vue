@@ -5,12 +5,12 @@
       <swiper :options="swiperOptions">
         <swiper-slide v-for="building in buildings" :key="building.id" >
           <div class="building-item">
-            <div class="img-box"><a :href="building.link"><img :src="building.bg" alt=""></a></div>
+            <div class="img-box"><router-link :to="'/' + lang + '/building-view/' + building['slug_' + $i18n.locale]"><img :src="building.bg" alt=""></router-link></div>
             <div class="caption">
               <div class="title-box">
-                <h2 class="title"><a :href="building.link">{{ building.description }}</a></h2>
+                <h2 class="title"><router-link :to="'/' + lang + '/building-view/' + building['slug_' + $i18n.locale]">{{ building['titel_' + $i18n.locale] }}</router-link></h2>
                 <div class="location-info">{{ building.location }}</div>
-                <div class="btn-box"><a :href="building.link" class="btn">Виж</a></div>
+                <div class="btn-box"><router-link :to="'/' + lang + '/building-view/' + building['slug_' + $i18n.locale]" class="btn">Виж</router-link></div>
               </div>
             </div>
           </div>
@@ -50,6 +50,9 @@ export default {
     }
   },
   computed: {
+    lang () {
+      return this.$i18n.locale
+    },
     ...mapGetters({
       buildings: 'getSortedBuildings'
     })

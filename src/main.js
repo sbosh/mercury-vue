@@ -12,6 +12,8 @@ import VueMq from 'vue-mq'
 import VTooltip from 'v-tooltip'
 Vue.use(VTooltip)
 
+window.fakeRouter = false
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyDQU830d2yJlr3kJ3VvQpKTRWTRtF4gT7g'

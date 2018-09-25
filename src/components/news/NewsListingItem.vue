@@ -3,10 +3,6 @@
     <div class="date">{{ date }}</div>
     <div class="img-box">
       <router-link :to="'/' + $i18n.locale + '/article/' + id + '/' + link"><img :src="image" alt=""></router-link>
-      <div class="category" v-if="whithCategory">
-        <div class="icon"><img :src="icon" alt=""></div>
-        <div class="text">{{ category }}</div>
-      </div>
     </div>
     <div class="info-box">
       <h3 class="article-title"><router-link :to="'/' + $i18n.locale + '/article/' + id + '/' + link">{{ title }}</router-link></h3>
@@ -19,6 +15,6 @@
 <script>
 export default {
   name: 'news-listing-item',
-  props: ['id', 'title', 'description', 'date', 'image', 'link', 'icon', 'category', 'whithCategory']
+  props: ['id', 'title', 'description', 'date', 'image', 'link', 'icon', 'category']
 }
 </script>

@@ -14,7 +14,7 @@
             <img :src="article.image" alt="">
           </div>
           <div class="info-box">
-            <p v-html="article['annonce_' + $i18n.locale]"></p>
+            <p v-html="article['text_' + $i18n.locale]"></p>
           </div>
         </article>
         <div class="related-news">
@@ -90,6 +90,25 @@ export default {
   padding-top: 190px;
   position: relative;
   padding-right: 195px;
+  .info-box {
+    ul li {
+      margin-bottom: 8px;
+    }
+    ul li,
+    p {
+      color: #363636;
+      font-size: 17px;
+      line-height: 23px;
+      a {
+        color: #000;
+      }
+    }
+    h2, h3 ,h4 ,h5 ,h6 {
+      font-family: Montserrat;
+      color: #2c2c2c;
+      margin: 10px 0 15px 0;
+    }
+  }
   .nav-inner .header-title {
     margin: 0;
   }
