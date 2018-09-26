@@ -3,7 +3,7 @@
     <div class="contacts-page">
       <navinner-component :navTitle="contacts['title_' + $i18n.locale]"  />
       <div class="contacts-us">
-        <contact-form></contact-form>
+        <contact-form />
       </div>
       <div class="google-map">
         <div class="tabs">

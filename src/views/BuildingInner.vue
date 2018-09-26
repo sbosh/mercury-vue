@@ -1,13 +1,11 @@
 <template>
-  <div class="main-content">
+  <div class="main-content" v-if="building">
     <mq-layout mq="md+"><navinner-component navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
-    <div class="inner-building" v-if="building">
+    <div class="inner-building">
       <div class="inner-building-header">
         <mq-layout mq="sm"><h1 class="page-title">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
-        <div class="main-img">
-          <img :src="building.image" alt="">
-        </div>
-        <div class="btn-box"><router-link :to="'/' + lang + '/building-view/' + building['slug_' + $i18n.locale]" class="btn">ВИЖ СХЕМАТА на блока</router-link></div>
+        <div class="main-img"><img :src="building.image" alt=""></div>
+        <div v-if="building.status == 1" class="btn-box"><router-link :to="'/' + lang + '/building-view/' + building['slug_' + $i18n.locale]" class="btn">ВИЖ СХЕМАТА на блока</router-link></div>
       </div>
       <div class="caption" id="about">
         <div class="title-box">
@@ -393,8 +391,10 @@ export default {
   }
 }
 .gallery-building {
+  .swiper-container {
+    padding-right: 200px;
+  }
   .swiper-slide {
-    width: auto;
     img {
       display: block;
       max-width: 100%;

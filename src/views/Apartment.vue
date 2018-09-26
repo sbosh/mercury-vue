@@ -54,7 +54,12 @@
             <div class="text">Статус</div>
             <div class="status available">Свободен</div>
           </mq-layout>
-          <a href="" class="btn">Изпрати запитване</a>
+          <a @click="contactFormActive = !contactFormActive" class="btn">Изпрати запитване</a>
+          <div class="popup" v-bind:class="{ active: contactFormActive }" >
+            <h2 class="popup-title">Направи запитване</h2>
+            <div class="close" @click="contactFormActive = false">Затвори</div>
+            <contact-form />
+          </div>
           <div class="donwload-pdf">
             <a href="" class="btn-pdf">Изтегли PDF на апартамента</a>
           </div>
@@ -72,8 +77,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import ContactForm from '@/components/contactForm/ContactForm'
 export default {
   name: 'apartment',
+  components: { ContactForm },
+  data () {
+    return {
+      contactFormActive: false
+    }
+  },
   metaInfo () {
     return {
       title: this.apartment ? this.apartment['seo_title_' + this.$i18n.locale] : ''
@@ -85,12 +98,74 @@ export default {
     },
     apartment: function () {
       return this.$store.getters.getApartment(Number(this.$route.params.id), this.$route.params.slug)
-    }
+    },
+    ...mapState({
+      contacts: state => state.pages.contacts
+    })
   }
 }
 </script>
 
 <style lang="scss">
+.popup {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(#000, .5);
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+  overflow: auto;
+  transition: all .7s;
+  transform: translateX(-100%);
+  .close {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 30px;
+    cursor: pointer;
+    position: fixed;
+    right: 0;
+    top: 0;
+  }
+  .popup-title {
+    font-size: 24px;
+    text-align: center;
+    color: #fff;
+    font-weight: 500;
+    margin-top: 3%;
+  }
+  form {
+    margin: 5% 10%;
+    background: #fff;
+    padding: 5%;
+    transform: translateY(100%);
+    transition-delay: 1s;
+    transition-property: all;
+    transition-duration: .7s;
+    h3 {
+      color: #2c2c2c;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      margin-top: 20px;
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+  }
+  &.active {
+    z-index: 99999;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    form {
+      transform: translateY(0);
+    }
+  }
+}
 .apartment-info {
   display: flex;
   justify-content: center;

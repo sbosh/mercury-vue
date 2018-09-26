@@ -12,4 +12,14 @@ export default class BuildingsService {
     return this.http.get('/buildings/current')
       .catch((error) => { throw new Error(error) })
   }
+
+  getFutureBuildings () {
+    return this.http.get('/buildings/future')
+      .catch((error) => { throw new Error(error) })
+  }
+
+  getFinishedBuildings () {
+    return this.http.get('/buildings/finished')
+      .catch((error) => { throw new Error(error) })
+  }
 }

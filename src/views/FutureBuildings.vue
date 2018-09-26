@@ -1,17 +1,21 @@
 <template>
   <div class="main-content">
     <mq-layout mq="m+">
-      <navinner-component :navTitle="this.futureBuildings['title_' + this.$i18n.locale]" />
+      <navinner-component :navTitle="this.futureBuildingsPage['title_' + this.$i18n.locale]" />
       <div class="buildings building-sort">
         <swiper :options="swiperOptions">
-          <swiper-slide v-for="building in buildings" :key="building.id" >
+          <swiper-slide v-for="building in future" :key="building.id" >
             <div class="building-item">
-              <div class="img-box"><a :href="building.link"><img :src="building.bg" alt=""></a></div>
+              <div class="img-box">
+                <router-link :to="'/' + lang + '/building/' + building['slug_' + $i18n.locale]">
+                  <img :src="building.thumb" alt="">
+                </router-link>
+              </div>
               <div class="caption">
                 <div class="title-box">
-                  <h2 class="title"><a :href="building.link">{{ building.description }}</a></h2>
-                  <div class="location-info">{{ building.location }}</div>
-                  <div class="btn-box"><a :href="building.link" class="btn">Виж</a></div>
+                  <h2 class="title"><router-link :to="'/' + lang + '/building/' + building['slug_' + $i18n.locale]">{{ building['annonce_' + $i18n.locale] }}</router-link></h2>
+                  <div class="location-info">{{ building['annonce_' + $i18n.locale] }}</div>
+                  <div class="btn-box"><router-link :to="'/' + lang + '/building/' + building['slug_' + $i18n.locale]" class="btn">Виж</router-link></div>
                 </div>
               </div>
             </div>
@@ -21,13 +25,13 @@
       </div>
     </mq-layout>
     <mq-layout mq="sm">
-      <futurebuildings-mobile :pageTitle="this.futureBuildings['title_' + this.$i18n.locale]" />
+      <futurebuildings-mobile :pageTitle="this.futureBuildingsPage['title_' + this.$i18n.locale]" />
     </mq-layout>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapState } from 'vuex'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import FutureBuildingsMobile from '@/components/mobile/FutureBuildingsMobile'
 export default {
@@ -57,11 +61,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      buildings: 'getSortedBuildings'
-    }),
+    lang () {
+      return this.$i18n.locale
+    },
     ...mapState({
-      futureBuildings: state => state.pages.futureBuildings
+      futureBuildingsPage: state => state.pages.futureBuildingsPage,
+      future: state => state.buildings.future
     })
   }
 }

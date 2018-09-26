@@ -42,6 +42,8 @@ new Vue({
     this.$store.cache.dispatch('fetchApartments')
     this.$store.cache.dispatch('fetchBuildings')
     this.$store.cache.dispatch('fetchCurrentBuildings')
+    this.$store.cache.dispatch('fetchFutureBuildings')
+    this.$store.cache.dispatch('fetchFinishedBuildings')
     this.$store.cache.dispatch('fetchFloors')
     this.$store.cache.dispatch('fetchHomePage')
     this.$store.cache.dispatch('fetchNewsPage')

@@ -1,8 +1,8 @@
 <template>
   <div class="main-content">
     <nav-component />
-    <mq-layout mq="md+"><buildings-carousel :pageTitle="this.currentBuildings['title_' + this.$i18n.locale]" /></mq-layout>
-    <mq-layout mq="sm"><buildings-mobile :pageTitle="this.currentBuildings['title_' + this.$i18n.locale]" /></mq-layout>
+    <mq-layout mq="md+"><buildings-carousel :pageTitle="this.currentBuildingsPage['title_' + this.$i18n.locale]" /></mq-layout>
+    <mq-layout mq="sm"><buildings-mobile :pageTitle="this.currentBuildingsPage['title_' + this.$i18n.locale]" /></mq-layout>
   </div>
 </template>
 
@@ -25,12 +25,12 @@ export default {
   },
   metaInfo () {
     return {
-      title: this.currentBuildings ? this.currentBuildings['seo_title_' + this.$i18n.locale] : ''
+      title: this.currentBuildingsPage ? this.currentBuildingsPage['seo_title_' + this.$i18n.locale] : ''
     }
   },
   computed: {
     ...mapState({
-      currentBuildings: state => state.buildings.current
+      currentBuildingsPage: state => state.buildings.current
     })
   }
 }

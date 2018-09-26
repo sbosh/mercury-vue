@@ -9,7 +9,7 @@ const state = {
 
 const actions = {
   fetchArticles ({ commit }) {
-    articleService.getArticles('/posts/mitko').then(({ data }) => commit('setArticles', data.data))
+    articleService.getArticles('/posts').then(({ data }) => commit('setArticles', data.data))
   }
 }
 

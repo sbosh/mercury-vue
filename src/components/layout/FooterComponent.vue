@@ -4,9 +4,9 @@
     <mq-layout mq="md+">
       <nav>
         <ul class="footer-top-nav">
-          <li><a href="">Настоящи проекти</a></li>
-          <li><a href="">Завършени проекти</a></li>
-          <li><a href="">Бъдещи проекти</a></li>
+          <router-link tag="li" :to="'/' + lang + '/current-buildings'"><a href="">Настоящи проекти</a></router-link>
+          <router-link tag="li" :to="'/' + lang + '/finished-buildings'"><a href="">Завършени проекти</a></router-link>
+          <router-link tag="li" :to="'/' + lang + '/future-buildings'"><a href="">Бъдещи проекти</a></router-link>
         </ul>
         <ul class="footer-second-nav">
           <router-link tag="li" :to="'/' + lang + '/about'"><a href="">За компанията</a></router-link>
