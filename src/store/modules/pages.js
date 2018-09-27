@@ -6,7 +6,7 @@ const pagesService = new PagesService(HTTP)
 const state = {
   home: [],
   news: [],
-  currentBuildings: [],
+  currentBuildingsPage: [],
   futureBuildingsPage: [],
   finishedBuildingsPage: [],
   contacts: [],

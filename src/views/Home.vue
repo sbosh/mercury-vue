@@ -14,9 +14,9 @@
       </div>
     </div>
     <mq-layout mq="md+">
-      <div class="news-box">
+      <div class="news-box" v-for="article in articles" :key="article.id" v-if="article.show_in_homepage == 1">
         <article class="news">
-          <h3><a href=""><span class="icon"></span>Сградата Лазур в ж.к Младост 3 получи Акт 16 <span class="text">Прочети повече</span></a></h3>
+          <h3><router-link :to="'/' + $i18n.locale + '/article/' + article.id + '/' + article['slug_' + $i18n.locale]"><span class="icon"></span>{{ article['title_' + $i18n.locale] }}<span class="text">Прочети повече</span></router-link></h3>
         </article>
       </div>
     </mq-layout>
@@ -45,7 +45,8 @@ export default {
   },
   computed: {
     ...mapState({
-      home: state => state.pages.home
+      home: state => state.pages.home,
+      articles: state => state.articles.all
     }),
     lang () {
       return this.$i18n.locale

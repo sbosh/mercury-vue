@@ -1,7 +1,7 @@
 <template>
   <div class="buildings-carousel">
     <swiper :options="this.getSwiperOptions(this.home)">
-      <swiper-slide v-for="building in current" :key="building.id" >
+      <swiper-slide v-for="building in current" :key="building.id">
         <div class="bg" :style="{ 'background-image': 'url(' + building.image + ')' }">
           <div class="caption" v-if="!home">
             <div class="title-box">
@@ -11,7 +11,7 @@
         </div>
       </swiper-slide>
       <div class="buildings-list" v-if="!home">
-        <h3>{{ currentBuildings['title_' + $i18n.locale] }}</h3>
+        <h3>{{ currentBuildingsPage['title_' + $i18n.locale] }}</h3>
         <div class="buildings-titles">
           <div class="building-title" v-for="(building, index) in current" :key="building.id">
             <router-link :to="'/' + lang + '/building/' + building['slug_' + $i18n.locale]"><span>{{ index + 1 }}</span> {{ building['title_' + $i18n.locale] }}</router-link>
@@ -64,7 +64,7 @@ export default {
       return this.$i18n.locale
     },
     ...mapState({
-      currentBuildings: state => state.pages.currentBuildings,
+      currentBuildingsPage: state => state.pages.currentBuildingsPage,
       current: state => state.buildings.current
     })
   }
