@@ -7,15 +7,15 @@
           <swiper-slide v-for="building in finished" :key="building.id" >
             <div class="building-item">
               <div class="img-box">
-                <router-link :to="'/' + lang + '/building/' + building['slug_' + $i18n.locale]">
+                <router-link :to="'/' + lang + '/' + building['slug_' + $i18n.locale]">
                   <img :src="building.thumb" alt="">
                 </router-link>
               </div>
               <div class="caption">
                 <div class="title-box">
-                  <h2 class="title"><router-link :to="'/' + lang + '/building/' + building['slug_' + $i18n.locale]">{{ building['annonce_' + $i18n.locale] }}</router-link></h2>
+                  <h2 class="title"><router-link :to="'/' + lang + '/' + building['slug_' + $i18n.locale]">{{ building['annonce_' + $i18n.locale] }}</router-link></h2>
                   <div class="location-info">{{ building['annonce_' + $i18n.locale] }}</div>
-                  <div class="btn-box"><router-link :to="'/' + lang + '/building/' + building['slug_' + $i18n.locale]" class="btn">Виж</router-link></div>
+                  <div class="btn-box"><router-link :to="'/' + lang + '/' + building['slug_' + $i18n.locale]" class="btn">Виж</router-link></div>
                 </div>
               </div>
             </div>
@@ -39,6 +39,11 @@ export default {
   components: {
     'navinner-component': NavinnerComponent,
     'finishedbuildings-mobile': FinishedBuildingsMobile
+  },
+  metaInfo () {
+    return {
+      title: this.finishedBuildingsPage ? this.finishedBuildingsPage['seo_title_' + this.$i18n.locale] : ''
+    }
   },
   data () {
     return {

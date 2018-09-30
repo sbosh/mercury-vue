@@ -59,13 +59,13 @@ let router = new Router({
       component: FinishedBuildings
     },
     {
-      path: '/:lang/building/:building',
+      path: '/:lang/:building',
       name: 'building-inner',
       component: BuildingInner,
       meta: { transitionName: 'slide' }
     },
     {
-      path: '/:lang/building-view/:building',
+      path: '/:lang/:building/view',
       name: 'building-view',
       component: BuildingView,
       meta: { transitionName: 'slide' }

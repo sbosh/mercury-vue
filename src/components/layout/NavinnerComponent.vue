@@ -1,7 +1,7 @@
 <template>
   <headroom>
     <nav class="nav-inner">
-      <mq-layout mq="md+"><router-link :to="'/' + lang" class="inner-logo"><img src="@/assets/images/logo-white.svg" class="logo" alt=""></router-link></mq-layout>
+      <mq-layout mq="md+"><router-link :to="'/' + lang" class="inner-logo"><img src="@/assets/images/logo-inner.svg" class="logo" alt=""></router-link></mq-layout>
       <div class="header-title"><h1 class="title">{{ navTitle }}</h1></div>
       <mq-layout mq="md+" class="mr-auto">
         <inner-building-nav v-if="navigation === 'buildingNav'" />

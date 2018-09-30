@@ -63,7 +63,7 @@
       </div>
       <div class="bottom-options">
         <div class="building-btn">
-          <div class="btn-box"><router-link :to="'/' + lang + '/building/' + building['slug_' + $i18n.locale]" class="btn">Информация за сградата</router-link></div>
+          <div class="btn-box"><router-link :to="'/' + lang + '/' + building['slug_' + $i18n.locale]" class="btn">Информация за сградата</router-link></div>
         </div>
         <div class="building-filter">
           <button class="filter-btn" @click="filterActive = !filterActive">

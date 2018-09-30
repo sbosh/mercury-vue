@@ -5,7 +5,7 @@
         <div class="bg" :style="{ 'background-image': 'url(' + building.image + ')' }">
           <div class="caption" v-if="!home">
             <div class="title-box">
-              <h2 class="title"><router-link :to="'/' + lang + '/building/' + building['slug_' + $i18n.locale]">{{ building['annonce_' + $i18n.locale] }}</router-link></h2>
+              <h2 class="title"><router-link :to="'/' + lang + '/' + building['slug_' + $i18n.locale]">{{ building['annonce_' + $i18n.locale] }}</router-link></h2>
             </div>
           </div>
         </div>
@@ -14,7 +14,7 @@
         <h3>{{ currentBuildingsPage['title_' + $i18n.locale] }}</h3>
         <div class="buildings-titles">
           <div class="building-title" v-for="(building, index) in current" :key="building.id">
-            <router-link :to="'/' + lang + '/building/' + building['slug_' + $i18n.locale]"><span>{{ index + 1 }}</span> {{ building['title_' + $i18n.locale] }}</router-link>
+            <router-link :to="'/' + lang + '/' + building['slug_' + $i18n.locale]"><span>{{ index + 1 }}</span> {{ building['title_' + $i18n.locale] }}</router-link>
           </div>
         </div>
         <div class="buttons">

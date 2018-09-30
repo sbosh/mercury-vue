@@ -5,7 +5,7 @@
       <div class="inner-building-header">
         <mq-layout mq="sm"><h1 class="page-title">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
         <div class="main-img"><img :src="building.image" alt=""></div>
-        <div v-if="building.status == 1" class="btn-box"><router-link :to="'/' + lang + '/building-view/' + building['slug_' + $i18n.locale]" class="btn">ВИЖ СХЕМАТА на блока</router-link></div>
+        <div v-if="building.status == 1" class="btn-box"><router-link :to="'/' + lang + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">ВИЖ СХЕМАТА на блока</router-link></div>
       </div>
       <div class="caption" id="about">
         <div class="title-box">
@@ -552,12 +552,13 @@ export default {
   padding: 130px 0 0 195px;
   margin-bottom: 140px;
   .btn-box {
-    margin-top: -40px;
+    margin-top: -50px;
     float: right;
     .btn {
       background-color: #fa6a02;
       border-color: #fa6a02;
       margin-right: 90px;
+      padding: 42px 30px;
     }
   }
   .main-img img {
