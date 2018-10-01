@@ -5,7 +5,7 @@
       <div class="img-box">
         <img :src="building.image" alt="">
         <svg v-if="floors" width="1920" height="600">
-          <a v-for="floor in floors" :key="floor.id" :xlink:href="'/' + $i18n.locale + '/floor/' + floor.id + '/' + floor['slug_' + $i18n.locale]" v-tooltip="{content: 'Floor ID: ' + floor.id}">
+          <a v-for="floor in floors" :key="floor.id" :xlink:href="'/' + $i18n.locale + '/floor/' + floor['slug_' + $i18n.locale] + '/' + floor.id" v-tooltip="{content: 'Floor ID: ' + floor.id}">
             <path class="st0" :d="floor.coords" />
           </a>
         </svg>
@@ -63,7 +63,7 @@
       </div>
       <div class="bottom-options">
         <div class="building-btn">
-          <div class="btn-box"><router-link :to="'/' + lang + '/' + building['slug_' + $i18n.locale]" class="btn">Информация за сградата</router-link></div>
+          <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">Информация за сградата</router-link></div>
         </div>
         <div class="building-filter">
           <button class="filter-btn" @click="filterActive = !filterActive">

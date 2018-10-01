@@ -13,6 +13,11 @@ export default class BuildingsService {
       .catch((error) => { throw new Error(error) })
   }
 
+  getBuildingById (id) {
+    return this.http.get('/building/' + id)
+      .catch((error) => { throw new Error(error) })
+  }
+
   getFutureBuildings () {
     return this.http.get('/buildings/future')
       .catch((error) => { throw new Error(error) })

@@ -5,7 +5,7 @@
       <div class="inner-building-header">
         <mq-layout mq="sm"><h1 class="page-title">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
         <div class="main-img"><img :src="building.image" alt=""></div>
-        <div v-if="building.status == 1" class="btn-box"><router-link :to="'/' + lang + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">ВИЖ СХЕМАТА на блока</router-link></div>
+        <div v-if="building.status == 1" class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">ВИЖ СХЕМАТА на блока</router-link></div>
       </div>
       <div class="caption" id="about">
         <div class="title-box">
@@ -16,7 +16,7 @@
       <div class="about-complex">
         <div class="box-row">
           <div class="box">
-            <div class="title">Име на комплекса</div>
+            <div class="title">{{ $t('company_name') }}</div>
             <div class="text">{{ building['title_' + $i18n.locale] }}</div>
           </div>
           <div class="box">
@@ -39,9 +39,9 @@
       </div>
       <div class="gallery-building" id="gallery">
         <swiper :options="swiperOption">
-          <swiper-slide><img src="@/assets/images/gallery01.jpg" alt=""><div class="progress-bar"></div></swiper-slide>
-          <swiper-slide><img src="@/assets/images/gallery02.jpg" alt=""><div class="progress-bar"></div></swiper-slide>
-          <swiper-slide><img src="@/assets/images/gallery01.jpg" alt=""><div class="progress-bar"></div></swiper-slide>
+          <swiper-slide v-for="(image, key) in building.gallery" :key="key">
+            <img :src="image" alt=""><div class="progress-bar"></div>
+          </swiper-slide>
         </swiper>
       </div>
       <div class="location" id="location">
@@ -156,11 +156,12 @@ export default {
       return this.$i18n.locale
     },
     ...mapState({
-      articles: state => state.articles.all
-    }),
-    building () {
-      return this.$store.getters.getBuilding(this.$route.params.building)
-    }
+      articles: state => state.articles.all,
+      building: state => state.buildings.building
+    })
+  },
+  created () {
+    this.$store.cache.dispatch('fetchBuildingById', this.$route.params.id)
   }
 }
 </script>

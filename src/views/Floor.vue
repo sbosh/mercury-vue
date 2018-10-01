@@ -32,12 +32,12 @@
       </div>
     </mq-layout>
     <div class="floor-info">
-      <swiper :options="swiperOptions">
+      <swiper :options="swiperOptions()">
         <swiper-slide v-for="floor in floors" :key="floor.id">
           <div class="img-box"><img :src="floor.image" alt=""></div>
         </swiper-slide>
       </swiper>
-      <div class="floor-paggination"></div>
+      <div class="swiper-pagination"></div>
     </div>
     <mq-layout mq="sm" class="buttons-mobile">
       <a href="" class="btn">Към сградата</a>
@@ -49,26 +49,6 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'floor',
-  data () {
-    return {
-      swiperOptions: {
-        slidesPerView: 'auto',
-        spaceBetween: 0,
-        effect: 'fade',
-        speed: 1000,
-        loop: true,
-        mousewheel: true,
-        pagination: {
-          el: '.floor-paggination',
-          clickable: true,
-          dynamicBullets: true,
-          renderBullet (index, className) {
-            return `<div class="${className}"><span>${index + 1}<div class="text">етаж</div></span></div>`
-          }
-        }
-      }
-    }
-  },
   computed: {
     lang () {
       return this.$i18n.locale
@@ -76,18 +56,39 @@ export default {
     ...mapGetters({
       floors: 'getFloors'
     })
+  },
+  methods: {
+    swiperOptions () {
+      const $this = this
+      return {
+        slidesPerView: 'auto',
+        spaceBetween: 0,
+        effect: 'fade',
+        speed: 1000,
+        loop: true,
+        mousewheel: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          dynamicBullets: true,
+          renderBullet: function (index, className) {
+            return '<span class="' + className + '">' + (index + 1) + ' <span class="floor">' + $this.$t('floor') + '</span></span>'
+          }
+        }
+      }
+    }
   }
 }
 </script>
 
 <style lang="scss">
 .floor-info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   text-align: center;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   .img-box {
     padding-right: 100px;
     visibility: hidden;
@@ -116,9 +117,57 @@ export default {
       opacity: 1;
     }
   }
+  .swiper-pagination.swiper-pagination-bullets {
+    right: 0;
+    top: 50%;
+    transform: translate3d(0, 0, 0) rotate(90deg) translateX(-52px);
+    white-space: nowrap;
+    padding-top: 20px;
+    .swiper-pagination-bullet {
+      transform: scale(1) rotate(-90deg);
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 0;
+      border: 1px solid transparent;
+      background: transparent;
+      margin: 0 10px;
+      text-align: center;
+      line-height: 100px;
+      box-shadow: none;
+      outline: none;
+      font-size: 64px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #000000;
+      opacity: 1;
+      .floor {
+        opacity: 0;
+        transform: rotate(90deg) translateY(-50%);
+        color: #8d8d8d;
+        font-family: "Fira Sans";
+        font-size: 11px;
+        height: 15px;
+        line-height: 15px;
+        font-weight: 500;
+        text-transform: uppercase;
+        position: absolute;
+        right: -22px;
+        top: 50%;
+        margin-top: -7px;
+      }
+      &.swiper-pagination-bullet-active {
+        color: #fa6a02;
+        border: 1px solid #fa6a02;
+        .floor {
+          opacity: 1;
+        }
+      }
+    }
+  }
   @media screen and(max-width: 768px) {
     padding: 25px;
-    flex-direction: column;
+    display: block;
     height: auto;
     .img-box {
       padding-right: 0;
@@ -132,90 +181,36 @@ export default {
         margin: auto;
       }
     }
-  }
-}
-.floor-paggination {
-  position: absolute;
-  bottom: 0;
-  right: 100px;
-  z-index: 999;
-  text-align: center;
-  margin: auto !important;
-  transform: rotate(90deg) translateX(-50%);
-  padding: 30px 0 0 0;
-  .swiper-pagination-bullet {
-    color: #000;
-    font-size: 48px;
-    font-weight: 700;
-    text-transform: uppercase;
-    width: 86px;
-    height: 100px;
-    line-height: 86px;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    background-color: transparent;
-    outline: none;
-    border: 1px solid transparent;
-    oveflow: visible;
-    span {
-      transform: rotate(-90deg);
-      display: block;
-      position: absolute;
-      left: -7px;
-      right: -7px;
-      top: 7px;
-      bottom: 7px;
-      .text {
-        position: absolute;
-        right: -30px;
-        transform: rotate(90deg);
-        color: #8d8d8d;
-        font-family: "Fira Sans";
-        font-size: 11px;
-        font-weight: 500;
-        text-transform: uppercase;
-        opacity: 0;
-        transition: all .8s;
-      }
-    }
-    &.swiper-pagination-bullet-active {
-      color: #fa6a02;
-      border-color: #fa6a02;
-      span {
-        .text {
-          opacity: 1;
-          top: 0;
+    .swiper-pagination.swiper-pagination-bullets {
+      position: relative;
+      right: inherit;
+      top: inherit;
+      transform: translate3d(0, 0, 0) rotate(0) translateX(0);
+      padding-top: 20px;
+      .swiper-pagination-bullet {
+        transform: scale(1) rotate(0);
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 24px;
+        margin: 0 5px;
+        .floor {
+          opacity: 0;
+          transform: rotate(0) translateY(0);
+          color: #8d8d8d;
+          font-family: "Fira Sans";
+          font-size: 11px;
+          height: 15px;
+          line-height: 15px;
+          right: 0;
+          left: 0;
+          text-align: center;
+          top: -20px;
+          margin-top: 0;
         }
-      }
-    }
-  }
-  @media screen and(max-width: 768px) {
-    transform: rotate(0) translate(0);
-    position: relative;
-    bottom: inherit;
-    right: inherit;
-    margin: inherit !important;
-    .swiper-pagination-bullet {
-      width: 100px;
-      height: 86px;
-      span {
-        transform: rotate(0);
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        .text {
-          transform: rotate(0) translateX(-50%);
-          right: inherit;
-          left: 50%;
-          line-height: 24px;
-        }
-      }
-      &.swiper-pagination-bullet-active {
-        span {
-          .text {
-            top: -30px;
+        &.swiper-pagination-bullet-active {
+          .floor {
+            opacity: 1;
           }
         }
       }

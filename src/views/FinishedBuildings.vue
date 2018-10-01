@@ -13,7 +13,7 @@
               </div>
               <div class="caption">
                 <div class="title-box">
-                  <h2 class="title"><router-link :to="'/' + lang + '/' + building['slug_' + $i18n.locale]">{{ building['annonce_' + $i18n.locale] }}</router-link></h2>
+                  <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['annonce_' + $i18n.locale] }}</router-link></h2>
                   <div class="location-info">{{ building['annonce_' + $i18n.locale] }}</div>
                   <div class="btn-box"><router-link :to="'/' + lang + '/' + building['slug_' + $i18n.locale]" class="btn">Виж</router-link></div>
                 </div>

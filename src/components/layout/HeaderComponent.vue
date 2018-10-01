@@ -11,7 +11,7 @@
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/current-buildings'">{{ $t('current_projects') }}</router-link></h3>
               <ul>
                 <li v-for="building in current" :key="building.id" >
-                  <router-link :to="'/' + lang + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
+                  <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
                 </li>
               </ul>
               <h3><router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link></h3>
@@ -44,8 +44,8 @@
             </div>
           </div>
           <ul class="lng">
-            <li v-if="lang === 'bg'" ><a href="#!" @click="changeLang('en', $event)">en</a></li>
-            <li v-else><a href="#!" @click="changeLang('bg', $event)">bg</a></li>
+            <li v-if="lang === 'bg'" ><a href="" @click="changeLang('en', $event)">en</a></li>
+            <li v-else><a href="" @click="changeLang('bg', $event)">bg</a></li>
             <li class="imigix">Created by Imigix</li>
           </ul>
         </div>

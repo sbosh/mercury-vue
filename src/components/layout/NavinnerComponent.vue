@@ -9,7 +9,7 @@
         <inner-news-nav v-if="navigation === 'newsNav'" />
         <inner-news-breadcrumbs v-if="navigation === 'newsBreadcrumbs'" />
       </mq-layout>
-      <div class="back-btn" @click="routeBack()">Назад</div>
+      <div class="back-btn" @click="routeBack()">{{ $t('back') }}</div>
       <div class="scroll-top" @click="scrollTop()"></div>
     </nav>
   </headroom>

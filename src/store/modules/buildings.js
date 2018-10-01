@@ -6,6 +6,7 @@ const buildingsService = new BuildingsService(HTTP)
 const state = {
   all: [],
   current: [],
+  building: [],
   future: [],
   finished: []
 }
@@ -16,6 +17,9 @@ const actions = {
   },
   fetchCurrentBuildings ({ commit }) {
     buildingsService.getCurrentBuildings().then(({ data }) => commit('setCurrentBuildings', data.data))
+  },
+  fetchBuildingById ({ commit }, id) {
+    buildingsService.getBuildingById(id).then(({ data }) => commit('setBuildingById', data.data))
   },
   fetchFutureBuildings ({ commit }) {
     buildingsService.getFutureBuildings().then(({ data }) => commit('setFutureBuildings', data.data))
@@ -43,6 +47,9 @@ const mutations = {
   },
   setCurrentBuildings (state, current) {
     state.current = current
+  },
+  setBuildingById (state, building) {
+    state.building = building
   },
   setFutureBuildings (state, future) {
     state.future = future

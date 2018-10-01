@@ -1,17 +1,14 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import axios from 'axios'
-import messages from '@/locales'
+import TranslationService from '../services/TranslationsService'
+import HTTP from '@/api/http'
 
 Vue.use(VueI18n)
 
-export const i18n = new VueI18n({
-  locale: 'bg',
-  fallbackLocale: 'bg',
-  messages
-})
+export const i18n = new VueI18n()
 
-const loadedLanguages = ['bg']
+const loadedLanguages = []
 
 function setI18nLanguage (lang) {
   i18n.locale = lang
@@ -19,16 +16,23 @@ function setI18nLanguage (lang) {
   document.querySelector('html').setAttribute('lang', lang)
   return lang
 }
+let translationService = new TranslationService(HTTP)
 export function loadLanguageAsync (lang) {
   if (i18n.locale !== lang) {
     if (!loadedLanguages.includes(lang)) {
-      return new Promise(function (resolve, reject) {
-        import(`@/locales/${lang}`).then(msgs => {
-          i18n.setLocaleMessage(lang, msgs.default)
+      translationService.getTranslations(lang)
+        .then(({ data }) => {
+          i18n.setLocaleMessage(lang, data.data[0])
           loadedLanguages.push(lang)
-          resolve(setI18nLanguage(lang))
+          setI18nLanguage(lang)
         })
-      })
+      // return new Promise(function (resolve, reject) {
+      //   import(`@/locales/${lang}`).then(msgs => {
+      //     i18n.setLocaleMessage(lang, msgs.default)
+      //     loadedLanguages.push(lang)
+      //     resolve(setI18nLanguage(lang))
+      //   })
+      // })
     }
     return Promise.resolve(setI18nLanguage(lang))
   }

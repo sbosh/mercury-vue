@@ -1,10 +1,10 @@
 <template>
   <ul>
-    <li><a href="#about">$t За сградата</a></li>
-    <li><a href="#gallery">$t Галерия</a></li>
-    <li><a href="#location">$t Локация</a></li>
-    <li><a href="#news">$t Новини</a></li>
-    <li class="btn-box"><a href="" class="btn">$t Виж схемата на блока</a></li>
+    <li><a href="#about">{{ $t('about_building') }}</a></li>
+    <li><a href="#gallery">{{ $t('gallery') }}</a></li>
+    <li><a href="#location">{{ $t('location') }}</a></li>
+    <li><a href="#news">{{ $t('news') }}</a></li>
+    <li class="btn-box"><a href="" class="btn">{{ $t('views_scheme') }}</a></li>
   </ul>
 </template>
 
