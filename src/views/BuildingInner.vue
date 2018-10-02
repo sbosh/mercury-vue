@@ -5,11 +5,11 @@
       <div class="inner-building-header">
         <mq-layout mq="sm"><h1 class="page-title">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
         <div class="main-img"><img :src="building.image" alt=""></div>
-        <div v-if="building.status == 1" class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">ВИЖ СХЕМАТА на блока</router-link></div>
+        <div v-if="building.status == 1" class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">{{ $t('views_scheme') }}</router-link></div>
       </div>
       <div class="caption" id="about">
         <div class="title-box">
-          <h2 class="title">За <br> сградата</h2>
+          <h2 class="title" v-html="$t('about_building')"></h2>
         </div>
         <div class="text" v-html="building['text_' + $i18n.locale]"></div>
       </div>
@@ -20,19 +20,19 @@
             <div class="text">{{ building['title_' + $i18n.locale] }}</div>
           </div>
           <div class="box">
-            <div class="title">Етажи на сградата</div>
+            <div class="title">{{ $t('floors_count') }}</div>
             <div class="text">6</div>
           </div>
           <div class="box">
-            <div class="title">Брой апартаменти</div>
+            <div class="title">{{ $t('apartments_count') }}</div>
             <div class="text">87</div>
           </div>
           <div class="box">
-            <div class="title">Свободни апартаменти</div>
+            <div class="title">{{ $t('free_apartments') }}</div>
             <div class="text">32</div>
           </div>
           <div class="box">
-            <div class="title">Година на завършване</div>
+            <div class="title">{{ $t('finished_date') }}</div>
             <div class="text">2019</div>
           </div>
         </div>
@@ -47,7 +47,7 @@
       <div class="location" id="location">
         <div class="caption">
           <div class="title-box">
-            <h2 class="title">За<br> локацията</h2>
+            <h2 class="title" v-html="$t('about_location')"></h2>
           </div>
         </div>
         <div class="box-row">
@@ -79,19 +79,19 @@
       </div>
       <div class="map">
         <div class="img-box">
-          <a href="" class="btn">бул. „Александър Малинов“ <span>ЗАВЕДИ МЕ НА АДРЕСА</span></a>
+          <a href="" class="btn">бул. „Александър Малинов“ <span>{{ $t('to_the_location') }}</span></a>
           <img src="@/assets/images/map.jpg" alt="">
-          <div class="btn-box"><a href="" class="btn">Виж картата</a></div>
+          <div class="btn-box"><a href="" class="btn">{{ $t('see_map') }}</a></div>
         </div>
       </div>
       <div class="news-inner" id="news">
-        <div class="title">Новини</div>
+        <div class="title">{{ $t('news') }}</div>
         <div class="news-swiper">
           <news-listing-swiper :articles="articles" />
         </div>
       </div>
       <div class="next-building">
-        <div class="text">Следваща сграда</div>
+        <div class="text">{{ $t('next_building') }}</div>
         <h2 class="title"><a href="">Комплекс Меркурий Плаза</a></h2>
         <div class="img-box"><a href=""><img src="@/assets/images/next-building.jpg" alt=""></a></div>
       </div>

@@ -29,7 +29,6 @@ const getters = {
   },
   getApartment (state) {
     return (id, slug) => {
-      console.log(id, slug)
       return state.all.find(apartment => apartment.id === id && apartment.slug_en === slug) ||
         state.all.find(apartment => apartment.id === id && apartment.slug_bg === slug)
     }

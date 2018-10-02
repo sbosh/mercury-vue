@@ -10,7 +10,7 @@
           <ul class="nav-tabs">
             <li class="active" @click="tabActive($event, 'tab1')"><a href="">Sofia</a>
               <div class="dropdown">
-                <div class="address">Адрес</div>
+                <div class="address">{{ $t('address') }}</div>
                 <div class="text">София, ул. „Николай Лилиев“ 14</div>
                 <br>
                 <div class="address">Консултант брокер</div>
@@ -21,7 +21,7 @@
             </li>
             <li @click="tabActive($event, 'tab2')"><a href="">Sunny Beach</a>
               <div class="dropdown">
-                <div class="address">Адрес</div>
+                <div class="address">{{ $t('address') }}</div>
                 <div class="text">София, ул. „Николай Лилиев“ 14</div>
                 <br>
                 <div class="address">Консултант брокер</div>

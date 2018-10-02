@@ -21,7 +21,7 @@
         <div class="close" @click="filterActive = false"></div>
         <div class="filter-row">
           <div class="filter-box">
-            <div class="text">Брой спални:</div>
+            <div class="text">{{ $t('rooms') }}:</div>
           </div>
           <div class="filter-box">
             <div class="input-field">
@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="filter-box price-range">
-            <div class="text">Избери цена:</div>
+            <div class="text">{{ $t('select_price') }}:</div>
             <div class="price">
               <div class="min">5 000</div>
               <vue-slider
@@ -63,7 +63,7 @@
       </div>
       <div class="bottom-options">
         <div class="building-btn">
-          <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">Информация за сградата</router-link></div>
+          <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">{{ $t('building_information') }}</router-link></div>
         </div>
         <div class="building-filter">
           <button class="filter-btn" @click="filterActive = !filterActive">

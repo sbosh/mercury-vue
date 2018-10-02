@@ -3,16 +3,14 @@
     <mq-layout mq="md+" class="left-sidebar">
       <div class="top">
         <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
-        <div class="back-btn">Към сградата</div>
+        <div class="back-btn">{{ $t('back_building') }}</div>
       </div>
       <div class="available-from">
-        <div class="text">Налични <br>апартаменти</div><span>3</span> / <span>7</span>
+        <div class="text" v-html="$t('available_apartments')"></div><span>3</span> / <span>7</span>
         <div class="input-group">
-          <label for="">Избран вход:</label>
+          <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="">
-            <option value="Вход А">Вход А</option>
-            <option value="Вход А">Вход Б</option>
-            <option value="Вход А">Вход В</option>
+            <option value="Вход А">{{ $t('block') }} А</option>
           </select>
         </div>
       </div>
@@ -21,14 +19,12 @@
     <mq-layout mq="sm" class="floor-info-mobile">
       <div class="available-from">
         <div class="input-group">
-          <label for="">Избран вход:</label>
+          <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="">
-            <option value="Вход А">Вход А</option>
-            <option value="Вход А">Вход Б</option>
-            <option value="Вход А">Вход В</option>
+            <option value="Вход А">{{ $t('block') }} А</option>
           </select>
         </div>
-        <div class="right"><div class="text">Налични апартаменти</div><span>3</span> / <span>7</span></div>
+        <div class="right"><div class="text" v-html="$t('available_apartments')"></div><span>3</span> / <span>7</span></div>
       </div>
     </mq-layout>
     <div class="floor-info">
@@ -40,7 +36,7 @@
       <div class="swiper-pagination"></div>
     </div>
     <mq-layout mq="sm" class="buttons-mobile">
-      <a href="" class="btn">Към сградата</a>
+      <a href="" class="btn">{{ $t('back_building') }}</a>
     </mq-layout>
   </div>
 </template>
@@ -252,7 +248,7 @@ export default {
     text-transform: uppercase;
     background-color: #eeeeee;
     display: block;
-    padding: 20px 15px;
+    padding: 20px 10px;
     text-align: center;
     cursor: pointer;
     &:before {

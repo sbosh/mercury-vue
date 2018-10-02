@@ -3,45 +3,43 @@
     <mq-layout mq="md+" class="left-sidebar">
       <div class="top">
         <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
-        <div class="back-btn">Към сградата</div>
-        <div class="back-btn">Към етажа</div>
+        <div class="back-btn">{{ $t('back_building') }}</div>
+        <div class="back-btn">{{ $t('back_floor') }}</div>
       </div>
       <div class="available-from">
-        <div class="status">Статус: <div class="available">Свободен</div></div>
+        <div class="status">{{ $t('status') }}: <div class="available">{{ $t('available') }}</div></div>
         <div class="input-group">
-          <label for="">Избран вход:</label>
+          <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="">
-            <option value="Вход А">Вход А</option>
-            <option value="Вход А">Вход Б</option>
-            <option value="Вход А">Вход В</option>
+            <option value="Вход А">{{ $t('block') }} А</option>
           </select>
         </div>
       </div>
       <div class="floor-plan">
-        <div class="text">Етажно разположение:</div>
+        <div class="text">{{ $t('floor_layout') }}:</div>
         <img src="@/assets/images/floor-plan.png" alt="">
       </div>
     </mq-layout>
     <div class="apartment-info">
       <div class="apartment-header">
         <div class="left">
-          <div class="title"><h1>{{ apartment.rooms }} - стаен апартамент</h1></div>
+          <div class="title"><h1>{{ apartment.rooms }} - {{ $t('room_apartment') }}</h1></div>
           <div class="sqm">{{ apartment.living_area }} m2</div>
         </div>
         <div class="right">
           <div class="">
-            <div class="text">Обща цена:</div>
+            <div class="text">{{ $t('total_price') }}:</div>
             <div class="price">{{ apartment.price }} <div class="currency drop-arrow">euro <span class="dropdown">bgn</span></div></div>
           </div>
           <div>
-            <div class="text">цена на m²:</div>
+            <div class="text">{{ $t('price_per_m') }} m²:</div>
             <div class="price">{{ apartment.price_m2 }} <div class="currency">eur</div></div>
           </div>
         </div>
       </div>
       <div class="apartment-content">
         <div class="sidebar">
-          <h3>Информация за апартамента</h3>
+          <h3>{{ $t('apartment_information') }}</h3>
           <ul>
             <li>Всекидневна <span>29 m²</span></li>
             <li>Всекидневна <span>29 m²</span></li>
@@ -54,14 +52,14 @@
             <div class="text">Статус</div>
             <div class="status available">Свободен</div>
           </mq-layout>
-          <a @click="contactFormActive = !contactFormActive" class="btn">Изпрати запитване</a>
+          <a @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
           <div class="popup" v-bind:class="{ active: contactFormActive }" >
             <h2 class="popup-title">Направи запитване</h2>
             <div class="close" @click="contactFormActive = false">Затвори</div>
             <contact-form />
           </div>
           <div class="donwload-pdf">
-            <a href="" class="btn-pdf">Изтегли PDF на апартамента</a>
+            <a href="" class="btn-pdf">{{ $t('download_pdf') }}</a>
           </div>
           <mq-layout mq="sm" class="buttons">
             <a href="" class="btn">Към сградата</a>
@@ -507,7 +505,7 @@ export default {
     text-transform: uppercase;
     background-color: #eeeeee;
     display: block;
-    padding: 20px 15px;
+    padding: 20px 10px;
     text-align: left;
     cursor: pointer;
     margin-top: 10px;

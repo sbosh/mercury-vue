@@ -1,6 +1,6 @@
 <template>
   <form @submit="checkForm" method="POST" action="">
-    <h3>Пиши ни</h3>
+    <h3>{{ $t('write_us') }}</h3>
     <div class="form-row radio-checkbox-row">
       <div class="form-group radio-group">
         <input type="radio" id="input_property" v-model="reason" name="reason" class="form-element" />
@@ -17,42 +17,42 @@
         <label for="input_team">Присъедини се към нашият екип</label>
       </div>
     </div>
-    <h3>Име</h3>
+    <h3>{{ $t('name') }}</h3>
     <div class="form-row">
       <div class="form-group">
         <p class="form-error" v-if="errors.name && errors.name.length" v-text="errors.name"/>
-        <input type="text" name="name" v-model="name" class="form-element" placeholder="Вашето име *" />
+        <input type="text" name="name" v-model="name" class="form-element" :placeholder="$t('your_name') + '*'" />
       </div>
       <div class="form-group">
-        <input type="text" name="company" v-model="company" class="form-element" placeholder="Име на вашата компания">
+        <input type="text" name="company" v-model="company" class="form-element" :placeholder="$t('company_name') + '*'">
       </div>
     </div>
-    <h3>Информация</h3>
+    <h3>{{ $t('information') }}</h3>
     <div class="form-row">
       <div class="form-group">
         <p class="form-error" v-if="errors.email && errors.email.length" v-text="errors.email"/>
         <input type="email" name="email" v-model="email" class="form-element" placeholder="Е-mail *" />
       </div>
       <div class="form-group">
-        <input type="tel" name="" v-model="phone" class="form-element" placeholder="Телефон">
+        <input type="tel" name="" v-model="phone" class="form-element" :placeholder="$t('telephone')">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
-        <input type="text" name="address" v-model="address" class="form-element" placeholder="Адрес" />
+        <input type="text" name="address" v-model="address" class="form-element" :placeholder="$t('address')" />
       </div>
       <div class="form-group">
-        <input type="text" name="time" v-model="time" class="form-element" placeholder="Удобно време за разговор">
+        <input type="text" name="time" v-model="time" class="form-element" :placeholder="$t('convenient_time')">
       </div>
     </div>
-    <h3>Съобщение</h3>
+    <h3>{{ $t('message') }}</h3>
     <div class="form-row">
       <div class="form-group">
         <textarea name="message" v-model="message" class="form-element"></textarea>
       </div>
     </div>
     <div class="form-group">
-      <input type="submit" class="send form-element" value="send">
+      <input type="submit" class="send form-element" :value="$t('send')">
     </div>
   </form>
 </template>

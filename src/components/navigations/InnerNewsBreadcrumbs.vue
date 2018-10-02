@@ -1,13 +1,18 @@
 <template>
   <ul class="breadcrumbs">
-    <li><a href="">Комплекс Бижу</a></li>
-    <li><a href="">Новини</a></li>
+    <li><a href="">Заглавие/категория/новина</a></li>
+    <li><router-link :to="'/' + lang + '/news'">{{ $t('news') }}</router-link></li>
   </ul>
 </template>
 
 <script>
 export default {
-  name: 'inner-news-breadcrumbs'
+  name: 'inner-news-breadcrumbs',
+  computed: {
+    lang () {
+      return this.$i18n.locale
+    }
+  }
 }
 </script>
 

@@ -1,17 +1,17 @@
 <template>
   <footer>
-    <div class="logo"><a href=""><img src="@/assets/images/logo-white-text.svg" alt=""></a></div>
+    <div class="logo"><router-link :to="'/' + lang"><img src="@/assets/images/logo-white-text.svg" alt=""></router-link></div>
     <mq-layout mq="md+">
       <nav>
         <ul class="footer-top-nav">
-          <router-link tag="li" :to="'/' + lang + '/current-buildings'"><a href="">Настоящи проекти</a></router-link>
-          <router-link tag="li" :to="'/' + lang + '/finished-buildings'"><a href="">Завършени проекти</a></router-link>
-          <router-link tag="li" :to="'/' + lang + '/future-buildings'"><a href="">Бъдещи проекти</a></router-link>
+          <router-link tag="li" :to="'/' + lang + '/current-buildings'"><a href="">{{ $t('current_projects') }}</a></router-link>
+          <router-link tag="li" :to="'/' + lang + '/finished-buildings'"><a href="">{{ $t('completed_projects') }}</a></router-link>
+          <router-link tag="li" :to="'/' + lang + '/future-buildings'"><a href="">{{ $t('future_projects') }}</a></router-link>
         </ul>
         <ul class="footer-second-nav">
-          <router-link tag="li" :to="'/' + lang + '/about'"><a href="">За компанията</a></router-link>
-          <router-link tag="li" :to="'/' + lang + '/contacts'"><a href="">Контакти</a></router-link>
-          <router-link tag="li" :to="'/' + lang + '/news'"><a href="">Новини</a></router-link>
+          <router-link tag="li" :to="'/' + lang + '/about'"><a href="">{{ $t('about_company') }}</a></router-link>
+          <router-link tag="li" :to="'/' + lang + '/contacts'"><a href="">{{ $t('contacts') }}</a></router-link>
+          <router-link tag="li" :to="'/' + lang + '/news'"><a href="">{{ $t('news') }}</a></router-link>
         </ul>
       </nav>
     </mq-layout>
@@ -20,8 +20,8 @@
       <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
       <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li>
     </ul>
-    <div class="all-rights">Всички права запазени @ Mercury99</div>
-    <div class="created-by"><a href="mailto:imigix2018@gmail.com">Created by Imigix</a></div>
+    <div class="all-rights">{{ $t('all_rights') }}</div>
+    <div class="created-by"><a href="mailto:imigix2018@gmail.com">{{ $t('created_by') }} Imigix</a></div>
   </footer>
 </template>
 

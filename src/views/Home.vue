@@ -6,17 +6,17 @@
       <div class="line"></div>
       <div class="caption">
         <div class="title-box">
-          <h2 class="title">Ние имаме различна<br> архитектурна практика</h2>
+          <h2 class="title" v-html="$t('home_announce')"></h2>
         </div>
         <div class="btn-box">
-          <router-link :to="'/' + lang + '/current-buildings'" class="btn"><div class="btn-overlay"></div>виж нашите проекти</router-link>
+          <router-link :to="'/' + lang + '/current-buildings'" class="btn"><div class="btn-overlay"></div>{{ $t('our_projects') }}</router-link>
         </div>
       </div>
     </div>
     <mq-layout mq="md+">
       <div class="news-box" v-for="article in articles" :key="article.id" v-if="article.show_in_homepage == 1">
         <article class="news">
-          <h3><router-link :to="'/' + $i18n.locale + '/article/' + article.id + '/' + article['slug_' + $i18n.locale]"><span class="icon"></span>{{ article['title_' + $i18n.locale] }}<span class="text">Прочети повече</span></router-link></h3>
+          <h3><router-link :to="'/' + $i18n.locale + '/article/' + article.id + '/' + article['slug_' + $i18n.locale]"><span class="icon"></span>{{ article['title_' + $i18n.locale] }}<span class="text">{{ $t('read_more') }}</span></router-link></h3>
         </article>
       </div>
     </mq-layout>
