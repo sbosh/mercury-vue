@@ -28,7 +28,7 @@
       </div>
     </mq-layout>
     <div class="floor-info">
-      <swiper :options="swiperOptions()">
+      <swiper ref="mySwiper" :options="swiperOptions()">
         <swiper-slide v-for="floor in floors" :key="floor.id">
           <div class="img-box"><img :src="floor.image" alt=""></div>
         </swiper-slide>
@@ -51,7 +51,13 @@ export default {
     },
     ...mapGetters({
       floors: 'getFloors'
-    })
+    }),
+    swiper () {
+      return this.$refs.mySwiper.swiper
+    }
+  },
+  mounted () {
+    this.swiper.slideTo(Number(this.$route.params.slug) - 1)
   },
   methods: {
     swiperOptions () {

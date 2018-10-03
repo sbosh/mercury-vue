@@ -154,7 +154,7 @@ export default {
             border-width: 17px 16px 0 16px;
             border-color: #fa6902 transparent transparent transparent;
             display: block;
-            z-index: 9999;
+            z-index: 9990;
             opacity: 0;
           }
         }
