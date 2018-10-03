@@ -26,13 +26,6 @@ export function loadLanguageAsync (lang) {
           loadedLanguages.push(lang)
           setI18nLanguage(lang)
         })
-      // return new Promise(function (resolve, reject) {
-      //   import(`@/locales/${lang}`).then(msgs => {
-      //     i18n.setLocaleMessage(lang, msgs.default)
-      //     loadedLanguages.push(lang)
-      //     resolve(setI18nLanguage(lang))
-      //   })
-      // })
     }
     return Promise.resolve(setI18nLanguage(lang))
   }

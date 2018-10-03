@@ -11,6 +11,7 @@ import BuildingInner from './views/BuildingInner.vue'
 import CurrentBuildings from './views/CurrentBuildings.vue'
 import BuildingSort from './views/BuildingSort.vue'
 import BuildingView from './views/BuildingView.vue'
+import BuildingInnerComponent from './components/buildings/BuildingInnerComponent'
 import FutureBuildings from './views/FutureBuildings.vue'
 import FinishedBuildings from './views/FinishedBuildings.vue'
 import Floor from './views/Floor.vue'
@@ -60,20 +61,25 @@ let router = new Router({
     },
     {
       path: '/:lang/:id/:building',
-      name: 'building-inner',
+      children: [
+        {
+          path: '',
+          name: 'building-inner-component',
+          component: BuildingInnerComponent,
+          meta: { transitionName: 'slide' }
+        },
+        {
+          path: 'view',
+          component: BuildingView,
+          name: 'building-view'
+        },
+        {
+          path: 'floor/:slug/:id',
+          component: Floor,
+          name: 'building-floor'
+        }
+      ],
       component: BuildingInner,
-      meta: { transitionName: 'slide' }
-    },
-    {
-      path: '/:lang/:id/:building/view',
-      name: 'building-view',
-      component: BuildingView,
-      meta: { transitionName: 'slide' }
-    },
-    {
-      path: '/:lang/floor/:slug/:id',
-      name: 'floor',
-      component: Floor,
       meta: { transitionName: 'slide' }
     },
     {

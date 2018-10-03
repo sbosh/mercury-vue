@@ -44,7 +44,7 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  name: 'floor',
+  name: 'building-floor',
   computed: {
     lang () {
       return this.$i18n.locale
