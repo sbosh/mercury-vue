@@ -58,6 +58,7 @@ export default {
   },
   mounted () {
     this.swiper.slideTo(Number(this.$route.params.slug) - 1)
+    this.swiper.on('slideChange', this.handleSlideChange)
   },
   methods: {
     swiperOptions () {
@@ -78,6 +79,9 @@ export default {
           }
         }
       }
+    },
+    handleSlideChange () {
+      this.$router.push({ name: 'building-floor', params: { slug: this.swiper.activeIndex + 1 } })
     }
   }
 }
