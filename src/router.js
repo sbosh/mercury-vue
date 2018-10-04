@@ -61,6 +61,7 @@ let router = new Router({
     },
     {
       path: '/:lang/:id/:building',
+      name: 'building-inner',
       children: [
         {
           path: '',
@@ -74,7 +75,7 @@ let router = new Router({
           name: 'building-view'
         },
         {
-          path: 'floor/:slug/:id',
+          path: 'floor/:slug/:floorId',
           component: Floor,
           name: 'building-floor'
         }
