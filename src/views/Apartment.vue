@@ -49,8 +49,8 @@
             <li>Тераса <span>5 m²</span></li>
           </ul>
           <mq-layout mq="sm" class="status-mobile">
-            <div class="text">Статус</div>
-            <div class="status available">Свободен</div>
+            <div class="text">{{ $t('status') }}</div>
+            <div class="status available">{{ $t('available') }}</div>
           </mq-layout>
           <a @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
           <div class="popup" v-bind:class="{ active: contactFormActive }" >
@@ -67,7 +67,7 @@
           </mq-layout>
         </div>
         <div class="apartment-florplan">
-          <img src="@/assets/images/apartment.png" alt="">
+          <img :src="apartment.image" alt="">
         </div>
       </div>
     </div>
@@ -311,6 +311,7 @@ export default {
         width: auto;
         text-align: center;
         transition: all .3s;
+        cursor: pointer;
         &:hover {
           color: #fff;
           background: #fa6a02;
