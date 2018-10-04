@@ -6,7 +6,10 @@ import HTTP from '@/api/http'
 
 Vue.use(VueI18n)
 
-export const i18n = new VueI18n()
+export const i18n = new VueI18n({
+  locale: '',
+  fallbackLocale: 'en'
+})
 
 const loadedLanguages = []
 

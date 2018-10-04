@@ -116,9 +116,10 @@ router.beforeEach((to, from, next) => {
     top: 0,
     behavior: 'smooth'
   })
+
   if (!to.params.lang) {
     let name = to.name ? to.name : 'home'
-    router.push({ name, params: { lang: i18n.locale } })
+    router.push({ name, params: { lang: i18n.fallbackLocale } })
     return
   }
   let lang = to.params.lang
