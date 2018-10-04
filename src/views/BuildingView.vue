@@ -5,7 +5,7 @@
       <div class="img-box">
         <img :src="building.image" alt="">
         <svg v-if="floors" width="1920" height="600">
-          <a v-for="floor in floors" :key="floor.id" :xlink:href="'/' + $i18n.locale + '/floor/' + floor['slug_' + $i18n.locale] + '/' + floor.id" v-tooltip="{content: 'Floor ID: ' + floor.id}">
+          <a v-for="floor in floors" :key="floor.id" :xlink:href="'/' + $i18n.locale +  '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/floor/' + floor['slug_' + $i18n.locale] + '/' + floor.id" v-tooltip="{content: 'Floor ID: ' + floor.id}">
             <path class="st0" :d="floor.coords" />
           </a>
         </svg>
@@ -96,6 +96,9 @@ export default {
       rooms: [],
       priceFrom: 5000
     }
+  },
+  created () {
+    console.log(this.$route.params)
   },
   computed: {
     lang () {
