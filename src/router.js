@@ -9,7 +9,6 @@ import News from './views/News.vue'
 import NewsInner from './views/NewsInner.vue'
 import BuildingInner from './views/BuildingInner.vue'
 import CurrentBuildings from './views/CurrentBuildings.vue'
-import BuildingSort from './views/BuildingSort.vue'
 import BuildingView from './views/BuildingView.vue'
 import BuildingInnerComponent from './components/buildings/BuildingInnerComponent'
 import FutureBuildings from './views/FutureBuildings.vue'
@@ -43,11 +42,6 @@ let router = new Router({
       path: '/:lang/current-buildings',
       name: 'current-buildings',
       component: CurrentBuildings
-    },
-    {
-      path: '/:lang/building-sort',
-      name: 'building-sort',
-      component: BuildingSort
     },
     {
       path: '/:lang/future-buildings',

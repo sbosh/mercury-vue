@@ -269,10 +269,11 @@ export default {
       justify-content: space-around;
       flex-direction: column;
       padding-left: 40px;
+      min-width: 220px;;
       ul {
         counter-reset: counter;
         padding: 0;
-        margin: 0;
+        margin: 15px 0;
         li {
           color: #4a4a4a;
           font-family: "Fira Sans";
@@ -308,10 +309,13 @@ export default {
         padding: 20px;
         display: inline-block;
         margin-right: auto;
+        margin-bottom: 20px;
         width: auto;
+        min-width: 220px;
         text-align: center;
         transition: all .3s;
         cursor: pointer;
+        box-sizing: border-box;
         &:hover {
           color: #fff;
           background: #fa6a02;

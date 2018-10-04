@@ -23,7 +23,7 @@
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/about'">{{ $t('about_company') }}</router-link></h3>
               <ul>
                 <li><router-link :to="'/' + lang + '/about'">{{ $t('about_us') }}</router-link></li>
-                <li><a href="">{{ $t('service') }}</a></li>
+                <li><router-link :to="'/' + lang + '/about' + '#services'">{{ $t('services') }}</router-link></li>
                 <li><a href="">{{ $t('history') }}</a></li>
               </ul>
               <div class="tel">

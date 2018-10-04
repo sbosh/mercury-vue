@@ -4,7 +4,9 @@
     <div class="inner-building">
       <div class="inner-building-header">
         <mq-layout mq="sm"><h1 class="page-title">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
-        <div class="main-img"><img :src="building.image" alt=""></div>
+        <div class="main-img">
+          <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'"><img :src="building.image" alt=""></router-link>
+        </div>
         <div v-if="building.status == 1" class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">{{ $t('views_scheme') }}</router-link></div>
       </div>
       <div class="caption" id="about">
@@ -96,16 +98,19 @@
         <div class="img-box"><a href=""><img src="@/assets/images/next-building.jpg" alt=""></a></div>
       </div>
     </div>
+    <footer-component />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import FooterComponent from '@/components/layout/FooterComponent.vue'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import NewsListingSwiper from '@/components/news/NewsListingSwiper'
 export default {
   name: 'building-inner-component',
   components: {
+    'footer-component': FooterComponent,
     'navinner-component': NavinnerComponent,
     'news-listing-swiper': NewsListingSwiper
   },
