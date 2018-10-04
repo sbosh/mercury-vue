@@ -10,9 +10,9 @@
     </div>
     <div class="apartments-listing">
       <div class="apartments-box" v-for="apartment in filtrApartments(priceFrom, priceTo, rooms)" :key="apartment.id">
-        <router-link :to="'/' + $i18n.locale + '/apartment/' + apartment.id + '/' + apartment['slug_' + $i18n.locale]"><img :src="apartment.image" alt="">link</router-link>
+        <router-link :to="'/' + $i18n.locale + '/apartment/' + apartment.id + '/' + apartment['slug_' + $i18n.locale]"><img :src="apartment.image" alt=""></router-link>
         <div class="info">
-          <div class="title"><h3>{{ apartment.rooms }}-стане <br>апартамент</h3></div>
+          <div class="title"><h3><router-link :to="'/' + $i18n.locale + '/apartment/' + apartment.id + '/' + apartment['slug_' + $i18n.locale]">{{ apartment.rooms }}-стане <br>апартамент</router-link></h3></div>
           <div class="sqm">{{ apartment.sqm }}</div>
           <div class="price">{{ apartment.price }} <span>eur</span></div>
         </div>
@@ -133,6 +133,9 @@ export default {
       display: flex;
       padding-bottom: 50px;
       margin-bottom: 40px;
+      img {
+        max-width: 100%;
+      }
       &:nth-child(even) {
         padding-top: 50px;
         padding-bottom: 0;
@@ -145,6 +148,10 @@ export default {
           font-weight: 600;
           line-height: 25px;
           margin-bottom: 10px;
+        }
+        .title a {
+          text-decoration: none;
+          color: #000;
         }
         .sqm {
           color: #8d8d8d;
