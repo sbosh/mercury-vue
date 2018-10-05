@@ -1,4 +1,6 @@
 <template>
+<div>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus aut dolore vel molestias, eos magnam aspernatur dolor iste facilis modi vero laboriosam saepe cumque id! Quam qui nisi excepturi doloribus?
   <div class="apartment-inner" v-if="apartment">
     <mq-layout mq="md+" class="left-sidebar">
       <div class="top">
@@ -54,8 +56,8 @@
           </mq-layout>
           <a @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
           <div class="popup" v-bind:class="{ active: contactFormActive }" >
-            <h2 class="popup-title">Направи запитване</h2>
-            <div class="close" @click="contactFormActive = false">Затвори</div>
+            <h2 class="popup-title">{{ $t('make_request') }}</h2>
+            <div class="close" @click="contactFormActive = false">{{ $t('close') }}</div>
             <contact-form />
           </div>
           <div class="donwload-pdf">
@@ -72,6 +74,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>

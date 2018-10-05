@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     ...mapState({
-      currentBuildingsPage: state => state.buildings.current
+      currentBuildingsPage: state => state.pages.currentBuildingsPage
     })
   }
 }

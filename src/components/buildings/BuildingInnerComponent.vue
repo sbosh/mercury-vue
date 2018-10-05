@@ -7,7 +7,9 @@
         <div class="main-img">
           <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'"><img :src="building.image" alt=""></router-link>
         </div>
-        <div v-if="building.status == 1" class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">{{ $t('views_scheme') }}</router-link></div>
+        <div v-if="building.status == 1" class="btn-box">
+          <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">{{ $t('views_scheme') }}</router-link>
+        </div>
       </div>
       <div class="caption" id="about">
         <div class="title-box">
@@ -531,7 +533,8 @@ export default {
     padding-left: 195px;
     p {
       column-count: 2;
-      max-width: 800px;
+      column-gap: 100px;
+      max-width: 80%;
       margin: 60px auto 10px auto;
       color: #383838;
       font-family: "Fira Sans";
@@ -640,6 +643,7 @@ export default {
           font-weight: 400;
           line-height: 23px;
           margin: 0;
+          max-width: 100%;
         }
       }
     }

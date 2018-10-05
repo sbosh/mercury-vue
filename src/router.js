@@ -14,6 +14,7 @@ import BuildingInnerComponent from './components/buildings/BuildingInnerComponen
 import FutureBuildings from './views/FutureBuildings.vue'
 import FinishedBuildings from './views/FinishedBuildings.vue'
 import Floor from './views/Floor.vue'
+import FloorComponent from './components/buildings/FloorComponent.vue'
 import Apartment from './views/Apartment.vue'
 import { loadLanguageAsync, i18n } from './setup/i18n'
 
@@ -55,7 +56,6 @@ let router = new Router({
     },
     {
       path: '/:lang/:id/:building',
-      name: 'building-inner',
       children: [
         {
           path: '',
@@ -71,16 +71,22 @@ let router = new Router({
         {
           path: 'floor/:slug/:floorId',
           component: Floor,
-          name: 'building-floor'
+          name: 'building-floor',
+          children: [
+            {
+              path: '',
+              name: 'building-floor',
+              component: FloorComponent
+            },
+            {
+              path: ':apartmentSlug',
+              component: Apartment,
+              name: 'apartment'
+            }
+          ]
         }
       ],
       component: BuildingInner,
-      meta: { transitionName: 'slide' }
-    },
-    {
-      path: '/:lang/apartment/:id/:slug',
-      name: 'apartment',
-      component: Apartment,
       meta: { transitionName: 'slide' }
     },
     {

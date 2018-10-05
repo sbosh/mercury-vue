@@ -1,6 +1,43 @@
 <template>
-  <div class="floor-apartment">
-    <router-view></router-view>
+  <div class="floor-plan">
+    <mq-layout mq="md+" class="left-sidebar">
+      <div class="top">
+        <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
+        <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building" class="back-btn">{{ $t('back_building') }}</router-link>
+      </div>
+      <div class="available-from">
+        <div class="text" v-html="$t('available_apartments')"></div><span>3</span> / <span>7</span>
+        <div class="input-group">
+          <label for="">{{ $t('selected_block') }}:</label>
+          <select name="" id="">
+            <option value="Вход А">{{ $t('block') }} А</option>
+          </select>
+        </div>
+      </div>
+      <div class="compass"><img src="@/assets/images/compass.svg" alt=""></div>
+    </mq-layout>
+    <mq-layout mq="sm" class="floor-info-mobile">
+      <div class="available-from">
+        <div class="input-group">
+          <label for="">{{ $t('selected_block') }}:</label>
+          <select name="" id="">
+            <option value="Вход А">{{ $t('block') }} А</option>
+          </select>
+        </div>
+        <div class="right"><div class="text" v-html="$t('available_apartments')"></div><span>3</span> / <span>7</span></div>
+      </div>
+    </mq-layout>
+    <div class="floor-info">
+      <swiper ref="mySwiper" :options="swiperOptions()">
+        <swiper-slide v-for="floor in floors" :key="floor.id">
+          <div class="img-box"><img :src="floor.image" alt=""></div>
+        </swiper-slide>
+      </swiper>
+      <div class="swiper-pagination"></div>
+    </div>
+    <mq-layout mq="sm" class="buttons-mobile">
+      <a href="" class="btn">{{ $t('back_building') }}</a>
+    </mq-layout>
   </div>
 </template>
 
