@@ -1,6 +1,5 @@
 <template>
 <div>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus aut dolore vel molestias, eos magnam aspernatur dolor iste facilis modi vero laboriosam saepe cumque id! Quam qui nisi excepturi doloribus?
   <div class="apartment-inner" v-if="apartment">
     <mq-layout mq="md+" class="left-sidebar">
       <div class="top">
@@ -98,7 +97,7 @@ export default {
       return this.$i18n.locale
     },
     apartment: function () {
-      return this.$store.getters.getApartment(Number(this.$route.params.id), this.$route.params.slug)
+      return this.$store.getters.getApartment(this.$route.params.apartmentSlug)
     },
     ...mapState({
       contacts: state => state.pages.contacts
