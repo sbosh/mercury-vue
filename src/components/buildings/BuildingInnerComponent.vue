@@ -20,24 +20,34 @@
       <div class="about-complex">
         <div class="box-row">
           <div class="box">
-            <div class="title">{{ $t('company_name') }}</div>
-            <div class="text">{{ building['title_' + $i18n.locale] }}</div>
+            <div class="info">
+              <div class="title">{{ $t('company_name') }}</div>
+              <div class="text">{{ building['title_' + $i18n.locale] }}</div>
+            </div>
           </div>
           <div class="box">
-            <div class="title">{{ $t('floors_count') }}</div>
-            <div class="text">6</div>
+            <div class="info">
+              <div class="title">{{ $t('floors_count') }}</div>
+              <div class="text">6</div>
+            </div>
           </div>
           <div class="box">
-            <div class="title">{{ $t('apartments_count') }}</div>
-            <div class="text">87</div>
+            <div class="info">
+              <div class="title">{{ $t('apartments_count') }}</div>
+              <div class="text">87</div>
+            </div>
           </div>
           <div class="box">
-            <div class="title">{{ $t('free_apartments') }}</div>
-            <div class="text">32</div>
+            <div class="info">
+              <div class="title">{{ $t('free_apartments') }}</div>
+              <div class="text">32</div>
+            </div>
           </div>
           <div class="box">
-            <div class="title">{{ $t('finished_date') }}</div>
-            <div class="text">2019</div>
+            <div class="info">
+              <div class="title">{{ $t('finished_date') }}</div>
+              <div class="text">2019</div>
+            </div>
           </div>
         </div>
       </div>
@@ -96,8 +106,14 @@
       </div>
       <div class="next-building">
         <div class="text">{{ $t('next_building') }}</div>
-        <h2 class="title"><a href="">Комплекс Меркурий Плаза</a></h2>
-        <div class="img-box"><a href=""><img src="@/assets/images/next-building.jpg" alt=""></a></div>
+        <h2 class="title">
+          <router-link :to="building.slug_bg">{{ building.next_building['title_' + $i18n.locale] }}</router-link>
+        </h2>
+        <div class="img-box">
+          <router-link :to="building.slug_bg">
+            <img :src="building.next_building.image" alt="">
+          </router-link>
+        </div>
       </div>
     </div>
     <footer-component />
@@ -177,7 +193,7 @@ export default {
     color: #8d8d8d;
     font-family: Montserrat;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
   }
   .title,
@@ -185,14 +201,64 @@ export default {
     color: #2c2c2c;
     font-family: "Exo 2";
     font-size: 50px;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
     text-decoration: none;
+  }
+  .title {
+    display: flex;
+    align-items: center;
+    &:hover {
+      &:after {
+        width: 15%;
+        margin-left: 50px;
+      }
+      &:before {
+        border-radius: 0;
+        transform: rotate(45deg) translate(-10px, 10px);
+        border-left-color: transparent;
+        border-bottom-color: transparent;
+      }
+    }
+    a {
+      order: 1;
+    }
+    &:after {
+      content: '';
+      display: inline-block;
+      width: 20%;
+      height: 1px;
+      background: #fa6a02;
+      margin-left: 25px;
+      order: 2;
+      transition: all .3s;
+    }
+    &:before {
+      content: '';
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid #fa6a02;
+      order:3;
+      transition: all .3s;
+    }
   }
   .img-box {
     display: flex;
     justify-content: flex-end;
     margin-top: 55px;
+    background: #000;
+    img {
+      transition: all .3s;
+      opacity: .6;
+      max-width: 100%;
+    }
+    &:hover {
+      img {
+        opacity: 1;
+      }
+    }
 
     a {
       display: block;
@@ -226,7 +292,7 @@ export default {
   .title {
     color: #fff;
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 80px;
   }
   @media screen and(max-width: 767px) {
@@ -235,7 +301,7 @@ export default {
       margin-bottom: 40px;
       color: #fff;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 600;
     }
   }
 }
@@ -271,6 +337,21 @@ export default {
       }
       span {
         float: right;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-family: 'Exo 2', sans-serif;
+        color: #c1c1c1;
+        &:after {
+          content: '';
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 4px 0 4px 5px;
+          border-color: transparent transparent transparent #fa6902;
+          display: inline-block;
+          margin: 0 0 0 10px;
+        }
       }
     }
     .btn-box {
@@ -296,7 +377,7 @@ export default {
           float: none;
           color: #8d8d8d;
           font-size: 10px;
-          font-weight: 700;
+          font-weight: 600;
           text-transform: uppercase;
           &:after {
             content: '';
@@ -360,6 +441,11 @@ export default {
       font-weight: 600;
       margin-left: 20px;
     }
+    &:nth-last-child(-n+2){
+      .info {
+        border-bottom: 0;
+      }
+    }
   }
   @media screen and(max-width: 768px) {
     padding: 50px 0;
@@ -400,9 +486,15 @@ export default {
     padding-right: 200px;
   }
   .swiper-slide {
+    background: #000;
     img {
+      opacity: 0.6;
       display: block;
       max-width: 100%;
+      transition: all .3s;
+      &:hover {
+        opacity: 1;
+      }
     }
     .progress-bar {
       position: absolute;
@@ -472,12 +564,19 @@ export default {
       padding: 0 10px;
       border-right: 1px solid #dfdfdf;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .info {
+        display: inline-block;
+        margin: auto;
+      }
       &:first-child {
         .text {
           color: #4a4a4a;
           font-family: "Exo 2";
           font-size: 27px;
-          font-weight: 700;
+          font-weight: 600;
           text-transform: uppercase;
         }
       }
@@ -494,7 +593,7 @@ export default {
       .text {
         color: #484b47;
         font-size: 64px;
-        font-weight: 700;
+        font-weight: 600;
       }
     }
   }
@@ -518,7 +617,7 @@ export default {
         .text {
           color: #4a4a4a;
           font-size: 36px;
-          font-weight: 700;
+          font-weight: 600;
           text-transform: uppercase;
         }
         &:last-child {
@@ -534,7 +633,7 @@ export default {
     p {
       column-count: 2;
       column-gap: 100px;
-      max-width: 80%;
+      max-width: 84%;
       margin: 60px auto 10px auto;
       color: #383838;
       font-family: "Fira Sans";
@@ -579,7 +678,7 @@ export default {
       color: #fff;
       font-family: "Exo 2";
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 600;
       text-transform: uppercase;
     }
     .btn-box {
@@ -622,7 +721,7 @@ export default {
         .title {
           color: #2c2c2c;
           font-size: 20px;
-          font-weight: 700;
+          font-weight: 600;
           br {
             display: none;
           }

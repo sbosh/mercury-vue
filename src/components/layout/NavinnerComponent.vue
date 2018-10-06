@@ -101,14 +101,14 @@ export default {
       color: #fff;
       font-family: 'Exo 2', sans-serif;
       font-size: 24px;
-      font-weight: 700;
+      font-weight: 600;
       text-transform: uppercase;
     }
   }
   .back-btn {
     color: #8d8d8d;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
     background-image: url(~@/assets/images/back-arrow.svg);
     background-repeat: no-repeat;
@@ -136,7 +136,7 @@ export default {
       a {
         color: #fff;
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 500;
         text-transform: uppercase;
         text-decoration: none;
         padding: 15px;

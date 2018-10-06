@@ -36,7 +36,7 @@ export default {
   padding-top: 200px;
   padding-right: 195px;
   .caption {
-    margin-bottom: 120px;
+    margin-bottom: 50px;
     .title-box {
       h1.title {
         color: #6e6e6e;
@@ -60,7 +60,7 @@ export default {
       h2 {
         color: #fff;
         font-size: 42px;
-        font-weight: 700;
+        font-weight: 600;
         line-height: 57px;
         max-width: 800px;
       }

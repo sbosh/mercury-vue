@@ -104,8 +104,12 @@ export default {
       opacity: 0;
     }
     .img-box {
+      background: rgba(0,0,0, .1);
       img {
-        width: 100%;
+        margin: auto;
+        display: block;
+        max-width: 100%;
+        max-height: 300px;
         transform: translateY(200px);
         transition-property: all ;
         transition-delay: .6s;
@@ -133,7 +137,7 @@ export default {
       p {
         color: #363636;
         font-family: "Fira Sans";
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 400;
         line-height: 33px;
       }
