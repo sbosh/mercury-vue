@@ -106,7 +106,7 @@ export default {
       bottom: 0;
       background: rgba(0,0,0, .6);
       transform: translateX(-100%);
-      transition: all 1.6s;
+      transition: all .6s;
     }
     img {
       max-width: 100%;
@@ -115,7 +115,7 @@ export default {
       display: block;
       transform: translateX(-150%);
       transition-delay: .2s;
-      transition-duration: 1.6s;
+      transition-duration: .6s;
       transition-property: all;
       opacity: 0;
     }
