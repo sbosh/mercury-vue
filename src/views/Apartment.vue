@@ -4,8 +4,8 @@
     <mq-layout mq="md+" class="left-sidebar">
       <div class="top">
         <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
-        <div class="back-btn">{{ $t('back_building') }}</div>
-        <div class="back-btn">{{ $t('back_floor') }}</div>
+        <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="back-btn">{{ $t('back_building') }}</router-link>
+        <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.slug + '/' + this.$route.params.floorId" class="back-btn">{{ $t('back_floor') }}</router-link>
       </div>
       <div class="available-from">
         <div class="status">{{ $t('status') }}: <div class="available">{{ $t('available') }}</div></div>

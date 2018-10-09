@@ -93,9 +93,9 @@
       </div>
       <div class="map">
         <div class="img-box">
-          <a href="" class="btn">бул. „Александър Малинов“ <span>{{ $t('to_the_location') }}</span></a>
-          <img src="@/assets/images/map.jpg" alt="">
-          <div class="btn-box"><a href="" class="btn">{{ $t('see_map') }}</a></div>
+          <a :href="building.google_map" target='_blank' class="btn">бул. „Александър Малинов“ <span>{{ $t('to_the_location') }}</span></a>
+          <img :src="building.map" alt="">
+          <div class="btn-box"><a :href="building.google_map" target='_blank' class="btn">{{ $t('see_map') }}</a></div>
         </div>
       </div>
       <div class="news-inner" id="news">

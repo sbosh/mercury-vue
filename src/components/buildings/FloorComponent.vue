@@ -3,7 +3,7 @@
     <mq-layout mq="md+" class="left-sidebar">
       <div class="top">
         <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
-        <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building" class="back-btn">{{ $t('back_building') }}</router-link>
+        <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="back-btn">{{ $t('back_building') }}</router-link>
       </div>
       <div class="available-from">
         <div class="text" v-html="$t('available_apartments')"></div><span>3</span> / <span>7</span>
@@ -30,7 +30,9 @@
     <div class="floor-info">
       <swiper ref="mySwiper" :options="swiperOptions()">
         <swiper-slide v-for="floor in floors" :key="floor.id">
-          <div class="img-box"><img :src="floor.image" alt=""></div>
+          <div class="img-box">
+            <img :src="floor.image" alt="">
+          </div>
         </swiper-slide>
       </swiper>
       <div class="swiper-pagination"></div>
@@ -57,6 +59,7 @@ export default {
     }
   },
   mounted () {
+    console.log(Number(this.$route.params.slug) - 1)
     this.swiper.slideTo(Number(this.$route.params.slug) - 1)
     this.swiper.on('slideChange', this.handleSlideChange)
   },

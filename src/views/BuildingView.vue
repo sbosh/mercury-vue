@@ -1,14 +1,25 @@
 <template>
-  <div class="main-content" v-if="building">
+  <div class="main-content">
     <mq-layout mq="md+" class="building-view-header"><navinner-component :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
     <div class="building-apartments">
       <div class="img-box">
-        <img :src="building.image" alt="">
-        <svg v-if="floors" width="1920" height="600">
+        <canvas id="myCanvas"></canvas>
+        <img src="@/assets/images/8__building.jpg" id="map" usemap="#image-map">
+        <map name="image-map">
+          <area v-for="floor in floors" :key="floor.id"
+          @mouseover="myHover"
+          @mouseleave="myLeave"
+          alt=""
+          title=""
+          :href="'/' + $i18n.locale +  '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/floor/' + floor['slug_' + $i18n.locale] + '/' + floor.id"
+          :coords="floor.coords"
+          shape="poly">
+        </map>
+        <!-- <svg v-if="floors" width="1920" height="600">
           <a v-for="floor in floors" :key="floor.id" :xlink:href="'/' + $i18n.locale +  '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/floor/' + floor['slug_' + $i18n.locale] + '/' + floor.id" v-tooltip="{content: 'Floor ID: ' + floor.id}">
             <path class="st0" :d="floor.coords" />
           </a>
-        </svg>
+        </svg> -->
       </div>
       <filtered-apartments
         @clicked="isFiltred = false"
@@ -94,11 +105,80 @@ export default {
       filterActive: false,
       isFiltred: false,
       rooms: [],
-      priceFrom: 5000
+      priceFrom: 5000,
+      hdc: null
     }
   },
-  created () {
-    console.log(this.$route.params)
+  mounted () {
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.myInit()
+      }, 1000)
+    })
+  },
+  methods: {
+    byId (e) {
+      return document.getElementById(e)
+    },
+    drawPoly (coOrdStr) {
+      let mCoords = coOrdStr.split(',')
+      let i, n
+      n = mCoords.length
+      this.hdc.beginPath()
+      console.log(this.hdc)
+      this.hdc.moveTo(mCoords[0], mCoords[1])
+      for (i = 2; i < n; i += 2) {
+        this.hdc.lineTo(mCoords[i], mCoords[i + 1])
+      }
+      this.hdc.lineTo(mCoords[0], mCoords[1])
+      this.hdc.stroke()
+    },
+    drawRect (coOrdStr) {
+      let mCoords = coOrdStr.split(',')
+      let top, left, bot, right
+      left = mCoords[0]
+      top = mCoords[1]
+      right = mCoords[2]
+      bot = mCoords[3]
+      this.hdc.strokeRect(left, top, right - left, bot - top)
+    },
+    myHover (event) {
+      let element = event.fromElement
+      if (element.nodeName === 'IMG') return
+      let coordStr = element.getAttribute('coords')
+      let areaType = element.getAttribute('shape')
+      switch (areaType) {
+        case 'polygon':
+        case 'poly': this.drawPoly(coordStr)
+          break
+        case 'rect': this.drawRect(coordStr)
+      }
+    },
+    myLeave () {
+      let canvas = this.byId('myCanvas')
+      if (!this.hdc) return
+      this.hdc.clearRect(0, 0, canvas.width, canvas.height)
+    },
+    myInit () {
+      let img = this.byId('map')
+      let x, y, w, h
+      x = img.offsetLeft
+      y = img.offsetTop
+      w = img.clientWidth
+      h = img.clientHeight
+      let imgParent = img.parentNode
+      let can = this.byId('myCanvas')
+      imgParent.appendChild(can)
+      can.style.zIndex = 9999
+      can.style.left = x + 'px'
+      can.style.top = y + 'px'
+      can.setAttribute('width', w + 'px')
+      can.setAttribute('height', h + 'px')
+      this.hdc = can.getContext('2d')
+      this.hdc.fillStyle = 'red'
+      this.hdc.strokeStyle = 'red'
+      this.hdc.lineWidth = 6
+    }
   },
   computed: {
     lang () {
@@ -116,6 +196,11 @@ export default {
 </script>
 
 <style lang="scss">
+canvas {
+  pointer-events: none;       /* make the canvas transparent to the mouse - needed since canvas is position infront of image */
+  position: absolute;
+  z-index: 100;
+}
 .tooltip {
   .tooltip-inner {
     background: #fff;
@@ -125,27 +210,28 @@ export default {
 }
 .building-apartments {
   .img-box {
-    img {
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-    }
-    svg {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      path,
-      polygon {
-        transition: all .3s;
-        &:hover {
-          opacity: .8;
-        }
-      }
-    }
+    position: relative;
+    // img {
+    //   width: 100vw;
+    //   height: 100vh;
+    //   object-fit: cover;
+    // }
+    // svg {
+    //   width: 100%;
+    //   height: 100%;
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   right: 0;
+    //   bottom: 0;
+    //   path,
+    //   polygon {
+    //     transition: all .3s;
+    //     &:hover {
+    //       opacity: .8;
+    //     }
+    //   }
+    // }
   }
 }
 .filters {

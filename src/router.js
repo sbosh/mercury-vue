@@ -65,23 +65,26 @@ let router = new Router({
         },
         {
           path: 'view',
+          name: 'building-view',
           component: BuildingView,
-          name: 'building-view'
+          meta: { transitionName: 'slide' }
         },
         {
           path: 'floor/:slug/:floorId',
           component: Floor,
-          name: 'building-floor',
+          meta: { transitionName: 'slide' },
           children: [
             {
               path: '',
               name: 'building-floor',
-              component: FloorComponent
+              component: FloorComponent,
+              meta: { transitionName: 'slide' }
             },
             {
               path: ':apartmentSlug',
+              name: 'apartment',
               component: Apartment,
-              name: 'apartment'
+              meta: { transitionName: 'slide' }
             }
           ]
         }
