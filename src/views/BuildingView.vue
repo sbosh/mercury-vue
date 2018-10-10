@@ -3,7 +3,8 @@
     <mq-layout mq="md+" class="building-view-header"><navinner-component :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
     <div class="building-apartments">
       <div class="img-box">
-        <canvas id="myCanvas"></canvas>
+        <div id="building"></div>
+        <!-- <canvas id="myCanvas"></canvas>
         <img src="@/assets/images/8__building.jpg" id="map" usemap="#image-map">
         <map name="image-map">
           <area v-for="floor in floors" :key="floor.id"
@@ -14,7 +15,7 @@
           :href="'/' + $i18n.locale +  '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/floor/' + floor['slug_' + $i18n.locale] + '/' + floor.id"
           :coords="floor.coords"
           shape="poly">
-        </map>
+        </map> -->
         <!-- <svg v-if="floors" width="1920" height="600">
           <a v-for="floor in floors" :key="floor.id" :xlink:href="'/' + $i18n.locale +  '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/floor/' + floor['slug_' + $i18n.locale] + '/' + floor.id" v-tooltip="{content: 'Floor ID: ' + floor.id}">
             <path class="st0" :d="floor.coords" />
@@ -95,6 +96,7 @@ import vueSlider from 'vue-slider-component'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import FilteredApartments from '@/components/buildings/FilteredApartments'
 import AllApartments from '@/components/buildings/AllApartments'
+/* eslint-disable no-undef */
 export default {
   name: 'building-view',
   components: { NavinnerComponent, vueSlider, FilteredApartments, AllApartments },
@@ -106,17 +108,84 @@ export default {
       isFiltred: false,
       rooms: [],
       priceFrom: 5000,
-      hdc: null
+      hdc: null,
+      game: null,
+      polygons: [],
+      coordinates: [
+        [25, 573, 38, 578, 40, 601, 70, 571, 86, 573, 98, 563, 354, 583, 355, 543, 376, 532, 377, 517, 75, 488],
+        [40, 609, 52, 583, 69, 568, 86, 570, 96, 559, 352, 582, 355, 627, 98, 612, 69, 617, 40, 648],
+        [718, 510, 1322, 285, 1465, 320, 1471, 354, 1393, 339, 715, 544]
+      ]
     }
   },
   mounted () {
-    this.$nextTick(() => {
-      setTimeout(() => {
-        this.myInit()
-      }, 1000)
-    })
+    this.game = new Phaser.Game(
+      window.innerWidth * window.devicePixelRatio,
+      window.innerHeight * window.devicePixelRatio,
+      Phaser.CANVAS,
+      'building',
+      {
+        preload: this.preload,
+        create: this.create
+      }
+    )
   },
   methods: {
+    preload () {
+      this.game.load.image('starlight', '/images/build-starlight.jpg')
+    },
+    create () {
+      this.game.stage.disableVisibilityChange = true
+      this.game.tweens.frameBased = true
+      this.game.time.advancedTiming = false
+      this.game.config.forceSetTimeOut = false
+      this.game.forceSingleUpdate = false
+
+      this.scaleGame()
+
+      this.game.add.image(0, 0, 'starlight')
+
+      this.coordinates.forEach((coords, index) => {
+        let poly = new Phaser.Polygon(coords)
+        let graphics = this.game.add.graphics(0, 0)
+
+        graphics.inputEnabled = true
+        graphics.input.useHandCursor = true
+
+        graphics.events.onInputDown.add(this.onDown(index), this)
+        graphics.events.onInputOver.add(this.onOver(index), this)
+        graphics.events.onInputOut.add(this.onOut(index), this)
+
+        graphics.alpha = 0
+        graphics.beginFill(0x000000)
+        graphics.drawPolygon(poly.points)
+        graphics.endFill()
+
+        this.polygons.push(graphics)
+      })
+    },
+    onDown (index) {
+      return () => {
+        alert('Работи уе, лек!')
+      }
+    },
+    onOver (index) {
+      return () => {
+        this.game.add.tween(this.polygons[index]).to({ alpha: 0.5 }, 200, 'Linear', true)
+      }
+    },
+    onOut (index) {
+      return () => {
+        this.game.add.tween(this.polygons[index]).to({ alpha: 0 }, 200, 'Linear', true)
+      }
+    },
+    scaleGame () {
+      this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL
+      this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
+      this.game.scale.pageAlignVertically = true
+      this.game.scale.pageAlignHorizontally = true
+      this.game.scale.refresh()
+    },
     byId (e) {
       return document.getElementById(e)
     },
