@@ -182,8 +182,6 @@ export default {
     scaleGame () {
       this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL
       this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
-      this.game.scale.pageAlignVertically = true
-      this.game.scale.pageAlignHorizontally = true
       this.game.scale.refresh()
     },
     byId (e) {
@@ -265,11 +263,6 @@ export default {
 </script>
 
 <style lang="scss">
-canvas {
-  pointer-events: none;       /* make the canvas transparent to the mouse - needed since canvas is position infront of image */
-  position: absolute;
-  z-index: 100;
-}
 .tooltip {
   .tooltip-inner {
     background: #fff;
