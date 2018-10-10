@@ -157,7 +157,7 @@ export default {
         graphics.events.onInputOut.add(this.onOut(index), this)
 
         graphics.alpha = 0
-        graphics.beginFill(0x000000)
+        graphics.beginFill(0xfa6a02)
         graphics.drawPolygon(poly.points)
         graphics.endFill()
 
