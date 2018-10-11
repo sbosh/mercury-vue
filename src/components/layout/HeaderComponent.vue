@@ -27,7 +27,7 @@
                 <li><a href="">{{ $t('history') }}</a></li>
               </ul>
               <div class="tel">
-                <a href="tel+359884626391" class="tel-box">
+                <a href="tel:+359884626391" class="tel-box">
                   <div class="icon"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></div>
                   <div class="text">{{ $t('contact_us_now') }}</div>
                   <div class="phone">+359 884 626 391</div>
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="tel">
-        <a href="tel+359884626391" class="tel-box">
+        <a href="tel:+359884626391" class="tel-box">
           <div class="icon"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></div>
           <div class="text">{{ $t('contact_us_now') }}</div>
           <div class="phone">+359 884 626 391</div>
@@ -152,7 +152,6 @@ export default {
   top: 0;
   bottom: 0;
   z-index: 99999;
-  border-left: 1px solid rgba(#979797, .37);
   width: 195px;
   transition-delay: 1s;
   transition-duration: 1.2s;
@@ -161,6 +160,9 @@ export default {
     img {
       max-width: 165px;
     }
+  }
+  nav.home-header {
+    border-left: 1px solid rgba(#979797, .37);
   }
   nav:not(.home-header) {
     background: #fff;

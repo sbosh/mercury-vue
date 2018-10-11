@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content">
+  <div class="main-content" v-if="building">
     <mq-layout mq="md+" class="building-view-header"><navinner-component :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
     <div class="building-apartments">
       <div class="img-box">
@@ -273,6 +273,15 @@ export default {
 .building-apartments {
   .img-box {
     position: relative;
+    height: 100vh;
+    width: 100vw;
+    #building {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
     // img {
     //   width: 100vw;
     //   height: 100vh;

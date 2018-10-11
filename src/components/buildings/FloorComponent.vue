@@ -29,7 +29,7 @@
     </mq-layout>
     <div class="floor-info">
       <swiper ref="mySwiper" :options="swiperOptions()">
-        <swiper-slide v-for="floor in floors" :key="floor.id">
+        <swiper-slide v-for="floor in building.entrances.data[this.$route.params.slug].floors.data" :key="floor.id">
           <div class="img-box">
             <img :src="floor.image" alt="">
           </div>
@@ -44,16 +44,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'building-floor',
   computed: {
+    ...mapState({
+      building: state => state.buildings.building
+    }),
     lang () {
       return this.$i18n.locale
     },
-    ...mapGetters({
-      floors: 'getFloors'
-    }),
     swiper () {
       return this.$refs.mySwiper.swiper
     }

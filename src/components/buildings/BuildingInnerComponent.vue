@@ -1,11 +1,12 @@
 <template>
-  <div class="main-content" v-if="building">
+  <div class="main-content">
     <mq-layout mq="md+"><navinner-component navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
     <div class="inner-building">
       <div class="inner-building-header">
         <mq-layout mq="sm"><h1 class="page-title">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
         <div class="main-img">
-          <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'"><img :src="building.image" alt=""></router-link>
+          <router-link v-if="building.status == 1" :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'"><img :src="building.image" alt=""></router-link>
+          <img v-else :src="building.image" alt="">
         </div>
         <div v-if="building.status == 1" class="btn-box">
           <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">{{ $t('views_scheme') }}</router-link>
@@ -107,10 +108,10 @@
       <div class="next-building">
         <div class="text">{{ $t('next_building') }}</div>
         <h2 class="title">
-          <router-link :to="building.slug_bg">{{ building.next_building['title_' + $i18n.locale] }}</router-link>
+          <router-link :to="'/' + lang + '/' + building.next_building.id + '/' + building.next_building['slug_' + $i18n.locale]">{{ building.next_building['title_' + $i18n.locale] }}</router-link>
         </h2>
         <div class="img-box">
-          <router-link :to="building.slug_bg">
+          <router-link :to="'/' + lang + '/' + building.next_building.id + '/' + building.next_building['slug_' + $i18n.locale]">
             <img :src="building.next_building.image" alt="">
           </router-link>
         </div>
@@ -179,9 +180,6 @@ export default {
       articles: state => state.articles.all,
       building: state => state.buildings.building
     })
-  },
-  created () {
-    this.$store.cache.dispatch('fetchBuildingById', this.$route.params.id)
   }
 }
 </script>
@@ -570,6 +568,7 @@ export default {
       .info {
         display: inline-block;
         margin: auto;
+        height: 100%;
       }
       &:first-child {
         .text {

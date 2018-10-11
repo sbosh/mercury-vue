@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <mq-layout mq="m+">
+    <mq-layout mq="m+" class="mq-m future-current">
       <navinner-component :navTitle="this.futureBuildingsPage['title_' + this.$i18n.locale]" />
       <div class="buildings building-sort">
         <swiper :options="swiperOptions">
@@ -78,6 +78,11 @@ export default {
 </script>
 
 <style lang="scss">
+.future-current {
+  .nav-inner {
+    background: #232323;
+  }
+}
 .building-sort {
   position:relative;
   height: 100vh;
@@ -209,6 +214,19 @@ export default {
         }
         &:before {
           border-color: transparent transparent transparent #4a4a4a;
+        }
+      }
+    }
+  }
+  @media screen and(max-width: 1366px){
+    .title-box {
+      padding-left: 80px;
+      .title {
+        &:before {
+          margin-right: 30px;
+        }
+        &:after {
+          margin-right: 18px;
         }
       }
     }

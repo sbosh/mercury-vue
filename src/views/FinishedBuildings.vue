@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <mq-layout mq="m+">
+    <mq-layout mq="m+" class="mq-m future-current">
       <navinner-component :navTitle="this.finishedBuildingsPage['title_' + this.$i18n.locale]" />
       <div class="buildings building-sort">
         <swiper :options="swiperOptions">

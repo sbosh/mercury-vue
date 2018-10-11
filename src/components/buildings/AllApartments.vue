@@ -15,7 +15,7 @@
         </div>
         <div class="tbody">
           {{ filtrApartments(10000, 180000, [4]) }}
-          <router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor_for_filters + '/1/' + apartment['slug_' + $i18n.locale]" class="tr" v-for="apartment in apartments" :key="apartment.id">
+          <router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor_for_filters + '/1/' + apartment['slug_' + $i18n.locale]" class="tr" v-for="apartment in building.apartments.data" :key="apartment.id">
             <div class="td"><div class="block">{{ apartment.block }}</div></div>
             <div class="td"><div class="level">{{ apartment.floor_for_filters }}</div></div>
             <div class="td"><div class="number">{{ apartment.id }}</div></div>
@@ -29,13 +29,15 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 export default {
   name: 'all-apartments',
   props: [ 'apartmentsActive' ],
   computed: {
+    ...mapState({
+      building: state => state.buildings.building
+    }),
     ...mapGetters({
-      apartments: 'getApartments',
       filtrApartments: 'getFiltredApartments'
     })
   },

@@ -6,7 +6,7 @@
       <div class="line"></div>
       <div class="caption">
         <div class="title-box">
-          <h2 class="title" v-html="$t('home_announce')"></h2>
+          <h2 class="title" ><router-link :to="'/' + lang + '/current-buildings'" v-html="$t('home_announce')"></router-link></h2>
         </div>
         <div class="btn-box">
           <router-link :to="'/' + lang + '/current-buildings'" class="btn"><div class="btn-overlay"></div>{{ $t('our_projects') }}</router-link>

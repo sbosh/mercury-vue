@@ -5,14 +5,14 @@
         <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
         <div class="back-btn" @click="closed">Към сградата</div>
       </div>
-      <div class="available-from"><div class="text">Налични <br>апартаменти</div><span>{{ filtrApartments(priceFrom, priceTo, rooms).length }}</span> / <span>{{ count }}</span></div>
+      <div class="available-from"><div class="text" v-html="$t('available_apartments')"></div><span>{{ filtrApartments(priceFrom, priceTo, rooms).length }}</span> / <span>{{ count }}</span></div>
       <div class="compass"><img src="@/assets/images/compass.svg" alt=""></div>
     </div>
     <div class="apartments-listing">
       <div class="apartments-box" v-for="apartment in filtrApartments(priceFrom, priceTo, rooms)" :key="apartment.id">
-        <router-link :to="'/' + $i18n.locale + '/apartment/' + apartment.id + '/' + apartment['slug_' + $i18n.locale]"><img :src="apartment.image" alt=""></router-link>
+        <router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor_for_filters + '/1/' + apartment['slug_' + $i18n.locale]"><img :src="apartment.image" alt=""></router-link>
         <div class="info">
-          <div class="title"><h3><router-link :to="'/' + $i18n.locale + '/apartment/' + apartment.id + '/' + apartment['slug_' + $i18n.locale]">{{ apartment.rooms }}-стане <br>апартамент</router-link></h3></div>
+          <div class="title"><h3><router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor_for_filters + '/1/' + apartment['slug_' + $i18n.locale]">{{ apartment.rooms }}-стане <br>апартамент</router-link></h3></div>
           <div class="sqm">{{ apartment.sqm }}</div>
           <div class="price">{{ apartment.price }} <span>eur</span></div>
         </div>
