@@ -652,6 +652,15 @@ export default {
           .status {
             font-size: 11px;
             font-weight: 700;
+            &.sold {
+              color: #e22f2f;
+            }
+            &.reserved {
+              color: #fa6a02;
+            }
+            &.available {
+              color: #22a314;
+            }
           }
         }
       }

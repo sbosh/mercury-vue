@@ -31,7 +31,12 @@
       <swiper ref="mySwiper" :options="swiperOptions()">
         <swiper-slide v-for="floor in building.entrances.data[this.$route.params.slug].floors.data" :key="floor.id">
           <div class="img-box">
-            <img :src="floor.image" alt="">
+            <!-- <img :src="floor.image" alt=""> -->
+            <svg width="580" height="400" xmlns="http://www.w3.org/2000/svg">
+              <g>
+                <a :href="floor.apartments['slug_' + $i18n.local]"><rect id="svg_1" height="189" width="273" y="0.4375" x="0.5" fill="#fff"/></a>
+              </g>
+            </svg>
           </div>
         </swiper-slide>
       </swiper>
@@ -104,9 +109,11 @@ export default {
     opacity: 0;
     transition: all .3s;
     svg {
-      width: 100%;
-      height: 100%;
+      //width: 100%;
+      //height: 100%;
+      margin: 0 auto;
     }
+    svg rect:hover,
     svg polygon:hover {
       opacity: .3;
       fill: #fa6a02;

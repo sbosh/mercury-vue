@@ -5,12 +5,12 @@
       <div class="table">
         <div class="thead">
           <div class="tr">
-            <div class="th">Вход:</div>
-            <div class="th">Ниво:</div>
-            <div class="th">Номер: (id)</div>
-            <div class="th">квадратура:</div>
-            <div class="th">Цена:</div>
-            <div class="th">Статус:</div>
+            <div class="th">{{ $t('entrance') }}:</div>
+            <div class="th">{{ $t('level') }}:</div>
+            <div class="th">{{ $t('number') }}: (id)</div>
+            <div class="th">{{ $t('mq2') }}:</div>
+            <div class="th">{{ $t('price') }}:</div>
+            <div class="th">{{ $t('status') }}:</div>
           </div>
         </div>
         <div class="tbody">
@@ -20,8 +20,18 @@
             <div class="td"><div class="level">{{ apartment.floor_for_filters }}</div></div>
             <div class="td"><div class="number">{{ apartment.id }}</div></div>
             <div class="td"><div class="sqm">{{ apartment.total_area }}</div></div>
-            <div class="td"><div class="price">{{ apartment.price }}</div></div>
-            <div class="td"><div class="status">{{ apartment.status }}</div></div>
+            <div class="td"><div class="price" v-if="apartment.status === 1 || apartment.status === 2">{{ apartment.price }}</div></div>
+            <div class="td">
+              <div v-if="apartment.status == 2" class="status reserved">
+                {{ $t('reserved') }}
+              </div>
+              <div v-if="apartment.status == 3" class="status sold">
+                {{ $t('sold') }}
+              </div>
+              <div v-if="apartment.status == 1" class="status available">
+                {{ $t('available') }}
+              </div>
+            </div>
           </router-link>
         </div>
       </div>
