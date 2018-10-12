@@ -4,7 +4,6 @@
     <li><a href="#gallery">{{ $t('gallery') }}</a></li>
     <li><a href="#location">{{ $t('location') }}</a></li>
     <li><a href="#news">{{ $t('news') }}</a></li>
-    <li class="btn-box"><a href="" class="btn">{{ $t('views_scheme') }}</a></li>
   </ul>
 </template>
 

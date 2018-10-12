@@ -90,6 +90,7 @@ let router = new Router({
         }
       ],
       component: BuildingInner,
+      name: 'building-inner',
       meta: { transitionName: 'slide' }
     },
     {

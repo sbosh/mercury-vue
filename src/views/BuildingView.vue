@@ -150,26 +150,25 @@ export default {
 
       this.background = this.game.add.image(0, 0, 'starlight')
 
-      this.building.entrances.data.forEach((entrance, index) => {
-        entrance.floors.data.forEach((floor) => {
-          let coords = floor.coords.split(',').map(f => Number(f))
-          let poly = new Phaser.Polygon(coords)
-          let graphics = this.game.add.graphics(0, 0)
+      this.building.entrances.data[0].floors.data.forEach((floor, index) => {
+        let coords = floor.coords.split(', ').map(f => Number(f))
+        console.log(coords)
+        let poly = new Phaser.Polygon(coords)
+        let graphics = this.game.add.graphics(0, 0)
 
-          graphics.inputEnabled = true
-          graphics.input.useHandCursor = true
+        graphics.inputEnabled = true
+        graphics.input.useHandCursor = true
 
-          graphics.events.onInputDown.add(this.onDown(index), this)
-          graphics.events.onInputOver.add(this.onOver(index), this)
-          graphics.events.onInputOut.add(this.onOut(index), this)
+        graphics.events.onInputDown.add(this.onDown(index), this)
+        graphics.events.onInputOver.add(this.onOver(index), this)
+        graphics.events.onInputOut.add(this.onOut(index), this)
 
-          graphics.alpha = 0
-          graphics.beginFill(0xfa6a02)
-          graphics.drawPolygon(poly.points)
-          graphics.endFill()
+        graphics.alpha = 0
+        graphics.beginFill(0xfa6a02)
+        graphics.drawPolygon(poly.points)
+        graphics.endFill()
 
-          this.polygons.push(graphics)
-        })
+        this.polygons.push(graphics)
       })
     },
     onDown (index) {

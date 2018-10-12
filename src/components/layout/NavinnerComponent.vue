@@ -9,8 +9,9 @@
         <inner-news-nav v-if="navigation === 'newsNav'" />
         <inner-news-breadcrumbs v-if="navigation === 'newsBreadcrumbs'" />
       </mq-layout>
-      <div class="back-btn" @click="routeBack()">{{ $t('back') }}</div>
-      <div class="scroll-top" @click="scrollTop()"></div>
+      <div class="btn-box"><a @click="viewScheme" class="btn">{{ $t('views_scheme') }}</a></div>
+      <div class="back-btn" @click="routeBack">{{ $t('back') }}</div>
+      <div class="scroll-top" @click="scrollTop"></div>
     </nav>
   </headroom>
 </template>
@@ -40,6 +41,10 @@ export default {
     }
   },
   methods: {
+    viewScheme () {
+      this.$router.push({ name: 'building-view' })
+      console.log(this.$route.params)
+    },
     routeBack () {
       if (window.fakeRouter) {
         this.$router.go(-1)
@@ -169,11 +174,11 @@ export default {
           opacity: 1;
         }
       }
-      &.btn-box {
-        display: none;
-      }
     }//li
   }//ul
+  .btn-box {
+    display: none;
+  }
 }
 .headroom--not-top {
   background-color: #232323;
@@ -196,24 +201,20 @@ export default {
     height: 50px;
   }
   .nav-inner {
-    ul {
-      li {
-        &.btn-box {
-          display: block;
-          padding: 0 0 0 20px;
-          margin: 0;
-          a {
-            font-size: 11px;
-            font-weight: 500;
-            text-transform: uppercase;
-            background-color: #fa6a02;
-            border-color: #fa6a02;
-            padding: 20px 15px;
-            &:after,
-            &:before {
-              display: none;
-            }
-          }
+    .btn-box {
+      display: block;
+      padding: 0 0 0 20px;
+      margin: 0;
+      a {
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        background-color: #fa6a02;
+        border-color: #fa6a02;
+        padding: 20px 15px;
+        &:after,
+        &:before {
+          display: none;
         }
       }
     }

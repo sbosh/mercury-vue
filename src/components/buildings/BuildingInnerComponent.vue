@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content">
+  <div class="main-content" v-if="building">
     <mq-layout mq="md+"><navinner-component navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
     <div class="inner-building">
       <div class="inner-building-header">
@@ -29,19 +29,19 @@
           <div class="box">
             <div class="info">
               <div class="title">{{ $t('floors_count') }}</div>
-              <div class="text">6</div>
+              <div class="text"></div>
             </div>
           </div>
           <div class="box">
             <div class="info">
               <div class="title">{{ $t('apartments_count') }}</div>
-              <div class="text">87</div>
+              <div class="text">{{ building.apartments.data.length }}</div>
             </div>
           </div>
           <div class="box">
             <div class="info">
               <div class="title">{{ $t('free_apartments') }}</div>
-              <div class="text">32</div>
+              <div class="text">{{ building.apartments.data.filter(apartment => apartment.status === 1).length }}</div>
             </div>
           </div>
           <div class="box">
@@ -105,7 +105,7 @@
           <news-listing-swiper :articles="articles" />
         </div>
       </div>
-      <div class="next-building">
+      <div class="next-building" v-if="building.next_building">
         <div class="text">{{ $t('next_building') }}</div>
         <h2 class="title">
           <router-link :to="'/' + lang + '/' + building.next_building.id + '/' + building.next_building['slug_' + $i18n.locale]">{{ building.next_building['title_' + $i18n.locale] }}</router-link>
