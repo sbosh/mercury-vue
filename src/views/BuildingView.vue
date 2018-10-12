@@ -22,6 +22,7 @@
           </a>
         </svg> -->
       </div>
+      {{ initCanvas() }}
       <filtered-apartments
         @clicked="isFiltred = false"
         :isFiltred="isFiltred"
@@ -115,26 +116,30 @@ export default {
         [25, 573, 38, 578, 40, 601, 70, 571, 86, 573, 98, 563, 354, 583, 355, 543, 376, 532, 377, 517, 75, 488],
         [40, 609, 52, 583, 69, 568, 86, 570, 96, 559, 352, 582, 355, 627, 98, 612, 69, 617, 40, 648],
         [718, 510, 1322, 285, 1465, 320, 1471, 354, 1393, 339, 715, 544]
-      ]
+      ],
+      background: null,
+      isInit: false
     }
   },
-  mounted () {
-    this.game = new Phaser.Game(
-      window.innerWidth * window.devicePixelRatio,
-      window.innerHeight * window.devicePixelRatio,
-      Phaser.CANVAS,
-      'building',
-      {
-        preload: this.preload,
-        create: this.create
-      }
-    )
-  },
   methods: {
-    preload () {
+    initCanvas () {
+      this.game = new Phaser.Game(
+        1920 * window.devicePixelRatio,
+        1080 * window.devicePixelRatio,
+        Phaser.CANVAS,
+        'building',
+        {
+          preload: this.preloadGame,
+          create: this.createGame
+        }
+      )
+
+      return true
+    },
+    preloadGame () {
       this.game.load.image('starlight', '/images/build-starlight.jpg')
     },
-    create () {
+    createGame () {
       this.game.stage.disableVisibilityChange = true
       this.game.tweens.frameBased = true
       this.game.time.advancedTiming = false
@@ -143,25 +148,28 @@ export default {
 
       this.scaleGame()
 
-      this.game.add.image(0, 0, 'starlight')
+      this.background = this.game.add.image(0, 0, 'starlight')
 
-      this.coordinates.forEach((coords, index) => {
-        let poly = new Phaser.Polygon(coords)
-        let graphics = this.game.add.graphics(0, 0)
+      this.building.entrances.data.forEach((entrance, index) => {
+        entrance.floors.data.forEach((floor) => {
+          let coords = floor.coords.split(',').map(f => Number(f))
+          let poly = new Phaser.Polygon(coords)
+          let graphics = this.game.add.graphics(0, 0)
 
-        graphics.inputEnabled = true
-        graphics.input.useHandCursor = true
+          graphics.inputEnabled = true
+          graphics.input.useHandCursor = true
 
-        graphics.events.onInputDown.add(this.onDown(index), this)
-        graphics.events.onInputOver.add(this.onOver(index), this)
-        graphics.events.onInputOut.add(this.onOut(index), this)
+          graphics.events.onInputDown.add(this.onDown(index), this)
+          graphics.events.onInputOver.add(this.onOver(index), this)
+          graphics.events.onInputOut.add(this.onOut(index), this)
 
-        graphics.alpha = 0
-        graphics.beginFill(0xfa6a02)
-        graphics.drawPolygon(poly.points)
-        graphics.endFill()
+          graphics.alpha = 0
+          graphics.beginFill(0xfa6a02)
+          graphics.drawPolygon(poly.points)
+          graphics.endFill()
 
-        this.polygons.push(graphics)
+          this.polygons.push(graphics)
+        })
       })
     },
     onDown (index) {
@@ -181,7 +189,16 @@ export default {
     },
     scaleGame () {
       this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL
-      this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
+      this.game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
+
+      Phaser.Canvas.setImageRenderingCrisp(this.game.canvas)
+      Phaser.Canvas.setSmoothingEnabled(this.game.context, false)
+
+      if (window.innerWidth <= 1366) {
+        this.game.scale.setGameSize(window.innerWidth, 1080)
+      }
+
+      this.game.antialias = false
       this.game.scale.refresh()
     },
     byId (e) {
@@ -247,6 +264,11 @@ export default {
       this.hdc.lineWidth = 6
     }
   },
+  watch: {
+    building () {
+      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+    }
+  },
   computed: {
     lang () {
       return this.$i18n.locale
@@ -263,6 +285,11 @@ export default {
 </script>
 
 <style lang="scss">
+canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .tooltip {
   .tooltip-inner {
     background: #fff;
