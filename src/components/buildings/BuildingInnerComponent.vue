@@ -277,6 +277,9 @@ export default {
       font-size: 26px;
       font-weight: 600;
       text-transform: uppercase;
+      &:before,&:after {
+        display: none;
+      }
     }
     .text {
       font-size: 10px;
@@ -412,6 +415,24 @@ export default {
       }
     }
   }
+  @media screen and(max-width: 600px) {
+    .img-box {
+      width: 100%;
+      padding-left: 25px;
+      padding-right: 25px;
+      >.btn {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        box-sizing: border-box;
+      }
+      .btn-box {
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  }
 }//map
 .location {
   padding-top: 100px;
@@ -466,7 +487,11 @@ export default {
       .box {
         flex: 1 0 100%;
         width: 100%;
+        &:last-child .info {
+          border-bottom: none;
+        }
         .info {
+          border-bottom: 1px solid #dfdfdf;
           .icon {
             width: 50px;
             img {

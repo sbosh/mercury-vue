@@ -43,7 +43,7 @@
       <div class="swiper-pagination"></div>
     </div>
     <mq-layout mq="sm" class="buttons-mobile">
-      <a href="" class="btn">{{ $t('back_building') }}</a>
+      <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="btn">{{ $t('back_building') }}</router-link>
     </mq-layout>
   </div>
 </template>

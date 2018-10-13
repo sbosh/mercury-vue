@@ -1,7 +1,7 @@
 <template>
   <header :class="[{ active: isActive }, { white: $route.name === 'building-inner-floor' || $route.name === 'apartment' }]" class="header-mobile">
     <router-link tag="a" :to="'/' + lang" class="main-nav-logo">
-      <img src="@/assets/images/export.svg" class="svg" alt="">
+      <img src="@/assets/images/mercury-logo-mobile.svg" class="svg" alt="">
     </router-link>
     <ul class="lng">
       <li v-if="lang === 'bg'" ><a href="#!" @click="changeLang('en', $event)">en</a></li>
@@ -17,7 +17,7 @@
       </div>
     </button>
     <div class="tel">
-      <a href="tel+359884626391" class="tel-box"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></a>
+      <a href="tel:+359884626391" class="tel-box"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></a>
     </div>
     <nav class="main-nav">
       <div class="main-navigation">
@@ -26,15 +26,14 @@
             <div class="col">
             </div>
             <div class="col">
-              <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/buildings'">{{ $t('current_projects') }}</router-link></h3>
+              <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/current-buildings'">{{ $t('current_projects') }}</router-link></h3>
               <ul>
-                <li><a href="">Комплекс Бижу</a><router-link :to="'/' + lang">{{ $t('home') }}</router-link></li>
-                <li><a href="">Флора Бийч Резорт</a></li>
-                <li><a href="">Комплекс Меркурий Плаза</a></li>
-                <li><a href="">Комплекс Елеганс</a></li>
+                <li v-for="building in current" :key="building.id" >
+                  <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
+                </li>
               </ul>
-              <h3><router-link :to="'/' + lang + '/building-sort'">{{ $t('completed_projects') }}</router-link></h3>
-              <h3><router-link :to="'/' + lang + '/building-sort'">{{ $t('future_projects') }}</router-link></h3>
+              <h3><router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link></h3>
+              <h3><router-link :to="'/' + lang + '/future-buildings'">{{ $t('future_projects') }}</router-link></h3>
               <h3><router-link :to="'/' + lang + '/news'">{{ $t('news') }}</router-link></h3>
             </div>
             <div class="col">
@@ -62,6 +61,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { loadLanguageAsync } from '@/setup/i18n'
 import axios from 'axios'
 export default {
@@ -74,7 +74,10 @@ export default {
   computed: {
     lang () {
       return this.$i18n.locale
-    }
+    },
+    ...mapState({
+      current: state => state.buildings.current
+    })
   },
   mounted () {
     this.convertSVG()
@@ -174,7 +177,7 @@ export default {
     background: transparent;
     color: #fff;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
     z-index: 150;
     border-right: 1px solid rgba(255,255,255, .2);
@@ -245,7 +248,7 @@ export default {
       a {
         color: #fff;
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 600;
         text-transform: uppercase;
         border-bottom: 2px solid #fa6a02;
         padding: 5px;
@@ -256,7 +259,7 @@ export default {
         margin-left: auto;
         color: #fff;
         font-size: 12px;
-        font-weight: 700;
+        font-weight: 600;
       }
     }
   }
@@ -292,7 +295,7 @@ export default {
       h3, h3 a {
         color: #fff;
         font-size: 17px;
-        font-weight: 700;
+        font-weight: 600;
         line-height: 35px;
         text-decoration: none;
       }
@@ -319,7 +322,7 @@ export default {
       .cols {
         display: flex;
         flex-direction: column;
-        padding: 60px 20px 20px 20px;
+        padding: 60px 25px 20px 25px;
       }
       .col {
         opacity: 0;
@@ -345,7 +348,7 @@ export default {
         .text {
           color: #fff;
           font-size: 9px;
-          font-weight: 700;
+          font-weight: 600;
           text-transform: uppercase;
           margin-bottom:  15px;
         }
@@ -439,7 +442,7 @@ export default {
     svg g,
     svg g g,
     svg g path, {
-      fill: blue !important;
+      fill: #fff !important;
     }
   }
   &.white {
@@ -447,13 +450,13 @@ export default {
     left: 0;
     padding-left: 25px;
     .main-nav-logo {
-      svg path,
-      svg polygon,
-      svg g mask,
-      svg g,
-      svg g g,
-      svg g path, {
-        fill: red !important;
+      svg {
+        path {
+          fill: #000 !important;
+        }
+        g g:nth-child(2) path {
+          fill: #b1b1b1 !important;
+        }
       }
     }
     .toggle-header {
@@ -465,6 +468,16 @@ export default {
       }
     }
     &.active {
+      .main-nav-logo {
+        svg {
+          path {
+            fill: #fff !important;
+          }
+          g g:nth-child(2) path {
+            fill: #fff !important;
+          }
+        }
+      }
       .toggle-header {
         border-right: 1px solid #fff;
         .button {

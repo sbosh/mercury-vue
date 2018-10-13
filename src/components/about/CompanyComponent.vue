@@ -3,7 +3,7 @@
     <div class="caption">
       <div class="title-box">
         <h1 class="title">{{ $t('about_company') }}</h1>
-        <h2>Mercury99 е строителна фирма. <br>Ние създаваме иновативни комплекси, сгради.</h2>
+        <h2>{{ $t('about_company_annonce') }}</h2>
       </div>
     </div>
     <div class="img-box">
@@ -11,14 +11,14 @@
     </div>
     <div class="caption">
       <div class="title-box">
-        <h3 class="title">Consetetur sadipscing elitr, sed diam</h3>
+        <h3 class="title">{{ $t('about_company_caption') }}</h3>
       </div>
     </div>
     <div class="description">
-      <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+      <p>{{ $t('about_company_description') }}</p>
       <br>
       <blockquote >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum fugit inventore corrupti, culpa quam consequuntur quia nulla temporibus est facilis accusantium ipsam unde ducimus sit, eius deserunt excepturi dignissimos itaque.
+        {{ $t('about_company_blockquote') }}
       </blockquote>
     </div>
   </div>

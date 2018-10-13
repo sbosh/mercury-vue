@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content">
+  <div class="main-content" v-if="currentBuildingsPage">
     <nav-component />
     <mq-layout mq="md+"><buildings-carousel :pageTitle="this.currentBuildingsPage['title_' + this.$i18n.locale]" /></mq-layout>
     <mq-layout mq="sm"><buildings-mobile :pageTitle="this.currentBuildingsPage['title_' + this.$i18n.locale]" /></mq-layout>

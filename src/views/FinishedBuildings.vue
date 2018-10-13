@@ -4,7 +4,7 @@
       <navinner-component :navTitle="this.finishedBuildingsPage['title_' + this.$i18n.locale]" />
       <div class="buildings building-sort">
         <swiper :options="swiperOptions">
-          <swiper-slide v-for="building in finished" :key="building.id" >
+          <swiper-slide v-for="building in finished" :key="building.id">
             <div class="building-item">
               <div class="img-box">
                 <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">

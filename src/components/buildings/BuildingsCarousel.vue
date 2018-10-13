@@ -254,6 +254,18 @@ export default {
     }
   }
 }
+@media screen and(max-width: 1366px) {
+  .buildings-carousel {
+    .swiper-slide {
+      .caption {
+        .title {
+          font-size: 28px;
+          line-height: 36px;
+        }
+      }
+    }
+  }
+}
 @keyframes bounce-animation {
   0%{
     transform:translateY(0);

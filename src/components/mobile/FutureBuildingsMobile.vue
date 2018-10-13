@@ -1,16 +1,16 @@
 <template>
   <div class="building-listing-mobile">
     <h1 class="title">{{pageTitle}}</h1>
-    <div class="building-box" v-for="building in buildings" :key="building.id" >
-      <div class="img-box"><img :src="building.bg" alt=""></div>
+    <div class="building-box" v-for="building in future" :key="building.id">
+      <div class="img-box"><img :src="building.thumb" alt=""></div>
       <div class="info">
-        <h2 class="title"><a :href="building.link"><span>{{building.id}}. </span>{{ building.title }}</a></h2>
+        <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
       </div>
     </div>
     <div class="outher-buildings">
       <div class="buttons">
-        <router-link :to="'/' + lang + '/building-sort'">{{ $t('future_projects') }}</router-link>
-        <router-link :to="'/' + lang + '/building-sort'">{{ $t('completed_projects') }}</router-link>
+        <router-link :to="'/' + lang + '/current-buildings'">{{ $t('current_projects') }}</router-link>
+        <router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link>
       </div>
     </div>
   </div>
@@ -31,15 +31,13 @@ export default {
       return this.$i18n.locale
     },
     ...mapState({
-      buildings: state => state.buildings.all
+      future: state => state.buildings.future
     })
   }
 }
 </script>
 
 <style lang="scss" scroped>
-.active-component {
-}
 .outher-buildings {
   .buttons {
     display: flex;

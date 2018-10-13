@@ -6,15 +6,15 @@
           <h3 class="title">{{ $t('services') }}</h3>
         </div>
         <div class="description">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In numquam tenetur laboriosam. Quisquam eligendi sed, enim molestias aut, molestiae deserunt. Ad doloribus laborum, maiores, soluta perferendis labore facere nemo laboriosam!</p>
+          <p>{{ $t('services_description') }}</p>
         </div>
       </div>
       <div class="all-services">
         <ul>
-          <li><a href="">Мазилки и замазки</a></li>
-          <li><a href="">Отдаване под наем</a></li>
-          <li><a href="">Обзавеждане</a></li>
-          <li><a href="">Боядисване</a></li>
+          <li><a href="">{{ $t('services_one') }}</a></li>
+          <li><a href="">{{ $t('services_two') }}</a></li>
+          <li><a href="">{{ $t('services_three') }}</a></li>
+          <li><a href="">{{ $t('services_four') }}</a></li>
         </ul>
       </div>
     </div>

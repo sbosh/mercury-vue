@@ -179,6 +179,14 @@ export default {
   .btn-box {
     display: none;
   }
+  @media screen and(max-width: 1366px) {
+    .header-title {
+      margin-left: 40px;
+    }
+    ul {
+      margin: 0 auto 0 80px;
+    }
+  }
 }
 .headroom--not-top {
   background-color: #232323;

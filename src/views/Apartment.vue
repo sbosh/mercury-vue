@@ -8,7 +8,17 @@
         <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.slug + '/' + this.$route.params.floorId" class="back-btn">{{ $t('back_floor') }}</router-link>
       </div>
       <div class="available-from">
-        <div class="status">{{ $t('status') }}: <div class="available">{{ $t('available') }}</div></div>
+        <div class="status">{{ $t('status') }}
+          <div v-if="apartment.status == 2" class="reserved">
+            {{ $t('reserved') }}
+          </div>
+          <div v-if="apartment.status == 3" class="sold">
+            {{ $t('sold') }}
+          </div>
+          <div v-if="apartment.status == 1" class="available">
+            {{ $t('available') }}
+          </div>
+        </div>
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="">
@@ -25,12 +35,12 @@
       <div class="apartment-header">
         <div class="left">
           <div class="title"><h1>{{ apartment.rooms }} - {{ $t('room_apartment') }}</h1></div>
-          <div class="sqm">{{ apartment.living_area }} m2</div>
+          <div class="sqm">{{ apartment.living_area }} m<sup>2</sup></div>
         </div>
         <div class="right">
           <div class="">
             <div class="text">{{ $t('total_price') }}:</div>
-            <div class="price">{{ apartment.price }} <div class="currency drop-arrow">euro <span class="dropdown">bgn</span></div></div>
+            <div class="price">{{ apartment.price }} <div class="currency">euro</div></div>
           </div>
           <div>
             <div class="text">{{ $t('price_per_m') }} m²:</div>
@@ -44,7 +54,17 @@
           <div class="text" v-html="apartment['text_' + $i18n.local]"></div>
           <mq-layout mq="sm" class="status-mobile">
             <div class="text">{{ $t('status') }}</div>
-            <div class="status available">{{ $t('available') }}</div>
+            <div class="status">
+              <div v-if="apartment.status == 2" class="reserved">
+                {{ $t('reserved') }}
+              </div>
+              <div v-if="apartment.status == 3" class="sold">
+                {{ $t('sold') }}
+              </div>
+              <div v-if="apartment.status == 1" class="available">
+                {{ $t('available') }}
+              </div>
+            </div>
           </mq-layout>
           <a @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
           <div class="popup" v-bind:class="{ active: contactFormActive }" >
@@ -56,8 +76,8 @@
             <a href="" class="btn-pdf">{{ $t('download_pdf') }}</a>
           </div>
           <mq-layout mq="sm" class="buttons">
-            <a href="" class="btn">Към сградата</a>
-            <a href="" class="btn">Към етажа</a>
+            <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="btn">{{ $t('back_building') }}</router-link>
+            <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.slug + '/' + this.$route.params.floorId" class="btn">{{ $t('back_floor') }}</router-link>
           </mq-layout>
         </div>
         <div class="apartment-florplan">
@@ -156,6 +176,16 @@ export default {
     transform: translateX(0);
     form {
       transform: translateY(0);
+    }
+  }
+  @media screen and(max-width: 768px) {
+    .popup-title {
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
+    form {
+      margin-left: 10px;
+      margin-right: 10px;
     }
   }
 }
@@ -399,6 +429,7 @@ export default {
       .sidebar {
         margin-top: 40px;
         padding-left: 0;
+        min-width: inherit;
         h3 {
           color: #2c2c2c;
           font-size: 17px;
@@ -440,15 +471,16 @@ export default {
           padding: 30px 0;
           display: flex;
           justify-content: space-between;
+          flex-direction: column;
           .btn {
-            width: 47%;
+            width: 100%;
             background-color: #eee;
             border-color: #eee;
             color: #000;
             font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
-            margin: 0;
+            margin: 10px 0;
           }
         }
       }

@@ -4,23 +4,6 @@
     <div class="building-apartments">
       <div class="img-box">
         <div id="building"></div>
-        <!-- <canvas id="myCanvas"></canvas>
-        <img src="@/assets/images/8__building.jpg" id="map" usemap="#image-map">
-        <map name="image-map">
-          <area v-for="floor in floors" :key="floor.id"
-          @mouseover="myHover"
-          @mouseleave="myLeave"
-          alt=""
-          title=""
-          :href="'/' + $i18n.locale +  '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/floor/' + floor['slug_' + $i18n.locale] + '/' + floor.id"
-          :coords="floor.coords"
-          shape="poly">
-        </map> -->
-        <!-- <svg v-if="floors" width="1920" height="600">
-          <a v-for="floor in floors" :key="floor.id" :xlink:href="'/' + $i18n.locale +  '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/floor/' + floor['slug_' + $i18n.locale] + '/' + floor.id" v-tooltip="{content: 'Floor ID: ' + floor.id}">
-            <path class="st0" :d="floor.coords" />
-          </a>
-        </svg> -->
       </div>
       <filtered-apartments
         @clicked="isFiltred = false"
@@ -305,27 +288,6 @@ canvas {
       right: 0;
       bottom: 0;
     }
-    // img {
-    //   width: 100vw;
-    //   height: 100vh;
-    //   object-fit: cover;
-    // }
-    // svg {
-    //   width: 100%;
-    //   height: 100%;
-    //   position: absolute;
-    //   top: 0;
-    //   left: 0;
-    //   right: 0;
-    //   bottom: 0;
-    //   path,
-    //   polygon {
-    //     transition: all .3s;
-    //     &:hover {
-    //       opacity: .8;
-    //     }
-    //   }
-    // }
   }
 }
 .filters {
@@ -687,6 +649,28 @@ canvas {
           }
         }
       }
+    }
+  }
+  @media screen and(max-width: 768px) {
+    height: auto;
+    .img-box {
+      height: auto;
+      width: 100%;
+      #building {
+        position: relative;
+        left: inherit;
+        right: inherit;
+        top: inherit;
+        bottom: inherit;
+      }
+    }
+    .bottom-options {
+      position: relative;
+      left: inherit;
+      bottom: inherit;
+      right: inherit;
+      padding: 20px 25px;
+      background: #000;
     }
   }
 }
