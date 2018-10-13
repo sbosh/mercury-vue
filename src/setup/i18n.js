@@ -8,7 +8,8 @@ Vue.use(VueI18n)
 
 export const i18n = new VueI18n({
   locale: '',
-  fallbackLocale: 'en'
+  fallbackLocale: 'en',
+  silentTranslationWarn: true
 })
 
 const loadedLanguages = []

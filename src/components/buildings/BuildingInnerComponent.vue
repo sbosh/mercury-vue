@@ -29,7 +29,7 @@
           <div class="box">
             <div class="info">
               <div class="title">{{ $t('floors_count') }}</div>
-              <div class="text"></div>
+              <div class="text">{{ building.floors.data.length }}</div>
             </div>
           </div>
           <div class="box">
@@ -158,9 +158,8 @@ export default {
     }
   },
   mounted () {
-    let $this = this
-    setTimeout(function () {
-      $this.$el.classList.add('active')
+    setTimeout(() => {
+      this.$el.classList.add('active')
     }, 1000)
     let animateBox = document.getElementsByClassName('animate-box')
     window.addEventListener('scroll', function () {
@@ -171,6 +170,14 @@ export default {
         }
       }
     })
+  },
+  created () {
+    this.$store.cache.dispatch('fetchBuildingById', this.$route.params.id)
+  },
+  watch: {
+    '$route.params.id' (id) {
+      this.$store.cache.dispatch('fetchBuildingById', id)
+    }
   },
   computed: {
     lang () {

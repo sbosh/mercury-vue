@@ -2,7 +2,7 @@
   <div class="company-component">
     <div class="caption">
       <div class="title-box">
-        <h1 class="title">За компанията</h1>
+        <h1 class="title">{{ $t('about_company') }}</h1>
         <h2>Mercury99 е строителна фирма. <br>Ние създаваме иновативни комплекси, сгради.</h2>
       </div>
     </div>

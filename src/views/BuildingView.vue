@@ -22,7 +22,6 @@
           </a>
         </svg> -->
       </div>
-      {{ initCanvas() }}
       <filtered-apartments
         @clicked="isFiltred = false"
         :isFiltred="isFiltred"
@@ -121,6 +120,16 @@ export default {
       isInit: false
     }
   },
+  mounted () {
+    if (this.building) {
+      this.initCanvas()
+    }
+  },
+  watch: {
+    building () {
+      this.initCanvas()
+    }
+  },
   methods: {
     initCanvas () {
       this.game = new Phaser.Game(
@@ -137,7 +146,7 @@ export default {
       return true
     },
     preloadGame () {
-      this.game.load.image('starlight', '/images/build-starlight.jpg')
+      this.game.load.image('starlight', this.$store.state.buildings.building.image)
     },
     createGame () {
       this.game.stage.disableVisibilityChange = true
@@ -152,14 +161,13 @@ export default {
 
       this.building.entrances.data[0].floors.data.forEach((floor, index) => {
         let coords = floor.coords.split(', ').map(f => Number(f))
-        console.log(coords)
         let poly = new Phaser.Polygon(coords)
         let graphics = this.game.add.graphics(0, 0)
 
         graphics.inputEnabled = true
         graphics.input.useHandCursor = true
 
-        graphics.events.onInputDown.add(this.onDown(index), this)
+        graphics.events.onInputDown.add(this.onDown(floor.id), this)
         graphics.events.onInputOver.add(this.onOver(index), this)
         graphics.events.onInputOut.add(this.onOut(index), this)
 
@@ -171,9 +179,9 @@ export default {
         this.polygons.push(graphics)
       })
     },
-    onDown (index) {
+    onDown (floorId) {
       return () => {
-        alert('Работи уе, лек!')
+        this.$router.push({ name: 'building-inner-floor', params: { slug: 1, floorId } })
       }
     },
     onOver (index) {
@@ -188,14 +196,10 @@ export default {
     },
     scaleGame () {
       this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL
-      this.game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
+      this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
 
       Phaser.Canvas.setImageRenderingCrisp(this.game.canvas)
       Phaser.Canvas.setSmoothingEnabled(this.game.context, false)
-
-      if (window.innerWidth <= 1366) {
-        this.game.scale.setGameSize(window.innerWidth, 1080)
-      }
 
       this.game.antialias = false
       this.game.scale.refresh()
@@ -263,22 +267,15 @@ export default {
       this.hdc.lineWidth = 6
     }
   },
-  watch: {
-    building () {
-      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-    }
-  },
   computed: {
     lang () {
       return this.$i18n.locale
     },
     ...mapState({
       apartments: state => state.apartments.all,
-      floors: state => state.floors.all
-    }),
-    building () {
-      return this.$store.getters.getBuilding(this.$route.params.building)
-    }
+      floors: state => state.floors.all,
+      building: state => state.buildings.building
+    })
   }
 }
 </script>

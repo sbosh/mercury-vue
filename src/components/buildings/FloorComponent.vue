@@ -1,5 +1,5 @@
 <template>
-  <div class="floor-plan">
+  <div class="floor-plan" v-if="building">
     <mq-layout mq="md+" class="left-sidebar">
       <div class="top">
         <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
@@ -29,12 +29,12 @@
     </mq-layout>
     <div class="floor-info">
       <swiper ref="mySwiper" :options="swiperOptions()">
-        <swiper-slide v-for="floor in building.entrances.data[this.$route.params.slug].floors.data" :key="floor.id">
+        <swiper-slide v-for="floor in building.entrances.data[this.$route.params.slug - 1].floors.data" :key="floor.id">
           <div class="img-box">
             <!-- <img :src="floor.image" alt=""> -->
             <svg width="580" height="400" xmlns="http://www.w3.org/2000/svg">
               <g>
-                <a :href="floor.apartments['slug_' + $i18n.local]"><rect id="svg_1" height="189" width="273" y="0.4375" x="0.5" fill="#fff"/></a>
+                <a href="http://www.w3.org/2000/svg"><rect id="svg_1" height="189" width="273" y="0.4375" x="0.5" fill="#fff"/></a>
               </g>
             </svg>
           </div>
@@ -51,7 +51,12 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-  name: 'building-floor',
+  name: 'building-inner-floor',
+  data () {
+    return {
+      swiperHasRef: false
+    }
+  },
   computed: {
     ...mapState({
       building: state => state.buildings.building
@@ -64,11 +69,18 @@ export default {
     }
   },
   mounted () {
-    console.log(Number(this.$route.params.slug) - 1)
-    this.swiper.slideTo(Number(this.$route.params.slug) - 1)
-    this.swiper.on('slideChange', this.handleSlideChange)
+    this.initSwiper()
+  },
+  updated () {
+    this.initSwiper()
   },
   methods: {
+    initSwiper () {
+      if (this.$refs.mySwiper) {
+        this.$refs.mySwiper.swiper.slideTo(Number(this.$route.params.slug))
+        this.$refs.mySwiper.swiper.on('slideChange', this.handleSlideChange)
+      }
+    },
     swiperOptions () {
       const $this = this
       return {
@@ -89,7 +101,7 @@ export default {
       }
     },
     handleSlideChange () {
-      this.$router.push({ name: 'building-floor', params: { slug: this.swiper.activeIndex + 1 } })
+      this.$router.replace({ name: 'building-inner-floor', params: { slug: this.swiper.activeIndex } })
     }
   }
 }

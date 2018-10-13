@@ -41,14 +41,7 @@
       <div class="apartment-content">
         <div class="sidebar">
           <h3>{{ $t('apartment_information') }}</h3>
-          <ul>
-            <li>Всекидневна <span>29 m²</span></li>
-            <li>Всекидневна <span>29 m²</span></li>
-            <li>Спалня 2 <span>15 m²</span></li>
-            <li>Баня с wc <span>13.3 m²</span></li>
-            <li>Wc <span>3.4 m²</span></li>
-            <li>Тераса <span>5 m²</span></li>
-          </ul>
+          <div class="text" v-html="apartment['text_' + $i18n.local]"></div>
           <mq-layout mq="sm" class="status-mobile">
             <div class="text">{{ $t('status') }}</div>
             <div class="status available">{{ $t('available') }}</div>
@@ -271,9 +264,10 @@ export default {
       justify-content: space-around;
       flex-direction: column;
       padding-left: 40px;
-      min-width: 220px;;
+      min-width: 220px;
+      counter-reset: counter;
+      ol,
       ul {
-        counter-reset: counter;
         padding: 0;
         margin: 15px 0;
         li {
@@ -290,7 +284,7 @@ export default {
           }
           &:before {
             counter-increment: counter;
-            content: counters(counter,".");
+            content: counters(counter,". 0");
             width: 36px;
             height: 36px;
             line-height: 36px;

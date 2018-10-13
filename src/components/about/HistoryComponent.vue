@@ -2,7 +2,7 @@
   <div class="history-component">
     <div class="caption">
       <div class="title-box">
-        <h2 class="title">История</h2>
+        <h2 class="title">{{ $t('history') }}</h2>
       </div>
     </div>
     <div class="history-slider">

@@ -1,5 +1,5 @@
 <template>
-  <div class="all-apartments" v-bind:class="{ active: apartmentsActive }">
+  <div class="all-apartments" v-if="building" v-bind:class="{ active: apartmentsActive }">
     <div class="table-box">
       <div class="close" @click="closed"></div>
       <div class="table">

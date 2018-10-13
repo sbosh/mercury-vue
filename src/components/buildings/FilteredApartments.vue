@@ -3,7 +3,7 @@
     <div class="left-sidebar">
       <div class="top">
         <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
-        <div class="back-btn" @click="closed">Към сградата</div>
+        <div class="back-btn" @click="closed">{{ $t('back_building') }}</div>
       </div>
       <div class="available-from"><div class="text" v-html="$t('available_apartments')"></div><span>{{ filtrApartments(priceFrom, priceTo, rooms).length }}</span> / <span>{{ count }}</span></div>
       <div class="compass"><img src="@/assets/images/compass.svg" alt=""></div>
@@ -16,17 +16,9 @@
         <div class="info">
           <div class="title"><h3><router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor_for_filters + '/1/' + apartment['slug_' + $i18n.locale]">{{ apartment.rooms }}-{{ $t('rooms') }} <br>{{ $t('apartment') }}</router-link></h3></div>
           <div class="sqm">{{ apartment.total_area }} mq<sup>2</sup></div>
-          <div class="price">{{ apartment.price }} <span>eur</span></div>
+          <div class="price" v-if="apartment.status == 2">{{ apartment.price }} <span>eur</span></div>
         </div>
       </div>
-      <svg class="defs-only">
-        <filter id="duotone" color-interpolation-filters="sRGB" x="0" y="0" height="100%" width="100%">
-          <feColorMatrix type="matrix" values="1 0 0 0 0 -0.2 1.0 0.3 0.1 0 -0.1 0 1 0 0 0 0 0 1 0 " />
-        </filter>
-        <filter id="linear">
-          <feColorMatrix type="matrix" values="1 -0.2 0 0 0 0 1 0 -0.1 0 0 1.2 1 0.1 0 0 0 1.7 1 0 "/>
-        </filter>
-      </svg>
     </div>
   </div>
 </template>
@@ -147,16 +139,15 @@ export default {
         max-width: 100%;
       }
       &.sold {
-        img {
-          filter:  url(#duotone);
-        }
+        img,
         .info {
           opacity: .2;
         }
       }
       &.reserved {
-        img {
-          filter:  url(#linear);
+        img,
+        .info {
+          opacity: .2;
         }
       }
       &:nth-child(even) {

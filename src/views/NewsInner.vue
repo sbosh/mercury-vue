@@ -18,7 +18,7 @@
           </div>
         </article>
         <div class="related-news">
-          <h3>Свързани новини</h3>
+          <h3>{{ $t('related_news') }}</h3>
           <div class="news-swiper">
             <news-listing-swiper :articles="articles" />
           </div>

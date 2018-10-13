@@ -9,7 +9,7 @@
         <inner-news-nav v-if="navigation === 'newsNav'" />
         <inner-news-breadcrumbs v-if="navigation === 'newsBreadcrumbs'" />
       </mq-layout>
-      <div class="btn-box"><a @click="viewScheme" class="btn">{{ $t('views_scheme') }}</a></div>
+      <div class="btn-box" v-if="this.$route.name === 'building-inner-component'"><a @click="viewScheme" class="btn">{{ $t('views_scheme') }}</a></div>
       <div class="back-btn" @click="routeBack">{{ $t('back') }}</div>
       <div class="scroll-top" @click="scrollTop"></div>
     </nav>
@@ -43,7 +43,6 @@ export default {
   methods: {
     viewScheme () {
       this.$router.push({ name: 'building-view' })
-      console.log(this.$route.params)
     },
     routeBack () {
       if (window.fakeRouter) {
@@ -58,6 +57,7 @@ export default {
     }
   },
   mounted () {
+    console.log(this.$route.name)
     let anchorlinks = document.querySelectorAll('a[href^="#"]')
     for (let item of anchorlinks) {
       item.addEventListener('click', (e) => {
@@ -212,6 +212,7 @@ export default {
         background-color: #fa6a02;
         border-color: #fa6a02;
         padding: 20px 15px;
+        cursor: pointer;
         &:after,
         &:before {
           display: none;

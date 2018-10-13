@@ -4,7 +4,7 @@ import HTTP from '@/api/http'
 const articleService = new ArticleService(HTTP)
 
 const state = {
-  all: []
+  all: null
 }
 
 const actions = {

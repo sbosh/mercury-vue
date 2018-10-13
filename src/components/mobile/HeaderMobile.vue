@@ -1,6 +1,8 @@
 <template>
-  <header v-bind:class="{ active: isActive }" class="header-mobile">
-    <router-link tag="a" :to="'/' + lang" class="main-nav-logo"><img src="@/assets/images/logo-mobile.png" alt=""></router-link>
+  <header :class="[{ active: isActive }, { white: $route.name === 'building-inner-floor' || $route.name === 'apartment' }]" class="header-mobile">
+    <router-link tag="a" :to="'/' + lang" class="main-nav-logo">
+      <img src="@/assets/images/export.svg" class="svg" alt="">
+    </router-link>
     <ul class="lng">
       <li v-if="lang === 'bg'" ><a href="#!" @click="changeLang('en', $event)">en</a></li>
       <li v-else><a href="#!" @click="changeLang('bg', $event)">bg</a></li>
@@ -430,59 +432,82 @@ export default {
       }
     }
   }
+  .main-nav-logo {
+    svg path,
+    svg polygon,
+    svg g mask,
+    svg g,
+    svg g g,
+    svg g path, {
+      fill: blue !important;
+    }
+  }
+  &.white {
+    background: #fff;
+    left: 0;
+    padding-left: 25px;
+    .main-nav-logo {
+      svg path,
+      svg polygon,
+      svg g mask,
+      svg g,
+      svg g g,
+      svg g path, {
+        fill: red !important;
+      }
+    }
+    .toggle-header {
+      border-right: 1px solid #000;
+      .button {
+        span {
+          background-color: #000;
+        }
+      }
+    }
+    &.active {
+      .toggle-header {
+        border-right: 1px solid #fff;
+        .button {
+          span {
+            background-color: #fff;
+          }
+        }
+      }
+    }
+  }
 }
 @-webkit-keyframes ring {
   0% {
   }
   10% {
-    -webkit-transform:rotate(5deg);
-    -moz-transform:rotate(5deg);
-    -o-transform:rotate(5deg);
+    transform:rotate(5deg);
   }
   20% {
-    -webkit-transform:rotate(-5deg);
-    -moz-transform:rotate(-5deg);
-    -o-transform:rotate(-5deg);
+    transform:rotate(-5deg);
   }
   30% {
-    -webkit-transform:rotate(5deg);
-    -moz-transform:rotate(5deg);
-    -o-transform:rotate(5deg);
+    transform:rotate(5deg);
   }
    40% {
-    -webkit-transform:rotate(-5deg);
-    -moz-transform:rotate(-5deg);
-    -o-transform:rotate(-5deg);
+    transform:rotate(-5deg);
   }
   50% {
-    -webkit-transform:rotate(5deg);
-    -moz-transform:rotate(5deg);
-    -o-transform:rotate(5deg);
+    transform:rotate(5deg);
   }
    60% {
-    -webkit-transform:rotate(-5deg);
-    -moz-transform:rotate(-5deg);
-    -o-transform:rotate(-5deg);
+    transform:rotate(-5deg);
   }
   70% {
-    -webkit-transform:rotate(5deg);
-    -moz-transform:rotate(5deg);
-    -o-transform:rotate(5deg);
+    transform:rotate(5deg);
   }
   80% {
-    -webkit-transform:rotate(-5deg);
-    -moz-transform:rotate(-5deg);
-    -o-transform:rotate(-5deg);
+    transform:rotate(-5deg);
   }
   90% {
-    -webkit-transform:rotate(5deg);
-    -moz-transform:rotate(5deg);
-    -o-transform:rotate(5deg);
+    transform:rotate(5deg);
   }
    100% {
-    -webkit-transform:rotate(-5deg);
-    -moz-transform:rotate(-5deg);
-    -o-transform:rotate(-5deg);
+    transform:rotate(-5deg);
   }
 }
 @keyframes nav-animation {

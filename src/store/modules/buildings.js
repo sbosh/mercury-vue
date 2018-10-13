@@ -4,11 +4,11 @@ import HTTP from '@/api/http'
 const buildingsService = new BuildingsService(HTTP)
 
 const state = {
-  all: [],
-  current: [],
-  building: [],
-  future: [],
-  finished: []
+  all: null,
+  current: null,
+  building: null,
+  future: null,
+  finished: null
 }
 
 const actions = {
@@ -32,6 +32,7 @@ const actions = {
 const getters = {
   getBuilding (state) {
     return (slug) => {
+      if (!state.all) return
       return state.all.find(building => building.slug_en === slug) ||
         state.all.find(building => building.slug_bg === slug)
     }

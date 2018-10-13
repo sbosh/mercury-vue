@@ -4,13 +4,13 @@ import HTTP from '@/api/http'
 const pagesService = new PagesService(HTTP)
 
 const state = {
-  home: [],
-  news: [],
-  currentBuildingsPage: [],
-  futureBuildingsPage: [],
-  finishedBuildingsPage: [],
-  contacts: [],
-  about: []
+  home: null,
+  news: null,
+  currentBuildingsPage: null,
+  futureBuildingsPage: null,
+  finishedBuildingsPage: null,
+  contacts: null,
+  about: null
 }
 
 const actions = {

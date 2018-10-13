@@ -76,7 +76,7 @@ let router = new Router({
           children: [
             {
               path: '',
-              name: 'building-floor',
+              name: 'building-inner-floor',
               component: FloorComponent,
               meta: { transitionName: 'slide' }
             },
@@ -90,7 +90,6 @@ let router = new Router({
         }
       ],
       component: BuildingInner,
-      name: 'building-inner',
       meta: { transitionName: 'slide' }
     },
     {

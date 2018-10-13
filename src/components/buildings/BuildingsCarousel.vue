@@ -14,7 +14,7 @@
         <h3>{{ currentBuildingsPage['title_' + $i18n.locale] }}</h3>
         <div class="buildings-titles">
           <div class="building-title" v-for="(building, index) in current" :key="building.id">
-            <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]"><span>{{ index + 1 }}</span> {{ building['title_' + $i18n.locale] }}</router-link>
+            <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'"><span>{{ index + 1 }}</span> {{ building['title_' + $i18n.locale] }}</router-link>
           </div>
         </div>
         <div class="buttons">

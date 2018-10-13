@@ -4,7 +4,7 @@ import HTTP from '@/api/http'
 const floorsService = new FloorsService(HTTP)
 
 const state = {
-  all: []
+  all: null
 }
 
 const actions = {
@@ -15,7 +15,7 @@ const actions = {
 
 const getters = {
   getFloors (state) {
-    return state.all
+    return state.all ? state.all : []
   }
 }
 

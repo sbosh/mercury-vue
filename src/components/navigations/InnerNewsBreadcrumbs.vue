@@ -1,7 +1,7 @@
 <template>
   <ul class="breadcrumbs">
-    <li><a href="">Заглавие/категория/новина</a></li>
     <li><router-link :to="'/' + lang + '/news'">{{ $t('news') }}</router-link></li>
+    <!-- <li><router-link :to="'/' + lang + '/news'">{{ $t('news') }}</router-link></li> -->
   </ul>
 </template>
 

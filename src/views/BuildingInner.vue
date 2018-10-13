@@ -1,6 +1,6 @@
 <template>
   <div class="building-content">
-    <preloader-component @complete="isComplete" v-if="building && isLoading" />
+    <!-- <preloader-component @complete="isComplete" v-if="building && isLoading" /> -->
     <transition name="page" mode="out-in">
       <router-view />
     </transition>
