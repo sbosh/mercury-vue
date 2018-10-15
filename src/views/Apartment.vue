@@ -342,6 +342,7 @@ export default {
         transition: all .3s;
         cursor: pointer;
         box-sizing: border-box;
+        text-decoration: none;
         &:hover {
           color: #fff;
           background: #fa6a02;
@@ -480,6 +481,7 @@ export default {
             font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
+            text-decoration: none;
             margin: 10px 0;
           }
         }
@@ -536,6 +538,7 @@ export default {
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
+    text-decoration: none;
     background-color: #eeeeee;
     display: block;
     padding: 20px 10px;

@@ -9,8 +9,10 @@
         <div class="text" v-html="$t('available_apartments')"></div><span>3</span> / <span>7</span>
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
-          <select name="" id="">
-            <option value="Вход А">{{ $t('block') }} А</option>
+          <select name="" id="" @change="changeRout">
+            <option :value="entrance.id" v-for="entrance in building.entrances.data" :key="entrance.id">
+            {{ entrance['title_' + $i18n.locale] }}
+            </option>
           </select>
         </div>
       </div>
@@ -21,7 +23,7 @@
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="">
-            <option value="Вход А">{{ $t('block') }} А</option>
+            <option value="Вход А" v-for="entrance in building.entrances.data" :key="entrance.id">{{ entrance['title_'] + $i18n.local }}</option>
           </select>
         </div>
         <div class="right"><div class="text" v-html="$t('available_apartments')"></div><span>3</span> / <span>7</span></div>
@@ -99,6 +101,9 @@ export default {
           }
         }
       }
+    },
+    changeRout (event) {
+      this.$router.push({ name: 'building-inner-floor', params: { slug: event.target.value } })
     },
     handleSlideChange () {
       this.$router.replace({ name: 'building-inner-floor', params: { slug: this.swiper.activeIndex } })
@@ -283,6 +288,7 @@ export default {
     padding: 20px 10px;
     text-align: center;
     cursor: pointer;
+    text-decoration: none;
     &:before {
       content: '';
       width: 19px;
@@ -414,6 +420,7 @@ export default {
     text-transform: uppercase;
     text-align: center;
     padding: 30px 20px;
+    text-decoration: none;
     &:before {
       position: absolute;
       left: 10px;

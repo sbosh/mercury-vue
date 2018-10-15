@@ -446,6 +446,13 @@ export default {
     }
     .icon {
       margin-left: auto;
+      svg {
+        g use,
+        g,
+        path {
+          fill: #fff;
+        }
+      }
     }
     .text {
       font-family: Montserrat;

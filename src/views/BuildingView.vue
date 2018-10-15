@@ -12,7 +12,7 @@
         :priceTo="value"
         :rooms="rooms" />
       <all-apartments :apartmentsActive="apartmentsActive" @clicked="() => apartmentsActive = false" />
-      <div class="filters" v-bind:class="{ active: filterActive }">
+      <div class="filters" v-if="priceFrom" v-bind:class="{ active: filterActive }">
         <div class="close" @click="filterActive = false"></div>
         <div class="filter-row">
           <div class="filter-box">
@@ -309,7 +309,7 @@ canvas {
     top: 25px;
     width: 20px;
     height: 20px;
-    background: #fff url(../assets/images/close-apms-icon.svg) no-repeat center center;
+    background: url(../assets/images/close-apms-icon.svg) no-repeat center center;
     cursor: pointer;
     z-index: 999;
   }
@@ -464,9 +464,10 @@ canvas {
       }
       .parking-btn {
         background-color: #ffffff;
-        background-image: url(../assets/images/p-icon.svg);
+        background-image: url(../assets/images/parking-icon.svg);
         background-repeat: no-repeat;
         background-position: center;
+        background-size: 60%;
         transition-delay: .6s;
       }
       .filter-btn {
@@ -554,7 +555,7 @@ canvas {
     .close {
       width: 20px;
       height: 20px;
-      background: #fff url(../assets/images/close-apms-icon.svg) no-repeat center center;
+      background: url(../assets/images/close-apms-icon.svg) no-repeat center center;
       position: absolute;
       top: 10px;
       right: 10px;

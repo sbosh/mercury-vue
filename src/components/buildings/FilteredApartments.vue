@@ -16,7 +16,16 @@
         <div class="info">
           <div class="title"><h3><router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor_for_filters + '/1/' + apartment['slug_' + $i18n.locale]">{{ apartment.rooms }}-{{ $t('rooms') }} <br>{{ $t('apartment') }}</router-link></h3></div>
           <div class="sqm">{{ apartment.total_area }} mq<sup>2</sup></div>
-          <div class="price" v-if="apartment.status == 2">{{ apartment.price }} <span>eur</span></div>
+          <div class="price" v-if="apartment.status == 2 || apartment.status == 1">{{ apartment.price }} <span>eur</span></div>
+          <div v-if="apartment.status == 2" class="status reserved">
+            {{ $t('reserved') }}
+          </div>
+          <div v-if="apartment.status == 3" class="status sold">
+            {{ $t('sold') }}
+          </div>
+          <div v-if="apartment.status == 1" class="status available">
+            {{ $t('available') }}
+          </div>
         </div>
       </div>
     </div>
@@ -74,7 +83,7 @@ export default {
     text-transform: uppercase;
     background-color: #eeeeee;
     display: block;
-    padding: 20px 15px;
+    padding: 20px 10px;
     text-align: center;
     cursor: pointer;
     &:before {
@@ -141,13 +150,13 @@ export default {
       &.sold {
         img,
         .info {
-          opacity: .2;
+          //opacity: .2;
         }
       }
       &.reserved {
         img,
         .info {
-          opacity: .2;
+          //opacity: .2;
         }
       }
       &:nth-child(even) {
@@ -176,8 +185,24 @@ export default {
           color: #000;
           font-size: 19px;
           font-weight: 600;
+          margin-top: 5px;
           span {
             font-weight: 300;
+          }
+        }
+        .status {
+          font-weight: 700;
+          font-size: 11px;
+          margin-top: 5px;
+          text-transform: uppercase;
+          &.sold {
+            color: #e22f2f;
+          }
+          &.reserved {
+            color: #fa6a02;
+          }
+          &.available {
+            color: #22a314;
           }
         }
       }

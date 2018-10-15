@@ -162,7 +162,7 @@ export default {
       color: #484b47;
       font-size: 16px;
       font-weight: 600;
-      background-image: url(../assets/images/location-icon.svg);
+      background-image: url(../assets/images/location-pin.svg);
       background-position: top left;
       background-repeat: no-repeat;
       padding-left: 31px;

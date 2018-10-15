@@ -68,25 +68,25 @@
         <div class="box-row">
           <div class="box">
             <div class="info">
-              <div class="icon"><img src="@/assets/images/location01.png" alt=""></div>
+              <div class="icon"><img src="@/assets/images/map-center.svg" alt=""></div>
               <div class="text">18 минути от центъра</div>
             </div>
           </div>
           <div class="box">
             <div class="info">
-              <div class="icon"><img src="@/assets/images/location02.png" alt=""></div>
+              <div class="icon"><img src="@/assets/images/map-shop.svg" alt=""></div>
               <div class="text">6 супермаркета в близост</div>
             </div>
           </div>
           <div class="box">
             <div class="info">
-              <div class="icon"><img src="@/assets/images/location03.png" alt=""></div>
+              <div class="icon"><img src="@/assets/images/map-subway.svg" alt=""></div>
               <div class="text">100 метра от метростанция</div>
             </div>
           </div>
           <div class="box">
             <div class="info">
-              <div class="icon"><img src="@/assets/images/location04.png" alt=""></div>
+              <div class="icon"><img src="@/assets/images/map-school.svg" alt=""></div>
               <div class="text">2 училища в района</div>
             </div>
           </div>
