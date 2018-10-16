@@ -33,10 +33,16 @@
       <swiper ref="mySwiper" :options="swiperOptions()">
         <swiper-slide v-for="floor in building.entrances.data[this.$route.params.slug - 1].floors.data" :key="floor.id">
           <div class="img-box">
-            <!-- <img :src="floor.image" alt=""> -->
-            <svg width="580" height="400" xmlns="http://www.w3.org/2000/svg">
+            <img :src="floor.image" alt="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
               <g>
-                <a href="http://www.w3.org/2000/svg"><rect id="svg_1" height="189" width="273" y="0.4375" x="0.5" fill="#fff"/></a>
+                <polygon points="276,301,454,302,458,434,550,431,552,774,277,771,275,636,237,635,234,423,278,423" fill="none"></polygon>
+              </g>
+              <g>
+                <polygon points="457,360,592,358,592,21,275,19,274,263,324,260,322,298,456,301" fill="none"></polygon>
+              </g>
+              <g>
+                <polygon points="556,427,702,428,703,134,762,130,761,90,947,89,943,767,557,770" fill="none"></polygon>
               </g>
             </svg>
           </div>
@@ -103,7 +109,7 @@ export default {
       }
     },
     changeRout (event) {
-      this.$router.push({ name: 'building-inner-floor', params: { slug: event.target.value } })
+      this.$router.push({ name: 'building-inner-floor', params: { floorId: event.target.value, slug: 1 } })
     },
     handleSlideChange () {
       this.$router.replace({ name: 'building-inner-floor', params: { slug: this.swiper.activeIndex } })
@@ -121,27 +127,41 @@ export default {
   align-items: center;
   justify-content: center;
   .img-box {
-    padding-right: 100px;
+    //padding-right: 100px;
     visibility: hidden;
     opacity: 0;
     transition: all .3s;
-    svg {
-      //width: 100%;
-      //height: 100%;
-      margin: 0 auto;
+    margin: 0 auto;
+    position: relative;
+    img {
+      max-width: 100%;
+      position: relative;
+      z-index: 1;
     }
-    svg rect:hover,
-    svg polygon:hover {
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      path,
+      polygon,
+      rect {
+        -webkit-transition: .3s all cubic-bezier(.115,.87,.19,1);
+        -o-transition: .3s all cubic-bezier(.115,.87,.19,1);
+        transition: .3s all cubic-bezier(.115,.87,.19,1);
+        opacity: 0;
+        fill: #fa6a02 !important;
+        mix-blend-mode: multiply;
+      }
+    }
+    g:hover path,
+    g:hover polygon,
+    g:hover rect,
+    g:hover,
+    g polygon:hover {
       opacity: .3;
-      fill: #fa6a02;
-    }
-    img,
-    svg {
-      max-width: 80vw;
-      max-height: 80vh;
-      height: auto;
-      display: block;
-      margin: auto;
     }
   }
   .swiper-slide-active {

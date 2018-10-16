@@ -318,6 +318,7 @@ export default {
   justify-content: center;
   align-items: center;
   padding-bottom: 100px;
+  padding-left: 10%;
   .img-box {
     img {
       max-width: 100%;
@@ -373,6 +374,7 @@ export default {
     }
   }//img-box
   @media screen and(max-width: 768px){
+    padding-left: 0;
     .img-box {
       > .btn {
         font-size: 12px;

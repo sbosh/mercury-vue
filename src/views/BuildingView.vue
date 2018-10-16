@@ -16,6 +16,13 @@
         <div class="close" @click="filterActive = false"></div>
         <div class="filter-row">
           <div class="filter-box">
+            <div class="text">{{ $t('only_available') }}:</div>
+            <div class="input-field">
+              <input type="checkbox" id="only_available" name="available" class="checkbox" v-model="available" value="available" />
+              <label for="only_available"> </label>
+            </div>
+          </div>
+          <div class="filter-box">
             <div class="text">{{ $t('rooms') }}:</div>
           </div>
           <div class="filter-box">
