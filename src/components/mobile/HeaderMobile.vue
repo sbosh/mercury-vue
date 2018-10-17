@@ -160,6 +160,9 @@ export default {
         top: 10px;
         left: 10px;
         -webkit-animation: ring 1.5s 4;
+        path {
+          fill: #fff;
+        }
       }
     }
   }

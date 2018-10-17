@@ -344,6 +344,9 @@ export default {
         border: none;
         background: url('~@/assets/images/location-pin.svg') no-repeat center;
       }
+      &:after {
+        display: none;
+      }
       span {
         float: right;
         font-size: 12px;
@@ -370,6 +373,11 @@ export default {
         background-color: #fa6a02;
         float: right;
         margin-right: 90px;
+        @media screen and(min-width: 1023px) {
+          &:hover {
+            background: #fff;
+          }
+        }
       }
     }
   }//img-box
@@ -520,13 +528,9 @@ export default {
   .swiper-slide {
     background: #000;
     img {
-      opacity: 0.6;
       display: block;
       max-width: 100%;
       transition: all .3s;
-      &:hover {
-        opacity: 1;
-      }
     }
     .progress-bar {
       position: absolute;
@@ -551,6 +555,12 @@ export default {
     }
   }
   .swiper-slide-active {
+    img {
+      opacity: 0.6;
+      &:hover {
+        opacity: 1;
+      }
+    }
     .progress-bar {
       visibility: visible;
       opacity: 1;
@@ -697,6 +707,9 @@ export default {
       border-color: #fa6a02;
       margin-right: 90px;
       padding: 42px 30px;
+      &:hover {
+        background: #fff;
+      }
     }
   }
   .main-img img {

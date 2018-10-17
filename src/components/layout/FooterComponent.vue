@@ -139,13 +139,15 @@ footer {
         transition: all .3s;
         svg {
           transition: all .3s;
+          path, g use {
+            transition: all .3s;
+          }
         }
         &:hover {
-          border-color: #ffffff;
-          background: #ffffff;
+          border-color: #fa6a02;
           svg path,
           svg g use {
-            fill: #2c2c2c;
+            fill: #fa6a02;
           }
         }
       }

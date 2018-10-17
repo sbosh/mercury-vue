@@ -329,6 +329,7 @@ canvas {
     width: 20px;
     height: 20px;
     background: url(../assets/images/close-apms-icon.svg) no-repeat center center;
+    background-size: 100%;
     cursor: pointer;
     z-index: 999;
   }
@@ -575,6 +576,7 @@ canvas {
       width: 20px;
       height: 20px;
       background: url(../assets/images/close-apms-icon.svg) no-repeat center center;
+      background-size: 100%;
       position: absolute;
       top: 10px;
       right: 10px;

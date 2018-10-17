@@ -493,7 +493,7 @@ export default {
       border-radius: 50%;
       position: relative;
       margin-bottom: 12px;
-
+      transition: all .3s;
       span {
         display: block;
         width: 27px;
@@ -503,12 +503,21 @@ export default {
         left: 50%;
         margin-left: -14px;
         transition: all .3s;
-
         &:nth-child(1){
           top: 30px;
         }
         &:nth-child(2){
           top: 40px;
+        }
+      }
+    }
+    @media screen and(min-width: 992px) {
+      &:hover {
+        .button {
+          transform: scale(1.1);
+          span {
+            transform: scale(.9);
+          }
         }
       }
     }

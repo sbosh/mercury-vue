@@ -35,7 +35,7 @@
             <div id="tab1" v-if="tab1">
               <GmapMap
                 :center="{lat:42.676590, lng:23.320476}"
-                :zoom="17"
+                :zoom="14"
               >
                 <GmapMarker
                   :position="{lat:42.676590, lng:23.320476}"
@@ -46,7 +46,7 @@
             <div id="tab2" v-if="tab2">
               <GmapMap
                 :center="{lat:42.687657, lng:27.705927}"
-                :zoom="17"
+                :zoom="14"
                 :icon="'https://cdn3.iconfinder.com/data/icons/flat-icons-web/40/Location-128.png'"
               >
                 <GmapMarker
