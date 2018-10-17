@@ -5,11 +5,11 @@
         <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
         <div class="back-btn" @click="closed">{{ $t('back_building') }}</div>
       </div>
-      <div class="available-from"><div class="text" v-html="$t('available_apartments')"></div><span>{{ filtrApartments(priceFrom, priceTo, rooms).length }}</span> / <span>{{ count }}</span></div>
+      <div class="available-from"><div class="text" v-html="$t('available_apartments')"></div><span>{{ filtrApartments(priceFrom, priceTo, rooms, available).length }}</span> / <span>{{ count }}</span></div>
       <div class="compass"><img src="@/assets/images/compass.svg" alt=""></div>
     </div>
     <div class="apartments-listing">
-      <div class="apartments-box" v-for="apartment in filtrApartments(priceFrom, priceTo, rooms)" :key="apartment.id" :class="[{ sold: apartment.status == 3 },{ reserved: apartment.status == 2 }]">
+      <div class="apartments-box" v-for="apartment in filtrApartments(priceFrom, priceTo, rooms, available)" :key="apartment.id" :class="[{ sold: apartment.status == 3 },{ reserved: apartment.status == 2 }]">
         <router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor_for_filters + '/1/' + apartment['slug_' + $i18n.locale]">
           <img :src="apartment.image" alt="">
         </router-link>
@@ -35,7 +35,7 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'filtered-apartments',
-  props: [ 'isFiltred', 'priceFrom', 'priceTo', 'rooms' ],
+  props: [ 'isFiltred', 'priceFrom', 'priceTo', 'rooms', 'available' ],
   computed: {
     ...mapGetters({
       filtrApartments: 'getFiltredApartments',

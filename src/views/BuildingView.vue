@@ -10,7 +10,8 @@
         :isFiltred="isFiltred"
         :priceFrom="priceFrom"
         :priceTo="value"
-        :rooms="rooms" />
+        :rooms="rooms"
+        :available="available" />
       <all-apartments :apartmentsActive="apartmentsActive" @clicked="() => apartmentsActive = false" />
       <div class="filters" v-if="priceFrom" v-bind:class="{ active: filterActive }">
         <div class="close" @click="filterActive = false"></div>
@@ -18,7 +19,7 @@
           <div class="filter-box">
             <div class="text">{{ $t('only_available') }}:</div>
             <div class="input-field">
-              <input type="checkbox" id="only_available" name="available" class="checkbox" v-model="available" value="available" />
+              <input type="checkbox" id="only_available" name="available" class="checkbox" v-model="available" />
               <label for="only_available"> </label>
             </div>
           </div>
@@ -48,6 +49,7 @@
             <div class="price">
               <div class="min">5 000</div>
               <vue-slider
+                :show="show"
                 ref="slider"
                 v-model="value"
                 :width="400"
@@ -68,7 +70,10 @@
           <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">{{ $t('building_information') }}</router-link></div>
         </div>
         <div class="building-filter">
-          <button class="filter-btn" @click="filterActive = !filterActive">
+          <button class="filter-btn" @click="() => {
+            filterActive = !filterActive
+            show = !show
+            }">
             <span></span>
             <span></span>
             <span></span>
@@ -92,7 +97,9 @@ export default {
   components: { NavinnerComponent, vueSlider, FilteredApartments, AllApartments },
   data () {
     return {
+      show: false,
       value: 5000,
+      available: true,
       apartmentsActive: false,
       filterActive: false,
       isFiltred: false,
@@ -118,6 +125,11 @@ export default {
   watch: {
     building () {
       this.initCanvas()
+    },
+    show (val) {
+      if (val) {
+        this.$nextTick(() => this.$refs.slider.refresh())
+      }
     }
   },
   methods: {
@@ -157,7 +169,7 @@ export default {
         graphics.inputEnabled = true
         graphics.input.useHandCursor = true
 
-        graphics.events.onInputDown.add(this.onDown(floor.id), this)
+        graphics.events.onInputDown.add(this.onDown(floor['slug_' + this.$i18n.locale]), this)
         graphics.events.onInputOver.add(this.onOver(index), this)
         graphics.events.onInputOut.add(this.onOut(index), this)
 
@@ -169,9 +181,9 @@ export default {
         this.polygons.push(graphics)
       })
     },
-    onDown (floorId) {
+    onDown (slug) {
       return () => {
-        this.$router.push({ name: 'building-inner-floor', params: { slug: 1, floorId } })
+        this.$router.push({ name: 'building-inner-floor', params: { slug, floorId: 1 } })
       }
     },
     onOver (index) {

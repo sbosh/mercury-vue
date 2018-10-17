@@ -5,7 +5,7 @@
       <div class="top">
         <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
         <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="back-btn">{{ $t('back_building') }}</router-link>
-        <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.slug + '/' + this.$route.params.floorId" class="back-btn">{{ $t('back_floor') }}</router-link>
+        <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.floorId + '/' + this.$route.params.slug" class="back-btn">{{ $t('back_floor') }}</router-link>
       </div>
       <div class="available-from">
         <div class="status">{{ $t('status') }}
@@ -51,7 +51,7 @@
       <div class="apartment-content">
         <div class="sidebar">
           <h3>{{ $t('apartment_information') }}</h3>
-          <div class="text" v-html="apartment['text_' + $i18n.local]"></div>
+          <div class="text">{{ apartment['text_' + $i18n.local] }}</div>
           <mq-layout mq="sm" class="status-mobile">
             <div class="text">{{ $t('status') }}</div>
             <div class="status">

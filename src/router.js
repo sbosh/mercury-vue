@@ -70,7 +70,7 @@ let router = new Router({
           meta: { transitionName: 'slide' }
         },
         {
-          path: 'floor/:slug/:floorId',
+          path: 'floor/:floorId/:slug',
           component: Floor,
           meta: { transitionName: 'slide' },
           children: [

@@ -11,7 +11,7 @@
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="" @change="changeRout">
             <option :value="entrance.id" v-for="entrance in building.entrances.data" :key="entrance.id">
-            {{ entrance['title_' + $i18n.locale] }}
+            {{ entrance.id }}
             </option>
           </select>
         </div>
@@ -22,27 +22,24 @@
       <div class="available-from">
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
-          <select name="" id="">
-            <option value="Вход А" v-for="entrance in building.entrances.data" :key="entrance.id">{{ entrance['title_'] + $i18n.local }}</option>
+          <select name="" id="" @change="changeRout">
+            <option :value="entrance.id" v-for="entrance in building.entrances.data" :key="entrance.id">
+            {{ entrance.id }}
+            </option>
           </select>
         </div>
         <div class="right"><div class="text" v-html="$t('available_apartments')"></div><span>3</span> / <span>7</span></div>
       </div>
     </mq-layout>
     <div class="floor-info">
+      <!-- {{ building.entrances.data.filter(e => e.id === Number(this.$route.params.slug)) }} -->
       <swiper ref="mySwiper" :options="swiperOptions()">
-        <swiper-slide v-for="floor in building.entrances.data[this.$route.params.slug - 1].floors.data" :key="floor.id">
+        <swiper-slide v-for="floor in building.entrances.data.filter(e => e.id === Number(this.$route.params.slug))[0].floors.data" :key="floor.id">
           <div class="img-box">
             <img :src="floor.image" alt="">
             <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
-              <g>
-                <polygon points="276,301,454,302,458,434,550,431,552,774,277,771,275,636,237,635,234,423,278,423" fill="none"></polygon>
-              </g>
-              <g>
-                <polygon points="457,360,592,358,592,21,275,19,274,263,324,260,322,298,456,301" fill="none"></polygon>
-              </g>
-              <g>
-                <polygon points="556,427,702,428,703,134,762,130,761,90,947,89,943,767,557,770" fill="none"></polygon>
+              <g v-for="apartment in floor.apartments.data" :key="apartment.id" @click="apartmentRoute(apartment['slug_' + $i18n.locale])">
+                <polygon :points="apartment.coords" fill="none"></polygon>
               </g>
             </svg>
           </div>
@@ -85,7 +82,7 @@ export default {
   methods: {
     initSwiper () {
       if (this.$refs.mySwiper) {
-        this.$refs.mySwiper.swiper.slideTo(Number(this.$route.params.slug))
+        this.$refs.mySwiper.swiper.slideTo(Number(this.$route.params.floorId))
         this.$refs.mySwiper.swiper.on('slideChange', this.handleSlideChange)
       }
     },
@@ -108,11 +105,14 @@ export default {
         }
       }
     },
+    apartmentRoute (apartmentSlug) {
+      this.$router.push({ name: 'apartment', params: { apartmentSlug } })
+    },
     changeRout (event) {
-      this.$router.push({ name: 'building-inner-floor', params: { floorId: event.target.value, slug: 1 } })
+      this.$router.replace({ name: 'building-inner-floor', params: { slug: event.target.value, floorId: 1 } })
     },
     handleSlideChange () {
-      this.$router.replace({ name: 'building-inner-floor', params: { slug: this.swiper.activeIndex } })
+      this.$router.replace({ name: 'building-inner-floor', params: { floorId: this.swiper.activeIndex } })
     }
   }
 }
@@ -161,7 +161,7 @@ export default {
     g:hover rect,
     g:hover,
     g polygon:hover {
-      opacity: .3;
+      opacity: .7;
     }
   }
   .swiper-slide-active {
