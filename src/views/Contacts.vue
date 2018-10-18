@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content">
+  <div class="main-content" v-if="contacts">
     <div class="contacts-page">
       <navinner-component :navTitle="contacts['title_' + $i18n.locale]"  />
       <div class="contacts-us">
@@ -39,7 +39,7 @@
               >
                 <GmapMarker
                   :position="{lat:42.676590, lng:23.320476}"
-                  :icon="'https://cdn3.iconfinder.com/data/icons/flat-icons-web/40/Location-128.png'"
+                  :icon="icon"
                 />
               </GmapMap>
             </div>
@@ -47,11 +47,10 @@
               <GmapMap
                 :center="{lat:42.687657, lng:27.705927}"
                 :zoom="14"
-                :icon="'https://cdn3.iconfinder.com/data/icons/flat-icons-web/40/Location-128.png'"
               >
                 <GmapMarker
                   :position="{lat:42.687657, lng:27.705927}"
-                  :icon="'https://cdn3.iconfinder.com/data/icons/flat-icons-web/40/Location-128.png'"
+                  :icon="icon"
                 />
               </GmapMap>
             </div>
@@ -78,7 +77,8 @@ export default {
   data () {
     return {
       tab1: true,
-      tab2: false
+      tab2: false,
+      icon: require('@/assets/images/pin.svg')
     }
   },
   methods: {

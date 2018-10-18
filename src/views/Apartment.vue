@@ -51,7 +51,7 @@
       <div class="apartment-content">
         <div class="sidebar">
           <h3>{{ $t('apartment_information') }}</h3>
-          <div class="text">{{ apartment['text_' + $i18n.local] }}</div>
+          <div class="text" v-html="apartment['text_' + $i18n.locale]"></div>
           <mq-layout mq="sm" class="status-mobile">
             <div class="text">{{ $t('status') }}</div>
             <div class="status">
@@ -324,7 +324,7 @@ export default {
             margin-right: 9px;
             display: inline-block;
           }
-          span {
+          span,strong, b {
             margin-left: auto;
           }
         }

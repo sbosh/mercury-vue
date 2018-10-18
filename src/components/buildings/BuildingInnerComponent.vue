@@ -12,13 +12,13 @@
           <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">{{ $t('views_scheme') }}</router-link>
         </div>
       </div>
-      <div class="caption" id="about">
+      <div class="caption animate-box" id="about">
         <div class="title-box">
           <h2 class="title" v-html="$t('about_building')"></h2>
         </div>
         <div class="text" v-html="building['text_' + $i18n.locale]"></div>
       </div>
-      <div class="about-complex">
+      <div class="about-complex animate-box">
         <div class="box-row">
           <div class="box">
             <div class="info">
@@ -60,7 +60,7 @@
         </swiper>
       </div>
       <div class="location" id="location">
-        <div class="caption">
+        <div class="caption animate-box">
           <div class="title-box">
             <h2 class="title" v-html="$t('about_location')"></h2>
           </div>
@@ -107,7 +107,7 @@
       </div>
       <div class="next-building" v-if="building.next_building">
         <div class="text">{{ $t('next_building') }}</div>
-        <h2 class="title">
+        <h2 class="title animate-box">
           <router-link :to="'/' + lang + '/' + building.next_building.id + '/' + building.next_building['slug_' + $i18n.locale]">{{ building.next_building['title_' + $i18n.locale] }}</router-link>
         </h2>
         <div class="img-box">
@@ -213,6 +213,15 @@ export default {
   .title {
     display: flex;
     align-items: center;
+    transform: translateX(-100%);
+    transition: all .2s;
+    opacity: 0;
+    visibility: hidden;
+    &.visible {
+      transform: translateX(0);
+      visibility: visible;
+      opacity: 1;
+    }
     &:hover {
       &:after {
         width: 15%;
@@ -373,11 +382,6 @@ export default {
         background-color: #fa6a02;
         float: right;
         margin-right: 90px;
-        @media screen and(min-width: 1023px) {
-          &:hover {
-            background: #fff;
-          }
-        }
       }
     }
   }//img-box
@@ -449,6 +453,15 @@ export default {
   padding-bottom: 100px;
   .caption {
     margin-bottom: 100px;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: all .2s;
+    &.visible {
+      transform: translateX(0);
+      visibility: visible;
+      opacity: 1;
+    }
   }
   .box-row {
     display: flex;
@@ -598,6 +611,15 @@ export default {
   padding: 0 90px;
   margin-top: 100px;
   margin-bottom: 100px;
+  visibility: hidden;
+  opacity: 0;
+  transition: all .3s;
+  transform: translateY(200px);
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
   .box-row {
     display: flex;
     justify-content: space-around;
@@ -707,9 +729,6 @@ export default {
       border-color: #fa6a02;
       margin-right: 90px;
       padding: 42px 30px;
-      &:hover {
-        background: #fff;
-      }
     }
   }
   .main-img img {

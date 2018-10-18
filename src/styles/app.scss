@@ -133,7 +133,7 @@ h1,h2,h3,h4,h5,h6 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: #fff;
+    background: #fa6a02;
     z-index: -1;
     transition: all .3s;
     transform: translateX(-102%); 
@@ -163,17 +163,17 @@ h1,h2,h3,h4,h5,h6 {
   }
   @media screen and(min-width: 1024px) {
     &:hover {
-      border-color: #fff;
-      color: #000;
+      border-color: #fa6a02;
+      color: #fff;
       .btn-overlay {
         transform: translateX(0);
       }
       &:after {
         width: 60px;
-        background: #000;
+        background: #fff;
       }
       &:before {
-        border-color: transparent transparent transparent #000;
+        border-color: transparent transparent transparent #fff;
       }
     }
   }

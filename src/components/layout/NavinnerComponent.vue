@@ -181,14 +181,6 @@ export default {
     .btn {
       transition: all .2s;
     }
-    @media screen and(min-width: 1023px) {
-      &:hover {
-        .btn {
-          background: #fff;
-          border-color: #fff;
-        }
-      }
-    }
   }
   @media screen and(max-width: 1366px) {
     .header-title {
