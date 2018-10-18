@@ -1,6 +1,6 @@
 <template>
-  <div class="buildings-carousel">
-    <swiper :options="this.getSwiperOptions(this.home)">
+  <div class="buildings-carousel" v-if="current">
+    <swiper ref="swiper" :options="this.getSwiperOptions(this.home)">
       <swiper-slide v-for="building in current" :key="building.id">
         <div class="bg" :style="{ 'background-image': 'url(' + building.image + ')' }">
           <div class="caption" v-if="!home">
@@ -13,8 +13,10 @@
       <div class="buildings-list" v-if="!home">
         <h3>{{ currentBuildingsPage['title_' + $i18n.locale] }}</h3>
         <div class="buildings-titles">
-          <div class="building-title" v-for="(building, index) in current" :key="building.id">
-            <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'"><span>{{ index + 1 }}</span> {{ building['title_' + $i18n.locale] }}</router-link>
+          <div class="building-title" v-for="(building, index) in current" :key="building.id" @mouseenter="changeSwpier(index)">
+            <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'">
+              <span>{{ index >= 10 ? index: '0' + (index + 1) }}</span> {{ building['title_' + $i18n.locale] }}
+            </router-link>
           </div>
         </div>
         <div class="buttons">
@@ -34,10 +36,14 @@ export default {
   props: ['home', 'pageTitle'],
   data () {
     return {
-      buildingsRoute: null
+      buildingsRoute: null,
+      active: false
     }
   },
   methods: {
+    changeSwpier (index) {
+      this.$refs.swiper.swiper.slideTo(index)
+    },
     getSwiperOptions (isHome) {
       let options = {
         slidesPerView: 'auto',
@@ -174,7 +180,7 @@ export default {
       text-decoration: none;
       display: block;
     }
-    &.swiper-pagination-bullet-active {
+    &.active {
       a {
         color: #fa6a02;
       }

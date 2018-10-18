@@ -170,7 +170,7 @@ export default {
         graphics.input.useHandCursor = true
 
         graphics.events.onInputDown.add(this.onDown(floor['slug_' + this.$i18n.locale]), this)
-        graphics.events.onInputOver.add(this.onOver(index), this)
+        graphics.events.onInputOver.add(this.onOver(index, floor.id), this)
         graphics.events.onInputOut.add(this.onOut(index), this)
 
         graphics.alpha = 0
@@ -186,8 +186,9 @@ export default {
         this.$router.push({ name: 'building-inner-floor', params: { slug, floorId: 1 } })
       }
     },
-    onOver (index) {
+    onOver (index, id) {
       return () => {
+        console.log(id)
         this.game.add.tween(this.polygons[index]).to({ alpha: 0.5 }, 200, 'Linear', true)
       }
     },
