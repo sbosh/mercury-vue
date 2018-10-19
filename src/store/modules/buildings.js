@@ -39,6 +39,11 @@ const getters = {
   },
   getSortedBuildings (state) {
     return state.all
+  },
+  getFloorsByEntrance (state) {
+    return (slug) => {
+      return state.building.entrances.data.filter(entrance => entrance.slug_en === slug || entrance.slug_bg === slug)
+    }
   }
 }
 

@@ -34,7 +34,7 @@
     <div class="floor-info">
       <!-- {{ building.entrances.data.filter(e => e.id === Number(this.$route.params.slug)) }} -->
       <swiper ref="mySwiper" :options="swiperOptions()">
-        <swiper-slide v-for="floor in building.entrances.data.filter(e => e.id === Number(this.$route.params.slug))[0].floors.data" :key="floor.id">
+        <swiper-slide v-for="floor in entrance.floors.data" :key="floor.id">
           <div class="img-box">
             <img :src="floor.image" alt="">
             <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
@@ -66,6 +66,9 @@ export default {
     ...mapState({
       building: state => state.buildings.building
     }),
+    entrance () {
+      return this.$store.getters.getFloorsByEntrance(this.$route.params.slug)[0]
+    },
     lang () {
       return this.$i18n.locale
     },
