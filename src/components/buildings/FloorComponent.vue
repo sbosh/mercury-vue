@@ -10,8 +10,8 @@
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="" @change="changeRout">
-            <option :value="entrance.id" v-for="entrance in building.entrances.data" :key="entrance.id">
-            {{ entrance.id }}
+            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in building.entrances.data" :key="entrance.id">
+            {{ entrance['title_' + $i18n.locale] }}
             </option>
           </select>
         </div>
@@ -23,8 +23,8 @@
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="" @change="changeRout">
-            <option :value="entrance.id" v-for="entrance in building.entrances.data" :key="entrance.id">
-            {{ entrance.id }}
+            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in building.entrances.data" :key="entrance.id">
+            {{ entrance['title_' + $i18n.locale] }}
             </option>
           </select>
         </div>
@@ -39,7 +39,7 @@
             <img :src="floor.image" alt="">
             <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
               <g v-for="apartment in floor.apartments.data" :key="apartment.id" @click="apartmentRoute(apartment['slug_' + $i18n.locale])">
-                <polygon :points="apartment.coords" fill="none"></polygon>
+                <path :d="apartment.coords" fill="none"></path>
               </g>
             </svg>
           </div>
@@ -136,6 +136,7 @@ export default {
     transition: all .3s;
     margin: 0 auto;
     position: relative;
+    max-width: 1200px;
     img {
       max-width: 100%;
       position: relative;
