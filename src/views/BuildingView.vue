@@ -8,14 +8,14 @@
           <div class="tooltip-info">
             <div class="box">
               <div class="text">{{ $t('apartmetns_number')}}</div>
-              <div class="number">8</div>
+              <div class="number" id="js-apartments">8</div>
             </div>
             <div class="box">
               <div class="text">{{ $t('floor')}}</div>
-              <div class="number">8</div>
+              <div class="number" id="js-floor">8</div>
             </div>
             <div class="box">
-              <div class="text">{{ $t('entrance')}}</div>
+              <div class="text" id="js-entrance">{{ $t('entrance')}}</div>
               <div class="number">8</div>
             </div>
           </div>
@@ -132,7 +132,11 @@ export default {
       background: null,
       isInit: false,
       entrances: [],
-      insidePoly: false
+      insidePoly: false,
+      jsApartments: null,
+      jsFloor: null,
+      jsEntrance: null,
+      tooltip: null
     }
   },
   mounted () {
@@ -140,12 +144,21 @@ export default {
       this.initCanvas()
     }
 
+    this.tooltip = document.querySelector('.flor-info-tooltip')
+
+    this.jsApartments = document.getElementById('js-apartments')
+    this.jsFloor = document.getElementById('js-floor')
+    this.jsEntrance = document.getElementById('js-entrance')
     window.onmousemove = (e) => {
       if (this.insidePoly) {
-        let x = (e.clientX + 20) + 'px'
-        let y = (e.clientY + 20) + 'px'
+        let x = (e.clientX - this.tooltip.offsetWidth / 2) + 'px'
+        let y = (e.clientY + 50) + 'px'
 
-        console.log(x, y)
+        this.tooltip.style.display = 'block'
+        this.tooltip.style.top = y
+        this.tooltip.style.left = x
+      } else {
+        this.tooltip.style.display = 'none'
       }
     }
   },
@@ -239,7 +252,9 @@ export default {
     },
     onOver (eIndex, floorData, id) {
       return () => {
-        console.log(floorData)
+        this.jsApartments.innerText = floorData.countOfApartments
+        this.jsFloor.innerText = floorData.index + 1
+        this.jsEntrance.innerText = floorData.entrance
         this.insidePoly = true
         this.game.add.tween(this.entrances[eIndex].polygons[floorData.index]).to({ alpha: 0.5 }, 200, 'Linear', true)
       }
@@ -297,6 +312,7 @@ canvas {
   background: #fff;
   padding: 20px 10px;
   top: 100px;
+  display: none;
   &:before {
     content: '';
     position: absolute;
