@@ -87,6 +87,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import 'phaser-kinetic-scrolling-plugin'
 import vueSlider from 'vue-slider-component'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import FilteredApartments from '@/components/buildings/FilteredApartments'
@@ -160,7 +161,7 @@ export default {
 
       this.scaleGame()
 
-      this.background = this.game.add.image(0, 0, 'starlight')
+      this.background = this.game.add.tileSprite(0, 0, 1920, 1080, 'starlight')
 
       this.building.entrances.data.forEach((entrance, eIndex) => {
         let entrc = {
@@ -219,8 +220,6 @@ export default {
     scaleGame () {
       this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL
       this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
-      this.game.scale.pageAlignVertically = true
-      this.game.scale.pageAlignHorizontally = true
 
       this.game.scale.setMinMax(360, 480, 1920, 1080)
 
