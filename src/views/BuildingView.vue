@@ -392,6 +392,40 @@ canvas {
     font-size: 0;
     cursor: pointer;
   }
+  @media screen and(max-width: 768px) {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0;
+    background: rgba(0,0,0, .5);
+    .vue-slider-component {
+      .vue-slider-tooltip {
+        padding: 8px 10px;
+        font-size: 14px;
+      }
+    }
+    &.active {
+      position: fixed;
+      top: 0;
+      z-index: 99999;
+      .filter-row {
+        height: 65%;
+        width: 100%;
+        background: #232323;
+        margin-top: auto;
+        padding: 20px;
+        .filter-box {
+          margin: 15px 0;
+        }
+      }
+    }
+    .filter-row {
+      flex-direction: column;
+      .vue-slider-component {
+        width: 280px !important;
+      }
+    }
+  }
 }
 .building-apartments {
   overflow: hidden;
@@ -532,6 +566,14 @@ canvas {
     &.active {
       transform: translateX(0);
     }
+    @media screen and(max-width: 768px) {
+      &.active {
+        z-index: 99999;
+        padding-right: 0;
+        width: 100%;
+        position: fixed;
+      }
+    }
   }
   .table-box {
     height: 100vh;
@@ -639,6 +681,7 @@ canvas {
   }
   @media screen and(max-width: 768px) {
     height: auto;
+    overflow: visible;
     .img-box {
       height: auto;
       width: 100%;
@@ -655,8 +698,29 @@ canvas {
       left: inherit;
       bottom: inherit;
       right: inherit;
-      padding: 20px 25px;
-      background: #000;
+      padding: 0;
+      background: transparent;
+      flex-direction: column-reverse;
+      .building-filter {
+        flex-direction: row;
+        margin-top: -90px;
+        .filter-btn,
+        .parking-btn {
+          margin: 0 10px 20px 10px;
+        }
+      }
+      .building-btn {
+        width: 100%;
+        .btn-box {
+          width: 100%;
+          .btn {
+            width: 100%;
+            padding: 25px 20px;
+            font-size: 12px;
+            box-sizing: border-box;
+          }
+        }
+      }
     }
   }
 }
