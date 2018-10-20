@@ -219,10 +219,10 @@ export default {
     scaleGame () {
       this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL
       this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
-      this.scale.pageAlignVertically = true
-      this.scale.pageAlignHorizontally = true
+      this.game.scale.pageAlignVertically = true
+      this.game.scale.pageAlignHorizontally = true
 
-      this.game.scale.setMinMax(320, 220, 1920, 1080)
+      this.game.scale.setMinMax(360, 480, 1920, 1080)
 
       Phaser.Canvas.setImageRenderingCrisp(this.game.canvas)
       Phaser.Canvas.setSmoothingEnabled(this.game.context, false)
