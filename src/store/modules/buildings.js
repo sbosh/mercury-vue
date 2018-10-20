@@ -19,7 +19,11 @@ const actions = {
     buildingsService.getCurrentBuildings().then(({ data }) => commit('setCurrentBuildings', data.data))
   },
   fetchBuildingById ({ commit }, id) {
-    buildingsService.getBuildingById(id).then(({ data }) => commit('setBuildingById', data.data))
+    buildingsService.getBuildingById(id).then(({ data }) => {
+      commit('setBuildingById', data.data)
+      console.log(data.data)
+      commit('setApartments', data.data.apartments.data)
+    })
   },
   fetchFutureBuildings ({ commit }) {
     buildingsService.getFutureBuildings().then(({ data }) => commit('setFutureBuildings', data.data))

@@ -40,7 +40,6 @@ new Vue({
   render: h => h(App),
   beforeCreate () {
     this.$store.cache.dispatch('fetchArticles')
-    this.$store.cache.dispatch('fetchApartments')
     this.$store.cache.dispatch('fetchBuildings')
     this.$store.cache.dispatch('fetchCurrentBuildings')
     this.$store.cache.dispatch('fetchFutureBuildings')

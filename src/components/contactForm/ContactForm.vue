@@ -4,17 +4,17 @@
     <div class="form-row radio-checkbox-row">
       <div class="form-group radio-group">
         <input type="radio" id="input_property" v-model="reason" name="reason" class="form-element" />
-        <label for="input_property">Запитване свързано с закупуване на жилище</label>
+        <label for="input_property">{{ $t('enquery_for_apartment') }}</label>
       </div>
       <hr>
       <div class="form-group radio-group">
         <input type="radio" id="input_company" v-model="reason" name="reason" class="form-element" />
-        <label for="input_company">Запитване към компанията</label>
+        <label for="input_company">{{ $t('enquery_for_company') }}</label>
       </div>
       <hr>
       <div class="form-group radio-group">
         <input type="radio" id="input_team" v-model="reason" name="reason" class="form-element" />
-        <label for="input_team">Присъедини се към нашият екип</label>
+        <label for="input_team">{{ $t('join_our_team') }}</label>
       </div>
     </div>
     <h3>{{ $t('name') }}</h3>
