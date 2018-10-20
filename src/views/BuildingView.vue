@@ -114,7 +114,8 @@ export default {
         [718, 510, 1322, 285, 1465, 320, 1471, 354, 1393, 339, 715, 544]
       ],
       background: null,
-      isInit: false
+      isInit: false,
+      entrances: []
     }
   },
   mounted () {
@@ -161,27 +162,43 @@ export default {
 
       this.background = this.game.add.image(0, 0, 'starlight')
 
-      this.building.entrances.data.forEach(entrance => {
+      this.building.entrances.data.forEach((entrance, eIndex) => {
+        let entrc = {
+          polygons: []
+        }
         const floors = entrance.floors.data
         floors.forEach((floor, index) => {
-          let coords = floor.coords.split(', ').map(f => Number(f))
-          let poly = new Phaser.Polygon(coords)
+          let coords = floor.coords.split(',')
+          let originalCoords = []
+          coords.forEach(c => {
+            if (c.includes(' ')) {
+              let o = c.split(' ').map(c => Number(c)).filter(c => c)
+              originalCoords.push(o[0])
+              originalCoords.push(o[1])
+            } else {
+              originalCoords.push(Number(c))
+            }
+          })
+
+          let poly = new Phaser.Polygon(originalCoords)
           let graphics = this.game.add.graphics(0, 0)
 
           graphics.inputEnabled = true
           graphics.input.useHandCursor = true
 
           graphics.events.onInputDown.add(this.onDown(entrance['slug_' + this.$i18n.locale], floor['slug_' + this.$i18n.locale]), this)
-          graphics.events.onInputOver.add(this.onOver(index, floor.id), this)
-          graphics.events.onInputOut.add(this.onOut(index), this)
+          graphics.events.onInputOver.add(this.onOver(eIndex, index, floor.id), this)
+          graphics.events.onInputOut.add(this.onOut(eIndex, index), this)
 
           graphics.alpha = 0
           graphics.beginFill(0xfa6a02)
           graphics.drawPolygon(poly.points)
           graphics.endFill()
 
+          entrc.polygons.push(graphics)
           this.polygons.push(graphics)
         })
+        this.entrances.push(entrc)
       })
     },
     onDown (entranceSlug, florSlug) {
@@ -189,15 +206,14 @@ export default {
         this.$router.push({ name: 'building-inner-floor', params: { slug: entranceSlug, floorId: florSlug } })
       }
     },
-    onOver (index, id) {
+    onOver (eIndex, index, id) {
       return () => {
-        console.log(id)
-        this.game.add.tween(this.polygons[index]).to({ alpha: 0.5 }, 200, 'Linear', true)
+        this.game.add.tween(this.entrances[eIndex].polygons[index]).to({ alpha: 0.5 }, 200, 'Linear', true)
       }
     },
-    onOut (index) {
+    onOut (eIndex, index) {
       return () => {
-        this.game.add.tween(this.polygons[index]).to({ alpha: 0 }, 200, 'Linear', true)
+        this.game.add.tween(this.entrances[eIndex].polygons[index]).to({ alpha: 0 }, 200, 'Linear', true)
       }
     },
     scaleGame () {
@@ -209,9 +225,6 @@ export default {
 
       this.game.antialias = false
       this.game.scale.refresh()
-    },
-    byId (e) {
-      return document.getElementById(e)
     }
   },
   computed: {
@@ -408,7 +421,7 @@ canvas {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 235px 45px 40px;
+    padding: 45px 235px 45px 40px;
     z-index: 200;
     .building-filter {
       display: flex;

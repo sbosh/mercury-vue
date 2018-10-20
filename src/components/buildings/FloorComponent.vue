@@ -115,7 +115,8 @@ export default {
       this.$router.replace({ name: 'building-inner-floor', params: { slug: event.target.value, floorId: 1 } })
     },
     handleSlideChange () {
-      this.$router.replace({ name: 'building-inner-floor', params: { floorId: this.swiper.activeIndex } })
+      const floor = this.entrance.floors.data[this.swiper.activeIndex - 1]
+      this.$router.replace({ name: 'building-inner-floor', params: { floorId: floor['slug_' + this.$i18n.locale] } })
     }
   }
 }
