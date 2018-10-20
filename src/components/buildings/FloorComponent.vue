@@ -10,8 +10,8 @@
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="" @change="changeRout">
-            <option :value="entrance.id" v-for="entrance in building.entrances.data" :key="entrance.id">
-            {{ entrance.id }}
+            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in building.entrances.data" :key="entrance.id">
+            {{ entrance['title_' + $i18n.locale] }}
             </option>
           </select>
         </div>
@@ -23,8 +23,8 @@
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="" @change="changeRout">
-            <option :value="entrance.id" v-for="entrance in building.entrances.data" :key="entrance.id">
-            {{ entrance.id }}
+            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in building.entrances.data" :key="entrance.id">
+            {{ entrance['title_' + $i18n.locale] }}
             </option>
           </select>
         </div>
@@ -34,12 +34,12 @@
     <div class="floor-info">
       <!-- {{ building.entrances.data.filter(e => e.id === Number(this.$route.params.slug)) }} -->
       <swiper ref="mySwiper" :options="swiperOptions()">
-        <swiper-slide v-for="floor in building.entrances.data.filter(e => e.id === Number(this.$route.params.slug))[0].floors.data" :key="floor.id">
+        <swiper-slide v-for="floor in entrance.floors.data" :key="floor.id">
           <div class="img-box">
             <img :src="floor.image" alt="">
             <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
               <g v-for="apartment in floor.apartments.data" :key="apartment.id" @click="apartmentRoute(apartment['slug_' + $i18n.locale])">
-                <polygon :points="apartment.coords" fill="none"></polygon>
+                <path :d="apartment.coords" fill="none"></path>
               </g>
             </svg>
           </div>
@@ -66,6 +66,9 @@ export default {
     ...mapState({
       building: state => state.buildings.building
     }),
+    entrance () {
+      return this.$store.getters.getFloorsByEntrance(this.$route.params.slug)[0]
+    },
     lang () {
       return this.$i18n.locale
     },
@@ -133,6 +136,7 @@ export default {
     transition: all .3s;
     margin: 0 auto;
     position: relative;
+    max-width: 1200px;
     img {
       max-width: 100%;
       position: relative;

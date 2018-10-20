@@ -161,29 +161,32 @@ export default {
 
       this.background = this.game.add.image(0, 0, 'starlight')
 
-      this.building.entrances.data[0].floors.data.forEach((floor, index) => {
-        let coords = floor.coords.split(', ').map(f => Number(f))
-        let poly = new Phaser.Polygon(coords)
-        let graphics = this.game.add.graphics(0, 0)
+      this.building.entrances.data.forEach(entrance => {
+        const floors = entrance.floors.data
+        floors.forEach((floor, index) => {
+          let coords = floor.coords.split(', ').map(f => Number(f))
+          let poly = new Phaser.Polygon(coords)
+          let graphics = this.game.add.graphics(0, 0)
 
-        graphics.inputEnabled = true
-        graphics.input.useHandCursor = true
+          graphics.inputEnabled = true
+          graphics.input.useHandCursor = true
 
-        graphics.events.onInputDown.add(this.onDown(floor['slug_' + this.$i18n.locale]), this)
-        graphics.events.onInputOver.add(this.onOver(index, floor.id), this)
-        graphics.events.onInputOut.add(this.onOut(index), this)
+          graphics.events.onInputDown.add(this.onDown(entrance['slug_' + this.$i18n.locale], floor['slug_' + this.$i18n.locale]), this)
+          graphics.events.onInputOver.add(this.onOver(index, floor.id), this)
+          graphics.events.onInputOut.add(this.onOut(index), this)
 
-        graphics.alpha = 0
-        graphics.beginFill(0xfa6a02)
-        graphics.drawPolygon(poly.points)
-        graphics.endFill()
+          graphics.alpha = 0
+          graphics.beginFill(0xfa6a02)
+          graphics.drawPolygon(poly.points)
+          graphics.endFill()
 
-        this.polygons.push(graphics)
+          this.polygons.push(graphics)
+        })
       })
     },
-    onDown (slug) {
+    onDown (entranceSlug, florSlug) {
       return () => {
-        this.$router.push({ name: 'building-inner-floor', params: { slug, floorId: 1 } })
+        this.$router.push({ name: 'building-inner-floor', params: { slug: entranceSlug, floorId: florSlug } })
       }
     },
     onOver (index, id) {

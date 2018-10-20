@@ -716,11 +716,42 @@ export default {
   visibility: hidden;
   transition: all 1.4s;
 }
+.active-component {
+  .inner-building-header {
+    &:before {
+      animation: line-animation 7s forwards;
+    }
+  }
+}
+@keyframes line-animation {
+  0%{
+    left: 0px;
+    height: 0;
+  }
+  95% {
+    left: 88px;
+    height: 0;
+  }
+  100% {
+    left: 88px;
+    height: 50%;
+  }
+}
 .inner-building-header {
   transition: all 1.4s;
   background: linear-gradient(#232323 80%, #232323 80%, #232323 80%, #f8f8f8 20%, #f8f8f8 20%);
   padding: 130px 0 0 195px;
   margin-bottom: 140px;
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 200px;
+    background: #979797;
+    height: 0;
+    width: 1px;
+  }
   .btn-box {
     margin-top: -50px;
     float: right;
