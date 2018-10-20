@@ -115,12 +115,22 @@ export default {
       ],
       background: null,
       isInit: false,
-      entrances: []
+      entrances: [],
+      insidePoly: false
     }
   },
   mounted () {
     if (this.building) {
       this.initCanvas()
+    }
+
+    window.onmousemove = (e) => {
+      if (this.insidePoly) {
+        let x = (e.clientX + 20) + 'px'
+        let y = (e.clientY + 20) + 'px'
+
+        console.log(x, y)
+      }
     }
   },
   watch: {
@@ -170,6 +180,11 @@ export default {
         floors.forEach((floor, index) => {
           let coords = floor.coords.split(',')
           let originalCoords = []
+          let floorData = {
+            index,
+            countOfApartments: floor.apartments.data.length,
+            entrance: entrance['slug_' + this.$i18n.locale]
+          }
           coords.forEach(c => {
             if (c.includes(' ')) {
               let o = c.split(' ').map(c => Number(c)).filter(c => c)
@@ -187,8 +202,8 @@ export default {
           graphics.input.useHandCursor = true
 
           graphics.events.onInputDown.add(this.onDown(entrance['slug_' + this.$i18n.locale], floor['slug_' + this.$i18n.locale]), this)
-          graphics.events.onInputOver.add(this.onOver(eIndex, index, floor.id), this)
-          graphics.events.onInputOut.add(this.onOut(eIndex, index), this)
+          graphics.events.onInputOver.add(this.onOver(eIndex, floorData, floor.id), this)
+          graphics.events.onInputOut.add(this.onOut(eIndex, floorData), this)
 
           graphics.alpha = 0
           graphics.beginFill(0xfa6a02)
@@ -206,14 +221,17 @@ export default {
         this.$router.push({ name: 'building-inner-floor', params: { slug: entranceSlug, floorId: florSlug } })
       }
     },
-    onOver (eIndex, index, id) {
+    onOver (eIndex, floorData, id) {
       return () => {
-        this.game.add.tween(this.entrances[eIndex].polygons[index]).to({ alpha: 0.5 }, 200, 'Linear', true)
+        console.log(floorData)
+        this.insidePoly = true
+        this.game.add.tween(this.entrances[eIndex].polygons[floorData.index]).to({ alpha: 0.5 }, 200, 'Linear', true)
       }
     },
-    onOut (eIndex, index) {
+    onOut (eIndex, floorData) {
       return () => {
-        this.game.add.tween(this.entrances[eIndex].polygons[index]).to({ alpha: 0 }, 200, 'Linear', true)
+        this.insidePoly = false
+        this.game.add.tween(this.entrances[eIndex].polygons[floorData.index]).to({ alpha: 0 }, 200, 'Linear', true)
       }
     },
     scaleGame () {
