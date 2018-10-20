@@ -8,26 +8,26 @@
       <div class="google-map">
         <div class="tabs">
           <ul class="nav-tabs">
-            <li class="active" @click="tabActive($event, 'tab1')"><a href="">Sofia</a>
+            <li class="active" @click="tabActive($event, 'tab1')"><a href="">{{ $t('tab_1') }}</a>
               <div class="dropdown">
                 <div class="address">{{ $t('address') }}</div>
-                <div class="text">София, ул. „Николай Лилиев“ 14</div>
+                <div class="text">{{ $t('address_one') }}</div>
                 <br>
-                <div class="address">Консултант брокер</div>
-                <div class="text">Ани Ботева</div>
+                <div class="address">{{ $t('address_one_title') }}</div>
+                <div class="text">{{ $t('address_one_name') }}</div>
                 <div class="phone"><a href="tel:+359884626391">+359 884 626 391</a></div>
-                <div class="text">sales@mercury99.com</div>
+                <div class="text"><a href="mailto:sales@mercury99.com">sales@mercury99.com</a></div>
               </div>
             </li>
-            <li @click="tabActive($event, 'tab2')"><a href="">Sunny Beach</a>
+            <li @click="tabActive($event, 'tab2')"><a href="">{{ $t('tab_2') }}</a>
               <div class="dropdown">
                 <div class="address">{{ $t('address') }}</div>
-                <div class="text">София, ул. „Николай Лилиев“ 14</div>
+                <div class="text">{{ $t('address_two') }}</div>
                 <br>
-                <div class="address">Консултант брокер</div>
-                <div class="text">Ани Ботева</div>
+                <div class="address">{{ $t('address_two_title') }}</div>
+                <div class="text">{{ $t('address_two_name') }}</div>
                 <div class="phone"><a href="tel:+359884626391">+359 884 626 391</a></div>
-                <div class="text">sales@mercury99.com</div>
+                <div class="text"><a href="mailto:sales@mercury99.com"></a>sales@mercury99.com</div>
               </div>
             </li>
           </ul>

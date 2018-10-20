@@ -135,9 +135,8 @@ export default {
     visibility: hidden;
     opacity: 0;
     transition: all .3s;
-    margin: 0 auto;
+    margin: 0 440px 0 220px;
     position: relative;
-    max-width: 55vw;
     img {
       max-width: 100%;
       position: relative;
@@ -224,12 +223,14 @@ export default {
     }
   }
   @media screen and(max-width: 768px) {
-    padding: 25px;
+    padding: 0 25px 25px;
     display: block;
     height: auto;
     .img-box {
       padding-right: 0;
       margin-bottom: 30px;
+      margin-left: 0;
+      margin-right: 0;
       img,
       svg {
         max-width: 100%;
@@ -241,7 +242,8 @@ export default {
     }
     .swiper-pagination.swiper-pagination-bullets {
       position: relative;
-      right: inherit;
+      right: 0;
+      left: 25%;
       top: inherit;
       transform: translate3d(0, 0, 0) rotate(0) translateX(0);
       padding-top: 20px;
