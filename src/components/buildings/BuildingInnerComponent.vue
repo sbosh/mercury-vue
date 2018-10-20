@@ -716,27 +716,27 @@ export default {
   visibility: hidden;
   transition: all 1.4s;
 }
-.active-component {
-  .inner-building-header {
-    &:before {
-      animation: line-animation 7s forwards;
-    }
-  }
-}
-@keyframes line-animation {
-  0%{
-    left: 0px;
-    height: 0;
-  }
-  95% {
-    left: 88px;
-    height: 0;
-  }
-  100% {
-    left: 88px;
-    height: 50%;
-  }
-}
+// .active-component {
+//   .inner-building-header {
+//     &:before {
+//       animation: line-animation 7s forwards;
+//     }
+//   }
+// }
+// @keyframes line-animation {
+//   0%{
+//     left: 0px;
+//     height: 0;
+//   }
+//   95% {
+//     left: 88px;
+//     height: 0;
+//   }
+//   100% {
+//     left: 88px;
+//     height: 50%;
+//   }
+// }
 .inner-building-header {
   transition: all 1.4s;
   background: linear-gradient(#232323 80%, #232323 80%, #232323 80%, #f8f8f8 20%, #f8f8f8 20%);
@@ -748,8 +748,9 @@ export default {
     position: absolute;
     display: block;
     top: 200px;
+    left: 88px;
     background: #979797;
-    height: 0;
+    height: 50%;
     width: 1px;
   }
   .btn-box {

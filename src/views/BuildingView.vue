@@ -212,65 +212,6 @@ export default {
     },
     byId (e) {
       return document.getElementById(e)
-    },
-    drawPoly (coOrdStr) {
-      let mCoords = coOrdStr.split(',')
-      let i, n
-      n = mCoords.length
-      this.hdc.beginPath()
-      console.log(this.hdc)
-      this.hdc.moveTo(mCoords[0], mCoords[1])
-      for (i = 2; i < n; i += 2) {
-        this.hdc.lineTo(mCoords[i], mCoords[i + 1])
-      }
-      this.hdc.lineTo(mCoords[0], mCoords[1])
-      this.hdc.stroke()
-    },
-    drawRect (coOrdStr) {
-      let mCoords = coOrdStr.split(',')
-      let top, left, bot, right
-      left = mCoords[0]
-      top = mCoords[1]
-      right = mCoords[2]
-      bot = mCoords[3]
-      this.hdc.strokeRect(left, top, right - left, bot - top)
-    },
-    myHover (event) {
-      let element = event.fromElement
-      if (element.nodeName === 'IMG') return
-      let coordStr = element.getAttribute('coords')
-      let areaType = element.getAttribute('shape')
-      switch (areaType) {
-        case 'polygon':
-        case 'poly': this.drawPoly(coordStr)
-          break
-        case 'rect': this.drawRect(coordStr)
-      }
-    },
-    myLeave () {
-      let canvas = this.byId('myCanvas')
-      if (!this.hdc) return
-      this.hdc.clearRect(0, 0, canvas.width, canvas.height)
-    },
-    myInit () {
-      let img = this.byId('map')
-      let x, y, w, h
-      x = img.offsetLeft
-      y = img.offsetTop
-      w = img.clientWidth
-      h = img.clientHeight
-      let imgParent = img.parentNode
-      let can = this.byId('myCanvas')
-      imgParent.appendChild(can)
-      can.style.zIndex = 9999
-      can.style.left = x + 'px'
-      can.style.top = y + 'px'
-      can.setAttribute('width', w + 'px')
-      can.setAttribute('height', h + 'px')
-      this.hdc = can.getContext('2d')
-      this.hdc.fillStyle = 'red'
-      this.hdc.strokeStyle = 'red'
-      this.hdc.lineWidth = 6
     }
   },
   computed: {
@@ -467,7 +408,7 @@ canvas {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 45px 235px 45px 40px;
+    padding: 0 235px 45px 40px;
     z-index: 200;
     .building-filter {
       display: flex;

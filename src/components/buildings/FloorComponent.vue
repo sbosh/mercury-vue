@@ -6,7 +6,7 @@
         <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="back-btn">{{ $t('back_building') }}</router-link>
       </div>
       <div class="available-from">
-        <div class="text" v-html="$t('available_apartments')"></div><span>3</span> / <span>7</span>
+        <div class="text" v-html="$t('available_apartments')"></div><span>3</span> / <span>{{ building.entrances.data[1].floors.data[1].apartments.data.length }}</span>
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="" @change="changeRout">
@@ -136,7 +136,7 @@ export default {
     transition: all .3s;
     margin: 0 auto;
     position: relative;
-    max-width: 1200px;
+    max-width: 55vw;
     img {
       max-width: 100%;
       position: relative;
