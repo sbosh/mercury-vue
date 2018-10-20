@@ -4,6 +4,22 @@
     <div class="building-apartments">
       <div class="img-box">
         <div id="building"></div>
+        <div class="flor-info-tooltip">
+          <div class="tooltip-info">
+            <div class="box">
+              <div class="text">{{ $t('apartmetns_number')}}</div>
+              <div class="number">8</div>
+            </div>
+            <div class="box">
+              <div class="text">{{ $t('floor')}}</div>
+              <div class="number">8</div>
+            </div>
+            <div class="box">
+              <div class="text">{{ $t('entrance')}}</div>
+              <div class="number">8</div>
+            </div>
+          </div>
+        </div>
       </div>
       <filtered-apartments
         @clicked="isFiltred = false"
@@ -273,6 +289,50 @@ canvas {
     background: #fff;
     padding: 15px;
     color: #000;
+  }
+}
+.flor-info-tooltip {
+  position: absolute;
+  z-index: 9999;
+  background: #fff;
+  padding: 20px 10px;
+  top: 100px;
+  &:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -7px;
+    transform: trnaslateX(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 5px 7px 5px;
+    border-color: transparent transparent #ffffff transparent;
+  }
+  .tooltip-info {
+    display: flex;
+    align-items: center;
+    .box {
+      text-align: center;
+      padding: 0 20px;
+      .text {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 10px;
+        text-transform: uppercase;
+        margin-bottom: 7px;
+        color: #cfcfcf;
+      }
+      .number {
+        font-weight: 700;
+        color: #000;
+        font-size: 26px;
+        font-family: 'Exo 2', sans-serif;
+      }
+      &+.box {
+        border-left: 1px solid #cfcfcf;
+      }
+    }
   }
 }
 .building-apartments {
