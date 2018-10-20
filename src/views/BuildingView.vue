@@ -143,24 +143,6 @@ export default {
     if (this.building) {
       this.initCanvas()
     }
-
-    this.tooltip = document.querySelector('.flor-info-tooltip')
-
-    this.jsApartments = document.getElementById('js-apartments')
-    this.jsFloor = document.getElementById('js-floor')
-    this.jsEntrance = document.getElementById('js-entrance')
-    window.onmousemove = (e) => {
-      if (this.insidePoly) {
-        let x = (e.clientX - this.tooltip.offsetWidth / 2) + 'px'
-        let y = (e.clientY + 50) + 'px'
-
-        this.tooltip.style.display = 'block'
-        this.tooltip.style.top = y
-        this.tooltip.style.left = x
-      } else {
-        this.tooltip.style.display = 'none'
-      }
-    }
   },
   watch: {
     building () {
@@ -186,6 +168,25 @@ export default {
       )
 
       return true
+    },
+    initTooltip () {
+      this.tooltip = document.querySelector('.flor-info-tooltip')
+
+      this.jsApartments = document.getElementById('js-apartments')
+      this.jsFloor = document.getElementById('js-floor')
+      this.jsEntrance = document.getElementById('js-entrance')
+      window.onmousemove = (e) => {
+        if (this.insidePoly) {
+          let x = (e.clientX - this.tooltip.offsetWidth / 2) + 'px'
+          let y = (e.clientY + 50) + 'px'
+
+          this.tooltip.style.display = 'block'
+          this.tooltip.style.top = y
+          this.tooltip.style.left = x
+        } else {
+          this.tooltip.style.display = 'none'
+        }
+      }
     },
     preloadGame () {
       this.game.load.image('starlight', this.$store.state.buildings.building.image)
@@ -244,6 +245,8 @@ export default {
         })
         this.entrances.push(entrc)
       })
+
+      this.initTooltip()
     },
     onDown (entranceSlug, florSlug) {
       return () => {
