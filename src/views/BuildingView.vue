@@ -87,7 +87,6 @@
 
 <script>
 import { mapState } from 'vuex'
-import 'phaser-kinetic-scrolling-plugin'
 import vueSlider from 'vue-slider-component'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import FilteredApartments from '@/components/buildings/FilteredApartments'
