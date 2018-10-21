@@ -138,7 +138,6 @@ export default {
     margin: 0 440px 0 220px;
     position: relative;
     max-width: 1200px;
-    border: 1px solid #000;
     img {
       max-width: 100%;
       position: relative;
