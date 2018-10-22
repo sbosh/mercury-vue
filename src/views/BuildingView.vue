@@ -7,16 +7,18 @@
         <div class="flor-info-tooltip">
           <div class="tooltip-info">
             <div class="box">
-              <div class="text">{{ $t('apartmetns_number')}}</div>
-              <div class="number" id="js-apartments">8</div>
-            </div>
-            <div class="box">
-              <div class="text">{{ $t('floor')}}</div>
+              <div class="text">{{ $t('floor') }}</div>
               <div class="number" id="js-floor">8</div>
             </div>
             <div class="box">
-              <div class="text" id="js-entrance">{{ $t('entrance')}}</div>
-              <div class="number">8</div>
+              <div class="text">{{ $t('entrance') }}</div>
+              <div class="number" id="js-entrance">8</div>
+            </div>
+          </div>
+          <div class="tooltip-info">
+            <div class="box">
+              <div class="text" v-html="$t('available_apartments')"></div>
+              <div class="number" id="js-apartments">8</div>
             </div>
           </div>
         </div>
@@ -28,7 +30,7 @@
         :priceTo="value"
         :rooms="rooms"
         :available="available" />
-      <all-apartments :apartmentsActive="apartmentsActive" @clicked="() => apartmentsActive = false" />
+      <parking-component :parkingsActive="parkingsActive" @clicked="() => parkingsActive = false" />
       <div class="filters" v-if="priceFrom" v-bind:class="{ active: filterActive }">
         <div class="close" @click="filterActive = false"></div>
         <div class="filter-row">
@@ -94,7 +96,7 @@
             <span></span>
             <span></span>
           </button>
-          <button class="parking-btn" @click="apartmentsActive = !apartmentsActive"></button>
+          <button class="parking-btn" @click="parkingsActive = !parkingsActive"></button>
         </div>
       </div>
     </div>
@@ -106,17 +108,17 @@ import { mapState } from 'vuex'
 import vueSlider from 'vue-slider-component'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import FilteredApartments from '@/components/buildings/FilteredApartments'
-import AllApartments from '@/components/buildings/AllApartments'
+import ParkingComponent from '@/components/buildings/ParkingComponent'
 /* eslint-disable no-undef */
 export default {
   name: 'building-view',
-  components: { NavinnerComponent, vueSlider, FilteredApartments, AllApartments },
+  components: { NavinnerComponent, vueSlider, FilteredApartments, ParkingComponent },
   data () {
     return {
       show: false,
       value: 5000,
       available: true,
-      apartmentsActive: false,
+      parkingsActive: false,
       filterActive: false,
       isFiltred: false,
       rooms: [],
@@ -213,7 +215,7 @@ export default {
           let floorData = {
             index,
             countOfApartments: floor.apartments.data.length,
-            entrance: entrance['slug_' + this.$i18n.locale]
+            entrance: entrance['title_' + this.$i18n.locale].split('').pop()
           }
           coords.forEach(c => {
             if (c.includes(' ')) {
@@ -302,13 +304,6 @@ canvas {
   height: 100%;
   object-fit: cover;
 }
-.tooltip {
-  .tooltip-inner {
-    background: #fff;
-    padding: 15px;
-    color: #000;
-  }
-}
 .flor-info-tooltip {
   position: absolute;
   z-index: 9999;
@@ -331,9 +326,18 @@ canvas {
   .tooltip-info {
     display: flex;
     align-items: center;
+    &:last-child {
+     border-top: 1px solid #cfcfcf;
+     margin-top: 10px;
+     padding-top: 10px;
+      .box {
+        width: 100%;
+      }
+    }
     .box {
       text-align: center;
       padding: 0 20px;
+      width: 50%;
       .text {
         font-family: 'Montserrat', sans-serif;
         font-weight: 600;
@@ -341,6 +345,9 @@ canvas {
         text-transform: uppercase;
         margin-bottom: 7px;
         color: #cfcfcf;
+        br {
+          display: none;
+        }
       }
       .number {
         font-weight: 700;
@@ -502,6 +509,7 @@ canvas {
     &.active {
       position: fixed;
       top: 0;
+      bottom: 0;
       z-index: 99999;
       .filter-row {
         height: 65%;
@@ -648,7 +656,7 @@ canvas {
       }
     }
   }
-  .all-apartments {
+  .parkings {
     position: absolute;
     right: 0;
     top: 0;
@@ -776,7 +784,7 @@ canvas {
   }
   @media screen and(max-width: 768px) {
     height: auto;
-    overflow: visible;
+    min-height: 100vh;
     .img-box {
       height: auto;
       width: 100%;

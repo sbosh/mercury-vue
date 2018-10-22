@@ -1,5 +1,6 @@
 <template>
   <div class="main-content">
+    <!-- <preloader-component @complete="isComplete" v-if="home && isLoading" /> -->
     <nav-component />
     <buildings-carousel :home="true" />
     <div class="home-slider">
@@ -27,10 +28,12 @@
 import { mapState } from 'vuex'
 import NavComponent from '@/components/layout/NavComponent'
 import BuildingsCarousel from '@/components/buildings/BuildingsCarousel'
+import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 export default {
   name: 'home',
   components: {
     'nav-component': NavComponent,
+    'preloader-component': PreloaderComponent,
     'buildings-carousel': BuildingsCarousel
   },
   metaInfo () {
