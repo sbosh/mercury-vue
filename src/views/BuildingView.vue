@@ -107,6 +107,7 @@ import vueSlider from 'vue-slider-component'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import FilteredApartments from '@/components/buildings/FilteredApartments'
 import AllApartments from '@/components/buildings/AllApartments'
+
 /* eslint-disable no-undef */
 export default {
   name: 'building-view',
@@ -136,18 +137,25 @@ export default {
       jsApartments: null,
       jsFloor: null,
       jsEntrance: null,
-      tooltip: null
+      tooltip: null,
+      loading: false
     }
   },
-  mounted () {
-    if (this.building) {
-      this.initCanvas()
-    }
+  created () {
+    this.loading = true
+    // eslint-disable-next-line
+    this.$store.cache.dispatch('fetchBuildingEntrances', this.$route.params.id).then(() => {
+      // eslint-disable-next-line
+      this.$store.cache.dispatch('fetchBuildingFloors', this.$route.params.id).then(() => {
+        // eslint-disable-next-line
+        this.$store.cache.dispatch('fetchBuildingApartments', this.$route.params.id).then(() => {
+          this.loading = false
+          this.initCanvas()
+        })
+      })
+    })
   },
   watch: {
-    building () {
-      this.initCanvas()
-    },
     show (val) {
       if (val) {
         this.$nextTick(() => this.$refs.slider.refresh())
@@ -189,7 +197,7 @@ export default {
       }
     },
     preloadGame () {
-      this.game.load.image('starlight', this.$store.state.buildings.building.image)
+      this.game.load.image('starlight', this.building.image)
     },
     createGame () {
       this.game.stage.disableVisibilityChange = true
@@ -201,12 +209,12 @@ export default {
       this.scaleGame()
 
       this.background = this.game.add.tileSprite(0, 0, 1920, 1080, 'starlight')
-
-      this.building.entrances.data.forEach((entrance, eIndex) => {
+      this.buildingEntrances.forEach((entrance, eIndex) => {
         let entrc = {
           polygons: []
         }
-        const floors = entrance.floors.data
+
+        const floors = this.$store.getters.getFloorsByEntrance(entrance['slug_' + this.$i18n.locale])
         floors.forEach((floor, index) => {
           let coords = floor.coords.split(',')
           let originalCoords = []
@@ -245,6 +253,51 @@ export default {
         })
         this.entrances.push(entrc)
       })
+
+      // entrances.forEach((entrance, eIndex) => {
+      //   let entrc = {
+      //     polygons: []
+      //   }
+
+      //   const floors = this.$store.getters.buildings.getFloorsByEntrance(entrance.id)
+      //   floors.forEach((floor, index) => {
+      //     let coords = floor.coords.split(',')
+      //     let originalCoords = []
+      //     let floorData = {
+      //       index,
+      //       countOfApartments: floor.apartments.data.length,
+      //       entrance: entrance['slug_' + this.$i18n.locale]
+      //     }
+      //     coords.forEach(c => {
+      //       if (c.includes(' ')) {
+      //         let o = c.split(' ').map(c => Number(c)).filter(c => c)
+      //         originalCoords.push(o[0])
+      //         originalCoords.push(o[1])
+      //       } else {
+      //         originalCoords.push(Number(c))
+      //       }
+      //     })
+
+      //     let poly = new Phaser.Polygon(originalCoords)
+      //     let graphics = this.game.add.graphics(0, 0)
+
+      //     graphics.inputEnabled = true
+      //     graphics.input.useHandCursor = true
+
+      //     graphics.events.onInputDown.add(this.onDown(entrance['slug_' + this.$i18n.locale], floor['slug_' + this.$i18n.locale]), this)
+      //     graphics.events.onInputOver.add(this.onOver(eIndex, floorData, floor.id), this)
+      //     graphics.events.onInputOut.add(this.onOut(eIndex, floorData), this)
+
+      //     graphics.alpha = 0
+      //     graphics.beginFill(0xfa6a02)
+      //     graphics.drawPolygon(poly.points)
+      //     graphics.endFill()
+
+      //     entrc.polygons.push(graphics)
+      //     this.polygons.push(graphics)
+      //   })
+      //   this.entrances.push(entrc)
+      // })
 
       this.initTooltip()
     },
@@ -288,9 +341,9 @@ export default {
       return this.$i18n.locale
     },
     ...mapState({
-      apartments: state => state.apartments.all,
-      floors: state => state.floors.all,
-      building: state => state.buildings.building
+      building: state => state.buildings.building,
+      buildingEntrances: state => state.buildings.buildingEntrances,
+      buildingApartments: state => state.buildings.buildingApartments
     })
   }
 }

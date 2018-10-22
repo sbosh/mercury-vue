@@ -1,5 +1,5 @@
 <template>
-  <div class="building-content">
+  <div class="building-content" v-if="building">
     <!-- <preloader-component @complete="isComplete" v-if="building && isLoading" /> -->
     <transition name="page" mode="out-in">
       <router-view />
@@ -8,24 +8,21 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import PreloaderComponent from '@/components/preloader/PreloaderComponent'
+import { mapState } from 'vuex'
 export default {
   name: 'building-inner',
   components: { PreloaderComponent },
   data () {
     return {
-      isLoading: true
-    }
-  },
-  methods: {
-    isComplete () {
-      this.isLoading = false
+      loading: false
     }
   },
   created () {
-    console.log(this.$route.params.id)
-    this.$store.cache.dispatch('fetchBuildingById', this.$route.params.id)
+    this.loading = true
+
+    // eslint-disable-next-line
+    this.$store.cache.dispatch('fetchBuilding', this.$route.params.id).then(() => this.loading = false)
   },
   computed: {
     ...mapState({

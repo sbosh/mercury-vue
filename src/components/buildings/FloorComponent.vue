@@ -1,6 +1,6 @@
 <template>
-  <div class="floor-plan" v-if="building">
-    <mq-layout mq="md+" class="left-sidebar">
+  <div class="floor-plan" v-if="floors">
+  <mq-layout mq="md+" class="left-sidebar">
       <div class="top">
         <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
         <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="back-btn">{{ $t('back_building') }}</router-link>
@@ -10,7 +10,7 @@
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="" @change="changeRout">
-            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in building.entrances.data" :key="entrance.id">
+            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id">
             {{ entrance['title_' + $i18n.locale] }}
             </option>
           </select>
@@ -23,7 +23,7 @@
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="" @change="changeRout">
-            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in building.entrances.data" :key="entrance.id">
+            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id">
             {{ entrance['title_' + $i18n.locale] }}
             </option>
           </select>
@@ -32,9 +32,9 @@
       </div>
     </mq-layout>
     <div class="floor-info">
-      <!-- {{ building.entrances.data.filter(e => e.id === Number(this.$route.params.slug)) }} -->
+      {{ building.entrances.data.filter(e => e.id === Number(this.$route.params.slug)) }}
       <swiper ref="mySwiper" :options="swiperOptions()">
-        <swiper-slide v-for="floor in entrance.floors.data" :key="floor.id">
+        <swiper-slide v-for="floor in floors" :key="floor.id">
           <div class="img-box">
             <img :src="floor.image" alt="">
             <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
@@ -64,10 +64,11 @@ export default {
   },
   computed: {
     ...mapState({
-      building: state => state.buildings.building
+      building: state => state.buildings.building,
+      buildingEntrances: state => state.buildings.buildingEntrances
     }),
-    entrance () {
-      return this.$store.getters.getFloorsByEntrance(this.$route.params.slug)[0]
+    floors () {
+      return this.$store.getters.getFloorsByEntrance(this.$route.params.slug)
     },
     lang () {
       return this.$i18n.locale
@@ -75,6 +76,10 @@ export default {
     swiper () {
       return this.$refs.mySwiper.swiper
     }
+  },
+  created () {
+    // eslint-disable-next-line
+    this.$store.cache.dispatch('fetchBuildingEntrances', this.$route.params.id)
   },
   mounted () {
     this.initSwiper()
@@ -115,7 +120,7 @@ export default {
       this.$router.replace({ name: 'building-inner-floor', params: { slug: event.target.value, floorId: 1 } })
     },
     handleSlideChange () {
-      const floor = this.entrance.floors.data[this.swiper.activeIndex - 1]
+      const floor = this.floors[this.swiper.activeIndex - 1]
       this.$router.replace({ name: 'building-inner-floor', params: { floorId: floor['slug_' + this.$i18n.locale] } })
     }
   }

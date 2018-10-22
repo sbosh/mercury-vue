@@ -172,11 +172,11 @@ export default {
     })
   },
   created () {
-    this.$store.cache.dispatch('fetchBuildingById', this.$route.params.id)
+    // this.$store.cache.dispatch('fetchBuildingById', this.$route.params.id)
   },
   watch: {
     '$route.params.id' (id) {
-      this.$store.cache.dispatch('fetchBuildingById', id)
+      // this.$store.cache.dispatch('fetchBuildingById', id)
     }
   },
   computed: {

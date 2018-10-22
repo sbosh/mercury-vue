@@ -4,68 +4,85 @@ import HTTP from '@/api/http'
 const buildingsService = new BuildingsService(HTTP)
 
 const state = {
-  all: null,
-  current: null,
+  all: [],
   building: null,
-  future: null,
-  finished: null
+  buildingApartments: [],
+  buildingFloors: [],
+  buildingEntrances: [],
+  buildingParkings: []
 }
 
 const actions = {
-  fetchBuildings ({ commit }) {
-    buildingsService.getBuildings('/buildings').then(({ data }) => commit('setBuildings', data.data))
-  },
-  fetchCurrentBuildings ({ commit }) {
-    buildingsService.getCurrentBuildings().then(({ data }) => commit('setCurrentBuildings', data.data))
-  },
-  fetchBuildingById ({ commit }, id) {
-    buildingsService.getBuildingById(id).then(({ data }) => {
-      commit('setBuildingById', data.data)
-      console.log(data.data)
-      commit('setApartments', data.data.apartments.data)
+  fetchBuilding ({ commit }, id) {
+    return new Promise((resolve, reject) => {
+      buildingsService.getBuildingById(id).then(({ data }) => {
+        commit('setBuilding', data.data)
+        resolve()
+      })
     })
   },
-  fetchFutureBuildings ({ commit }) {
-    buildingsService.getFutureBuildings().then(({ data }) => commit('setFutureBuildings', data.data))
+  fetchBuildingApartments ({ commit }, id) {
+    return new Promise((resolve, reject) => {
+      buildingsService.getBuildingApartments(id).then(({ data }) => {
+        commit('setApartments', data.data)
+        resolve()
+      })
+    })
   },
-  fetchFinishedBuildings ({ commit }) {
-    buildingsService.getFinishedBuildings().then(({ data }) => commit('setFinishedBuildings', data.data))
+  fetchBuildingFloors ({ commit }, id) {
+    return new Promise((resolve, reject) => {
+      buildingsService.getBuildingFloors(id).then(({ data }) => {
+        commit('setFloors', data.data)
+        resolve()
+      })
+    })
+  },
+  fetchBuildingEntrances ({ commit }, id) {
+    return new Promise((resolve, reject) => {
+      buildingsService.getBuildingEntrances(id).then(({ data }) => {
+        commit('setEntrances', data.data)
+        resolve()
+      })
+    })
+  },
+  fetchBuildingParkings ({ commit }, id) {
+    return new Promise((resolve, reject) => {
+      buildingsService.getBuildingParkings(id).then(({ data }) => {
+        commit('setPartkings', data.data)
+        resolve()
+      })
+    })
   }
 }
 
 const getters = {
-  getBuilding (state) {
-    return (slug) => {
-      if (!state.all) return
-      return state.all.find(building => building.slug_en === slug) ||
-        state.all.find(building => building.slug_bg === slug)
+  getFloorsByEntrance (state) {
+    return (entranceSlug) => {
+      return state.buildingFloors.filter(floor => floor.entrance.slug_en === entranceSlug || floor.entrance.slug_bg === entranceSlug)
     }
   },
-  getSortedBuildings (state) {
-    return state.all
-  },
-  getFloorsByEntrance (state) {
-    return (slug) => {
-      return state.building.entrances.data.filter(entrance => entrance.slug_en === slug || entrance.slug_bg === slug)
+  getApartmentsByFloor (state) {
+    return (floorId) => {
+      return state.buildingApartments.filter(apartment => apartment.floor.id === floorId)
     }
   }
 }
 
 const mutations = {
-  setBuildings (state, buildings) {
-    state.all = buildings
-  },
-  setCurrentBuildings (state, current) {
-    state.current = current
-  },
-  setBuildingById (state, building) {
+  setBuilding (state, building) {
     state.building = building
   },
-  setFutureBuildings (state, future) {
-    state.future = future
+  setApartments (state, apartments) {
+    state.buildingApartments = apartments
   },
-  setFinishedBuildings (state, finished) {
-    state.finished = finished
+  setFloors (state, floors) {
+    state.buildingFloors = floors
+  },
+  setEntrances (state, entrances) {
+    state.buildingEntrances = entrances
+  },
+  setPartkings (state, parkings) {
+    state.buildingParkings = parkings
   }
 }
 

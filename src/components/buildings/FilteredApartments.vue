@@ -1,6 +1,6 @@
 <template>
   <div class="filtered-apartments" v-bind:class="{ active: isFiltred }">
-    <div class="left-sidebar">
+    <!-- <div class="left-sidebar">
       <div class="top">
         <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
         <div class="back-btn" @click="closed">{{ $t('back_building') }}</div>
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -147,18 +147,6 @@ export default {
       img {
         max-width: 100%;
       }
-      &.sold {
-        img,
-        .info {
-          //opacity: .2;
-        }
-      }
-      &.reserved {
-        img,
-        .info {
-          //opacity: .2;
-        }
-      }
       &:nth-child(even) {
         padding-top: 50px;
         padding-bottom: 0;
@@ -210,6 +198,52 @@ export default {
   }
   &.active {
     transform: translateX(0);
+  }
+  @media screen and(max-width: 1280px){
+    .apartments-listing {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+  @media screen and(max-width: 1024px){
+    .apartments-listing {
+      .apartments-box {
+        flex: 1 0 100%;
+        padding-bottom: 0;
+        &:nth-child(even) {
+          padding-top: 0;
+        }
+      }
+    }
+  }
+  @media screen and(max-width: 768px){
+    z-index: 99999;
+    height: 100vh;
+    padding: 0;
+    .left-sidebar {
+      width: 100%;
+      height: 100px;
+      padding: 0 25px;
+      bottom: inherit;
+      right: 0;
+      border-right: none;
+      flex-direction: row;
+      .top {
+        >.router-link-active {
+          display: none;
+        }
+      }
+      .available-from {
+        width: auto;
+        margin-left: auto;
+      }
+      .compass {
+        display: none;
+      }
+    }
+    .apartments-listing {
+      padding: 100px 25px 25px;
+    }
   }
 }
 </style>
