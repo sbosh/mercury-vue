@@ -609,20 +609,29 @@ canvas {
     }
   }
   .bottom-options {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 45px 235px 45px 40px;
-    z-index: 200;
+    // position: absolute;
+    // left: 0;
+    // bottom: 0;
+    // right: 0;
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
+    // padding: 45px 235px 45px 40px;
+    // z-index: 200;
+    .building-btn {
+      position: fixed;
+      left: 50px;
+      bottom: 50px;
+    }
     .building-filter {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      display: flex;
+      right: 250px;
+      bottom: 50px;
+      position: fixed;
       button {
         border-radius: 50%;
         width: 70px;
@@ -855,10 +864,17 @@ canvas {
       right: inherit;
       padding: 0;
       background: transparent;
+      display: flex;
       flex-direction: column-reverse;
+      justify-content: space-between;
+      text-align: center;
+      z-index: 200;
       .building-filter {
         flex-direction: row;
         margin-top: -90px;
+        right: inherit;
+        bottom: inherit;
+        position: inherit;
         .filter-btn,
         .parking-btn {
           margin: 0 10px 20px 10px;
@@ -866,6 +882,9 @@ canvas {
       }
       .building-btn {
         width: 100%;
+        position: relative;
+        left: inherit;
+        bottom: inherit;
         .btn-box {
           width: 100%;
           .btn {

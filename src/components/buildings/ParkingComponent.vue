@@ -1,5 +1,5 @@
 <template>
-  <div class="parkings" v-if="building" v-bind:class="{ active: parkingsActive }">
+  <div class="parkings" v-if="buildingParkings" v-bind:class="{ active: parkingsActive }">
     <div class="table-box">
       <div class="close" @click="closed"></div>
       <div class="table">
@@ -12,8 +12,7 @@
           </div>
         </div>
         <div class="tbody">
-          {{ filtrApartments(10000, 180000, [4]) }}
-          <div class="tr" v-for="parking in building.apartments.data" :key="parking.id">
+          <div class="tr" v-for="parking in buildingParkings" :key="parking.id">
             <div class="td"><div class="number">{{ parking.id }}</div></div>
             <div class="td"><div class="sqm">{{ parking.total_area }}</div></div>
             <div class="td"><div class="price" v-if="parking.status === 1 || parking.status === 2">{{ parking.price }}</div></div>
@@ -36,17 +35,17 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'parking-component',
   props: [ 'parkingsActive' ],
   computed: {
     ...mapState({
-      building: state => state.buildings.building
-    }),
-    ...mapGetters({
-      filtrApartments: 'getFiltredApartments'
+      buildingParkings: state => state.buildings.buildingParkings
     })
+  },
+  created () {
+    this.$store.cache.dispatch('fetchBuildingParkings', this.$route.params.id)
   },
   methods: {
     closed () {
