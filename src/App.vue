@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- <preloader-component @complete="isComplete" v-if="isLoading" /> -->
     <mq-layout mq="md+"><header-component /></mq-layout>
     <mq-layout mq="sm"><header-mobile /></mq-layout>
     <transition :name="transitionName" mode="out-in" @beforeLeave="beforeLeave" @enter="enter" @afterEnter="afterEnter">
@@ -8,23 +9,27 @@
   </div>
 </template>
 <script>
+import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 import HeaderComponent from '@/components/layout/HeaderComponent'
 import HeaderMobile from '@/components/mobile/HeaderMobile'
 const DEFAULT_TRANSITION = 'fade'
 export default {
   name: 'app',
-  components: { HeaderComponent, HeaderMobile },
+  components: { HeaderComponent, HeaderMobile, PreloaderComponent },
   metaInfo: {
     title: 'MERCURY 99',
     titleTemplate: '%s | Building Company'
   },
   data () {
     return {
+      loading: false,
+      isLoading: true,
       prevHeight: 0,
       transitionName: DEFAULT_TRANSITION
     }
   },
   created () {
+    this.loading = true
     this.$router.beforeEach((to, from, next) => {
       let transitionName = to.meta.transitionName || from.meta.transitionName
 
@@ -40,6 +45,9 @@ export default {
     })
   },
   methods: {
+    isComplete () {
+      this.isLoading = false
+    },
     beforeLeave (element) {
       this.prevHeight = getComputedStyle(element).height
       this.$el.classList.remove('active-component')
