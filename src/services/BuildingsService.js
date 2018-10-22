@@ -28,13 +28,13 @@ export default class BuildingsService {
       .catch((error) => { throw new Error(error) })
   }
 
+  getCurrentBuildings () {
+    return this.http.get('/buildings/current')
+      .catch((error) => { throw new Error(error) })
+  }
+
   // getBuildings () {
   //   return this.http.get('/buildings')
-  //     .catch((error) => { throw new Error(error) })
-  // }
-
-  // getCurrentBuildings () {
-  //   return this.http.get('/buildings/current')
   //     .catch((error) => { throw new Error(error) })
   // }
 
@@ -43,13 +43,13 @@ export default class BuildingsService {
   //     .catch((error) => { throw new Error(error) })
   // }
 
-  // getFutureBuildings () {
-  //   return this.http.get('/buildings/future')
-  //     .catch((error) => { throw new Error(error) })
-  // }
+  getFutureBuildings () {
+    return this.http.get('/buildings/future')
+      .catch((error) => { throw new Error(error) })
+  }
 
-  // getFinishedBuildings () {
-  //   return this.http.get('/buildings/finished')
-  //     .catch((error) => { throw new Error(error) })
-  // }
+  getFinishedBuildings () {
+    return this.http.get('/buildings/finished')
+      .catch((error) => { throw new Error(error) })
+  }
 }

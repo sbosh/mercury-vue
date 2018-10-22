@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content" v-if="currentBuildingsPage">
+  <div class="main-content" v-if="currentBuildingsPage && current">
     <nav-component />
     <mq-layout mq="md+"><buildings-carousel :pageTitle="this.currentBuildingsPage['title_' + this.$i18n.locale]" /></mq-layout>
     <mq-layout mq="sm"><buildings-mobile :pageTitle="this.currentBuildingsPage['title_' + this.$i18n.locale]" /></mq-layout>
@@ -23,6 +23,9 @@ export default {
       homeRoute: true
     }
   },
+  created () {
+    this.$store.cache.dispatch('fetchCurrentBuildings')
+  },
   metaInfo () {
     return {
       title: this.currentBuildingsPage ? this.currentBuildingsPage['seo_title_' + this.$i18n.locale] : ''
@@ -30,7 +33,8 @@ export default {
   },
   computed: {
     ...mapState({
-      currentBuildingsPage: state => state.pages.currentBuildingsPage
+      currentBuildingsPage: state => state.pages.currentBuildingsPage,
+      current: state => state.buildings.current
     })
   }
 }

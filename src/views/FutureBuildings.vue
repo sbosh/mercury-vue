@@ -65,13 +65,16 @@ export default {
       }
     }
   },
+  created () {
+    this.$store.cache.dispatch('fetchFuturedBuildings')
+  },
   computed: {
     lang () {
       return this.$i18n.locale
     },
     ...mapState({
       futureBuildingsPage: state => state.pages.futureBuildingsPage,
-      future: state => state.buildings.future
+      future: state => state.buildings.futured
     })
   }
 }

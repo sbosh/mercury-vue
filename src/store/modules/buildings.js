@@ -9,7 +9,10 @@ const state = {
   buildingApartments: [],
   buildingFloors: [],
   buildingEntrances: [],
-  buildingParkings: []
+  buildingParkings: [],
+  current: [],
+  finished: [],
+  futured: []
 }
 
 const actions = {
@@ -52,6 +55,30 @@ const actions = {
         resolve()
       })
     })
+  },
+  fetchCurrentBuildings ({ commit }) {
+    return new Promise((resolve, reject) => {
+      buildingsService.getCurrentBuildings().then(({ data }) => {
+        commit('setCurrentBuildings', data.data)
+        resolve()
+      })
+    })
+  },
+  fetchFuturedBuildings ({ commit }) {
+    return new Promise((resolve, reject) => {
+      buildingsService.getFutureBuildings().then(({ data }) => {
+        commit('setFuturedBuildings', data.data)
+        resolve()
+      })
+    })
+  },
+  fetchFinishedBuildings ({ commit }) {
+    return new Promise((resolve, reject) => {
+      buildingsService.getFinishedBuildings().then(({ data }) => {
+        commit('setFinishedBuildings', data.data)
+        resolve()
+      })
+    })
   }
 }
 
@@ -83,6 +110,15 @@ const mutations = {
   },
   setPartkings (state, parkings) {
     state.buildingParkings = parkings
+  },
+  setCurrentBuildings (state, currentBuildings) {
+    state.current = currentBuildings
+  },
+  setFuturedBuildings (state, futuredBuildings) {
+    state.futured = futuredBuildings
+  },
+  setFinishedBuildings (state, finishedBuildings) {
+    state.finished = finishedBuildings
   }
 }
 

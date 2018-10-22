@@ -65,6 +65,9 @@ export default {
       return options
     }
   },
+  created () {
+    this.$store.cache.dispatch('fetchCurrentBuildings')
+  },
   computed: {
     lang () {
       return this.$i18n.locale

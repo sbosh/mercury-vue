@@ -64,6 +64,9 @@ export default {
       }
     }
   },
+  created () {
+    this.$store.cache.dispatch('fetchFinishedBuildings')
+  },
   computed: {
     lang () {
       return this.$i18n.locale
