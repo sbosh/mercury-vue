@@ -38,7 +38,11 @@
           <div class="img-box">
             <img :src="floor.image" alt="">
             <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
-              <g v-for="apartment in floor.apartments.data" :key="apartment.id" @click="apartmentRoute(apartment['slug_' + $i18n.locale])">
+              <g
+                v-for="apartment in floor.apartments.data"
+                :key="apartment.id"
+                @click="apartmentRoute(apartment['slug_' + $i18n.locale])"
+                v-tooltip="`<h4>${apartment['title_' + $i18n.locale]}</h4><br>${$t('area')}: ${apartment.total_area}<br>${$t('price')}: ${apartment.price} (EUR)<br>${$t('rooms')}: ${apartment.rooms}`">
                 <path :d="apartment.coords" fill="none"></path>
               </g>
             </svg>
@@ -128,6 +132,18 @@ export default {
 </script>
 
 <style lang="scss">
+.tooltip {
+  background: #fff;
+  box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.46);
+  padding: 15px;
+  z-index: 9999;
+  font-size: 16px;
+  line-height: 20px;
+  h3 {
+    text-align: center;
+    margin: 0 0 10px 0;
+  }
+}
 .floor-info {
   height: 100vh;
   text-align: center;

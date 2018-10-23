@@ -13,7 +13,7 @@
               </div>
               <div class="caption">
                 <div class="title-box">
-                  <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['annonce_' + $i18n.locale] }}</router-link></h2>
+                  <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
                   <div class="location-info">{{ building['annonce_' + $i18n.locale] }}</div>
                   <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">{{ $t('see') }}</router-link></div>
                 </div>
@@ -80,6 +80,11 @@ export default {
 </script>
 
 <style lang="scss">
+.future-current {
+  .swiper-container {
+    width: 100%;
+  }
+}
 .building-sort {
   position:relative;
   height: 100vh;
@@ -169,6 +174,7 @@ export default {
       background-position: top left;
       background-repeat: no-repeat;
       padding-left: 31px;
+      min-height: 23px;
       margin: 25px 0 40px 0;
       transform: translateY(400px);
       transition-delay: 1.5s;
