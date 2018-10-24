@@ -10,20 +10,20 @@
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="" @change="changeRout">
-            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id">
+            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id" :selected="entrance['slug_' + $i18n.locale] === $route.params.slug">
             {{ entrance['title_' + $i18n.locale] }}
             </option>
           </select>
         </div>
       </div>
-      <div class="compass"><img src="@/assets/images/compass.svg" alt=""></div>
+      <div class="compass"><img src="@/assets/images/compass.svg" v-if="floors" :style="{ transform: 'rotate(-' + floors[Number($route.params.floorId)-1].degrees +'deg)' }" alt=""></div>
     </mq-layout>
     <mq-layout mq="sm" class="floor-info-mobile">
       <div class="available-from">
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="" @change="changeRout">
-            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id">
+            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id" :selected="entrance['slug_' + $i18n.locale] === $route.params.slug">
             {{ entrance['title_' + $i18n.locale] }}
             </option>
           </select>
@@ -42,7 +42,7 @@
                 v-for="apartment in floor.apartments.data"
                 :key="apartment.id"
                 @click="apartmentRoute(apartment['slug_' + $i18n.locale])"
-                v-tooltip="`<h4>${apartment['title_' + $i18n.locale]}</h4><br>${$t('area')}: ${apartment.total_area}<br>${$t('price')}: ${apartment.price} (EUR)<br>${$t('rooms')}: ${apartment.rooms}`">
+                v-tooltip="{ content: tooltipContent(apartment) }">
                 <path :d="apartment.coords" fill="none"></path>
               </g>
             </svg>
@@ -92,6 +92,9 @@ export default {
     this.initSwiper()
   },
   methods: {
+    tooltipContent (apartment) {
+      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><br>${this.$t('area')}: ${apartment.total_area}<br>${this.$t('price')}: ${apartment.price} (EUR)<br>${this.$t('rooms')}: ${apartment.rooms}`
+    },
     initSwiper () {
       if (this.$refs.mySwiper) {
         this.$refs.mySwiper.swiper.slideTo(Number(this.$route.params.floorId))
@@ -398,6 +401,9 @@ export default {
     transform: translateX(0);
     .compass {
       animation: rotate-animation 1.3s linear;
+      img {
+        transition: all .4s;
+      }
     }
   }
 }

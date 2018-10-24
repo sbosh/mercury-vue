@@ -368,6 +368,7 @@ canvas {
     position: absolute;
     left: 50%;
     top: -7px;
+    margin-left: -5px;
     transform: trnaslateX(-50%);
     width: 0;
     height: 0;
@@ -390,18 +391,26 @@ canvas {
       text-align: center;
       padding: 0 20px;
       width: 50%;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: flex-start;
       .text {
         font-family: 'Montserrat', sans-serif;
         font-weight: 600;
-        font-size: 10px;
-        text-transform: uppercase;
-        margin-bottom: 7px;
-        color: #cfcfcf;
+        font-size: 12px;
+        // text-transform: uppercase;
+        // margin-bottom: 7px;
+        color: #333;
+        margin-left: 10px;
+        // height: 100%;
         br {
           display: none;
         }
       }
       .number {
+        // height: 100%;
+        margin-right: auto;
         font-weight: 700;
         color: #000;
         font-size: 26px;
