@@ -695,11 +695,12 @@ export default {
 .caption {
   .text {
     padding-left: 195px;
+    margin-top: 40px;
     p {
-      column-count: 2;
-      column-gap: 100px;
+      // column-count: 2;
+      // column-gap: 100px;
       max-width: 84%;
-      margin: 60px auto 10px auto;
+      margin: 20px auto 10px auto;
       color: #383838;
       font-family: "Fira Sans";
       font-size: 17px;

@@ -266,6 +266,12 @@ export default {
     margin-bottom: 20px;
     border: 1px solid #dfdfdf;
   }
+  @media screen and(max-width: 1280px) {
+    .contacts-us {
+      margin: 0 50px 50px 50px;
+      padding: 30px;
+    }
+  }
   @media screen and(max-width: 768px) {
     padding: 90px 25px 25px;
     .contacts-us {
@@ -312,13 +318,16 @@ export default {
     &.send {
       padding: 20px 30px;
       color: #fff;
-      background-color: #fa6a02;
       border-color: #fa6a02;
       font-size: 12px;
       width: auto;
       cursor: pointer;
       min-width: 200px;
       margin-top: 30px;
+      background-color: #fa6a02;
+      background-image: url(~@/assets/images/send.svg);
+      background-position: 40px 18px;
+      background-repeat: no-repeat;
     }
   }
   textarea {
@@ -361,7 +370,7 @@ export default {
     }
   }
   @media screen and(max-width: 768px) {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     &.radio-group {
       margin-bottom: 20px;
       label {
@@ -371,6 +380,10 @@ export default {
     .form-element {
       &.send {
         width: 100%;
+        background-image: none;
+        font-size: 13px;
+        text-transform: uppercase;
+        font-weight: 600;
       }
     }
   }

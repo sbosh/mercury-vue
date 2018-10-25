@@ -49,7 +49,7 @@
     <div class="apartment-info">
       <div class="apartment-header">
         <div class="left">
-          <div class="title"><h1>{{ apartment.rooms }} - {{ $t('room_apartment') }}</h1></div>
+          <div class="title"><h1>{{ apartment['title_' + $i18n.locale] }}</h1></div>
           <div class="sqm">{{ apartment.total_area }} m<sup>2</sup></div>
         </div>
         <div class="right">
@@ -64,47 +64,44 @@
         </div>
       </div>
       <div class="apartment-content">
-        <div class="sidebar">
-          <h3>{{ $t('apartment_information') }}</h3>
-          <div class="text" v-html="apartment['text_' + $i18n.locale]"></div>
-          <mq-layout mq="sm" class="status-mobile">
-            <div class="text">{{ $t('status') }}</div>
-            <div class="status">
-              <div v-if="apartment.status == 2" class="reserved">
-                {{ $t('reserved') }}
+        <div class="right-info">
+          <div class="sidebar">
+            <h3>{{ $t('apartment_information') }}</h3>
+            <div class="text" v-html="apartment['text_' + $i18n.locale]"></div>
+            <mq-layout mq="sm" class="status-mobile">
+              <div class="text">{{ $t('status') }}</div>
+              <div class="status">
+                <div v-if="apartment.status == 2" class="reserved">
+                  {{ $t('reserved') }}
+                </div>
+                <div v-if="apartment.status == 3" class="sold">
+                  {{ $t('sold') }}
+                </div>
+                <div v-if="apartment.status == 1" class="available">
+                  {{ $t('available') }}
+                </div>
               </div>
-              <div v-if="apartment.status == 3" class="sold">
-                {{ $t('sold') }}
-              </div>
-              <div v-if="apartment.status == 1" class="available">
-                {{ $t('available') }}
-              </div>
+            </mq-layout>
+            <a @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
+            <div class="popup" v-bind:class="{ active: contactFormActive }" >
+              <div class="close" @click="contactFormActive = false">{{ $t('close') }}</div>
+              <contact-form />
             </div>
-          </mq-layout>
-          <a @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
-          <div class="popup" v-bind:class="{ active: contactFormActive }" >
-            <h2 class="popup-title">{{ $t('make_request') }}</h2>
-            <div class="close" @click="contactFormActive = false">{{ $t('close') }}</div>
-            <contact-form />
+            <div class="donwload-pdf">
+              <a href="" class="btn-pdf">{{ $t('download_pdf') }}</a>
+            </div>
+            <mq-layout mq="sm" class="buttons">
+              <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="btn">{{ $t('back_building') }}</router-link>
+              <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.slug + '/' + this.$route.params.floorId" class="btn">{{ $t('back_floor') }}</router-link>
+            </mq-layout>
           </div>
-          <div class="donwload-pdf">
-            <a href="" class="btn-pdf">{{ $t('download_pdf') }}</a>
-          </div>
-          <mq-layout mq="sm" class="buttons">
-            <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="btn">{{ $t('back_building') }}</router-link>
-            <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.slug + '/' + this.$route.params.floorId" class="btn">{{ $t('back_floor') }}</router-link>
-          </mq-layout>
         </div>
         <div class="apartment-floorplan">
-          <div v-if="apartment.mezonet == 1" class="maisonette-carousel">
+          <div v-if="apartment.mezonet == 1" class="maisonette-info">
             <swiper :options="swiperOption">
               <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
-              <swiper-slide>
-                <img src="@/assets/images/apartment.png" alt="">
-              </swiper-slide>
-              <swiper-slide>
-                <img src="@/assets/images/apartment.png" alt="">
-              </swiper-slide>
+              <swiper-slide><div class="img-box"><img src="@/assets/images/apartment.png" alt=""></div></swiper-slide>
+              <swiper-slide><div class="img-box"><img src="@/assets/images/apartment.png" alt=""></div></swiper-slide>
             </swiper>
           </div>
           <div v-else class="img-floorplan">
@@ -124,16 +121,16 @@ export default {
   name: 'apartment',
   components: { ContactForm },
   data () {
+    let $this = this
     return {
       contactFormActive: false,
       swiperOption: {
-        spaceBetween: 30,
         effect: 'fade',
         pagination: {
           el: '.swiper-pagination',
           clickable: true,
           renderBullet (index, className) {
-            return `<span class="${className} swiper-pagination-bullet-custom">${index + 1}</span>`
+            return `<span class="${className} swiper-pagination-bullet-custom"><span class="text">${$this.$t('floor')} ${index + 1}</span></span>`
           }
         }
       }
@@ -174,15 +171,6 @@ export default {
 </script>
 
 <style lang="scss">
-.maisonette-carousel {
-  .swiper-wrapper {
-    .swiper-slide {
-    }
-  }
-  img {
-    max-width: 100%;
-  }
-}
 .popup {
   position: fixed;
   left: 0;
@@ -344,21 +332,77 @@ export default {
     display: flex;
     justify-content: space-around;
     flex-direction: row-reverse;
+    flex-wrap: wrap;
     align-items: stretch;
     margin-bottom: auto;
+    margin-bottom: 20px;
+    width: 100%;
     .apartment-floorplan {
-      width: 100%;
+      width: 70%;
+      .swiper-slide {
+        opacity: 0;
+        &.swiper-slide-active {
+          opacity: 1;
+        }
+      }
+      .swiper-container {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+      .swiper-pagination {
+        position: relative;
+        text-align: left;
+        left: inherit;
+        bottom: inherit;
+        display: flex;
+        .swiper-pagination-bullet {
+          width: auto;
+          height: auto;
+          border-radius: 0;
+          background: transparent;
+          opacity: 1;
+          font-family: 'Montserrat', sans-serif;
+          text-decoration: none;
+          padding: 0 10px;
+          margin: 0 0;
+          outline: none;
+          .text {
+            font-size: 14px;
+            color: #8d8d8d;
+            font-weight: 600;
+            display: inline-block;
+            list-style: none;
+            padding: 3px 10px;
+            border-bottom: 2px solid transparent;
+          }
+          &:first-child {
+          }
+          &+.swiper-pagination-bullet {
+            border-left: 1px solid #e1e1e1;
+          }
+          &.swiper-pagination-bullet-active {
+            background: transparent;
+            .text {
+              color: #111;
+              border-bottom: 2px solid #fa6902;
+            }
+          }
+        }
+      }
       img,
       svg {
         max-width: 100%;
       }
+    }
+    .right-info {
+      width: 30%;
     }
     .sidebar {
       display: flex;
       justify-content: space-around;
       flex-direction: column;
       padding-left: 40px;
-      min-width: 220px;
+      min-width: 270px;
       counter-reset: counter;
       ol,
       ul {
@@ -446,6 +490,27 @@ export default {
               border-color: #fa6a02;
             }
           }
+        }
+      }
+    }
+  }
+  @media screen and(max-width: 1366px){
+    .apartment-content {
+      .right-info,
+      .apartment-floorplan {
+        width: 50%;
+      }
+    }
+  }
+  @media screen and(max-width: 1024px) {
+    .apartment-content {
+      flex-direction: column-reverse;
+      .apartment-floorplan,
+      .right-info {
+        width: 100%;
+        .sidebar {
+          padding-top: 20px;
+          padding-left: 0;
         }
       }
     }

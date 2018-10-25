@@ -1,10 +1,8 @@
 <template>
   <div class="preloader">
     <div class="preloader-content">
-      <div class="logo"><img src="@/assets/images/logo-filter.svg" alt=""></div>
-      <div class="progress-bar">
-        <span>Loading, please wait 100% - {{loaded}}</span>
-        <div class="fill" :style="{width:loaded}"></div>
+      <div class="logo">
+        <img src="@/assets/images/logo-filter.svg" alt="">
       </div>
     </div>
   </div>
@@ -12,41 +10,7 @@
 
 <script>
 export default {
-  name: 'preloader-component',
-  data () {
-    return {
-      loadingPercent: 0,
-      loadTime: 0,
-      interval: null
-    }
-  },
-  created () {
-    let perfData = window.performance.timing
-    let estimatedTime = Math.abs(perfData.loadEventEnd - perfData.navigationStart)
-    this.loadTime = parseInt((estimatedTime / 2000) % 60) * 100
-    this.doProgress()
-  },
-  computed: {
-    loaded () {
-      return this.loadingPercent + '%'
-    }
-  },
-  methods: {
-    doProgress () {
-      let step = this.loadTime / 100
-      this.interval = setInterval(() => {
-        this.loadingPercent++
-      }, step)
-    }
-  },
-  watch: {
-    loadingPercent (val) {
-      if (val >= 100) {
-        this.$emit('complete')
-        clearInterval(this.interval)
-      }
-    }
-  }
+  name: 'preloader-component'
 }
 </script>
 
@@ -73,30 +37,6 @@ export default {
       img {
         width: 100%;
       }
-    }
-    .progress-bar {
-      width: 90%;
-      text-align: center;
-      position: relative;
-      display: flex;
-      box-sizing: border-box;
-      span {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #ccc;
-        font-family: 'Exo 2', sans-serif;
-        font-size: 16px;
-        font-weight: 600;
-        text-transform: uppercase;
-      }
-    }
-    .progress-bar .fill {
-      background: #f26b21;
-      height: 100%;
-      width: 0%;
-      padding: 20px;
     }
   }
 }

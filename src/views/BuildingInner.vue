@@ -1,7 +1,7 @@
 <template>
-  <div class="building-content" v-if="building">
-    <!-- <preloader-component @complete="isComplete" v-if="building && isLoading" /> -->
-    <transition name="page" mode="out-in">
+  <div class="building-content">
+    <preloader-component v-if="loading" />
+    <transition v-else name="page" mode="out-in">
       <router-view />
     </transition>
   </div>
