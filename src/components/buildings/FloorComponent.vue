@@ -6,7 +6,9 @@
         <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="back-btn">{{ $t('back_building') }}</router-link>
       </div>
       <div class="available-from">
-        <div class="text" v-html="$t('available_apartments')"></div><span>3</span> / <span>{{ building.entrances.data[1].floors.data[1].apartments.data.length }}</span>
+        <div class="text" v-html="$t('available_apartments')"></div>
+        <span>{{ floors[Number($route.params.floorId)-1].totalApartments }}</span> /
+        <span>{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span>
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="" @change="changeRout">
@@ -16,7 +18,7 @@
           </select>
         </div>
       </div>
-      <div class="compass"><img src="@/assets/images/compass.svg" v-if="floors" :style="{ transform: 'rotate(-' + floors[Number($route.params.floorId)-1].degrees +'deg)' }" alt=""></div>
+      <div class="compass" v-if="floors[Number($route.params.floorId)-1]"><img src="@/assets/images/compass.svg" v-if="floors" :style="{ transform: 'rotate(-' + floors[Number($route.params.floorId)-1].degrees +'deg)' }" alt=""></div>
     </mq-layout>
     <mq-layout mq="sm" class="floor-info-mobile">
       <div class="available-from">
@@ -32,7 +34,7 @@
       </div>
     </mq-layout>
     <div class="floor-info">
-      {{ building.entrances.data.filter(e => e.id === Number(this.$route.params.slug)) }}
+      {{ buildingEntrances.filter(e => e.id === Number(this.$route.params.slug)) }}
       <swiper ref="mySwiper" :options="swiperOptions()">
         <swiper-slide v-for="floor in floors" :key="floor.id">
           <div class="img-box">
@@ -63,7 +65,8 @@ export default {
   name: 'building-inner-floor',
   data () {
     return {
-      swiperHasRef: false
+      swiperHasRef: false,
+      degrees: null
     }
   },
   computed: {
@@ -93,7 +96,18 @@ export default {
   },
   methods: {
     tooltipContent (apartment) {
-      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><br>${this.$t('area')}: ${apartment.total_area}<br>${this.$t('price')}: ${apartment.price} (EUR)<br>${this.$t('rooms')}: ${apartment.rooms}`
+      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><br><b>${this.$t('area')}:</b> ${apartment.total_area} m²<br><b>${this.$t('price')}:</b> ${apartment.price} EUR<br><b>${this.$t('rooms')}:</b> ${apartment.rooms}<br><span>${this.apartmentStatus(apartment.status)}</span>`
+    },
+    apartmentStatus (status) {
+      if (status === 1) {
+        return `<div class="available">` + this.$t('available') + `<div>`
+      }
+      if (status === 2) {
+        return this.$t('reserved')
+      }
+      if (status === 3) {
+        return this.$t('sold')
+      }
     },
     initSwiper () {
       if (this.$refs.mySwiper) {
@@ -145,6 +159,9 @@ export default {
   h3 {
     text-align: center;
     margin: 0 0 10px 0;
+  }
+  .available {
+    color: green;
   }
 }
 .floor-info {
@@ -268,7 +285,7 @@ export default {
     .swiper-pagination.swiper-pagination-bullets {
       position: relative;
       right: 0;
-      left: 25%;
+      left: 0;
       top: inherit;
       transform: translate3d(0, 0, 0) rotate(0) translateX(0);
       padding-top: 20px;

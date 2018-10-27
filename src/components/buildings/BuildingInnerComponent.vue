@@ -18,36 +18,36 @@
         </div>
         <div class="text" v-html="building['text_' + $i18n.locale]"></div>
       </div>
-      <div class="about-complex animate-box">
+      <div class="about-complex" v-if="building.status === 1">
         <div class="box-row">
-          <div class="box">
+          <div class="box animate-box">
             <div class="info">
               <div class="title">{{ $t('company_name') }}</div>
               <div class="text">{{ building['title_' + $i18n.locale] }}</div>
             </div>
           </div>
-          <div class="box">
+          <div class="box animate-box">
             <div class="info">
               <div class="title">{{ $t('floors_count') }}</div>
-              <div class="text">{{ building.floors.data.length }}</div>
+              <!-- <div class="text">{{ building.entrances.data[0].floors.data.length }}</div> -->
             </div>
           </div>
-          <div class="box">
+          <div class="box animate-box">
             <div class="info">
               <div class="title">{{ $t('apartments_count') }}</div>
-              <div class="text">{{ building.apartments.data.length }}</div>
+              <!-- <div class="text">{{ building.apartments.data.length }}</div> -->
             </div>
           </div>
-          <div class="box">
+          <div class="box animate-box">
             <div class="info">
               <div class="title">{{ $t('free_apartments') }}</div>
-              <div class="text">{{ building.apartments.data.filter(apartment => apartment.status === 1).length }}</div>
+                <!-- <div class="text">{{ building.apartments.data.filter(apartment => apartment.status === 1).length }}</div> -->
             </div>
           </div>
-          <div class="box">
+          <div class="box animate-box">
             <div class="info">
               <div class="title">{{ $t('finished_date') }}</div>
-              <div class="text">2019</div>
+              <div class="text">{{ building.year }}</div>
             </div>
           </div>
         </div>
@@ -390,6 +390,7 @@ export default {
     .img-box {
       > .btn {
         font-size: 12px;
+        margin-bottom: 0;
         &:before {
           margin-top: -2px;
         }
@@ -415,6 +416,7 @@ export default {
         }
       }
       .btn-box {
+        margin-top: 0;
         margin-left: auto;
         margin-right: auto;
         max-width: 270px;
@@ -611,15 +613,6 @@ export default {
   padding: 0 90px;
   margin-top: 100px;
   margin-bottom: 100px;
-  visibility: hidden;
-  opacity: 0;
-  transition: all .3s;
-  transform: translateY(200px);
-  &.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
   .box-row {
     display: flex;
     justify-content: space-around;
@@ -631,6 +624,15 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: all .3s;
+      transform: translateY(200px);
+      &.visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
       .info {
         display: inline-block;
         margin: auto;
@@ -717,27 +719,6 @@ export default {
   visibility: hidden;
   transition: all 1.4s;
 }
-// .active-component {
-//   .inner-building-header {
-//     &:before {
-//       animation: line-animation 7s forwards;
-//     }
-//   }
-// }
-// @keyframes line-animation {
-//   0%{
-//     left: 0px;
-//     height: 0;
-//   }
-//   95% {
-//     left: 88px;
-//     height: 0;
-//   }
-//   100% {
-//     left: 88px;
-//     height: 50%;
-//   }
-// }
 .inner-building-header {
   transition: all 1.4s;
   background: linear-gradient(#232323 80%, #232323 80%, #232323 80%, #f8f8f8 20%, #f8f8f8 20%);

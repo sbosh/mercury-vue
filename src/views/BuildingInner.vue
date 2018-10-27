@@ -1,6 +1,8 @@
 <template>
   <div class="building-content">
-    <preloader-component v-if="loading" />
+    <transition name="fade" v-if="loading">
+      <preloader-component />
+    </transition>
     <transition v-else name="page" mode="out-in">
       <router-view />
     </transition>
@@ -33,6 +35,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 .page-enter-active, .page-leave-active {
   transition: opacity 1s, transform 1s;
 }

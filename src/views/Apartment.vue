@@ -92,7 +92,7 @@
             </div>
             <mq-layout mq="sm" class="buttons">
               <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="btn">{{ $t('back_building') }}</router-link>
-              <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.slug + '/' + this.$route.params.floorId" class="btn">{{ $t('back_floor') }}</router-link>
+              <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.floorId + '/' + this.$route.params.slug" class="btn">{{ $t('back_floor') }}</router-link>
             </mq-layout>
           </div>
         </div>
@@ -143,7 +143,7 @@ export default {
   },
   methods: {
     tooltipContent (apartment) {
-      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><br>${this.$t('area')}: ${apartment.total_area}<br>${this.$t('price')}: ${apartment.price} (EUR)<br>${this.$t('rooms')}: ${apartment.rooms}`
+      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><br><b>${this.$t('area')}:</b> ${apartment.total_area} m²<br><b>${this.$t('price')}:</b> ${apartment.price} EUR<br><b>${this.$t('rooms')}:</b> ${apartment.rooms}`
     },
     apartmentRoute (apartmentSlug) {
       this.$router.push({ name: 'apartment', params: { apartmentSlug } })
@@ -404,6 +404,11 @@ export default {
       padding-left: 40px;
       min-width: 270px;
       counter-reset: counter;
+      p {
+        font-family: "Fira Sans";
+        font-weight: 500;
+        font-size: 14px;
+      }
       ol,
       ul {
         padding: 0;
