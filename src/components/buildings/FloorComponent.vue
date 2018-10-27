@@ -103,10 +103,10 @@ export default {
         return `<div class="available">` + this.$t('available') + `<div>`
       }
       if (status === 2) {
-        return this.$t('reserved')
+        return `<div class="reserved">` + this.$t('reserved') + `<div>`
       }
       if (status === 3) {
-        return this.$t('sold')
+        return `<div class="sold">` + this.$t('sold') + `<div>`
       }
     },
     initSwiper () {
@@ -160,8 +160,20 @@ export default {
     text-align: center;
     margin: 0 0 10px 0;
   }
+  .sold,
+  .reserved,
   .available {
-    color: green;
+    font-weight: 600;
+    margin-top: 5px;
+  }
+  .sold {
+    color: #e22f2f;
+  }
+  .available {
+    color: #22a314;
+  }
+  .reserved {
+    color: #fa6a02;
   }
 }
 .floor-info {
@@ -200,6 +212,7 @@ export default {
         opacity: 0;
         fill: #fa6a02 !important;
         mix-blend-mode: multiply;
+        cursor: pointer;
       }
     }
     g:hover path,

@@ -97,6 +97,9 @@
           </div>
         </div>
         <div class="apartment-floorplan">
+          <div class="compass">
+            <img src="@/assets/images/compass.svg" :style="{ transform: 'rotate(-' + apartment.degrees +'deg)' }" alt="">
+          </div>
           <div v-if="apartment.mezonet == 1" class="maisonette-info">
             <swiper :options="swiperOption">
               <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
@@ -143,7 +146,18 @@ export default {
   },
   methods: {
     tooltipContent (apartment) {
-      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><br><b>${this.$t('area')}:</b> ${apartment.total_area} m²<br><b>${this.$t('price')}:</b> ${apartment.price} EUR<br><b>${this.$t('rooms')}:</b> ${apartment.rooms}`
+      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><br><b>${this.$t('area')}:</b> ${apartment.total_area} m²<br><b>${this.$t('price')}:</b> ${apartment.price} EUR<br><b>${this.$t('rooms')}:</b> ${apartment.rooms}<br><span>${this.apartmentStatus(apartment.status)}</span>`
+    },
+    apartmentStatus (status) {
+      if (status === 1) {
+        return `<div class="available">` + this.$t('available') + `<div>`
+      }
+      if (status === 2) {
+        return `<div class="reserved">` + this.$t('reserved') + `<div>`
+      }
+      if (status === 3) {
+        return `<div class="sold">` + this.$t('sold') + `<div>`
+      }
     },
     apartmentRoute (apartmentSlug) {
       this.$router.push({ name: 'apartment', params: { apartmentSlug } })
@@ -339,6 +353,15 @@ export default {
     width: 100%;
     .apartment-floorplan {
       width: 70%;
+      position: relative;
+      .compass {
+        position: absolute;
+        right: 0;
+        top: 0;
+        img {
+          max-width: 60px;
+        }
+      }
       .swiper-slide {
         opacity: 0;
         &.swiper-slide-active {
