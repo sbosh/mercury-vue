@@ -29,19 +29,19 @@
           <div class="box animate-box">
             <div class="info">
               <div class="title">{{ $t('floors_count') }}</div>
-              <!-- <div class="text">{{ building.entrances.data[0].floors.data.length }}</div> -->
+               <div class="text">{{ building.floorsCount }}</div>
             </div>
           </div>
           <div class="box animate-box">
             <div class="info">
               <div class="title">{{ $t('apartments_count') }}</div>
-              <!-- <div class="text">{{ building.apartments.data.length }}</div> -->
+               <div class="text">{{ building.totalApartments }}</div>
             </div>
           </div>
           <div class="box animate-box">
             <div class="info">
               <div class="title">{{ $t('free_apartments') }}</div>
-                <!-- <div class="text">{{ building.apartments.data.filter(apartment => apartment.status === 1).length }}</div> -->
+                 <div class="text">{{ building.totalFreeApartments }}</div>
             </div>
           </div>
           <div class="box animate-box">
@@ -66,28 +66,10 @@
           </div>
         </div>
         <div class="box-row">
-          <div class="box">
+          <div class="box" v-if="building.facilities" v-for="facility in building.facilities.data" :key="facility.id">
             <div class="info">
-              <div class="icon"><img src="@/assets/images/map-center.svg" alt=""></div>
-              <div class="text">18 минути от центъра</div>
-            </div>
-          </div>
-          <div class="box">
-            <div class="info">
-              <div class="icon"><img src="@/assets/images/map-shop.svg" alt=""></div>
-              <div class="text">6 супермаркета в близост</div>
-            </div>
-          </div>
-          <div class="box">
-            <div class="info">
-              <div class="icon"><img src="@/assets/images/map-subway.svg" alt=""></div>
-              <div class="text">100 метра от метростанция</div>
-            </div>
-          </div>
-          <div class="box">
-            <div class="info">
-              <div class="icon"><img src="@/assets/images/map-school.svg" alt=""></div>
-              <div class="text">2 училища в района</div>
+              <div class="icon"><img :src="facility.image" alt=""></div>
+              <div class="text">{{facility['title_' + $i18n.locale]}}</div>
             </div>
           </div>
         </div>
