@@ -108,7 +108,7 @@
               <swiper-slide><div class="img-box"><img :src="apartment.image2" alt=""></div></swiper-slide>
             </swiper>
           </div>
-          <div v-else class="img-floorplan">
+          <div v-else class="img-box">
             <img :src="apartment.image" alt="">
           </div>
         </div>
@@ -356,7 +356,7 @@ export default {
       width: 70%;
       position: relative;
       .img-box {
-        padding: 30px 0;
+        padding: 70px 0 20px 0;
       }
       .compass {
         position: absolute;
