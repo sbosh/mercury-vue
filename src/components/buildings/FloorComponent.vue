@@ -7,8 +7,8 @@
       </div>
       <div class="available-from">
         <div class="text" v-html="$t('available_apartments')"></div>
-        <span>{{ floors[Number($route.params.floorId)-1].totalApartments }}</span> /
-        <span>{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span>
+        <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalApartments }}</span> /
+        <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span>
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="" @change="changeRout">

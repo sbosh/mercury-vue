@@ -30,13 +30,12 @@
         </div>
       </div>
       <div class="floor-plan">
-        <div class="text">{{ $t('floor_layout') }}:</div>
+        <div class="text">{{ $t('floor_layout') }} {{ Number($route.params.floorId) - 1}}:</div>
         <div class="svg-box" v-if="floors">
-            <img :src="floors[Number($route.params.floorId)].image" alt="">
             <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
               <g
                 :class="{'active': apartment['slug_' + $i18n.locale] === $route.params.apartmentSlug }"
-                v-for="apartment in floors[Number($route.params.floorId)].apartments.data"
+                v-for="apartment in floors[Number($route.params.floorId) - 1].apartments.data"
                 :key="apartment.id"
                 v-tooltip="{ content: tooltipContent(apartment), placement: 'right-end', offset: '30' }"
                 @click="apartmentRoute(apartment['slug_' + $i18n.locale])">
@@ -166,6 +165,10 @@ export default {
     changeRout (event) {
       this.$router.replace({ name: 'building-inner-floor', params: { slug: event.target.value, floorId: 1 } })
     }
+  },
+  created () {
+    // eslint-disable-next-line
+    this.$store.cache.dispatch('fetchBuildingApartments', this.$route.params.id)
   },
   computed: {
     floors () {
