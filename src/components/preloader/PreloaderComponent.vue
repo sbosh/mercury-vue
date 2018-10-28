@@ -37,8 +37,6 @@ export default {
     border-radius: 50%;
     text-align: center;
     line-height: 250px;
-    text-shadow: 0 0 10px #fff000;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   }
   .loader::before {
     content: '';
@@ -91,6 +89,17 @@ export default {
         transform: rotate(405deg);
     }
   }
+  @keyframes elena {
+    0% {
+      transform: rotateY(-40deg);
+    }
+    50% {
+      transform: rotateY(40deg);
+    }
+    100% {
+      transform: rotateY(-40deg);
+    }
+  }
   .preloader-content {
     display: flex;
     justify-content: center;
@@ -98,11 +107,13 @@ export default {
     flex-direction: column;
     height: 100%;
     .logo {
-      max-width: 100px;
+      max-width: 130px;
       width: 100%;
       margin: 50px auto;
+      perspective: 1000px;
       img {
         width: 100%;
+        animation: elena 3000ms ease-out infinite;
       }
     }
   }

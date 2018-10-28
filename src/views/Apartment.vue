@@ -171,13 +171,13 @@ export default {
     this.$store.cache.dispatch('fetchBuildingApartments', this.$route.params.id)
   },
   computed: {
-    floors () {
-      return this.$store.getters.getFloorsByEntrance(this.$route.params.slug)
-    },
     lang () {
       return this.$i18n.locale
     },
-    apartment: function () {
+    floors () {
+      return this.$store.getters.getFloorsByEntrance(this.$route.params.slug)
+    },
+    apartment () {
       return this.$store.getters.getApartment(this.$route.params.apartmentSlug)
     },
     ...mapState({
