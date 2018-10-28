@@ -1,6 +1,6 @@
 <template>
   <div class="filtered-apartments" v-bind:class="{ active: isFiltred }">
-    <!-- <div class="left-sidebar">
+    <div class="left-sidebar">
       <div class="top">
         <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
         <div class="back-btn" @click="closed">{{ $t('back_building') }}</div>
@@ -10,11 +10,11 @@
     </div>
     <div class="apartments-listing">
       <div class="apartments-box" v-for="apartment in filtrApartments(priceFrom, priceTo, rooms, available)" :key="apartment.id" :class="[{ sold: apartment.status == 3 },{ reserved: apartment.status == 2 }]">
-        <router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor_for_filters + '/1/' + apartment['slug_' + $i18n.locale]">
+        <router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor.id + '/' + apartment.entrance['slug_' + $i18n.locale] + '/' + apartment['slug_' + $i18n.locale]">
           <img :src="apartment.image" alt="">
         </router-link>
         <div class="info">
-          <div class="title"><h3><router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor_for_filters + '/1/' + apartment['slug_' + $i18n.locale]">{{ apartment.rooms }}-{{ $t('rooms') }} <br>{{ $t('apartment') }}</router-link></h3></div>
+          <div class="title"><h3><router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor.id + '/' + apartment.entrance['slug_' + $i18n.locale] + '/' + apartment['slug_' + $i18n.locale]">{{ apartment.rooms }}-{{ $t('rooms') }} <br>{{ $t('apartment') }}</router-link></h3></div>
           <div class="sqm">{{ apartment.total_area }} mq<sup>2</sup></div>
           <div class="price" v-if="apartment.status == 2 || apartment.status == 1">{{ apartment.price }} <span>eur</span></div>
           <div v-if="apartment.status == 2" class="status reserved">
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 <script>
