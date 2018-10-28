@@ -36,7 +36,10 @@
           :available="available" />
         <parking-component :parkingsActive="parkingsActive" @clicked="() => parkingsActive = false" />
         <div class="filters" v-if="priceFrom" v-bind:class="{ active: filterActive }">
-          <div class="close" @click="filterActive = false"></div>
+          <div class="close" @click="() => {
+              filterActive = !filterActive
+              show = !show
+              }"></div>
           <div class="filter-row">
             <div class="filter-box">
               <div class="text">{{ $t('rooms') }}:</div>

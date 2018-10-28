@@ -176,10 +176,8 @@ export default {
     }
     .swiper-pagination {
       .swiper-pagination-bullet {
-        background-color: rgba(#232323, .5);
       }
       .swiper-pagination-bullet-active {
-        background-color: rgba(#232323, 1);
       }
     }
   }

@@ -104,12 +104,12 @@
           <div v-if="apartment.mezonet == 1" class="maisonette-info">
             <swiper :options="swiperOption">
               <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
-              <swiper-slide><div class="img-box"><img :src="apartment.image" alt=""></div></swiper-slide>
-              <swiper-slide><div class="img-box"><img :src="apartment.image2" alt=""></div></swiper-slide>
+              <swiper-slide><div class="img-box"><viewer><img :src="apartment.image" alt=""></viewer></div></swiper-slide>
+              <swiper-slide><div class="img-box"><viewer><img :src="apartment.image2" alt=""></viewer></div></swiper-slide>
             </swiper>
           </div>
           <div v-else class="img-box">
-            <img :src="apartment.image" alt="">
+            <viewer><img :src="apartment.image" alt=""></viewer>
           </div>
         </div>
       </div>
@@ -257,7 +257,7 @@ export default {
 }
 .apartment-info {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   padding-left: 250px;
@@ -357,6 +357,10 @@ export default {
       position: relative;
       .img-box {
         padding: 70px 0 20px 0;
+        background-color: #f8f8f8;
+        img {
+          cursor: pointer;
+        }
       }
       .compass {
         position: absolute;

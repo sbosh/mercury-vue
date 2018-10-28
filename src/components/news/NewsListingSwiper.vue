@@ -62,17 +62,18 @@ export default {
       border-radius: 0;
       width: auto;
       height: auto;
+      background-color: transparent;
       &:before {
         content: '';
         width: 30px;
-        height: 3px;
+        height: 4px;
         display: block;
-        background-color: rgba(255,255,255, .2);
+        background-color: rgba(35, 35, 35, 0.5);
       }
     }
     .swiper-pagination-bullet-active {
       &:before {
-        background-color: rgba(255,255,255, 1);
+        background-color: rgb(35, 35, 35);
       }
     }
   }
