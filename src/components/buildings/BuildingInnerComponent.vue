@@ -142,7 +142,7 @@ export default {
   mounted () {
     setTimeout(() => {
       this.$el.classList.add('active')
-    }, 1000)
+    }, 2000)
     let animateBox = document.getElementsByClassName('animate-box')
     window.addEventListener('scroll', function () {
       for (let index = 0; index < animateBox.length; index++) {

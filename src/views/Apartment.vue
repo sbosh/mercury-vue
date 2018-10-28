@@ -98,13 +98,14 @@
         </div>
         <div class="apartment-floorplan">
           <div class="compass">
+            {{apartment.degrees}}
             <img src="@/assets/images/compass.svg" :style="{ transform: 'rotate(-' + apartment.degrees +'deg)' }" alt="">
           </div>
           <div v-if="apartment.mezonet == 1" class="maisonette-info">
             <swiper :options="swiperOption">
               <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
-              <swiper-slide><div class="img-box"><img src="@/assets/images/apartment.png" alt=""></div></swiper-slide>
-              <swiper-slide><div class="img-box"><img src="@/assets/images/apartment.png" alt=""></div></swiper-slide>
+              <swiper-slide><div class="img-box"><img :src="apartment.image" alt=""></div></swiper-slide>
+              <swiper-slide><div class="img-box"><img :src="apartment.image2" alt=""></div></swiper-slide>
             </swiper>
           </div>
           <div v-else class="img-floorplan">
@@ -354,10 +355,14 @@ export default {
     .apartment-floorplan {
       width: 70%;
       position: relative;
+      .img-box {
+        padding: 30px 0;
+      }
       .compass {
         position: absolute;
         right: 0;
         top: 0;
+        z-index: 999;
         img {
           max-width: 60px;
         }
