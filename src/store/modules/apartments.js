@@ -28,13 +28,6 @@ const getters = {
   },
   getCountApartments (state) {
     return state.all ? state.all.length : 0
-  },
-  getApartment (state) {
-    return (slug) => {
-      if (!state.all) return
-      return state.all.find(apartment => apartment.slug_en === slug) ||
-        state.all.find(apartment => apartment.slug_bg === slug)
-    }
   }
 }
 

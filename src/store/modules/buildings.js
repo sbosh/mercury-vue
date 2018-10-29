@@ -92,6 +92,11 @@ const getters = {
     return (floorId) => {
       return state.buildingApartments.filter(apartment => apartment.floor.id === floorId)
     }
+  },
+  getApartment (state) {
+    return (slug) => {
+      return state.buildingApartments.find(apartment => apartment.slug_en === slug || apartment.slug_bg === slug)
+    }
   }
 }
 

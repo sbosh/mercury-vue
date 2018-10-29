@@ -1,8 +1,6 @@
 <template>
   <div class="building-content">
-    <transition name="page" mode="out-in">
-      <router-view />
-    </transition>
+    <router-view />
   </div>
 </template>
 

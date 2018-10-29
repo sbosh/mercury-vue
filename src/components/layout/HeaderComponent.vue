@@ -96,16 +96,10 @@ export default {
   },
   mounted () {
     this.convertSVG()
-    let $this = this
-    let deleteLink = document.querySelectorAll('a')
-    for (let i = 0; i < deleteLink.length; i++) {
-      deleteLink[i].addEventListener('click', function () {
-        $this.isActive = false
-      })
-    }
   },
   watch: {
     '$route' (to, from) {
+      this.isActive = false
       if (to.name === 'home' || to.name === 'current-buildings') {
         this.$el.querySelector('.main-nav').classList.add('home-header')
       } else {
