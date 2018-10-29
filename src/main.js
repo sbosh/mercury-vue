@@ -10,8 +10,15 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 import headroom from 'vue-headroom'
 import VueMq from 'vue-mq'
 import VTooltip from 'v-tooltip'
+import 'viewerjs/dist/viewer.css'
+import Viewer from 'v-viewer'
 
 Vue.use(VTooltip)
+Vue.use(Viewer, {
+  defaultOptions: {
+    zIndex: 99999
+  }
+})
 
 window.fakeRouter = false
 

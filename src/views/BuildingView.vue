@@ -1,102 +1,103 @@
 <template>
-  <div class="main-content" v-if="building">
-    <mq-layout mq="md+" class="building-view-header"><navinner-component :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
-    <div class="building-apartments">
-      <div class="img-box">
-        <div id="building"></div>
-        <div class="flor-info-tooltip">
-          <div class="tooltip-info">
-            <div class="box">
-              <div class="text">{{ $t('floor') }}</div>
-              <div class="number" id="js-floor">8</div>
+  <div class="main-content">
+    <transition name="fade" v-if="loading">
+      <preloader-component />
+    </transition>
+    <div v-else>
+      <mq-layout mq="md+" class="building-view-header"><navinner-component :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
+      <div class="building-apartments">
+        <div class="img-box">
+          <div id="building"></div>
+          <div class="flor-info-tooltip">
+            <div class="tooltip-info">
+              <div class="box">
+                <div class="text">{{ $t('floor') }}</div>
+                <div class="number" id="js-floor">8</div>
+              </div>
+              <div class="box">
+                <div class="text">{{ $t('entrance') }}</div>
+                <div class="number" id="js-entrance">8</div>
+              </div>
             </div>
-            <div class="box">
-              <div class="text">{{ $t('entrance') }}</div>
-              <div class="number" id="js-entrance">8</div>
-            </div>
-          </div>
-          <div class="tooltip-info">
-            <div class="box">
-              <div class="text" v-html="$t('available_apartments')"></div>
-              <div class="number" id="js-apartments">8</div>
+            <div class="tooltip-info">
+              <div class="box">
+                <div class="text" v-html="$t('available_apartments')"></div>
+                <div class="number" id="js-apartments">8</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <filtered-apartments
-        @clicked="isFiltred = false"
-        :isFiltred="isFiltred"
-        :priceFrom="priceFrom"
-        :priceTo="value"
-        :rooms="rooms"
-        :available="available" />
-      <parking-component :parkingsActive="parkingsActive" @clicked="() => parkingsActive = false" />
-      <div class="filters" v-if="priceFrom" v-bind:class="{ active: filterActive }">
-        <div class="close" @click="filterActive = false"></div>
-        <div class="filter-row">
-          <div class="filter-box">
-            <div class="text">{{ $t('only_available') }}:</div>
-            <div class="input-field">
-              <input type="checkbox" id="only_available" name="available" class="checkbox" v-model="available" />
-              <label for="only_available"> </label>
+        <filtered-apartments
+          @clicked="isFiltred = false"
+          :isFiltred="isFiltred"
+          :priceFrom="priceFrom"
+          :priceTo="value"
+          :rooms="rooms"
+          :available="available" />
+        <parking-component :parkingsActive="parkingsActive" @clicked="() => parkingsActive = false" />
+        <div class="filters" v-if="priceFrom" v-bind:class="{ active: filterActive }">
+          <div class="close" @click="() => {
+              filterActive = !filterActive
+              show = !show
+              }"></div>
+          <div class="filter-row">
+            <div class="filter-box">
+              <div class="text">{{ $t('rooms') }}:</div>
             </div>
-          </div>
-          <div class="filter-box">
-            <div class="text">{{ $t('rooms') }}:</div>
-          </div>
-          <div class="filter-box">
-            <div class="input-field">
-              <input type="checkbox" id="one" name="rooms" class="checkbox" v-model="rooms" value="1" />
-              <label for="one">1</label>
+            <div class="filter-box">
+              <div class="input-field">
+                <input type="checkbox" id="one" name="rooms" class="checkbox" v-model="rooms" value="1" />
+                <label for="one">1</label>
+              </div>
+              <div class="input-field">
+                <input type="checkbox" id="two" name="rooms" class="checkbox" v-model="rooms" value="2" />
+                <label for="two">2</label>
+              </div>
+              <div class="input-field">
+                <input type="checkbox" id="three" name="rooms" class="checkbox" v-model="rooms" value="3" />
+                <label for="three">3</label>
+              </div>
+              <div class="input-field">
+                <input type="checkbox" id="four" name="rooms" class="checkbox" v-model="rooms" value="4" />
+                <label for="four">4+</label>
+              </div>
             </div>
-            <div class="input-field">
-              <input type="checkbox" id="two" name="rooms" class="checkbox" v-model="rooms" value="2" />
-              <label for="two">2</label>
+            <div class="filter-box price-range">
+              <div class="text">{{ $t('select_price') }}:</div>
+              <div class="price">
+                <div class="min">5 000</div>
+                <vue-slider
+                  :show="show"
+                  ref="slider"
+                  v-model="value"
+                  :width="400"
+                  formatter="{value} euro"
+                  :min="priceFrom"
+                  :max="300000"
+                  :interval="5000" />
+                <div class="max">300 000</div>
+              </div>
             </div>
-            <div class="input-field">
-              <input type="checkbox" id="three" name="rooms" class="checkbox" v-model="rooms" value="3" />
-              <label for="three">3</label>
+            <div class="filter-box">
+              <input type="submit" class="filter-btn" @click="isFiltred = !isFiltred" />
             </div>
-            <div class="input-field">
-              <input type="checkbox" id="four" name="rooms" class="checkbox" v-model="rooms" value="4" />
-              <label for="four">4+</label>
-            </div>
-          </div>
-          <div class="filter-box price-range">
-            <div class="text">{{ $t('select_price') }}:</div>
-            <div class="price">
-              <div class="min">5 000</div>
-              <vue-slider
-                :show="show"
-                ref="slider"
-                v-model="value"
-                :width="400"
-                formatter="{value} euro"
-                :min="priceFrom"
-                :max="300000"
-                :interval="5000" />
-              <div class="max">300 000</div>
-            </div>
-          </div>
-          <div class="filter-box">
-            <input type="submit" class="filter-btn" @click="isFiltred = !isFiltred" />
           </div>
         </div>
-      </div>
-      <div class="bottom-options">
-        <div class="building-btn">
-          <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">{{ $t('building_information') }}</router-link></div>
-        </div>
-        <div class="building-filter">
-          <button class="filter-btn" @click="() => {
-            filterActive = !filterActive
-            show = !show
-            }">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <button class="parking-btn" @click="parkingsActive = !parkingsActive"></button>
+        <div class="bottom-options">
+          <div class="building-btn">
+            <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">{{ $t('building_information') }}</router-link></div>
+          </div>
+          <div class="building-filter">
+            <button class="filter-btn" @click="() => {
+              filterActive = !filterActive
+              show = !show
+              }">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <button class="parking-btn" @click="parkingsActive = !parkingsActive"></button>
+          </div>
         </div>
       </div>
     </div>
@@ -109,14 +110,15 @@ import vueSlider from 'vue-slider-component'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import FilteredApartments from '@/components/buildings/FilteredApartments'
 import ParkingComponent from '@/components/buildings/ParkingComponent'
+import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 /* eslint-disable no-undef */
 export default {
   name: 'building-view',
-  components: { NavinnerComponent, vueSlider, FilteredApartments, ParkingComponent },
+  components: { NavinnerComponent, vueSlider, FilteredApartments, ParkingComponent, PreloaderComponent },
   data () {
     return {
       show: false,
-      value: 5000,
+      value: 300000,
       available: true,
       parkingsActive: false,
       filterActive: false,
@@ -368,6 +370,7 @@ canvas {
     position: absolute;
     left: 50%;
     top: -7px;
+    margin-left: -5px;
     transform: trnaslateX(-50%);
     width: 0;
     height: 0;
@@ -390,18 +393,26 @@ canvas {
       text-align: center;
       padding: 0 20px;
       width: 50%;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: flex-start;
       .text {
         font-family: 'Montserrat', sans-serif;
         font-weight: 600;
-        font-size: 10px;
-        text-transform: uppercase;
-        margin-bottom: 7px;
-        color: #cfcfcf;
+        font-size: 12px;
+        // text-transform: uppercase;
+        // margin-bottom: 7px;
+        color: #333;
+        margin-left: 10px;
+        // height: 100%;
         br {
           display: none;
         }
       }
       .number {
+        // height: 100%;
+        margin-right: auto;
         font-weight: 700;
         color: #000;
         font-size: 26px;

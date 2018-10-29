@@ -24,7 +24,7 @@
           <router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link>
         </div>
       </div>
-      <div class="scroll-icon" v-if="!home"><span></span></div>
+      <div class="scroll-icon" v-if="!home && current.lenght > 1"><span></span></div>
     </swiper>
   </div>
 </template>

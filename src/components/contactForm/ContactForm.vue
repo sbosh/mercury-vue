@@ -1,6 +1,6 @@
 <template>
   <form @submit="checkForm" method="POST" action="">
-    <h3>{{ $t('write_us') }}</h3>
+    <!-- <h3>{{ $t('write_us') }}</h3>
     <div class="form-row radio-checkbox-row">
       <div class="form-group radio-group">
         <input type="radio" id="input_property" v-model="reason" name="reason" class="form-element" />
@@ -17,33 +17,42 @@
         <label for="input_team">{{ $t('join_our_team') }}</label>
       </div>
     </div>
-    <h3>{{ $t('name') }}</h3>
+    <h3>{{ $t('name') }}</h3> -->
+    <h3>{{ $t('write_us') }}</h3>
     <div class="form-row">
       <div class="form-group">
         <p class="form-error" v-if="errors.name && errors.name.length" v-text="errors.name"/>
         <input type="text" name="name" v-model="name" class="form-element" :placeholder="$t('your_name') + '*'" />
       </div>
       <div class="form-group">
-        <input type="text" name="company" v-model="company" class="form-element" :placeholder="$t('company_name') + '*'">
+        <input type="tel" name="" v-model="phone" class="form-element" :placeholder="$t('telephone')">
       </div>
+      <!-- <div class="form-group">
+        <input type="text" name="company" v-model="company" class="form-element" :placeholder="$t('company_name') + '*'">
+      </div> -->
     </div>
-    <h3>{{ $t('information') }}</h3>
+    <br>
+    <!-- <h3>{{ $t('information') }}</h3> -->
     <div class="form-row">
       <div class="form-group">
         <p class="form-error" v-if="errors.email && errors.email.length" v-text="errors.email"/>
         <input type="email" name="email" v-model="email" class="form-element" placeholder="Е-mail *" />
       </div>
       <div class="form-group">
-        <input type="tel" name="" v-model="phone" class="form-element" :placeholder="$t('telephone')">
+        <select name="about" v-model="about" class="form-element">
+          <option value="" selected>{{ $t('about') }}</option>
+          <option :value="$t('enquery_for_apartment')">{{ $t('enquery_for_apartment') }}</option>
+          <option :value="$t('enquery_for_company')">{{ $t('enquery_for_company') }}</option>
+        </select>
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group">
+      <!-- <div class="form-group">
         <input type="text" name="address" v-model="address" class="form-element" :placeholder="$t('address')" />
       </div>
       <div class="form-group">
         <input type="text" name="time" v-model="time" class="form-element" :placeholder="$t('convenient_time')">
-      </div>
+      </div> -->
     </div>
     <h3>{{ $t('message') }}</h3>
     <div class="form-row">
@@ -66,6 +75,7 @@ export default {
       name: null,
       company: null,
       email: null,
+      about: null,
       address: null,
       time: null,
       phone: null,

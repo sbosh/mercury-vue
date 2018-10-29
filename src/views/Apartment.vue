@@ -8,34 +8,48 @@
         <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.floorId + '/' + this.$route.params.slug" class="back-btn">{{ $t('back_floor') }}</router-link>
       </div>
       <div class="available-from">
-        <div class="status">{{ $t('status') }}
+        <div class="status">
+          <div class="text">{{ $t('status') }}</div>
+          <div v-if="apartment.status == 1" class="available">
+            {{ $t('available') }}
+          </div>
           <div v-if="apartment.status == 2" class="reserved">
             {{ $t('reserved') }}
           </div>
           <div v-if="apartment.status == 3" class="sold">
             {{ $t('sold') }}
           </div>
-          <div v-if="apartment.status == 1" class="available">
-            {{ $t('available') }}
-          </div>
         </div>
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
-          <select name="" id="">
-            <option value="Вход А">{{ $t('block') }} А</option>
+          <select name="" id="" @change="changeRout">
+            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id" :selected="entrance['slug_' + $i18n.locale] === $route.params.slug">
+            {{ entrance['title_' + $i18n.locale] }}
+            </option>
           </select>
         </div>
       </div>
       <div class="floor-plan">
-        <div class="text">{{ $t('floor_layout') }}:</div>
-        <img src="@/assets/images/floor-plan.png" alt="">
+        <div class="text">{{ $t('floor_layout') }} {{ Number($route.params.floorId) - 1}}:</div>
+        <div class="svg-box" v-if="floors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+              <g
+                :class="{'active': apartment['slug_' + $i18n.locale] === $route.params.apartmentSlug }"
+                v-for="apartment in floors[Number($route.params.floorId) - 1].apartments.data"
+                :key="apartment.id"
+                v-tooltip="{ content: tooltipContent(apartment), placement: 'right-end', offset: '30' }"
+                @click="apartmentRoute(apartment['slug_' + $i18n.locale])">
+                <path :d="apartment.coords" fill="none"></path>
+              </g>
+            </svg>
+        </div>
       </div>
     </mq-layout>
     <div class="apartment-info">
       <div class="apartment-header">
         <div class="left">
-          <div class="title"><h1>{{ apartment.rooms }} - {{ $t('room_apartment') }}</h1></div>
-          <div class="sqm">{{ apartment.living_area }} m<sup>2</sup></div>
+          <div class="title"><h1>{{ apartment['title_' + $i18n.locale] }}</h1></div>
+          <div class="sqm">{{ apartment.total_area }} m<sup>2</sup></div>
         </div>
         <div class="right">
           <div class="">
@@ -49,39 +63,53 @@
         </div>
       </div>
       <div class="apartment-content">
-        <div class="sidebar">
-          <h3>{{ $t('apartment_information') }}</h3>
-          <div class="text" v-html="apartment['text_' + $i18n.locale]"></div>
-          <mq-layout mq="sm" class="status-mobile">
-            <div class="text">{{ $t('status') }}</div>
-            <div class="status">
-              <div v-if="apartment.status == 2" class="reserved">
-                {{ $t('reserved') }}
+        <div class="right-info">
+          <div class="sidebar">
+            <h3>{{ $t('apartment_information') }}</h3>
+            <div class="text" v-html="apartment['text_' + $i18n.locale]"></div>
+            <mq-layout mq="sm" class="status-mobile">
+              <div class="text">{{ $t('status') }}</div>
+              <div class="status">
+                <div v-if="apartment.status == 2" class="reserved">
+                  {{ $t('reserved') }}
+                </div>
+                <div v-if="apartment.status == 3" class="sold">
+                  {{ $t('sold') }}
+                </div>
+                <div v-if="apartment.status == 1" class="available">
+                  {{ $t('available') }}
+                </div>
               </div>
-              <div v-if="apartment.status == 3" class="sold">
-                {{ $t('sold') }}
-              </div>
-              <div v-if="apartment.status == 1" class="available">
-                {{ $t('available') }}
-              </div>
+            </mq-layout>
+            <a @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
+            <div class="popup" v-bind:class="{ active: contactFormActive }" >
+              <div class="close" @click="contactFormActive = false">{{ $t('close') }}</div>
+              <contact-form />
             </div>
-          </mq-layout>
-          <a @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
-          <div class="popup" v-bind:class="{ active: contactFormActive }" >
-            <h2 class="popup-title">{{ $t('make_request') }}</h2>
-            <div class="close" @click="contactFormActive = false">{{ $t('close') }}</div>
-            <contact-form />
+            <div class="donwload-pdf">
+              <a href="" class="btn-pdf">{{ $t('download_pdf') }}</a>
+            </div>
+            <mq-layout mq="sm" class="buttons">
+              <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="btn">{{ $t('back_building') }}</router-link>
+              <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.floorId + '/' + this.$route.params.slug" class="btn">{{ $t('back_floor') }}</router-link>
+            </mq-layout>
           </div>
-          <div class="donwload-pdf">
-            <a href="" class="btn-pdf">{{ $t('download_pdf') }}</a>
-          </div>
-          <mq-layout mq="sm" class="buttons">
-            <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="btn">{{ $t('back_building') }}</router-link>
-            <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.slug + '/' + this.$route.params.floorId" class="btn">{{ $t('back_floor') }}</router-link>
-          </mq-layout>
         </div>
-        <div class="apartment-florplan">
-          <img :src="apartment.image" alt="">
+        <div class="apartment-floorplan">
+          <div class="compass">
+            {{apartment.degrees}}
+            <img src="@/assets/images/compass.svg" :style="{ transform: 'rotate(-' + apartment.degrees +'deg)' }" alt="">
+          </div>
+          <div v-if="apartment.mezonet == 1" class="maisonette-info">
+            <swiper :options="swiperOption">
+              <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
+              <swiper-slide><div class="img-box"><viewer><img :src="apartment.image" alt=""></viewer></div></swiper-slide>
+              <swiper-slide><div class="img-box"><viewer><img :src="apartment.image2" alt=""></viewer></div></swiper-slide>
+            </swiper>
+          </div>
+          <div v-else class="img-box">
+            <viewer><img :src="apartment.image" alt=""></viewer>
+          </div>
         </div>
       </div>
     </div>
@@ -96,8 +124,19 @@ export default {
   name: 'apartment',
   components: { ContactForm },
   data () {
+    let $this = this
     return {
-      contactFormActive: false
+      contactFormActive: false,
+      swiperOption: {
+        effect: 'fade',
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          renderBullet (index, className) {
+            return `<span class="${className} swiper-pagination-bullet-custom"><span class="text">${$this.$t('floor')} ${index + 1}</span></span>`
+          }
+        }
+      }
     }
   },
   metaInfo () {
@@ -105,15 +144,45 @@ export default {
       title: this.apartment ? this.apartment['seo_title_' + this.$i18n.locale] : ''
     }
   },
+  methods: {
+    tooltipContent (apartment) {
+      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><br><b>${this.$t('area')}:</b> ${apartment.total_area} m²<br><b>${this.$t('price')}:</b> ${apartment.price} EUR<br><b>${this.$t('rooms')}:</b> ${apartment.rooms}<br><span>${this.apartmentStatus(apartment.status)}</span>`
+    },
+    apartmentStatus (status) {
+      if (status === 1) {
+        return `<div class="available">` + this.$t('available') + `<div>`
+      }
+      if (status === 2) {
+        return `<div class="reserved">` + this.$t('reserved') + `<div>`
+      }
+      if (status === 3) {
+        return `<div class="sold">` + this.$t('sold') + `<div>`
+      }
+    },
+    apartmentRoute (apartmentSlug) {
+      this.$router.push({ name: 'apartment', params: { apartmentSlug } })
+    },
+    changeRout (event) {
+      this.$router.replace({ name: 'building-inner-floor', params: { slug: event.target.value, floorId: 1 } })
+    }
+  },
+  created () {
+    // eslint-disable-next-line
+    this.$store.cache.dispatch('fetchBuildingApartments', this.$route.params.id)
+  },
   computed: {
     lang () {
       return this.$i18n.locale
     },
-    apartment: function () {
+    floors () {
+      return this.$store.getters.getFloorsByEntrance(this.$route.params.slug)
+    },
+    apartment () {
       return this.$store.getters.getApartment(this.$route.params.apartmentSlug)
     },
     ...mapState({
-      contacts: state => state.pages.contacts
+      contacts: state => state.pages.contacts,
+      buildingEntrances: state => state.buildings.buildingEntrances
     })
   }
 }
@@ -191,7 +260,7 @@ export default {
 }
 .apartment-info {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   padding-left: 250px;
@@ -281,21 +350,100 @@ export default {
     display: flex;
     justify-content: space-around;
     flex-direction: row-reverse;
+    flex-wrap: wrap;
     align-items: stretch;
     margin-bottom: auto;
-    .apartment-florplan {
+    margin-bottom: 20px;
+    width: 100%;
+    .apartment-floorplan {
+      width: 70%;
+      position: relative;
+      .img-box {
+        padding: 70px 0 20px 0;
+        background-color: #f8f8f8;
+        img {
+          cursor: pointer;
+        }
+      }
+      .compass {
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 999;
+        img {
+          max-width: 60px;
+        }
+      }
+      .swiper-slide {
+        opacity: 0;
+        &.swiper-slide-active {
+          opacity: 1;
+        }
+      }
+      .swiper-container {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+      .swiper-pagination {
+        position: relative;
+        text-align: left;
+        left: inherit;
+        bottom: inherit;
+        display: flex;
+        .swiper-pagination-bullet {
+          width: auto;
+          height: auto;
+          border-radius: 0;
+          background: transparent;
+          opacity: 1;
+          font-family: 'Montserrat', sans-serif;
+          text-decoration: none;
+          padding: 0 10px;
+          margin: 0 0;
+          outline: none;
+          .text {
+            font-size: 14px;
+            color: #8d8d8d;
+            font-weight: 600;
+            display: inline-block;
+            list-style: none;
+            padding: 3px 10px;
+            border-bottom: 2px solid transparent;
+          }
+          &:first-child {
+          }
+          &+.swiper-pagination-bullet {
+            border-left: 1px solid #e1e1e1;
+          }
+          &.swiper-pagination-bullet-active {
+            background: transparent;
+            .text {
+              color: #111;
+              border-bottom: 2px solid #fa6902;
+            }
+          }
+        }
+      }
       img,
       svg {
         max-width: 100%;
       }
+    }
+    .right-info {
+      width: 30%;
     }
     .sidebar {
       display: flex;
       justify-content: space-around;
       flex-direction: column;
       padding-left: 40px;
-      min-width: 220px;
+      min-width: 270px;
       counter-reset: counter;
+      p {
+        font-family: "Fira Sans";
+        font-weight: 500;
+        font-size: 14px;
+      }
       ol,
       ul {
         padding: 0;
@@ -382,6 +530,27 @@ export default {
               border-color: #fa6a02;
             }
           }
+        }
+      }
+    }
+  }
+  @media screen and(max-width: 1366px){
+    .apartment-content {
+      .right-info,
+      .apartment-floorplan {
+        width: 50%;
+      }
+    }
+  }
+  @media screen and(max-width: 1024px) {
+    .apartment-content {
+      flex-direction: column-reverse;
+      .apartment-floorplan,
+      .right-info {
+        width: 100%;
+        .sidebar {
+          padding-top: 20px;
+          padding-left: 0;
         }
       }
     }
@@ -556,7 +725,9 @@ export default {
   }
   .floor-plan {
     margin-top: auto;
+    margin: auto -25px 0 -25px;
     .text {
+      padding-left: 25px;
       color: #8d8d8d;
       font-family: "Fira Sans";
       font-size: 11px;
@@ -564,8 +735,44 @@ export default {
       text-transform: uppercase;
       margin-bottom: 10px;
     }
-    img {
-      max-width: 100%;
+    .svg-box {
+      width: 100%;
+      position: relative;
+      img {
+        max-width: 100%;
+      }
+      svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        path,
+        polygon,
+        rect {
+          -webkit-transition: .3s all cubic-bezier(.115,.87,.19,1);
+          -o-transition: .3s all cubic-bezier(.115,.87,.19,1);
+          transition: .3s all cubic-bezier(.115,.87,.19,1);
+          opacity: 0;
+          fill: #fa6a02 !important;
+          mix-blend-mode: multiply;
+          cursor: pointer;
+        }
+      }
+      g:hover path,
+      g:hover polygon,
+      g:hover rect,
+      g:hover,
+      g polygon:hover {
+        opacity: .7;
+      }
+      img {
+        display: block;
+      }
+      g.active path {
+        opacity: .7;
+      }
     }
   }
   .available-from {

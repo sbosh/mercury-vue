@@ -57,14 +57,24 @@ export default {
   .swiper-pagination {
     text-align: left;
     .swiper-pagination-bullet {
-      border-radius: 0;
-      width: 30px;
-      height: 3px;
-      background-color: rgba(255,255,255, .2);
       opacity: 1;
+      padding: 10px 0;
+      border-radius: 0;
+      width: auto;
+      height: auto;
+      background-color: transparent;
+      &:before {
+        content: '';
+        width: 30px;
+        height: 4px;
+        display: block;
+        background-color: rgba(35, 35, 35, 0.5);
+      }
     }
     .swiper-pagination-bullet-active {
-      background-color: rgba(255,255,255, 1);
+      &:before {
+        background-color: rgb(35, 35, 35);
+      }
     }
   }
 }

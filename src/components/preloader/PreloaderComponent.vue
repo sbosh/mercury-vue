@@ -1,10 +1,9 @@
 <template>
   <div class="preloader">
     <div class="preloader-content">
-      <div class="logo"><img src="@/assets/images/logo-filter.svg" alt=""></div>
-      <div class="progress-bar">
-        <span>Loading, please wait 100% - {{loaded}}</span>
-        <div class="fill" :style="{width:loaded}"></div>
+      <div class="loader">
+        <span></span>
+        <div class="logo"><img src="@/assets/images/logo-filter.svg" alt=""></div>
       </div>
     </div>
   </div>
@@ -12,41 +11,7 @@
 
 <script>
 export default {
-  name: 'preloader-component',
-  data () {
-    return {
-      loadingPercent: 0,
-      loadTime: 0,
-      interval: null
-    }
-  },
-  created () {
-    let perfData = window.performance.timing
-    let estimatedTime = Math.abs(perfData.loadEventEnd - perfData.navigationStart)
-    this.loadTime = parseInt((estimatedTime / 2000) % 60) * 100
-    this.doProgress()
-  },
-  computed: {
-    loaded () {
-      return this.loadingPercent + '%'
-    }
-  },
-  methods: {
-    doProgress () {
-      let step = this.loadTime / 100
-      this.interval = setInterval(() => {
-        this.loadingPercent++
-      }, step)
-    }
-  },
-  watch: {
-    loadingPercent (val) {
-      if (val >= 100) {
-        this.$emit('complete')
-        clearInterval(this.interval)
-      }
-    }
-  }
+  name: 'preloader-component'
 }
 </script>
 
@@ -60,6 +25,81 @@ export default {
   z-index: 99999;
   background: #fff;
   transition: all 1s;
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    background: transparent;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 250px;
+  }
+  .loader::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: 100%;
+    height: 100%;
+    border: 3px solid transparent;
+    border-top: 3px solid #fa6a02;
+    border-right: 3px solid #fa6a02;
+    border-radius: 50%;
+    animation: animateCircle 2s linear infinite;
+  }
+  .loader span {
+    display: block;
+    position: absolute;
+    top: calc(50% - 2px);
+    left: 50%;
+    width: 50%;
+    height: 4px;
+    background:transparent;
+    transform-origin: left;
+    animation: animate 2s linear infinite;
+  }
+  .loader span::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    background: #fa6a02;
+    box-shadow: 0 0 10px #fa6a02;
+  }
+  @keyframes animateCircle {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+  }
+  @keyframes animate {
+    0% {
+        transform: rotate(45deg);
+    }
+    100% {
+        transform: rotate(405deg);
+    }
+  }
+  @keyframes elena {
+    0% {
+      transform: rotateY(-40deg);
+    }
+    50% {
+      transform: rotateY(40deg);
+    }
+    100% {
+      transform: rotateY(-40deg);
+    }
+  }
   .preloader-content {
     display: flex;
     justify-content: center;
@@ -67,36 +107,14 @@ export default {
     flex-direction: column;
     height: 100%;
     .logo {
-      max-width: 250px;
+      max-width: 130px;
       width: 100%;
       margin: 50px auto;
+      perspective: 1000px;
       img {
         width: 100%;
+        animation: elena 3000ms ease-out infinite;
       }
-    }
-    .progress-bar {
-      width: 90%;
-      text-align: center;
-      position: relative;
-      display: flex;
-      box-sizing: border-box;
-      span {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #ccc;
-        font-family: 'Exo 2', sans-serif;
-        font-size: 16px;
-        font-weight: 600;
-        text-transform: uppercase;
-      }
-    }
-    .progress-bar .fill {
-      background: #f26b21;
-      height: 100%;
-      width: 0%;
-      padding: 20px;
     }
   }
 }

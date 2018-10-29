@@ -68,7 +68,7 @@ export default {
     ...mapState({
       articles: state => state.articles.all
     }),
-    article: function () {
+    article () {
       return this.$store.getters.getArticle(Number(this.$route.params.id), this.$route.params.slug)
     }
   }
@@ -176,10 +176,8 @@ export default {
     }
     .swiper-pagination {
       .swiper-pagination-bullet {
-        background-color: rgba(#232323, .5);
       }
       .swiper-pagination-bullet-active {
-        background-color: rgba(#232323, 1);
       }
     }
   }

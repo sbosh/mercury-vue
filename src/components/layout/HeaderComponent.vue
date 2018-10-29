@@ -9,11 +9,11 @@
             </div>
             <div class="col">
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/current-buildings'">{{ $t('current_projects') }}</router-link></h3>
-              <ul>
+              <div class="ul">
                 <li v-for="building in current" :key="building.id">
-                  <router-link tag="a" :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
+                  <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
                 </li>
-              </ul>
+              </div>
               <h3><router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link></h3>
               <h3><router-link :to="'/' + lang + '/future-buildings'">{{ $t('future_projects') }}</router-link></h3>
               <h3><router-link :to="'/' + lang + '/news'">{{ $t('news') }}</router-link></h3>
@@ -381,13 +381,13 @@ export default {
           }
         }
       }
-
+      .ul,
       ul {
         margin: 13px 0 30px 0;
         padding: 0;
         list-style: none;
 
-        li {
+        li,.box {
           display: block;
           margin-bottom: 16px;
 
