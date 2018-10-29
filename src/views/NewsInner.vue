@@ -15,6 +15,20 @@
           </div>
           <div class="info-box">
             <p v-html="article['text_' + $i18n.locale]"></p>
+            <div class="follow-us">
+              <div class="tex">{{ $t('share') }}</div>
+              <social-sharing
+                :url="this.$route.fullPath"
+                :title="article['title_' + $i18n.locale]"
+                :description="article['announce_' + $i18n.locale]"
+                twitter-user="Mercury99"
+                inline-template>
+                <div>
+                  <network network="facebook"><i class="fb"></i></network>
+                  <network network="twitter"><i class="tw"></i></network>
+                </div>
+              </social-sharing>
+            </div>
           </div>
         </article>
         <div class="related-news">
@@ -64,6 +78,9 @@ export default {
       }
     }
   },
+  created () {
+    console.log(this.$route.fullPath)
+  },
   computed: {
     ...mapState({
       articles: state => state.articles.all
@@ -90,6 +107,29 @@ export default {
   padding-top: 190px;
   position: relative;
   padding-right: 195px;
+  .follow-us {
+    display: flex;
+    margin-top: 50px;
+    .text {
+      font-family: 'Montserrat';
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    >div {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      padding: 20px;
+      span {
+        width: 20px;
+        height: 20px;
+        background: red;
+        margin: 5px;
+        cursor: pointer;
+      }
+    }
+  }
   .info-box {
     ul li {
       margin-bottom: 8px;

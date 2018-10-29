@@ -44,7 +44,7 @@
                 v-for="apartment in floor.apartments.data"
                 :key="apartment.id"
                 @click="apartmentRoute(apartment['slug_' + $i18n.locale])"
-                v-tooltip="{ content: tooltipContent(apartment) }">
+                v-tooltip="{ content: tooltipContent(apartment), placement: 'bottom', offset: '0' }">
                 <path :d="apartment.coords" fill="none"></path>
               </g>
             </svg>
@@ -156,6 +156,18 @@ export default {
   z-index: 9999;
   font-size: 16px;
   line-height: 20px;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    margin-left: -5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 7px 6.5px 0 6.5px;
+    border-color: #fff transparent transparent transparent;
+  }
   h3 {
     text-align: center;
     margin: 0 0 10px 0;
