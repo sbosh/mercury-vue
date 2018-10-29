@@ -38,7 +38,7 @@
                 :class="{'active': apartment['slug_' + $i18n.locale] === $route.params.apartmentSlug }"
                 v-for="apartment in floors[Number($route.params.floorId) - 1].apartments.data"
                 :key="apartment.id"
-                v-tooltip="{ content: tooltipContent(apartment), placement: 'right-end', offset: '30' }"
+                v-tooltip="{ content: tooltipContent(apartment), placement: 'right-end', offset: '30', classes: 'right-tooltip' }"
                 @click="apartmentRoute(apartment['slug_' + $i18n.locale])">
                 <path :d="apartment.coords" fill="none"></path>
               </g>
@@ -147,7 +147,7 @@ export default {
   },
   methods: {
     tooltipContent (apartment) {
-      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><br><b>${this.$t('area')}:</b> ${apartment.total_area} m²<br><b>${this.$t('price')}:</b> ${apartment.price} EUR<br><b>${this.$t('rooms')}:</b> ${apartment.rooms}<br><span>${this.apartmentStatus(apartment.status)}</span>`
+      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><div class="icons"><div><i class="area-icon"></i> ${apartment.total_area} m²</div> <div><i class="rooms-icon"></i>${apartment.rooms}</div></div> <div class="price">${apartment.price} EUR</div><div class="status">${this.apartmentStatus(apartment.status)}</div>`
     },
     apartmentStatus (status) {
       if (status === 1) {

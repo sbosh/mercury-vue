@@ -44,7 +44,7 @@
                 v-for="apartment in floor.apartments.data"
                 :key="apartment.id"
                 @click="apartmentRoute(apartment['slug_' + $i18n.locale])"
-                v-tooltip="{ content: tooltipContent(apartment), placement: 'bottom', offset: '0' }">
+                v-tooltip="{ content: tooltipContent(apartment), placement: 'top', offset: '0' }">
                 <path :d="apartment.coords" fill="none"></path>
               </g>
             </svg>
@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     tooltipContent (apartment) {
-      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><br><b>${this.$t('area')}:</b> ${apartment.total_area} m²<br><b>${this.$t('price')}:</b> ${apartment.price} EUR<br><b>${this.$t('rooms')}:</b> ${apartment.rooms}<br><span>${this.apartmentStatus(apartment.status)}</span>`
+      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><div class="icons"><div><i class="area-icon"></i> ${apartment.total_area} m²</div> <div><i class="rooms-icon"></i>${apartment.rooms}</div></div> <div class="price">${apartment.price} EUR</div><div class="status">${this.apartmentStatus(apartment.status)}</div>`
     },
     apartmentStatus (status) {
       if (status === 1) {
@@ -159,11 +159,44 @@ export default {
 .tooltip {
   background: #fff;
   box-shadow: 0px 0px 12px -2px rgba(0,0,0,0.46);
-  padding: 15px;
+  padding: 25px;
   z-index: 9999;
   font-size: 16px;
   line-height: 20px;
-  &:after {
+  min-width: 200px;
+  .icons {
+    display: flex;
+    align-items: center;
+    margin: 5px -10px;
+    div {
+      display: flex;
+      align-items: center;
+      margin: 10px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    i {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #fa6a02;
+      background-repeat: no-repeat;
+      background-position: center center;
+      margin-right: 6px;
+      display: inline-block;
+      &.area-icon {
+        background-image: url(~@/assets/images/area-icon.svg);
+      }
+      &.rooms-icon {
+        background-image: url(~@/assets/images/rooms-icon.svg);
+      }
+    }
+  }
+  .price {
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  &:not(.right-tooltip):after {
     content: '';
     position: absolute;
     bottom: -7px;
@@ -174,6 +207,18 @@ export default {
     border-style: solid;
     border-width: 7px 6.5px 0 6.5px;
     border-color: #fff transparent transparent transparent;
+  }
+  &.right-tooltip:after {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    margin-left: -7px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6.5px 7px 6.5px 0;
+    border-color: transparent #fff transparent transparent;
   }
   h3 {
     text-align: center;
