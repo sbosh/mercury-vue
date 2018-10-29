@@ -20,9 +20,9 @@ const getters = {
 }
 
 const mutations = {
-  setFloors (state, floors) {
-    state.all = floors
-  }
+  // setFloors (state, floors) {
+  //   state.all = floors
+  // }
 }
 
 export default {
