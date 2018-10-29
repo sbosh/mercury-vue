@@ -7,7 +7,7 @@
       <mq-layout mq="md+" class="building-view-header"><navinner-component :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
       <div class="building-apartments">
         <div class="img-box">
-          <div id="building"></div>
+          <div id="building" :style="'background-image: url(' + building.image + ')'"></div>
           <div class="flor-info-tooltip">
             <div class="tooltip-info">
               <div class="box">
@@ -141,11 +141,10 @@ export default {
       jsFloor: null,
       jsEntrance: null,
       tooltip: null,
-      loading: false
+      loading: true
     }
   },
   created () {
-    this.loading = true
     // eslint-disable-next-line
     this.$store.cache.dispatch('fetchBuildingEntrances', this.$route.params.id).then(() => {
       // eslint-disable-next-line
@@ -153,7 +152,6 @@ export default {
         // eslint-disable-next-line
         this.$store.cache.dispatch('fetchBuildingApartments', this.$route.params.id).then(() => {
           this.loading = false
-          this.initCanvas()
         })
       })
     })
@@ -162,6 +160,11 @@ export default {
     show (val) {
       if (val) {
         this.$nextTick(() => this.$refs.slider.refresh())
+      }
+    },
+    loading (value) {
+      if (!value) {
+        this.$nextTick(() => this.initCanvas())
       }
     }
   },

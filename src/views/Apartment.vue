@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="apartment-inner" v-if="apartment">
+  <div class="apartment-inner" v-if="floors.length && apartment">
     <mq-layout mq="md+" class="left-sidebar">
       <div class="top">
         <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
@@ -32,6 +32,7 @@
       <div class="floor-plan">
         <div class="text">{{ $t('floor_layout') }} {{ Number($route.params.floorId) - 1}}:</div>
         <div class="svg-box" v-if="floors">
+            <img :src="floors[Number($route.params.floorId) - 1].image" alt="">
             <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
               <g
                 :class="{'active': apartment['slug_' + $i18n.locale] === $route.params.apartmentSlug }"

@@ -4,7 +4,7 @@
     <mq-layout mq="md+"><header-component /></mq-layout>
     <mq-layout mq="sm"><header-mobile /></mq-layout>
     <transition :name="transitionName" mode="out-in" @beforeLeave="beforeLeave" @enter="enter" @afterEnter="afterEnter">
-      <router-view />
+      <router-view :key="$route.fullPath" />
     </transition>
   </div>
 </template>

@@ -8,7 +8,24 @@
 
 <script>
 export default {
-  name: 'building-floor'
+  name: 'building-floor',
+  data () {
+    return {
+      loading: true
+    }
+  },
+  created () {
+    // eslint-disable-next-line
+    this.$store.cache.dispatch('fetchBuildingEntrances', this.$route.params.id).then(() => {
+      // eslint-disable-next-line
+      this.$store.cache.dispatch('fetchBuildingFloors', this.$route.params.id).then(() => {
+        // eslint-disable-next-line
+        this.$store.cache.dispatch('fetchBuildingApartments', this.$route.params.id).then(() => {
+          this.loading = false
+        })
+      })
+    })
+  }
 }
 </script>
 

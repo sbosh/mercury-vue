@@ -88,6 +88,13 @@ export default {
     // eslint-disable-next-line
     this.$store.cache.dispatch('fetchBuildingEntrances', this.$route.params.id)
   },
+  beforeRouteUpdate (to, from, next) {
+    next({
+      redirect: {
+        name: 'building-inner-floor'
+      }
+    })
+  },
   mounted () {
     this.initSwiper()
   },
