@@ -12,14 +12,6 @@
       <div class="apartments-box" v-for="apartment in filtrApartments(priceFrom, priceTo, rooms, available)" :key="apartment.id" :class="[{ sold: apartment.status == 3 },{ reserved: apartment.status == 2 }]">
         <router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor.id + '/' + apartment.entrance['slug_' + $i18n.locale] + '/' + apartment['slug_' + $i18n.locale]">
           <img :src="apartment.image" alt="">
-        </router-link>
-        <div class="info">
-          <div class="title"><h3><router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor.id + '/' + apartment.entrance['slug_' + $i18n.locale] + '/' + apartment['slug_' + $i18n.locale]">{{ apartment['title_' + $i18n.locale] }}</router-link></h3></div>
-          <div class="maisonette" v-if="apartment.mezonet === 1">{{ $t('maisonette') }}</div>
-          <div class="sqm">{{ apartment.total_area }} mq<sup>2</sup></div>
-          <div class="price" v-if="apartment.status == 2 || apartment.status == 1">{{ apartment.price }} <span>eur</span></div>
-          <div class="entrance">{{ apartment.entrance['title_' + $i18n.locale] }}</div>
-          <div class="floor">{{ $t('floor') }} {{ apartment.floor['title_' + $i18n.locale] }}</div>
           <div v-if="apartment.status == 2" class="status reserved">
             {{ $t('reserved') }}
           </div>
@@ -28,6 +20,19 @@
           </div>
           <div v-if="apartment.status == 1" class="status available">
             {{ $t('available') }}
+          </div>
+        </router-link>
+        <div class="info">
+          <div class="maisonette" v-if="apartment.mezonet === 1">{{ $t('maisonette') }}</div>
+          <div class="title"><h3><router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor.id + '/' + apartment.entrance['slug_' + $i18n.locale] + '/' + apartment['slug_' + $i18n.locale]">{{ apartment['title_' + $i18n.locale] }}</router-link></h3></div>
+          <div class="sqm">{{ apartment.total_area }} mq<sup>2</sup></div>
+          <div class="floor-entrance">
+            <div class="entrance">{{ apartment.entrance['title_' + $i18n.locale] }}</div>
+            <div class="floor">{{ $t('floor') }} {{ apartment.floor['title_' + $i18n.locale] }}</div>
+          </div>
+          <div class="price" v-if="apartment.status == 2 || apartment.status == 1">
+            <div class="text">{{ $t('price') }}:</div>
+            {{ apartment.price }} <span>eur</span>
           </div>
         </div>
       </div>
@@ -147,6 +152,7 @@ export default {
       display: flex;
       padding-bottom: 50px;
       margin-bottom: 40px;
+      align-items: flex-start;
       img {
         max-width: 100%;
       }
@@ -156,9 +162,32 @@ export default {
       }
       >a {
         width: 50%;
+        text-decoration: none;
+        position: relative;
+        .status {
+          font-weight: 700;
+          font-size: 11px;
+          margin-top: 5px;
+          text-transform: uppercase;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          background: #fff;
+          padding: 10px 15px;
+          &.sold {
+            color: #e22f2f;
+          }
+          &.reserved {
+            color: #fa6a02;
+          }
+          &.available {
+            color: #22a314;
+          }
+        }
       }
       .info {
-        padding: 15px 35px 0 35px;
+        padding: 5px 35px 0 35px;
         width: 50%;
         .title {
           color: #000;
@@ -177,8 +206,6 @@ export default {
           font-weight: 600;
         }
         .maisonette,
-        .entrance,
-        .floor,
         .price {
           color: #000;
           font-size: 19px;
@@ -187,30 +214,55 @@ export default {
           span {
             font-weight: 300;
           }
+          .text {
+            display: block;
+            font-family: "Fira Sans";
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #bbbbbb;
+          }
+        }
+        .floor-entrance {
+          display: flex;
+          margin: 10px 0;
+          .entrance,
+          .floor {
+            color: #000;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 5px;
+            width: 60px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: #f1f1f1;
+          }
         }
         .maisonette {
-          color: #fa6a02;
-        }
-        .status {
-          font-weight: 700;
+          color: #fff;
+          background: #fa6a02;
+          padding: 10px 15px;
           font-size: 11px;
-          margin-top: 5px;
           text-transform: uppercase;
-          &.sold {
-            color: #e22f2f;
-          }
-          &.reserved {
-            color: #fa6a02;
-          }
-          &.available {
-            color: #22a314;
-          }
+          display: inline-block;
+          margin-bottom: 10px;
         }
       }
     }
   }
   &.active {
     transform: translateX(0);
+  }
+  @media screen and(max-width: 1366px){
+    .apartments-listing {
+      .apartments-box {
+        .info {
+          .title, .title a {
+            font-size: 16px;
+          }
+        }
+      }
+    }
   }
   @media screen and(max-width: 1280px){
     .apartments-listing {
