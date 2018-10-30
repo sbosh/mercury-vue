@@ -30,7 +30,10 @@
             </option>
           </select>
         </div>
-        <div class="right"><div class="text" v-html="$t('available_apartments')"></div><span>3</span> / <span>7</span></div>
+        <div class="right"><div class="text" v-html="$t('available_apartments')"></div>
+          <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalApartments }}</span> /
+          <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span>
+        </div>
       </div>
     </mq-layout>
     <div class="floor-info">
