@@ -328,10 +328,10 @@ export default {
       }
     },
     scaleGame () {
-      this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL
-      this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
+      this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT
+      this.game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
 
-      this.game.scale.setMinMax(360, 480, 1920, 1080)
+      this.game.scale.setMinMax(360, 480)
 
       Phaser.Canvas.setImageRenderingCrisp(this.game.canvas)
       Phaser.Canvas.setSmoothingEnabled(this.game.context, false)
