@@ -98,12 +98,15 @@
             <button class="filter-btn" @click="() => {
               filterActive = !filterActive
               show = !show
-              }">
+              }"
+              v-tooltip.left="$t('filter_apartments')">
               <span></span>
               <span></span>
               <span></span>
             </button>
-            <button class="parking-btn" @click="parkingsActive = !parkingsActive"></button>
+            <button class="parking-btn"
+              @click="parkingsActive = !parkingsActive"
+              v-tooltip.left="$t('all_parking')"></button>
           </div>
         </div>
       </div>
