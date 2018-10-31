@@ -12,7 +12,9 @@ import VueMq from 'vue-mq'
 import VTooltip from 'v-tooltip'
 import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
+var SocialSharing = require('vue-social-sharing')
 
+Vue.use(SocialSharing)
 Vue.use(VTooltip)
 Vue.use(Viewer, {
   defaultOptions: {

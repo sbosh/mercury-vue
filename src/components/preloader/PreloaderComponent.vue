@@ -89,17 +89,6 @@ export default {
         transform: rotate(405deg);
     }
   }
-  @keyframes elena {
-    0% {
-      transform: rotateY(-40deg);
-    }
-    50% {
-      transform: rotateY(40deg);
-    }
-    100% {
-      transform: rotateY(-40deg);
-    }
-  }
   .preloader-content {
     display: flex;
     justify-content: center;
@@ -113,7 +102,6 @@ export default {
       perspective: 1000px;
       img {
         width: 100%;
-        animation: elena 3000ms ease-out infinite;
       }
     }
   }

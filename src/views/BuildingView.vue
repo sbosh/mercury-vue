@@ -83,6 +83,13 @@
             </div>
           </div>
         </div>
+        <mq-layout mq="sm" class="entrances-mobile">
+          <ul>
+            <li v-for="entrance in buildingEntrances" :key="entrance.id">
+              <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/floor/1/' + entrance['slug_' + $i18n.locale]">{{ entrance['title_' + $i18n.locale] }}</router-link>
+            </li>
+          </ul>
+        </mq-layout>
         <div class="bottom-options">
           <div class="building-btn">
             <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">{{ $t('building_information') }}</router-link></div>
@@ -885,10 +892,12 @@ canvas {
       z-index: 200;
       .building-filter {
         flex-direction: row;
-        margin-top: -90px;
+        // margin-top: -90px;
+        background: #cfcfcf;
         right: inherit;
         bottom: inherit;
         position: inherit;
+        padding-top: 20px;
         .filter-btn,
         .parking-btn {
           margin: 0 10px 20px 10px;
@@ -908,6 +917,34 @@ canvas {
             box-sizing: border-box;
           }
         }
+      }
+    }
+  }
+}
+.entrances-mobile {
+  padding: 10px;
+  ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    li {
+      list-style: none;
+      margin: 5px;
+      a {
+        display: block;
+        border: 1px solid #fa6a02;
+        background: #fa6a02;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 15px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        font-family: "Fira Sans";
       }
     }
   }
