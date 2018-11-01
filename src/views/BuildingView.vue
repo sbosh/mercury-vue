@@ -442,7 +442,7 @@ canvas {
       position: absolute;
       left: 0;
       top: 0;
-      right: 0;
+      right: 195px;
       bottom: 0;
     }
   }
@@ -823,14 +823,9 @@ canvas {
           div {
             margin: auto;
           }
-          .number {
-            width: 33px;
-            height: 33px;
-            border-radius: 50%;
-            border: 1px solid #979797;
+          .parking-lot {
             text-align: center;
-            line-height: 34px;
-            font-size: 13px;
+            font-size: 14px;
           }
           .sqm {
             color: #8e8e8e;

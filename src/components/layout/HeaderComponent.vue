@@ -27,10 +27,10 @@
                 <li><a href="">{{ $t('history') }}</a></li>
               </ul>
               <div class="tel">
-                <a href="tel:+359884626391" class="tel-box">
+                <a :href="$t('tel_href')" class="tel-box">
                   <div class="icon"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></div>
                   <div class="text">{{ $t('contact_us_now') }}</div>
-                  <div class="phone">+359 884 626 391</div>
+                  <div class="phone">$t('tel')</div>
                 </a>
               </div>
               <div class="follow-us">
@@ -51,10 +51,10 @@
         </div>
       </div>
       <div class="tel">
-        <a href="tel:+359884626391" class="tel-box">
+        <a :href="$t('tel_href')" class="tel-box">
           <div class="icon"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></div>
           <div class="text">{{ $t('contact_us_now') }}</div>
-          <div class="phone">+359 884 626 391</div>
+          <div class="phone">$t('tel')</div>
         </a>
       </div>
       <button class="toggle-header"

@@ -5,17 +5,17 @@
       <div class="table">
         <div class="thead">
           <div class="tr">
-            <div class="th">{{ $t('number') }}: (id)</div>
-            <div class="th">{{ $t('mq2') }}:</div>
+            <div class="th">{{ $t('parking_lot') }}</div>
+            <div class="th">{{ $t('total_area') }}:</div>
             <div class="th">{{ $t('price') }}:</div>
             <div class="th">{{ $t('status') }}:</div>
           </div>
         </div>
         <div class="tbody">
           <div class="tr" v-for="parking in buildingParkings" :key="parking.id">
-            <div class="td"><div class="number">{{ parking.id }}</div></div>
-            <div class="td"><div class="sqm">{{ parking.total_area }}</div></div>
-            <div class="td"><div class="price" v-if="parking.status === 1 || parking.status === 2">{{ parking.price }}</div></div>
+            <div class="td"><div class="parking-lot">{{ parking['title_' + $i18n.locale] }}</div></div>
+            <div class="td"><div class="sqm">{{ parking.total_area }} <small>m²</small></div></div>
+            <div class="td"><div class="price" v-if="parking.status === 1 || parking.status === 2">{{ parking.price }} EUR</div></div>
             <div class="td">
               <div v-if="parking.status == 2" class="status reserved">
                 {{ $t('reserved') }}

@@ -376,9 +376,9 @@ export default {
         }
       }
       .swiper-slide {
-        opacity: 0;
+        opacity: 0 !important;
         &.swiper-slide-active {
-          opacity: 1;
+          opacity: 1 !important;
         }
       }
       .swiper-container {
