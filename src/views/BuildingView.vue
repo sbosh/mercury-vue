@@ -99,14 +99,14 @@
               filterActive = !filterActive
               show = !show
               }"
-              v-tooltip.left="$t('filter_apartments')">
+              v-tooltip="{ content: $t('filter_apartments'), placement: 'left', offset: '30', classes: 'left-tooltip' }">
               <span></span>
               <span></span>
               <span></span>
             </button>
             <button class="parking-btn"
               @click="parkingsActive = !parkingsActive"
-              v-tooltip.left="$t('all_parking')"></button>
+              v-tooltip="{ content: $t('all_parking'), placement: 'left', offset: '30', classes: 'left-tooltip' }"></button>
           </div>
         </div>
       </div>
@@ -414,17 +414,13 @@ canvas {
         font-family: 'Montserrat', sans-serif;
         font-weight: 600;
         font-size: 12px;
-        // text-transform: uppercase;
-        // margin-bottom: 7px;
         color: #333;
         margin-left: 10px;
-        // height: 100%;
         br {
           display: none;
         }
       }
       .number {
-        // height: 100%;
         margin-right: auto;
         font-weight: 700;
         color: #000;
@@ -633,15 +629,6 @@ canvas {
     }
   }
   .bottom-options {
-    // position: absolute;
-    // left: 0;
-    // bottom: 0;
-    // right: 0;
-    // display: flex;
-    // justify-content: space-between;
-    // align-items: center;
-    // padding: 45px 235px 45px 40px;
-    // z-index: 200;
     .building-btn {
       position: fixed;
       left: 50px;
@@ -895,7 +882,6 @@ canvas {
       z-index: 200;
       .building-filter {
         flex-direction: row;
-        // margin-top: -90px;
         background: #cfcfcf;
         right: inherit;
         bottom: inherit;

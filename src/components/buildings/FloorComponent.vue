@@ -223,6 +223,20 @@ export default {
     border-width: 6.5px 7px 6.5px 0;
     border-color: transparent #fff transparent transparent;
   }
+  &.left-tooltip:after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    right: initial;
+    display: block;
+    top: 50%;
+    margin-top: -7px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 11px;
+    border-color: transparent transparent transparent #fff;
+  }
   h3 {
     text-align: center;
     margin: 0 0 10px 0;
