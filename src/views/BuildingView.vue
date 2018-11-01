@@ -861,6 +861,10 @@ canvas {
         right: inherit;
         top: inherit;
         bottom: inherit;
+        background-size: cover;
+        background-position: center center;
+        height: 65vh;
+        overflow: hidden;
       }
     }
     .bottom-options {
