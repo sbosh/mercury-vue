@@ -37,7 +37,6 @@
       </div>
     </mq-layout>
     <div class="floor-info">
-      {{ buildingEntrances.filter(e => e.id === Number(this.$route.params.slug)) }}
       <swiper ref="mySwiper" :options="swiperOptions()">
         <swiper-slide v-for="floor in floors" :key="floor.id">
           <div class="img-box">
@@ -265,7 +264,6 @@ export default {
   align-items: center;
   justify-content: center;
   .img-box {
-    //padding-right: 100px;
     visibility: hidden;
     opacity: 0;
     transition: all .3s;
@@ -432,7 +430,7 @@ export default {
   padding-bottom: 40px;
   padding-top: 30px;
   transition: all .3s;
-  transform: translateX(-195px);
+  /*transform: translateX(-195px);*/
   .router-link-active {
     margin: 40px auto;
     display: block;
@@ -509,7 +507,7 @@ export default {
 }
 .active-component {
   .left-sidebar {
-    transform: translateX(0);
+    /*transform: translateX(0);*/
     .compass {
       animation: rotate-animation 1.3s linear;
       img {

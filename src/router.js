@@ -60,49 +60,42 @@ let router = new Router({
         {
           path: '',
           name: 'building-inner-component',
-          component: BuildingInnerComponent,
-          meta: { transitionName: 'slide' }
+          component: BuildingInnerComponent
         },
         {
           path: 'view',
           name: 'building-view',
-          component: BuildingView,
-          meta: { transitionName: 'slide' }
+          component: BuildingView
         },
         {
           path: 'floor/:floorId/:slug',
           component: Floor,
-          meta: { transitionName: 'slide' },
           children: [
             {
               path: '',
               name: 'building-inner-floor',
               component: FloorComponent,
-              meta: { transitionName: 'slide' }
+              meta: { transitionName: 'noeffect' }
             },
             {
               path: ':apartmentSlug',
               name: 'apartment',
-              component: Apartment,
-              meta: { transitionName: 'slide' }
+              component: Apartment
             }
           ]
         }
       ],
-      component: BuildingInner,
-      meta: { transitionName: 'slide' }
+      component: BuildingInner
     },
     {
       path: '/:lang/news',
       name: 'news',
-      component: News,
-      meta: { transitionName: 'slide' }
+      component: News
     },
     {
       path: '/:lang/article/:id/:slug',
       name: 'article-inner',
-      component: NewsInner,
-      meta: { transitionName: 'slide' }
+      component: NewsInner
     },
     {
       path: '/:lang/*',

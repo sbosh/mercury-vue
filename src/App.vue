@@ -68,6 +68,18 @@ export default {
 </script>
 
 <style>
+.noeffect-enter-active,
+.noeffect-leave-active {
+  transition-duration: 0;
+  transition-property: opacity;
+  transition-timing-function: inherit;
+  overflow: visible;
+}
+.noeffect-enter,
+.noeffect-leave-active {
+  opacity: 1;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.3s;
