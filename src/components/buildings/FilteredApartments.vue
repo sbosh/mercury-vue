@@ -6,10 +6,9 @@
         <div class="back-btn" @click="closed">{{ $t('back_building') }}</div>
       </div>
       <div class="available-from"><div class="text" v-html="$t('available_apartments')"></div><span>{{ filtrApartments(priceFrom, priceTo, rooms, available).length }}</span> / <span>{{ count }}</span></div>
-      <div class="compass"><img src="@/assets/images/compass.svg" alt=""></div>
     </div>
     <div class="apartments-listing">
-      <div class="apartments-box" v-for="apartment in filtrApartments(priceFrom, priceTo, rooms, available)" :key="apartment.id" :class="[{ sold: apartment.status == 3 },{ reserved: apartment.status == 2 }]">
+      <div class="apartments-box" v-if="apartment['slug_' + $i18n.locale] !== 'zavedenie'" v-for="apartment in filtrApartments(priceFrom, priceTo, rooms, available)" :key="apartment.id" :class="[{ sold: apartment.status == 3 },{ reserved: apartment.status == 2 }]">
         <router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor.id + '/' + apartment.entrance['slug_' + $i18n.locale] + '/' + apartment['slug_' + $i18n.locale]">
           <img :src="apartment.image" alt="">
           <div v-if="apartment.status == 2" class="status reserved">
@@ -231,7 +230,7 @@ export default {
             font-size: 12px;
             font-weight: 600;
             margin-top: 5px;
-            width: 60px;
+            padding: 0 10px;
             height: 50px;
             line-height: 50px;
             text-align: center;

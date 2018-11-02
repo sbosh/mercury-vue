@@ -16,7 +16,7 @@
           <div class="info-box">
             <p v-html="article['text_' + $i18n.locale]"></p>
             <div class="follow-us">
-              <div class="tex">{{ $t('share') }}</div>
+              <div class="tex">{{ $t('share_text') }}</div>
               <social-sharing
                 :url="this.$route.fullPath"
                 :title="article['title_' + $i18n.locale]"

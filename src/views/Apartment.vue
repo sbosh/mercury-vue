@@ -55,7 +55,9 @@
         <div class="right">
           <div class="">
             <div class="text">{{ $t('total_price') }}:</div>
-            <div class="price">{{ apartment.price }} <div class="currency">euro</div></div>
+            <div class="price" v-if="apartment.status == 1">{{ apartment.price }} <div class="currency">euro</div></div>
+            <div class="price sold" v-if="apartment.status == 2" >{{ $t('available') }}</div>
+            <div class="price sold" v-if="apartment.status == 3" >{{ $t('sold') }}</div>
           </div>
           <div>
             <div class="text">{{ $t('price_per_m') }} m²:</div>
@@ -98,7 +100,6 @@
         </div>
         <div class="apartment-floorplan">
           <div class="compass">
-            {{apartment.degrees}}
             <img src="@/assets/images/compass.svg" :style="{ transform: 'rotate(-' + apartment.degrees +'deg)' }" alt="">
           </div>
           <div v-if="apartment.mezonet == 1" class="maisonette-info">
@@ -307,6 +308,9 @@ export default {
         color: #000;
         font-size: 24px;
         font-weight: 600;
+        &.sold {
+          color: #e22f2f;
+        }
         .currency {
           font-weight: 300;
           position: relative;
@@ -780,6 +784,15 @@ export default {
     text-align: left;
     width: 100%;
     margin: auto;
+    .sold {
+      color: #e22f2f;
+    }
+    .reserved {
+      color: #fa6a02;
+    }
+    .available {
+      color: #22a314;
+    }
     .text {
       display: block;
       color: #8d8d8d;
