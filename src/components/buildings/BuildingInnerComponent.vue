@@ -76,9 +76,9 @@
       </div>
       <div class="map">
         <div class="img-box">
-          <a :href="building.google_map" target='_blank' class="btn">бул. „Александър Малинов“ <span>{{ $t('to_the_location') }}</span></a>
+          <a :href="building.google_map" target='_blank' class="btn">{{ building['annonce_' + $i18n.locale] }} <span>{{ $t('to_the_location') }}</span></a>
           <img :src="building.map" alt="">
-          <div class="btn-box"><a :href="building['annonce_' + $i18n.locale]" target='_blank' class="btn">{{ $t('see_map') }}</a></div>
+          <div class="btn-box"><a :href="building.google_map" target='_blank' class="btn">{{ $t('see_map') }}</a></div>
         </div>
       </div>
       <div class="news-inner" id="news">

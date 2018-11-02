@@ -30,7 +30,7 @@
                 <a :href="$t('tel_href')" class="tel-box">
                   <div class="icon"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></div>
                   <div class="text">{{ $t('contact_us_now') }}</div>
-                  <div class="phone">$t('tel')</div>
+                  <div class="phone">{{ $t('tel_phone') }}</div>
                 </a>
               </div>
               <div class="follow-us">
@@ -54,7 +54,7 @@
         <a :href="$t('tel_href')" class="tel-box">
           <div class="icon"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></div>
           <div class="text">{{ $t('contact_us_now') }}</div>
-          <div class="phone">$t('tel')</div>
+          <div class="phone">{{ $t('tel_phone') }}</div>
         </a>
       </div>
       <button class="toggle-header"

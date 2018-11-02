@@ -5,7 +5,7 @@
         <div class="bg" :style="{ 'background-image': 'url(' + building.image + ')' }">
           <div class="caption" v-if="!home">
             <div class="title-box">
-              <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['annonce_' + $i18n.locale] }}</router-link></h2>
+              <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@
         <div class="thead">
           <div class="tr">
             <div class="th">{{ $t('parking_lot') }}</div>
-            <div class="th">{{ $t('total_area') }}:</div>
+            <div class="th">{{ $t('clear_area') }}:</div>
             <div class="th">{{ $t('price') }}:</div>
             <div class="th">{{ $t('status') }}:</div>
           </div>
