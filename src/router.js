@@ -93,7 +93,7 @@ let router = new Router({
       component: News
     },
     {
-      path: '/:lang/article/:id/:slug',
+      path: '/:lang/news/:id/:slug',
       name: 'article-inner',
       component: NewsInner
     },

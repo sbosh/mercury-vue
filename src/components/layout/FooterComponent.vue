@@ -17,8 +17,8 @@
     </mq-layout>
     <ul class="footer-bottom-nav">
       <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
-      <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
-      <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li>
+<!--       <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
+      <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li> -->
     </ul>
     <div class="all-rights">{{ $t('all_rights') }}</div>
     <div class="created-by"><a href="mailto:imigix2018@gmail.com">{{ $t('created_by') }} Imigix</a></div>

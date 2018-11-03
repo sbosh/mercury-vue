@@ -15,7 +15,7 @@
         <div class="buildings-titles">
           <div class="building-title" v-for="(building, index) in current" :key="building.id" @mouseenter="changeSwpier(index)">
             <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'">
-              <span>{{ index >= 10 ? index: '0' + (index + 1) }}</span> {{ building['title_' + $i18n.locale] }}
+              {{ building['title_' + $i18n.locale] }}
             </router-link>
           </div>
         </div>
@@ -24,7 +24,7 @@
           <router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link>
         </div>
       </div>
-      <div class="scroll-icon" v-if="!home && current.lenght > 1"><span></span></div>
+      <div class="scroll-icon" v-if="!home"><span></span></div>
     </swiper>
   </div>
 </template>
@@ -127,6 +127,7 @@ export default {
   padding: 35px 0;
   transition: .7s;
   transform: translateY(100%);
+  counter-reset: titles;
   &:before {
     content: '';
     position: absolute;
@@ -163,16 +164,6 @@ export default {
     border-radius: 0;
     opacity: 1;
     display: block;
-    span {
-      display: inline-block;
-      color: #fa6a02;
-      font-family: Montserrat;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      float: left;
-      margin: 5px 10px 0;
-    }
     &:last-child {
       border-bottom: 0;
     }
@@ -182,7 +173,20 @@ export default {
       padding: 20px 0;
       text-decoration: none;
       display: block;
+      &:before {
+        counter-increment: titles;
+        content: "0" counters(titles,". 0");
+        display: inline-block;
+        color: #fa6a02;
+        font-family: Montserrat;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        float: left;
+        margin: 5px 10px 0;
+      }
     }
+    &:hover,
     &.active {
       a {
         color: #fa6a02;

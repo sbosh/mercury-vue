@@ -5,10 +5,10 @@
       <div class="inner-building-header">
         <mq-layout mq="sm"><h1 class="page-title">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
         <div class="main-img">
-          <router-link v-if="building.status == 1" :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'"><img :src="building.image" alt=""></router-link>
+          <router-link v-if="building.status == 1 && building.use_svg == 1" :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'"><img :src="building.image" alt=""></router-link>
           <img v-else :src="building.image" alt="">
         </div>
-        <div v-if="building.status == 1" class="btn-box">
+        <div v-if="building.status == 1 && building.use_svg == 1" class="btn-box">
           <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">{{ $t('views_scheme') }}</router-link>
         </div>
       </div>
@@ -18,7 +18,7 @@
         </div>
         <div class="text" v-html="building['text_' + $i18n.locale]"></div>
       </div>
-      <div class="about-complex" v-if="building.status === 1">
+      <div class="about-complex" v-if="building.status === 1 && building.use_svg === 1">
         <div class="box-row">
           <div class="box animate-box">
             <div class="info">
@@ -77,7 +77,15 @@
       <div class="map">
         <div class="img-box">
           <a :href="building.google_map" target='_blank' class="btn">{{ building['annonce_' + $i18n.locale] }} <span>{{ $t('to_the_location') }}</span></a>
-          <img :src="building.map" alt="">
+          <GmapMap
+            :center="{lat:Number(building.map_lat), lng:Number(building.map_lng)}"
+            :zoom="16"
+          >
+            <GmapMarker
+              :position="{lat:Number(building.map_lat), lng:Number(building.map_lng)}"
+              :icon="icon"
+            />
+          </GmapMap>
           <div class="btn-box"><a :href="building.google_map" target='_blank' class="btn">{{ $t('see_map') }}</a></div>
         </div>
       </div>
@@ -117,6 +125,7 @@ export default {
   },
   data () {
     return {
+      icon: require('@/assets/images/pin-build.svg'),
       title: 'Комплекс Бижу',
       swiperOption: {
         slidesPerView: 'auto',
@@ -310,7 +319,12 @@ export default {
   align-items: center;
   padding-bottom: 100px;
   padding-left: 10%;
+  .vue-map-container {
+    width: 100%;
+    height: 65vh;
+  }
   .img-box {
+    width: 100%;
     img {
       max-width: 100%;
       display: block;
@@ -326,6 +340,8 @@ export default {
       font-weight: 600;
       display: block;
       margin-bottom: -50px;
+      position: relative;
+      z-index: 99;
       &:before {
         content: '';
         width: 17px;
@@ -591,9 +607,11 @@ export default {
     width: 100%;
   }
 }
+#about {
+  margin-bottom: 100px;
+}
 .about-complex {
   padding: 0 90px;
-  margin-top: 100px;
   margin-bottom: 100px;
   .box-row {
     display: flex;

@@ -15,7 +15,7 @@
                 <br>
                 <div class="address">{{ $t('address_one_title') }}</div>
                 <div class="text">{{ $t('address_one_name') }}</div>
-                <div class="phone"><a href="tel:+359884626391">+359 884 626 391</a></div>
+                <div class="phone"><a :href="$t('address_one_phone')">{{ $t('address_one_phone_text') }}</a></div>
                 <div class="text"><a href="mailto:sales@mercury99.com">sales@mercury99.com</a></div>
               </div>
             </li>
@@ -26,8 +26,8 @@
                 <br>
                 <div class="address">{{ $t('address_two_title') }}</div>
                 <div class="text">{{ $t('address_two_name') }}</div>
-                <div class="phone"><a href="tel:+359884626391">+359 884 626 391</a></div>
-                <div class="text"><a href="mailto:sales@mercury99.com"></a>sales@mercury99.com</div>
+                <div class="phone"><a :href="$t('address_two_phone')">{{ $t('address_two_phone_text') }}</a></div>
+                <div class="text"><a href="mailto:sales@mercury99.com">sales@mercury99.com</a></div>
               </div>
             </li>
           </ul>
@@ -182,6 +182,14 @@ export default {
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 8px;
+            a {
+              color: #fff;
+              text-decoration: none;
+              transition: all .2s;
+              &:hover {
+                color: #cfcfcf;
+              }
+            }
           }
           .phone {
             margin-bottom: 8px;
@@ -191,6 +199,10 @@ export default {
               font-size: 18px;
               font-weight: 700;
               text-transform: uppercase;
+              transition: all .2s;
+              &:hover {
+                color: #cfcfcf;
+              }
             }
           }
         }

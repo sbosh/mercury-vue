@@ -6,9 +6,12 @@
         <div class="back-btn" @click="closed">{{ $t('back_building') }}</div>
       </div>
       <div class="available-from"><div class="text" v-html="$t('available_apartments')"></div><span>{{ filtrApartments(priceFrom, priceTo, rooms, available).length }}</span> / <span>{{ count }}</span></div>
+      <div class="compass">
+        <img src="@/assets/images/compass.svg" :style="{ transform: 'rotate(-' + degrees +'deg)' }" alt="">
+      </div>
     </div>
     <div class="apartments-listing">
-      <div class="apartments-box" v-if="apartment['slug_' + $i18n.locale] !== 'zavedenie'" v-for="apartment in filtrApartments(priceFrom, priceTo, rooms, available)" :key="apartment.id" :class="[{ sold: apartment.status == 3 },{ reserved: apartment.status == 2 }]">
+      <div @mouseenter="hoverFilteredApartment(apartment.degrees)" class="apartments-box" v-if="apartment['slug_' + $i18n.locale] !== 'zavedenie'" v-for="apartment in filtrApartments(priceFrom, priceTo, rooms, available)" :key="apartment.id" :class="[{ sold: apartment.status == 3 },{ reserved: apartment.status == 2 }]">
         <router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor.id + '/' + apartment.entrance['slug_' + $i18n.locale] + '/' + apartment['slug_' + $i18n.locale]">
           <img :src="apartment.image" alt="">
           <div v-if="apartment.status == 2" class="status reserved">
@@ -43,6 +46,11 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'filtered-apartments',
   props: [ 'isFiltred', 'priceFrom', 'priceTo', 'rooms', 'available' ],
+  data () {
+    return {
+      degrees: 100
+    }
+  },
   computed: {
     ...mapGetters({
       filtrApartments: 'getFiltredApartments',
@@ -53,6 +61,9 @@ export default {
     }
   },
   methods: {
+    hoverFilteredApartment (apartmentDegrees) {
+      this.degrees = apartmentDegrees
+    },
     closed () {
       this.$emit('clicked', false)
     }
@@ -76,7 +87,7 @@ export default {
   padding-right: 25px;
   box-sizing: border-box;
   .router-link-active {
-    margin: 40px auto;
+    margin: 0px auto 20px auto;
     display: block;
     text-align: center;
     img {
@@ -140,24 +151,23 @@ export default {
     overflow: auto;
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: stretch;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 100px 65px;
     box-sizing: border-box;
     .apartments-box {
       flex: 1 0 50%;
+      max-width: 50%;
       display: flex;
-      padding-bottom: 50px;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
       align-items: flex-start;
+      transition: all .2s;
+      &:hover {
+        transform: scale(.97);
+      }
       img {
         max-width: 100%;
-      }
-      &:nth-child(even) {
-        padding-top: 50px;
-        padding-bottom: 0;
       }
       >a {
         width: 50%;

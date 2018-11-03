@@ -16,7 +16,7 @@
           <div class="info-box">
             <p v-html="article['text_' + $i18n.locale]"></p>
             <div class="follow-us">
-              <div class="tex">{{ $t('share_text') }}</div>
+              <div class="tex">{{ $t('share_text') }}:</div>
               <social-sharing
                 :url="this.$route.fullPath"
                 :title="article['title_' + $i18n.locale]"
@@ -124,9 +124,27 @@ export default {
       span {
         width: 20px;
         height: 20px;
-        background: red;
         margin: 5px;
         cursor: pointer;
+        margin: 5px 15px;
+      }
+      .fb {
+        display: block;
+        width: 20px;
+        height: 20px;
+        background-image: url('~@/assets/images/facebook-logo.svg');
+        background-size: 20px;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+      .tw {
+        display: block;
+        width: 20px;
+        height: 20px;
+        background-image: url('~@/assets/images/twitter-logo.svg');
+        background-size: 20px;
+        background-repeat: no-repeat;
+        background-position: center center;
       }
     }
   }

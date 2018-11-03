@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="floor-plan">
-        <div class="text">{{ $t('floor_layout') }} {{ Number($route.params.floorId) - 1}}:</div>
+        <div class="text">{{ $t('floor_layout') }} <br> {{ $t('floor') }}: {{ Number($route.params.floorId) - 1}}</div>
         <div class="svg-box" v-if="floors">
             <img :src="floors[Number($route.params.floorId) - 1].image" alt="">
             <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
@@ -50,18 +50,18 @@
       <div class="apartment-header">
         <div class="left">
           <div class="title"><h1>{{ apartment['title_' + $i18n.locale] }}</h1></div>
-          <div class="sqm">{{ apartment.total_area }} m<sup>2</sup></div>
+          <div class="sqm">{{ apartment.total_area }} m²</div>
         </div>
         <div class="right">
           <div class="">
-            <div class="text">{{ $t('total_price') }}:</div>
-            <div class="price" v-if="apartment.status == 1">{{ apartment.price }} <div class="currency">euro</div></div>
-            <div class="price sold" v-if="apartment.status == 2" >{{ $t('available') }}</div>
+            <div class="text" v-if="apartment.status == 1">{{ $t('total_price') }}:</div>
+            <div class="price" v-if="apartment.status == 1">{{ apartment.price }} <div class="currency">{{ $t('euro') }}</div></div>
+            <div class="price available" v-if="apartment.status == 2" >{{ $t('available') }}</div>
             <div class="price sold" v-if="apartment.status == 3" >{{ $t('sold') }}</div>
           </div>
           <div>
-            <div class="text">{{ $t('price_per_m') }} m²:</div>
-            <div class="price">{{ apartment.price_m2 }} <div class="currency">eur</div></div>
+            <div class="text"><span>{{ $t('price_per_m') }}</span> m²:</div>
+            <div class="price">{{ apartment.price_m2 }} <div class="currency">{{ $t('euro') }}</div></div>
           </div>
         </div>
       </div>
@@ -84,13 +84,13 @@
                 </div>
               </div>
             </mq-layout>
-            <a @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
+            <a v-if="apartment.status !== 3" @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
             <div class="popup" v-bind:class="{ active: contactFormActive }" >
               <div class="close" @click="contactFormActive = false">{{ $t('close') }}</div>
               <contact-form />
             </div>
-            <div class="donwload-pdf">
-              <a href="" class="btn-pdf">{{ $t('download_pdf') }}</a>
+            <div class="donwload-pdf" v-if="apartment.pdf">
+              <a target="_blank" :href="apartment.pdf" class="btn-pdf">{{ $t('download_pdf') }}</a>
             </div>
             <mq-layout mq="sm" class="buttons">
               <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="btn">{{ $t('back_building') }}</router-link>
@@ -293,6 +293,8 @@ export default {
         border-right: 1px solid #dfdfdf;
         padding-right: 40px;
         padding-left: 0;
+        display: flex;
+        flex-direction: column;
       }
       >div {
         padding-left: 40px;
@@ -301,8 +303,10 @@ export default {
         color: #8d8d8d;
         font-family: "Fira Sans";
         font-size: 10px;
-        font-weight: 500;
-        text-transform: uppercase;
+        span {
+          font-weight: 500;
+          text-transform: uppercase;
+        }
       }
       .price {
         color: #000;
@@ -310,6 +314,7 @@ export default {
         font-weight: 600;
         &.sold {
           color: #e22f2f;
+          margin-top: 10px;
         }
         .currency {
           font-weight: 300;
@@ -476,6 +481,10 @@ export default {
             text-align: center;
             margin-right: 9px;
             display: inline-block;
+          }
+          &:after {
+            content: 'm²';
+            margin-left: 5px;
           }
           span,strong, b {
             margin-left: auto;
@@ -670,15 +679,15 @@ export default {
     font-size: 11px;
     font-weight: 500;
     text-transform: uppercase;
-    .available {
-      color: #22a314;
+    .sold, .available, .unavailable {
       font-size: 20px;
       font-weight: 600;
     }
+    .available {
+      color: #22a314;
+    }
     .unavailable {
       color: red;
-      font-size: 20px;
-      font-weight: 600;
     }
   }
   @media screen and (max-width: 768px ) {

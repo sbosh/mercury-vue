@@ -24,7 +24,7 @@ export default {
   bottom: 0;
   z-index: 99999;
   background: #fff;
-  transition: all 1s;
+  transition: all 1.5s;
   .loader {
     position: absolute;
     top: 50%;

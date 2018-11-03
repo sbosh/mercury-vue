@@ -37,8 +37,8 @@
                 <div class="text">{{ $t('follow_us') }}</div>
                 <ul>
                   <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
-                  <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
-                  <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li>
+<!--                   <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
+                  <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li> -->
                 </ul>
               </div>
             </div>
@@ -68,8 +68,8 @@
       </button>
       <ul class="social">
         <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
-        <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
-        <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li>
+<!--         <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
+        <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li> -->
       </ul>
     </nav>
   </header>
