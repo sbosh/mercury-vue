@@ -752,6 +752,9 @@ export default {
   @media screen and(max-width: 768px) {
     padding: 0 0 0 25px;
     margin-bottom: 40px;
+    &:before {
+      display: none;
+    }
     .page-title {
       padding: 90px 0 30px 0;
       color: #fff;

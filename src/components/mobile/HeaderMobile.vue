@@ -17,7 +17,7 @@
       </div>
     </button>
     <div class="tel">
-      <a href="tel:+359884626391" class="tel-box"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></a>
+      <a :href="$t('tel_href')" class="tel-box"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></a>
     </div>
     <nav class="main-nav">
       <div class="main-navigation">
