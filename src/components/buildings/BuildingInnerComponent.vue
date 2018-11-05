@@ -1,113 +1,118 @@
 <template>
-  <div class="main-content" v-if="building">
-    <mq-layout mq="md+"><navinner-component navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
-    <div class="inner-building">
-      <div class="inner-building-header">
-        <mq-layout mq="sm"><h1 class="page-title">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
-        <div class="main-img">
-          <router-link v-if="building.status == 1 && building.use_svg == 1" :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'"><img :src="building.image" alt=""></router-link>
-          <img v-else :src="building.image" alt="">
-        </div>
-        <div v-if="building.status == 1 && building.use_svg == 1" class="btn-box">
-          <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">{{ $t('views_scheme') }}</router-link>
-        </div>
-      </div>
-      <div class="caption animate-box" id="about">
-        <div class="title-box">
-          <h2 class="title" v-html="$t('about_building')"></h2>
-        </div>
-        <div class="text" v-html="building['text_' + $i18n.locale]"></div>
-      </div>
-      <div class="about-complex" v-if="building.status === 1 && building.use_svg === 1">
-        <div class="box-row">
-          <div class="box animate-box">
-            <div class="info">
-              <div class="title">{{ $t('company_name') }}</div>
-              <div class="text">{{ building['title_' + $i18n.locale] }}</div>
-            </div>
+  <div class="main-content">
+    <transition name="fade" v-if="loading && !building">
+      <preloader-component />
+    </transition>
+    <div v-else>
+      <mq-layout mq="md+"><navinner-component navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
+      <div class="inner-building">
+        <div class="inner-building-header">
+          <mq-layout mq="sm"><h1 class="page-title">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
+          <div class="main-img">
+            <router-link v-if="building.status == 1 && building.use_svg == 1" :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'"><img :src="building.image" alt=""></router-link>
+            <img v-else :src="building.image" alt="">
           </div>
-          <div class="box animate-box">
-            <div class="info">
-              <div class="title">{{ $t('floors_count') }}</div>
-               <div class="text">{{ building.floorsCount }}</div>
-            </div>
-          </div>
-          <div class="box animate-box">
-            <div class="info">
-              <div class="title">{{ $t('apartments_count') }}</div>
-               <div class="text">{{ building.totalApartments }}</div>
-            </div>
-          </div>
-          <div class="box animate-box">
-            <div class="info">
-              <div class="title">{{ $t('free_apartments') }}</div>
-                 <div class="text">{{ building.totalFreeApartments }}</div>
-            </div>
-          </div>
-          <div class="box animate-box">
-            <div class="info">
-              <div class="title">{{ $t('finished_date') }}</div>
-              <div class="text">{{ building.year }}</div>
-            </div>
+          <div v-if="building.status == 1 && building.use_svg == 1" class="btn-box">
+            <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">{{ $t('views_scheme') }}</router-link>
           </div>
         </div>
-      </div>
-      <div class="gallery-building" id="gallery">
-        <swiper :options="swiperOption">
-          <swiper-slide v-for="(image, key) in building.gallery" :key="key">
-            <img :src="image" alt=""><div class="progress-bar"></div>
-          </swiper-slide>
-        </swiper>
-      </div>
-      <div class="location" id="location">
-        <div class="caption animate-box">
+        <div class="caption animate-box" id="about">
           <div class="title-box">
-            <h2 class="title" v-html="$t('about_location')"></h2>
+            <h2 class="title" v-html="$t('about_building')"></h2>
           </div>
+          <div class="text" v-html="building['text_' + $i18n.locale]"></div>
         </div>
-        <div class="box-row">
-          <div class="box" v-if="building.facilities" v-for="facility in building.facilities.data" :key="facility.id">
-            <div class="info">
-              <div class="icon"><img :src="facility.image" alt=""></div>
-              <div class="text">{{facility['title_' + $i18n.locale]}}</div>
+        <div class="about-complex" v-if="building.status === 1 && building.use_svg === 1">
+          <div class="box-row">
+            <div class="box animate-box">
+              <div class="info">
+                <div class="title">{{ $t('company_name') }}</div>
+                <div class="text">{{ building['title_' + $i18n.locale] }}</div>
+              </div>
+            </div>
+            <div class="box animate-box">
+              <div class="info">
+                <div class="title">{{ $t('floors_count') }}</div>
+                <div class="text">{{ building.floorsCount }}</div>
+              </div>
+            </div>
+            <div class="box animate-box">
+              <div class="info">
+                <div class="title">{{ $t('apartments_count') }}</div>
+                <div class="text">{{ building.totalApartments }}</div>
+              </div>
+            </div>
+            <div class="box animate-box">
+              <div class="info">
+                <div class="title">{{ $t('free_apartments') }}</div>
+                  <div class="text">{{ building.totalFreeApartments }}</div>
+              </div>
+            </div>
+            <div class="box animate-box">
+              <div class="info">
+                <div class="title">{{ $t('finished_date') }}</div>
+                <div class="text">{{ building.year }}</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="map">
-        <div class="img-box">
-          <a :href="building.google_map" target='_blank' class="btn">{{ building['annonce_' + $i18n.locale] }} <span>{{ $t('to_the_location') }}</span></a>
-          <GmapMap
-            :center="{lat:Number(building.map_lat), lng:Number(building.map_lng)}"
-            :zoom="16"
-          >
-            <GmapMarker
-              :position="{lat:Number(building.map_lat), lng:Number(building.map_lng)}"
-              :icon="icon"
-            />
-          </GmapMap>
-          <div class="btn-box"><a :href="building.google_map" target='_blank' class="btn">{{ $t('see_map') }}</a></div>
+        <div class="gallery-building" id="gallery" v-if="building">
+          <swiper ref="swiper" :options="swiperOption">
+            <swiper-slide v-for="(image, key) in building.gallery" :key="key">
+              <img :src="image" alt=""><div class="progress-bar"></div>
+            </swiper-slide>
+          </swiper>
+        </div>
+        <div class="location" id="location">
+          <div class="caption animate-box">
+            <div class="title-box">
+              <h2 class="title" v-html="$t('about_location')"></h2>
+            </div>
+          </div>
+          <div class="box-row">
+            <div class="box" v-if="building.facilities" v-for="facility in building.facilities.data" :key="facility.id">
+              <div class="info">
+                <div class="icon"><img :src="facility.image" alt=""></div>
+                <div class="text">{{facility['title_' + $i18n.locale]}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="map">
+          <div class="img-box">
+            <a :href="building.google_map" target='_blank' class="btn">{{ building['annonce_' + $i18n.locale] }} <span>{{ $t('to_the_location') }}</span></a>
+            <GmapMap
+              :center="{lat:Number(building.map_lat), lng:Number(building.map_lng)}"
+              :zoom="16"
+            >
+              <GmapMarker
+                :position="{lat:Number(building.map_lat), lng:Number(building.map_lng)}"
+                :icon="icon"
+              />
+            </GmapMap>
+            <div class="btn-box"><a :href="building.google_map" target='_blank' class="btn">{{ $t('see_map') }}</a></div>
+          </div>
+        </div>
+        <div class="news-inner" id="news">
+          <div class="title">{{ $t('news') }}</div>
+          <div class="news-swiper">
+            <news-listing-swiper :articles="articles" />
+          </div>
+        </div>
+        <div class="next-building" v-if="building.next_building">
+          <div class="text">{{ $t('next_building') }}</div>
+          <h2 class="title animate-box">
+            <router-link :to="'/' + lang + '/' + building.next_building.id + '/' + building.next_building['slug_' + $i18n.locale]">{{ building.next_building['title_' + $i18n.locale] }}</router-link>
+          </h2>
+          <div class="img-box">
+            <router-link :to="'/' + lang + '/' + building.next_building.id + '/' + building.next_building['slug_' + $i18n.locale]">
+              <img :src="building.next_building.image" alt="">
+            </router-link>
+          </div>
         </div>
       </div>
-      <div class="news-inner" id="news">
-        <div class="title">{{ $t('news') }}</div>
-        <div class="news-swiper">
-          <news-listing-swiper :articles="articles" />
-        </div>
-      </div>
-      <div class="next-building" v-if="building.next_building">
-        <div class="text">{{ $t('next_building') }}</div>
-        <h2 class="title animate-box">
-          <router-link :to="'/' + lang + '/' + building.next_building.id + '/' + building.next_building['slug_' + $i18n.locale]">{{ building.next_building['title_' + $i18n.locale] }}</router-link>
-        </h2>
-        <div class="img-box">
-          <router-link :to="'/' + lang + '/' + building.next_building.id + '/' + building.next_building['slug_' + $i18n.locale]">
-            <img :src="building.next_building.image" alt="">
-          </router-link>
-        </div>
-      </div>
+      <footer-component />
     </div>
-    <footer-component />
   </div>
 </template>
 
@@ -116,17 +121,19 @@ import { mapState } from 'vuex'
 import FooterComponent from '@/components/layout/FooterComponent.vue'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import NewsListingSwiper from '@/components/news/NewsListingSwiper'
+import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 export default {
   name: 'building-inner-component',
   components: {
     'footer-component': FooterComponent,
     'navinner-component': NavinnerComponent,
-    'news-listing-swiper': NewsListingSwiper
+    'news-listing-swiper': NewsListingSwiper,
+    'preloader-component': PreloaderComponent
   },
   data () {
     return {
       icon: require('@/assets/images/pin-build.svg'),
-      title: 'Комплекс Бижу',
+      loading: true,
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 15,
@@ -162,13 +169,14 @@ export default {
       }
     })
   },
-  created () {
-    // this.$store.cache.dispatch('fetchBuildingById', this.$route.params.id)
+  beforeDestroy () {
+    this.loading = true
+    this.$refs.swiper.swiper.destroy()
   },
-  watch: {
-    '$route.params.id' (id) {
-      // this.$store.cache.dispatch('fetchBuildingById', id)
-    }
+  created () {
+    this.$store.cache.dispatch('fetchBuilding', this.$route.params.id).then(() => {
+      this.loading = false
+    })
   },
   computed: {
     lang () {

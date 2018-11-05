@@ -1,6 +1,9 @@
 <template>
-<div>
-  <div class="apartment-inner" v-if="floors.length && apartment">
+<div class="apartment-inner">
+  <transition name="fade" v-if="loading && !apartment">
+    <preloader-component />
+  </transition>
+  <div v-else>
     <mq-layout mq="md+" class="left-sidebar">
       <div class="top">
         <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
@@ -122,12 +125,14 @@
 <script>
 import { mapState } from 'vuex'
 import ContactForm from '@/components/contactForm/ContactForm'
+import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 export default {
   name: 'apartment',
-  components: { ContactForm },
+  components: { ContactForm, PreloaderComponent },
   data () {
     let $this = this
     return {
+      loading: true,
       contactFormActive: false,
       swiperOption: {
         effect: 'fade',
@@ -170,7 +175,15 @@ export default {
   },
   created () {
     // eslint-disable-next-line
-    this.$store.cache.dispatch('fetchBuildingApartments', this.$route.params.id)
+    this.$store.cache.dispatch('fetchBuildingEntrances', this.$route.params.id).then(() => {
+      // eslint-disable-next-line
+      this.$store.cache.dispatch('fetchBuildingFloors', this.$route.params.id).then(() => {
+        // eslint-disable-next-line
+        this.$store.cache.dispatch('fetchBuildingApartments', this.$route.params.id).then(() => {
+          this.loading = false
+        })
+      })
+    })
   },
   computed: {
     lang () {
@@ -371,6 +384,8 @@ export default {
       .img-box {
         padding: 70px 0 20px 0;
         background-color: #f8f8f8;
+        max-width: 700px;
+        margin: 0 auto;
         img {
           cursor: pointer;
         }

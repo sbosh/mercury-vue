@@ -14,7 +14,10 @@
         <h3>{{ currentBuildingsPage['title_' + $i18n.locale] }}</h3>
         <div class="buildings-titles">
           <div class="building-title" v-for="(building, index) in current" :key="building.id" @mouseenter="changeSwpier(index)">
-            <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'">
+            <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" v-if="building.use_svg">
+              {{ building['title_' + $i18n.locale] }}
+            </router-link>
+            <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" v-else>
               {{ building['title_' + $i18n.locale] }}
             </router-link>
           </div>

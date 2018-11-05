@@ -1,74 +1,82 @@
 <template>
-  <div class="floor-plan" v-if="floors">
-  <mq-layout mq="md+" class="left-sidebar">
-      <div class="top">
-        <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
-        <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="back-btn">{{ $t('back_building') }}</router-link>
-      </div>
-      <div class="available-from">
-        <div class="text" v-html="$t('available_apartments')"></div>
-        <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalApartments }}</span> /
-        <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span>
-        <div class="input-group">
-          <label for="">{{ $t('selected_block') }}:</label>
-          <select name="" id="" @change="changeRout">
-            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id" :selected="entrance['slug_' + $i18n.locale] === $route.params.slug">
-            {{ entrance['title_' + $i18n.locale] }}
-            </option>
-          </select>
+  <div class="floor-plan">
+    <transition name="fade" v-if="loading && !floors.length">
+      <preloader-component />
+    </transition>
+    <div v-else>
+      <mq-layout mq="md+" class="left-sidebar">
+        <div class="top">
+          <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
+          <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="back-btn">{{ $t('back_building') }}</router-link>
         </div>
-      </div>
-      <div class="compass" v-if="floors[Number($route.params.floorId)-1]"><img src="@/assets/images/compass.svg" v-if="floors" :style="{ transform: 'rotate(-' + floors[Number($route.params.floorId)-1].degrees +'deg)' }" alt=""></div>
-    </mq-layout>
-    <mq-layout mq="sm" class="floor-info-mobile">
-      <div class="available-from">
-        <div class="input-group">
-          <label for="">{{ $t('selected_block') }}:</label>
-          <select name="" id="" @change="changeRout">
-            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id" :selected="entrance['slug_' + $i18n.locale] === $route.params.slug">
-            {{ entrance['title_' + $i18n.locale] }}
-            </option>
-          </select>
-        </div>
-        <div class="right"><div class="text" v-html="$t('available_apartments')"></div>
+        <div class="available-from">
+          <div class="text" v-html="$t('available_apartments')"></div>
           <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalApartments }}</span> /
           <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span>
-        </div>
-      </div>
-    </mq-layout>
-    <div class="floor-info">
-      <swiper ref="mySwiper" :options="swiperOptions()">
-        <swiper-slide v-for="floor in floors" :key="floor.id">
-          <div class="img-box">
-            <img :src="floor.image" alt="">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
-              <g
-                v-for="apartment in floor.apartments.data"
-                :key="apartment.id"
-                @click="apartmentRoute(apartment['slug_' + $i18n.locale])"
-                v-tooltip="{ content: tooltipContent(apartment), placement: 'top', offset: '0' }">
-                <path :d="apartment.coords" fill="none"></path>
-              </g>
-            </svg>
+          <div class="input-group">
+            <label for="">{{ $t('selected_block') }}:</label>
+            <select name="" id="" @change="changeRout">
+              <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id" :selected="entrance['slug_' + $i18n.locale] === $route.params.slug">
+              {{ entrance['title_' + $i18n.locale] }}
+              </option>
+            </select>
           </div>
-        </swiper-slide>
-      </swiper>
-      <div class="swiper-pagination"></div>
+        </div>
+        <div class="compass" v-if="floors[Number($route.params.floorId)-1]"><img src="@/assets/images/compass.svg" v-if="floors" :style="{ transform: 'rotate(-' + floors[Number($route.params.floorId)-1].degrees +'deg)' }" alt=""></div>
+      </mq-layout>
+      <mq-layout mq="sm" class="floor-info-mobile">
+        <div class="available-from">
+          <div class="input-group">
+            <label for="">{{ $t('selected_block') }}:</label>
+            <select name="" id="" @change="changeRout">
+              <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id" :selected="entrance['slug_' + $i18n.locale] === $route.params.slug">
+              {{ entrance['title_' + $i18n.locale] }}
+              </option>
+            </select>
+          </div>
+          <div class="right"><div class="text" v-html="$t('available_apartments')"></div>
+            <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalApartments }}</span> /
+            <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span>
+          </div>
+        </div>
+      </mq-layout>
+      <div class="floor-info">
+        <swiper ref="mySwiper" :options="swiperOptions()">
+          <swiper-slide v-for="floor in floors" :key="floor.id">
+            <div class="img-box">
+              <img :src="floor.image" alt="">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+                <g
+                  v-for="apartment in floor.apartments.data"
+                  :key="apartment.id"
+                  @click="apartmentRoute(apartment['slug_' + $i18n.locale])"
+                  v-tooltip="{ content: tooltipContent(apartment), placement: 'top', offset: '0' }">
+                  <path :d="apartment.coords" fill="none"></path>
+                </g>
+              </svg>
+            </div>
+          </swiper-slide>
+        </swiper>
+        <div class="swiper-pagination"></div>
+      </div>
+      <mq-layout mq="sm" class="buttons-mobile">
+        <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="btn">{{ $t('back_building') }}</router-link>
+      </mq-layout>
     </div>
-    <mq-layout mq="sm" class="buttons-mobile">
-      <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="btn">{{ $t('back_building') }}</router-link>
-    </mq-layout>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 export default {
   name: 'building-inner-floor',
+  components: { PreloaderComponent },
   data () {
     return {
       swiperHasRef: false,
-      degrees: null
+      degrees: null,
+      loading: true
     }
   },
   computed: {
@@ -88,7 +96,15 @@ export default {
   },
   created () {
     // eslint-disable-next-line
-    this.$store.cache.dispatch('fetchBuildingEntrances', this.$route.params.id)
+    this.$store.cache.dispatch('fetchBuildingEntrances', this.$route.params.id).then(() => {
+      // eslint-disable-next-line
+      this.$store.cache.dispatch('fetchBuildingFloors', this.$route.params.id).then(() => {
+        // eslint-disable-next-line
+        this.$store.cache.dispatch('fetchBuildingApartments', this.$route.params.id).then(() => {
+          this.loading = false
+        })
+      })
+    })
   },
   beforeRouteUpdate (to, from, next) {
     next({

@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <transition name="fade" v-if="loading">
+    <transition name="fade" v-if="loading && !building">
       <preloader-component />
     </transition>
     <div v-else>

@@ -1,32 +1,37 @@
 <template>
   <div class="main-content">
-    <mq-layout mq="m+" class="mq-m future-current">
-      <navinner-component :navTitle="this.futureBuildingsPage['title_' + this.$i18n.locale]" />
-      <div class="buildings building-sort">
-        <swiper :options="swiperOptions">
-          <swiper-slide v-for="building in future" :key="building.id">
-            <div class="building-item">
-              <div class="img-box">
-                <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">
-                  <img :src="building.thumb" alt="">
-                </router-link>
-              </div>
-              <div class="caption">
-                <div class="title-box">
-                  <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
-                  <div class="location-info">{{ building['annonce_' + $i18n.locale] }}</div>
-                  <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">{{ $t('see') }}</router-link></div>
+    <transition name="fade" v-if="loading && !futureBuildingsPage">
+      <preloader-component />
+    </transition>
+    <div v-else>
+      <mq-layout mq="m+" class="mq-m future-current" v-if="futureBuildingsPage">
+        <navinner-component :navTitle="this.futureBuildingsPage['title_' + this.$i18n.locale]" />
+        <div class="buildings building-sort">
+          <swiper :options="swiperOptions">
+            <swiper-slide v-for="building in future" :key="building.id">
+              <div class="building-item">
+                <div class="img-box">
+                  <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">
+                    <img :src="building.thumb" alt="">
+                  </router-link>
+                </div>
+                <div class="caption">
+                  <div class="title-box">
+                    <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
+                    <div class="location-info">{{ building['annonce_' + $i18n.locale] }}</div>
+                    <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">{{ $t('see') }}</router-link></div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </swiper-slide>
-          <div class="dots-paggination"></div>
-        </swiper>
-      </div>
-    </mq-layout>
-    <mq-layout mq="sm">
-      <futurebuildings-mobile :pageTitle="this.futureBuildingsPage['title_' + this.$i18n.locale]" />
-    </mq-layout>
+            </swiper-slide>
+            <div class="dots-paggination"></div>
+          </swiper>
+        </div>
+      </mq-layout>
+      <mq-layout mq="sm" v-if="futureBuildingsPage">
+        <futurebuildings-mobile :pageTitle="this.futureBuildingsPage['title_' + this.$i18n.locale]" />
+      </mq-layout>
+    </div>
   </div>
 </template>
 
@@ -34,11 +39,13 @@
 import { mapState } from 'vuex'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import FutureBuildingsMobile from '@/components/mobile/FutureBuildingsMobile'
+import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 export default {
   name: 'future-buildings',
   components: {
     'navinner-component': NavinnerComponent,
-    'futurebuildings-mobile': FutureBuildingsMobile
+    'futurebuildings-mobile': FutureBuildingsMobile,
+    'preloader-component': PreloaderComponent
   },
   metaInfo () {
     return {
@@ -47,7 +54,7 @@ export default {
   },
   data () {
     return {
-      title: 'future buildings',
+      loading: true,
       swiperOptions: {
         slidesPerView: 'auto',
         spaceBetween: 0,
@@ -66,7 +73,9 @@ export default {
     }
   },
   created () {
-    this.$store.cache.dispatch('fetchFuturedBuildings')
+    this.$store.cache.dispatch('fetchFuturedBuildings').then(() => {
+      this.loading = false
+    })
   },
   computed: {
     lang () {

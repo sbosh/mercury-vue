@@ -1,8 +1,13 @@
 <template>
-  <div class="main-content" v-if="currentBuildingsPage && current">
-    <nav-component />
-    <mq-layout mq="md+"><buildings-carousel :pageTitle="this.currentBuildingsPage['title_' + this.$i18n.locale]" /></mq-layout>
-    <mq-layout mq="sm"><buildings-mobile :pageTitle="this.currentBuildingsPage['title_' + this.$i18n.locale]" /></mq-layout>
+  <div class="main-content">
+    <transition name="fade" v-if="loading && !currentBuildingsPage">
+      <preloader-component />
+    </transition>
+    <div v-else>
+      <nav-component />
+      <mq-layout mq="md+"><buildings-carousel :pageTitle="this.currentBuildingsPage['title_' + this.$i18n.locale]" /></mq-layout>
+      <mq-layout mq="sm"><buildings-mobile :pageTitle="this.currentBuildingsPage['title_' + this.$i18n.locale]" /></mq-layout>
+    </div>
   </div>
 </template>
 
@@ -11,20 +16,25 @@ import { mapState } from 'vuex'
 import NavComponent from '@/components/layout/NavComponent'
 import BuildingsCarousel from '@/components/buildings/BuildingsCarousel'
 import BuildingsMobile from '@/components/mobile/BuildingsMobile.vue'
+import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 export default {
   name: 'current-buildings',
   components: {
     'nav-component': NavComponent,
     'buildings-carousel': BuildingsCarousel,
-    'buildings-mobile': BuildingsMobile
+    'buildings-mobile': BuildingsMobile,
+    'preloader-component': PreloaderComponent
   },
   data: function () {
     return {
-      homeRoute: true
+      homeRoute: true,
+      loading: true
     }
   },
   created () {
-    this.$store.cache.dispatch('fetchCurrentBuildings')
+    this.$store.cache.dispatch('fetchCurrentBuildings').then(() => {
+      this.loading = false
+    })
   },
   metaInfo () {
     return {
