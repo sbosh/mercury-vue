@@ -47,11 +47,12 @@
               <img :src="floor.image" alt="">
               <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
                 <g
+                  v-bind:class="{sold: apartment.status !== 1}"
                   v-for="apartment in floor.apartments.data"
                   :key="apartment.id"
                   @click="apartmentRoute(apartment['slug_' + $i18n.locale])"
                   v-tooltip="{ content: tooltipContent(apartment), placement: 'top', offset: '0' }">
-                  <path :d="apartment.coords" fill="none"></path>
+                  <path :d="apartment.coords" fill="red"></path>
                 </g>
               </svg>
             </div>
@@ -271,6 +272,14 @@ export default {
   .reserved {
     color: #fa6a02;
   }
+}
+.center-tooltip {
+  width: auto;
+  min-width: inherit;
+  padding: 5px;
+  font-size: 10px;
+  text-transform: uppercase;
+  text-align: center;
 }
 .floor-info {
   height: 100vh;
