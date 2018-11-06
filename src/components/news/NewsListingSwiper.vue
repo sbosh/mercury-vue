@@ -1,6 +1,6 @@
 <template>
   <div class="news-swiper">
-    <swiper :options="swiperOption">
+    <swiper ref="newsListingSwiper" :options="swiperOption">
       <swiper-slide v-for="article in articles" :key="article.id" >
         <news-listing-item
           :id="article.id"
@@ -30,6 +30,7 @@ export default {
         slidesPerView: 2,
         spaceBetween: 100,
         watchSlidesVisibility: true,
+        init: false,
         pagination: {
           el: '.swiper-pagination',
           clickable: true
@@ -44,6 +45,10 @@ export default {
         }
       }
     }
+  },
+  mounted () {
+    this.$refs.newsListingSwiper.swiper.init()
+    this.$refs.newsListingSwiper.swiper.update()
   }
 }
 </script>
