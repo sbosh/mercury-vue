@@ -43,8 +43,8 @@
               </div>
             </div>
           </div>
-          <ul class="lng">
-            <li class="imigix">Created by Imigix</li>
+          <ul class="created-by">
+            <li class="imigix">Created by <a href="">Imigix</a></li>
           </ul>
         </div>
       </div>
@@ -252,7 +252,6 @@ export default {
         flex-direction: row;
         padding: 110px 30px 50px 30px;
       }
-
       .col {
         opacity: 0;
         padding: 0 40px 40px;
@@ -272,7 +271,6 @@ export default {
           border: none;
         }
       }
-
       .tel {
         .tel-box {
           padding: 0;
@@ -347,6 +345,24 @@ export default {
                 }
               }
             }
+          }
+        }
+      }
+      ul.created-by {
+        margin: auto auto 20px 20px;
+        li {
+          color: #fff;
+          font-size: 12px;
+          font-weight: 600;
+          padding: 5px;
+          display: block;
+          text-decoration: none;
+          a {
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px;
+            text-decoration: none;
           }
         }
       }
