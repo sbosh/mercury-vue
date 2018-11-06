@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <transition name="fade" v-if="loading && !building">
+    <transition name="fade" v-if="loading">
       <preloader-component />
     </transition>
     <div v-else>
@@ -139,6 +139,7 @@ export default {
         spaceBetween: 15,
         speed: 1000,
         loop: true,
+        init: false,
         slideToClickedSlide: true,
         autoplay: {
           delay: 7000,
@@ -156,6 +157,7 @@ export default {
     }
   },
   mounted () {
+    this.loading = false
     setTimeout(() => {
       this.$el.classList.add('active')
     }, 2000)
@@ -171,11 +173,13 @@ export default {
   },
   beforeDestroy () {
     this.loading = true
-    this.$refs.swiper.swiper.destroy()
   },
   created () {
     this.$store.cache.dispatch('fetchBuilding', this.$route.params.id).then(() => {
       this.loading = false
+
+      this.$refs.swiper.swiper.init()
+      this.$refs.swiper.swiper.update()
     })
   },
   computed: {
