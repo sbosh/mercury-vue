@@ -315,6 +315,12 @@ export default {
     font-weight: 600;
     margin-bottom: 80px;
   }
+  .news-swiper .swiper-pagination .swiper-pagination-bullet:before {
+    background: #9e9e9e;
+  }
+  .news-swiper .swiper-pagination .swiper-pagination-bullet-active:before {
+    background: #fff;
+  }
   @media screen and(max-width: 767px) {
     padding: 25px;
     .title {

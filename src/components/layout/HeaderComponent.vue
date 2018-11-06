@@ -43,10 +43,8 @@
               </div>
             </div>
           </div>
-          <ul class="lng">
-            <li v-if="lang === 'bg'" ><a href="" @click="changeLang('en', $event)">en</a></li>
-            <li v-else><a href="" @click="changeLang('bg', $event)">bg</a></li>
-            <li class="imigix">Created by Imigix</li>
+          <ul class="created-by">
+            <li class="imigix">Created by <a href="">Imigix</a></li>
           </ul>
         </div>
       </div>
@@ -70,6 +68,10 @@
         <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
 <!--         <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
         <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li> -->
+      </ul>
+      <ul class="lng">
+        <li v-if="lang === 'bg'" ><a href="" @click="changeLang('en', $event)">en</a></li>
+        <li v-else><a href="" @click="changeLang('bg', $event)">bg</a></li>
       </ul>
     </nav>
   </header>
@@ -250,7 +252,6 @@ export default {
         flex-direction: row;
         padding: 110px 30px 50px 30px;
       }
-
       .col {
         opacity: 0;
         padding: 0 40px 40px;
@@ -270,7 +271,6 @@ export default {
           border: none;
         }
       }
-
       .tel {
         .tel-box {
           padding: 0;
@@ -302,7 +302,6 @@ export default {
           }
         }
       }
-
       .follow-us {
         margin: 30px 0 0;
         .text {
@@ -349,29 +348,21 @@ export default {
           }
         }
       }
-
-      .lng {
-        margin: auto 0 0 0;
-        padding: 0 40px 40px 70px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      ul.created-by {
+        margin: auto auto 20px 20px;
         li {
-          margin: 0;
-          padding: 0;
+          color: #fff;
+          font-size: 12px;
+          font-weight: 600;
+          padding: 5px;
+          display: block;
+          text-decoration: none;
           a {
             color: #fff;
             font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-bottom: 2px solid #fa6a02;
+            font-weight: 600;
             padding: 5px;
-          }
-          &.imigix {
-            margin-left: auto;
-            color: #fff;
-            font-size: 12px;
-            font-weight: 700;
+            text-decoration: none;
           }
         }
       }
@@ -543,6 +534,43 @@ export default {
       a {
         display: block;
         padding: 17px;
+      }
+    }
+  }
+  .lng {
+    margin: 0 auto;
+    padding: 0 0 40px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    &:before {
+      content: '';
+      width: 1px;
+      height: 50px;
+      background: #8d8d8d;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+    li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      a {
+        color: #000;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-bottom: 2px solid #fa6a02;
+        padding: 5px;
+        display: block;
+        text-decoration: none;
+      }
+      &.imigix {
+        margin-left: auto;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
       }
     }
   }

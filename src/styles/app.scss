@@ -212,6 +212,7 @@ h1,h2,h3,h4,h5,h6 {
 .building-listing-mobile {
   position: relative;
   padding: 90px 25px 25px 25px;
+  counter-reset: titles;
   .title {
     color: #fff;
     font-family: "Fira Sans";
@@ -257,6 +258,20 @@ h1,h2,h3,h4,h5,h6 {
           font-weight: 700;
           text-transform: uppercase;
           margin-right: 10px;
+        }
+      }
+      .title a {
+        &:before {
+          counter-increment: titles;
+          content: "0" counters(titles,". 0");
+          display: inline-block;
+          color: #fa6a02;
+          font-family: Montserrat;
+          font-size: 10px;
+          font-weight: 700;
+          text-transform: uppercase;
+          float: left;
+          margin: 3px 10px 0;
         }
       }
     }

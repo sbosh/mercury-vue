@@ -863,7 +863,7 @@ canvas {
         bottom: inherit;
         background-size: cover;
         background-position: center center;
-        height: 65vh;
+        height: 58vh;
         overflow: hidden;
       }
     }
@@ -927,7 +927,7 @@ canvas {
         background: #fa6a02;
         color: #fff;
         text-decoration: none;
-        padding: 10px 15px;
+        padding: 10px 10px;
         text-align: center;
         font-weight: 600;
         font-size: 14px;

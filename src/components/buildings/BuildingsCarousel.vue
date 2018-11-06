@@ -1,46 +1,54 @@
 <template>
-  <div class="buildings-carousel" v-if="current">
-    <swiper ref="swiper" :options="this.getSwiperOptions(this.home)">
-      <swiper-slide v-for="building in current" :key="building.id">
-        <div class="bg" :style="{ 'background-image': 'url(' + building.image + ')' }">
-          <div class="caption" v-if="!home">
-            <div class="title-box">
-              <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
+  <div class="buildings-carousel">
+    <transition name="fade" v-if="loading && current">
+      <preloader-component />
+    </transition>
+    <div v-else>
+      <swiper ref="swiper" :options="this.getSwiperOptions(this.home)">
+        <swiper-slide v-for="building in current" :key="building.id">
+          <div class="bg" :style="{ 'background-image': 'url(' + building.image + ')' }">
+            <div class="caption" v-if="!home">
+              <div class="title-box">
+                <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
+              </div>
             </div>
           </div>
-        </div>
-      </swiper-slide>
-      <div class="buildings-list" v-if="!home">
-        <h3>{{ currentBuildingsPage['title_' + $i18n.locale] }}</h3>
-        <div class="buildings-titles">
-          <div class="building-title" v-for="(building, index) in current" :key="building.id" @mouseenter="changeSwpier(index)">
-            <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" v-if="building.use_svg">
-              {{ building['title_' + $i18n.locale] }}
-            </router-link>
-            <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" v-else>
-              {{ building['title_' + $i18n.locale] }}
-            </router-link>
+        </swiper-slide>
+        <div class="buildings-list" v-if="!home">
+          <h3>{{ currentBuildingsPage['title_' + $i18n.locale] }}</h3>
+          <div class="buildings-titles">
+            <div class="building-title" v-for="(building, index) in current" :key="building.id" @mouseenter="changeSwpier(index)">
+              <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" v-if="building.use_svg">
+                {{ building['title_' + $i18n.locale] }}
+              </router-link>
+              <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" v-else>
+                {{ building['title_' + $i18n.locale] }}
+              </router-link>
+            </div>
+          </div>
+          <div class="buttons">
+            <router-link :to="'/' + lang + '/future-buildings'">{{ $t('future_projects') }}</router-link>
+            <router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link>
           </div>
         </div>
-        <div class="buttons">
-          <router-link :to="'/' + lang + '/future-buildings'">{{ $t('future_projects') }}</router-link>
-          <router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link>
-        </div>
-      </div>
-      <div class="scroll-icon" v-if="!home"><span></span></div>
-    </swiper>
+        <div class="scroll-icon" v-if="!home"><span></span></div>
+      </swiper>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 export default {
   name: 'buildings-carousel',
   props: ['home', 'pageTitle'],
+  components: { PreloaderComponent },
   data () {
     return {
       buildingsRoute: null,
-      active: false
+      active: false,
+      loading: true
     }
   },
   methods: {
@@ -69,7 +77,10 @@ export default {
     }
   },
   created () {
-    this.$store.cache.dispatch('fetchCurrentBuildings')
+    this.loading = true
+    this.$store.cache.dispatch('fetchCurrentBuildings').then(() => {
+      this.loading = false
+    })
   },
   computed: {
     lang () {

@@ -385,6 +385,7 @@ export default {
     padding: 0 25px 25px;
     display: block;
     height: auto;
+    min-height: 50vh;
     .img-box {
       padding-right: 0;
       margin-bottom: 30px;
