@@ -34,7 +34,7 @@
         <div class="related-news">
           <h3>{{ $t('related_news') }}</h3>
           <div class="news-swiper">
-            <news-listing-swiper :articles="articles" />
+            <news-listing-swiper :articles="articles.filter(a => a.id !== article.id)" />
           </div>
         </div>
       </div>
