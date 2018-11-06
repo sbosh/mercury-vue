@@ -1,15 +1,20 @@
 <template>
   <div class="building-listing-mobile">
     <h1 class="title">{{pageTitle}}</h1>
-    <div class="building-box" v-for="building in future" :key="building.id">
-      <div class="img-box">
-        <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">
-          <img :src="building.thumb" alt="">
-        </router-link>
+    <div v-if="futured.length">
+      <div class="building-box" v-for="building in futured" :key="building.id">
+        <div class="img-box">
+          <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">
+            <img :src="building.thumb" alt="">
+          </router-link>
+        </div>
+        <div class="info">
+          <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
+        </div>
       </div>
-      <div class="info">
-        <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
-      </div>
+    </div>
+    <div v-else>
+      <h2>{{ $t('comming_soon_buildings') }}</h2>
     </div>
     <div class="outher-buildings">
       <div class="buttons">
@@ -35,7 +40,7 @@ export default {
       return this.$i18n.locale
     },
     ...mapState({
-      future: state => state.buildings.futured
+      futured: state => state.buildings.futured
     })
   }
 }
