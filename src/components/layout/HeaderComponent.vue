@@ -159,6 +159,13 @@ export default {
   }
   nav.home-header {
     border-left: 1px solid rgba(#979797, .37);
+    .lng {
+      li {
+        a {
+          color: #fff;
+        }
+      }
+    }
   }
   nav:not(.home-header) {
     background: #fff;

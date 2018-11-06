@@ -277,7 +277,34 @@ h1,h2,h3,h4,h5,h6 {
     }
   }
 }
-
+.comming-soon-annonunce {
+  min-height: 100vh;
+  position:relative;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  .caption {
+    max-width: 70vw;
+    z-index: 999;
+    .description {
+      padding-left: 195px;
+      p {
+        color: #fff;
+      }
+    }
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #232323;
+    z-index: 0;
+  }
+}
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }

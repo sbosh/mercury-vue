@@ -6,26 +6,38 @@
     <div v-else>
       <mq-layout mq="m+" class="mq-m future-current" v-if="finishedBuildingsPage">
         <navinner-component :navTitle="this.finishedBuildingsPage['title_' + this.$i18n.locale]" />
-        <div class="buildings building-sort">
-          <swiper :options="swiperOptions">
-            <swiper-slide v-for="building in finished" :key="building.id">
-              <div class="building-item">
-                <div class="img-box">
-                  <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">
-                    <img :src="building.thumb" alt="">
-                  </router-link>
-                </div>
-                <div class="caption">
-                  <div class="title-box">
-                    <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
-                    <div class="location-info">{{ building['annonce_' + $i18n.locale] }}</div>
-                    <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">{{ $t('see') }}</router-link></div>
+        <div v-if="finished.length">
+          <div class="buildings building-sort">
+            <swiper :options="swiperOptions">
+              <swiper-slide v-for="building in finished" :key="building.id">
+                <div class="building-item">
+                  <div class="img-box">
+                    <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">
+                      <img :src="building.thumb" alt="">
+                    </router-link>
+                  </div>
+                  <div class="caption">
+                    <div class="title-box">
+                      <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
+                      <div class="location-info">{{ building['annonce_' + $i18n.locale] }}</div>
+                      <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">{{ $t('see') }}</router-link></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </swiper-slide>
-            <div class="dots-paggination"></div>
-          </swiper>
+              </swiper-slide>
+              <div class="dots-paggination"></div>
+            </swiper>
+          </div>
+        </div>
+        <div v-else class="comming-soon-annonunce">
+          <div class="caption">
+            <div class="title-box">
+              <h2 class="title">{{ $t('comming_soon_buildings') }}</h2>
+            </div>
+            <div class="description">
+              <p>{{ $t('comming_soon_description') }}</p>
+            </div>
+          </div>
         </div>
       </mq-layout>
       <mq-layout mq="sm">

@@ -21,7 +21,7 @@
     <mq-layout mq="md+">
       <div class="news-box" v-for="article in articles" :key="article.id" v-if="article.show_in_homepage == 1">
         <article class="news">
-          <h3><router-link :to="'/' + $i18n.locale + '/article/' + article.id + '/' + article['slug_' + $i18n.locale]"><span class="icon"></span>{{ article['title_' + $i18n.locale] }}<span class="text">{{ $t('read_more') }}</span></router-link></h3>
+          <h3><router-link :to="'/' + $i18n.locale + '/news/' + article.id + '/' + article['slug_' + $i18n.locale]"><span class="icon"></span>{{ article['title_' + $i18n.locale] }}<span class="text">{{ $t('read_more') }}</span></router-link></h3>
         </article>
       </div>
     </mq-layout>

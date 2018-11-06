@@ -29,8 +29,15 @@
             </swiper>
           </div>
         </div>
-        <div v-else>
-          <h2>{{ $t('comming_soon_buildings') }}</h2>
+        <div v-else class="comming-soon-annonunce">
+          <div class="caption">
+            <div class="title-box">
+              <h2 class="title">{{ $t('comming_soon_buildings') }}</h2>
+            </div>
+            <div class="description">
+              <p>{{ $t('comming_soon_description') }}</p>
+            </div>
+          </div>
         </div>
       </mq-layout>
       <mq-layout mq="sm" v-if="futureBuildingsPage">
