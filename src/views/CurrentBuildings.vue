@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <transition name="fade" v-if="loading && !currentBuildingsPage">
+    <transition name="fade" v-if="!currentBuildingsPage">
       <preloader-component />
     </transition>
     <div v-else>
@@ -30,11 +30,6 @@ export default {
       homeRoute: true,
       loading: true
     }
-  },
-  created () {
-    this.$store.cache.dispatch('fetchCurrentBuildings').then(() => {
-      this.loading = false
-    })
   },
   metaInfo () {
     return {

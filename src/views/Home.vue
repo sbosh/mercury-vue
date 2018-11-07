@@ -1,20 +1,15 @@
 <template>
   <div class="main-content">
-    <transition name="fade" v-if="loading">
-      <preloader-component />
-    </transition>
-    <div v-else>
-      <nav-component />
-      <buildings-carousel :home="true" />
-      <div class="home-slider">
-        <div class="line"></div>
-        <div class="caption">
-          <div class="title-box">
-            <h2 class="title" ><router-link :to="'/' + lang + '/current-buildings'" v-html="$t('home_announce')"></router-link></h2>
-          </div>
-          <div class="btn-box">
-            <router-link :to="'/' + lang + '/current-buildings'" class="btn"><div class="btn-overlay"></div>{{ $t('our_projects') }}</router-link>
-          </div>
+    <nav-component />
+    <buildings-carousel :home="true" />
+    <div class="home-slider">
+      <div class="line"></div>
+      <div class="caption">
+        <div class="title-box">
+          <h2 class="title" ><router-link :to="'/' + lang + '/current-buildings'" v-html="$t('home_announce')"></router-link></h2>
+        </div>
+        <div class="btn-box">
+          <router-link :to="'/' + lang + '/current-buildings'" class="btn"><div class="btn-overlay"></div>{{ $t('our_projects') }}</router-link>
         </div>
       </div>
     </div>
@@ -32,12 +27,10 @@
 import { mapState } from 'vuex'
 import NavComponent from '@/components/layout/NavComponent'
 import BuildingsCarousel from '@/components/buildings/BuildingsCarousel'
-import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 export default {
   name: 'home',
   components: {
     'nav-component': NavComponent,
-    'preloader-component': PreloaderComponent,
     'buildings-carousel': BuildingsCarousel
   },
   metaInfo () {
@@ -59,12 +52,6 @@ export default {
     lang () {
       return this.$i18n.locale
     }
-  },
-  created () {
-    this.loading = true
-    this.$store.cache.dispatch('fetchCurrentBuildings').then(() => {
-      this.loading = false
-    })
   }
 }
 </script>

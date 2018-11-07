@@ -1,6 +1,6 @@
 <template>
-  <div class="buildings-carousel">
-    <transition name="fade" v-if="loading && current">
+  <div :class="{loading: !current}" class="buildings-carousel">
+    <transition name="fade" v-if="!current">
       <preloader-component />
     </transition>
     <div v-else>
@@ -75,12 +75,6 @@ export default {
       }
       return options
     }
-  },
-  created () {
-    this.loading = true
-    this.$store.cache.dispatch('fetchCurrentBuildings').then(() => {
-      this.loading = false
-    })
   },
   computed: {
     lang () {
@@ -245,6 +239,9 @@ export default {
   top: 0;
   height: 100vh;
   width: 100%;
+  &.loading {
+    z-index: 99999;
+  }
   .caption {
     max-width: 50%;
     position: relative;

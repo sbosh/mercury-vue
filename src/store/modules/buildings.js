@@ -10,7 +10,7 @@ const state = {
   buildingFloors: [],
   buildingEntrances: [],
   buildingParkings: [],
-  current: [],
+  current: null,
   finished: [],
   futured: []
 }
