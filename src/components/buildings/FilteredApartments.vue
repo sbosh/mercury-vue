@@ -317,6 +317,18 @@ export default {
     }
     .apartments-listing {
       padding: 100px 25px 25px;
+      .apartments-box {
+        max-width: 100%;
+        flex-direction: column;
+        border-bottom: 1px solid #cfcfcf;
+        padding-bottom: 15px;
+        >a, .info {
+          width: 100%;
+        }
+        .info {
+          padding-left: 0;
+        }
+      }
     }
   }
 }

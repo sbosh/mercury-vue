@@ -4,7 +4,7 @@
       <preloader-component />
     </transition>
     <div v-else>
-      <mq-layout mq="md+"><navinner-component navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
+      <mq-layout mq="md+"><navinner-component :buildingSvg="building.use_svg" navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
       <div class="inner-building">
         <div class="inner-building-header">
           <mq-layout mq="sm"><h1 class="page-title">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
@@ -87,8 +87,22 @@
             >
               <GmapMarker
                 :position="{lat:Number(building.map_lat), lng:Number(building.map_lng)}"
+                :clickable="true"
                 :icon="icon"
-              />
+                @click="infoWindow = !infoWindow">
+                <GmapInfoWindow v-if="infoWindow">
+                  <div class="map-tooltip">
+                    <img v-if="building.thumb" :src="building.thumb" alt="">
+                    <h3>{{ building['title_' + $i18n.locale]}}</h3>
+                    <p><div class="text">{{ $t('address') }}:</div>{{ building['annonce_' + $i18n.locale] }}</p>
+                    <div v-if="building.use_svg === 1" class="available-apartments">
+                      <div class="text" v-html="$t('available_apartments') + ':'"></div>
+                      <span><b>{{ building.totalFreeApartments }}</b>/<span>{{ building.totalApartments }}</span></span>
+                    </div>
+                    <div v-if="building.use_svg === 1" class="tel"><div class="text">{{ $t('phone') }}:</div><a :href="$t('tel_href')">{{ $t('tel_phone') }}</a></div>
+                  </div>
+                </GmapInfoWindow>
+              </GmapMarker>
             </GmapMap>
             <div class="btn-box"><a :href="building.google_map" target='_blank' class="btn">{{ $t('see_map') }}</a></div>
           </div>
@@ -134,6 +148,7 @@ export default {
     return {
       icon: require('@/assets/images/pin-build.svg'),
       loading: true,
+      infoWindow: false,
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 15,
@@ -337,6 +352,55 @@ export default {
   align-items: center;
   padding-bottom: 100px;
   padding-left: 10%;
+  .map-tooltip {
+    h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-family: 'Exo 2', sans-serif;
+    }
+    img {
+      max-width: 300px !important;
+      display: block;
+      margin-bottom: 5px;
+    }
+    p {
+      margin: 0 0 10px 0;
+    }
+    .tel {
+      display: flex;
+      align-items: center;
+      .text {
+        display: inline-block;
+        margin: 0 5px 0 0;
+      }
+      a {
+        color: #333;
+      }
+    }
+    .available-apartments {
+      margin-bottom: 10px;
+      span {
+        display: inline-block;
+        font-size: 20px;
+        background: #dfdfdf;
+        color: #333;
+        b {
+          padding: 0 5px;
+        }
+        &:first-of-type {
+          padding: 3px 5px;
+        }
+      }
+    }
+    .text, .tel {
+      font-weight: 600;
+      font-family: Montserrat;
+      margin-bottom: 5px;
+      br {
+        display: none;
+      }
+    }
+  }
   .vue-map-container {
     width: 100%;
     height: 65vh;

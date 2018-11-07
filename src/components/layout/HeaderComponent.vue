@@ -205,7 +205,7 @@ export default {
     left: 0;
     height: 100%;
     transform: translateX(100%);
-    transition: all 1.3s;
+    transition: all 1s;
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
@@ -226,7 +226,7 @@ export default {
       height: 100%;
       width: 85%;
       transform: translateX(50%);
-      transition: all 2.4s;
+      transition: all 1.8s;
       h3, h3 a {
         color: #fff;
         font-size: 24px;
@@ -263,18 +263,17 @@ export default {
         opacity: 0;
         padding: 0 40px 40px;
         border-right: 1px solid rgba(#979797, .37);
-
         &:nth-child(1){
           transform: translateX(250px);
-          transition: all 1.9s;
+          transition: all 1.1s;
         }
         &:nth-child(2){
           transform: translateX(450px);
-          transition: all 2.9s;
+          transition: all 1.6s;
         }
         &:nth-child(3){
           transform: translateX(600px);
-          transition: all 3.9s;
+          transition: all 2.2s;
           border: none;
         }
       }

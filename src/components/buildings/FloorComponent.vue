@@ -52,7 +52,7 @@
                   :key="apartment.id"
                   @click="apartmentRoute(apartment['slug_' + $i18n.locale])"
                   v-tooltip="{ content: tooltipContent(apartment), placement: 'top', offset: '0' }">
-                  <path :d="apartment.coords" fill="red"></path>
+                  <path :d="apartment.coords"></path>
                 </g>
               </svg>
             </div>
@@ -183,6 +183,9 @@ export default {
   font-size: 16px;
   line-height: 20px;
   min-width: 200px;
+  @media screen and(max-width: 1025px) {
+    display: none !important;
+  }
   .icons {
     display: flex;
     align-items: center;
@@ -280,6 +283,9 @@ export default {
   font-size: 10px;
   text-transform: uppercase;
   text-align: center;
+  &:after {
+    display: none;
+  }
 }
 .floor-info {
   height: 100vh;
