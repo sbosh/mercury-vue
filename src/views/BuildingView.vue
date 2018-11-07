@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <transition name="fade" v-if="loading && !building">
+    <transition name="fade" v-if="loading">
       <preloader-component />
     </transition>
     <div v-else>
@@ -156,12 +156,15 @@ export default {
   },
   created () {
     // eslint-disable-next-line
-    this.$store.cache.dispatch('fetchBuildingEntrances', this.$route.params.id).then(() => {
+    this.$store.cache.dispatch('fetchBuilding', this.$route.params.id).then(() => {
       // eslint-disable-next-line
-      this.$store.cache.dispatch('fetchBuildingFloors', this.$route.params.id).then(() => {
+      this.$store.cache.dispatch('fetchBuildingEntrances', this.$route.params.id).then(() => {
         // eslint-disable-next-line
-        this.$store.cache.dispatch('fetchBuildingApartments', this.$route.params.id).then(() => {
-          this.loading = false
+        this.$store.cache.dispatch('fetchBuildingFloors', this.$route.params.id).then(() => {
+          // eslint-disable-next-line
+          this.$store.cache.dispatch('fetchBuildingApartments', this.$route.params.id).then(() => {
+            this.loading = false
+          })
         })
       })
     })
