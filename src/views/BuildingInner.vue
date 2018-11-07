@@ -15,7 +15,7 @@ export default {
   },
   created () {
     // eslint-disable-next-line
-    // this.$store.cache.dispatch('fetchBuilding', this.$route.params.id).then(() => this.loading = false)
+    this.$store.cache.dispatch('fetchBuilding', this.$route.params.id).then(() => this.loading = false)
   },
   computed: {
     ...mapState({
