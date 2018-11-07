@@ -12,7 +12,8 @@ const state = {
   buildingParkings: [],
   current: null,
   finished: [],
-  futured: []
+  futured: [],
+  hasNewBuilding: false
 }
 
 const actions = {
@@ -104,6 +105,9 @@ const mutations = {
   setBuilding (state, building) {
     state.building = building
   },
+  removeBuilding (state) {
+    state.building = null
+  },
   setApartments (state, apartments) {
     state.buildingApartments = apartments
   },
@@ -124,6 +128,9 @@ const mutations = {
   },
   setFinishedBuildings (state, finishedBuildings) {
     state.finished = finishedBuildings
+  },
+  setNewBuilding (state, hasNewBuilding) {
+    state.hasNewBuilding = hasNewBuilding
   }
 }
 

@@ -3,11 +3,11 @@
     <transition name="fade" v-if="loading">
       <preloader-component />
     </transition>
-    <div v-else>
-      <mq-layout mq="md+"><navinner-component :buildingSvg="building.use_svg" navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
+    <div>
+      <mq-layout mq="md+"><navinner-component navigation="buildingNav" v-if="building" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
       <div class="inner-building">
         <div class="inner-building-header">
-          <mq-layout mq="sm"><h1 class="page-title">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
+          <mq-layout mq="sm"><h1 class="page-title" v-if="building">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
           <div class="main-img">
             <router-link v-if="building.status == 1 && building.use_svg == 1" :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'"><img :src="building.image" alt=""></router-link>
             <img v-else :src="building.image" alt="">
@@ -20,7 +20,7 @@
           <div class="title-box">
             <h2 class="title" v-html="$t('about_building')"></h2>
           </div>
-          <div class="text" v-html="building['text_' + $i18n.locale]"></div>
+          <div class="text" v-if="building" v-html="building['text_' + $i18n.locale]"></div>
         </div>
         <div class="about-complex" v-if="building.status === 1 && building.use_svg === 1">
           <div class="box-row">
@@ -92,9 +92,9 @@
                 @click="infoWindow = !infoWindow">
                 <GmapInfoWindow v-if="infoWindow">
                   <div class="map-tooltip">
-                    <img v-if="building.thumb" :src="building.thumb" alt="">
+                    <img v-if="building.thumb" :src="building.thumb" alt="" />
                     <h3>{{ building['title_' + $i18n.locale]}}</h3>
-                    <p><div class="text">{{ $t('address') }}:</div>{{ building['annonce_' + $i18n.locale] }}</p>
+                    <p><span class="text">{{ $t('address') }}:</span>{{ building['annonce_' + $i18n.locale] }}</p>
                     <div v-if="building.use_svg === 1" class="available-apartments">
                       <div class="text" v-html="$t('available_apartments') + ':'"></div>
                       <span><b>{{ building.totalFreeApartments }}</b>/<span>{{ building.totalApartments }}</span></span>
@@ -190,7 +190,7 @@ export default {
     this.loading = true
   },
   created () {
-    this.$store.cache.dispatch('fetchBuilding', this.$route.params.id).then(() => {
+    this.$store.dispatch('fetchBuilding', this.$route.params.id).then(() => {
       this.loading = false
 
       this.$refs.swiper.swiper.init()

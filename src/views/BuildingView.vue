@@ -1,10 +1,10 @@
 <template>
   <div class="main-content">
-    <transition name="fade" v-if="loading && !building">
+    <transition name="fade" v-if="loading">
       <preloader-component />
     </transition>
-    <div v-else>
-      <mq-layout mq="md+" class="building-view-header"><navinner-component :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
+    <div>
+      <mq-layout mq="md+" class="building-view-header"><navinner-component v-if="building" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
       <div class="building-apartments">
         <div class="img-box">
           <div id="building" :style="'background-image: url(' + building.image + ')'"></div>
@@ -156,12 +156,15 @@ export default {
   },
   created () {
     // eslint-disable-next-line
-    this.$store.cache.dispatch('fetchBuildingEntrances', this.$route.params.id).then(() => {
+    this.$store.dispatch('fetchBuilding', this.$route.params.id).then(() => {
       // eslint-disable-next-line
-      this.$store.cache.dispatch('fetchBuildingFloors', this.$route.params.id).then(() => {
+      this.$store.dispatch('fetchBuildingEntrances', this.$route.params.id).then(() => {
         // eslint-disable-next-line
-        this.$store.cache.dispatch('fetchBuildingApartments', this.$route.params.id).then(() => {
-          this.loading = false
+        this.$store.dispatch('fetchBuildingFloors', this.$route.params.id).then(() => {
+          // eslint-disable-next-line
+          this.$store.dispatch('fetchBuildingApartments', this.$route.params.id).then(() => {
+            this.loading = false
+          })
         })
       })
     })
@@ -174,12 +177,13 @@ export default {
     },
     loading (value) {
       if (!value) {
-        this.$nextTick(() => this.initCanvas())
+        this.initCanvas()
       }
     }
   },
   methods: {
     initCanvas () {
+      console.log('init canvas')
       this.game = new Phaser.Game(
         1920 * window.devicePixelRatio,
         1080 * window.devicePixelRatio,
@@ -267,54 +271,9 @@ export default {
           entrc.polygons.push(graphics)
           this.polygons.push(graphics)
         })
+
         this.entrances.push(entrc)
       })
-
-      // entrances.forEach((entrance, eIndex) => {
-      //   let entrc = {
-      //     polygons: []
-      //   }
-
-      //   const floors = this.$store.getters.buildings.getFloorsByEntrance(entrance.id)
-      //   floors.forEach((floor, index) => {
-      //     let coords = floor.coords.split(',')
-      //     let originalCoords = []
-      //     let floorData = {
-      //       index,
-      //       countOfApartments: floor.apartments.data.length,
-      //       entrance: entrance['slug_' + this.$i18n.locale]
-      //     }
-      //     coords.forEach(c => {
-      //       if (c.includes(' ')) {
-      //         let o = c.split(' ').map(c => Number(c)).filter(c => c)
-      //         originalCoords.push(o[0])
-      //         originalCoords.push(o[1])
-      //       } else {
-      //         originalCoords.push(Number(c))
-      //       }
-      //     })
-
-      //     let poly = new Phaser.Polygon(originalCoords)
-      //     let graphics = this.game.add.graphics(0, 0)
-
-      //     graphics.inputEnabled = true
-      //     graphics.input.useHandCursor = true
-
-      //     graphics.events.onInputDown.add(this.onDown(entrance['slug_' + this.$i18n.locale], floor['slug_' + this.$i18n.locale]), this)
-      //     graphics.events.onInputOver.add(this.onOver(eIndex, floorData, floor.id), this)
-      //     graphics.events.onInputOut.add(this.onOut(eIndex, floorData), this)
-
-      //     graphics.alpha = 0
-      //     graphics.beginFill(0xfa6a02)
-      //     graphics.drawPolygon(poly.points)
-      //     graphics.endFill()
-
-      //     entrc.polygons.push(graphics)
-      //     this.polygons.push(graphics)
-      //   })
-      //   this.entrances.push(entrc)
-      // })
-
       this.initTooltip()
     },
     onDown (entranceSlug, florSlug) {
@@ -361,6 +320,9 @@ export default {
       buildingEntrances: state => state.buildings.buildingEntrances,
       buildingApartments: state => state.buildings.buildingApartments
     })
+  },
+  beforeDestroy () {
+    this.game.destroy()
   }
 }
 </script>
