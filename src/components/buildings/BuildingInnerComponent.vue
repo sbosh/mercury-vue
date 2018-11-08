@@ -95,8 +95,8 @@
                     <img v-if="building.thumb" :src="building.thumb" alt="" />
                     <h3>{{ building['title_' + $i18n.locale]}}</h3>
                     <p><span class="text">{{ $t('address') }}:</span>{{ building['annonce_' + $i18n.locale] }}</p>
-                    <div v-if="building.use_svg === 1" class="available-apartments">
-                      <div class="text" v-html="$t('available_apartments') + ':'"></div>
+                    <div v-if="building.use_svg === 1" class="available-apartments">available-apartments
+                      <div class="text" v-html="$t('available_apartments') + ': '"></div>
                       <span><b>{{ building.totalFreeApartments }}</b>/<span>{{ building.totalApartments }}</span></span>
                     </div>
                     <div v-if="building.use_svg === 1" class="tel"><div class="text">{{ $t('phone') }}:</div><a :href="$t('tel_href')">{{ $t('tel_phone') }}</a></div>
@@ -379,6 +379,12 @@ export default {
     }
     .available-apartments {
       margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      .text {
+        margin-right: 5px;
+        margin-bottom: 0;
+      }
       span {
         display: inline-block;
         font-size: 20px;
