@@ -85,8 +85,11 @@ export default {
     }
   },
   created () {
+    this.$store.commit('startFetching')
     this.$store.cache.dispatch('fetchFuturedBuildings').then(() => {
-      this.loading = false
+      this.$store.cache.dispatch('fetchFutureBuildingsPage').then(() => {
+        this.$store.commit('stopFetching')
+      })
     })
   },
   computed: {

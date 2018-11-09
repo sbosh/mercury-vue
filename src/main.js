@@ -51,10 +51,6 @@ new Vue({
     this.$store.cache.dispatch('fetchArticles')
     this.$store.cache.dispatch('fetchHomePage')
     this.$store.cache.dispatch('fetchNewsPage')
-    this.$store.cache.dispatch('fetchCurrentBuildings')
-    this.$store.cache.dispatch('fetchCurrentBuildingsPage')
-    this.$store.cache.dispatch('fetchFutureBuildingsPage')
-    this.$store.cache.dispatch('fetchFinishedBuildingsPage')
     this.$store.cache.dispatch('fetchContactsPage')
     this.$store.cache.dispatch('fetchAboutPage')
   }
