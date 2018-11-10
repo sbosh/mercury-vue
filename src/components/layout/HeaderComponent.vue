@@ -150,7 +150,7 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 99999;
+  z-index: 99998;
   width: 195px;
   transition-delay: 1s;
   transition-duration: 1.2s;

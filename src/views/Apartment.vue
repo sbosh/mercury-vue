@@ -35,7 +35,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
             <g
               :class="{'active': apartment['slug_' + $i18n.locale] === $route.params.apartmentSlug }"
-              v-for="apartment in floors[Number($route.params.floorId)].apartments.data"
+              v-for="apartment in floors[Number($route.params.floorId) -1].apartments.data"
               :key="apartment.id"
               v-tooltip="{ content: tooltipContent(apartment), placement: 'right-end', offset: '30', classes: 'right-tooltip' }"
               @click="apartmentRoute(apartment['slug_' + $i18n.locale])">
