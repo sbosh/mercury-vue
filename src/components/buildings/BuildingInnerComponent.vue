@@ -73,6 +73,7 @@
             </div>
           </div>
         </div>
+<<<<<<< HEAD
       </div>
       <div class="map">
         <div class="img-box">
@@ -94,6 +95,30 @@
                   <div v-if="building.use_svg === 1" class="available-apartments">
                     <div class="text" v-html="$t('available_apartments') + ':'"></div>
                     <span><b>{{ building.totalFreeApartments }}</b>/<span>{{ building.totalApartments }}</span></span>
+=======
+        <div class="map">
+          <div class="img-box">
+            <a :href="building.google_map" target='_blank' class="btn">{{ building['annonce_' + $i18n.locale] }} <span>{{ $t('to_the_location') }}</span></a>
+            <GmapMap
+              :center="{lat:Number(building.map_lat), lng:Number(building.map_lng)}"
+              :zoom="16"
+            >
+              <GmapMarker
+                :position="{lat:Number(building.map_lat), lng:Number(building.map_lng)}"
+                :clickable="true"
+                :icon="icon"
+                @click="infoWindow = !infoWindow">
+                <GmapInfoWindow v-if="infoWindow">
+                  <div class="map-tooltip">
+                    <img v-if="building.thumb" :src="building.thumb" alt="" />
+                    <h3>{{ building['title_' + $i18n.locale]}}</h3>
+                    <p><span class="text">{{ $t('address') }}:</span>{{ building['annonce_' + $i18n.locale] }}</p>
+                    <div v-if="building.use_svg === 1" class="available-apartments">available-apartments
+                      <div class="text" v-html="$t('available_apartments') + ': '"></div>
+                      <span><b>{{ building.totalFreeApartments }}</b>/<span>{{ building.totalApartments }}</span></span>
+                    </div>
+                    <div v-if="building.use_svg === 1" class="tel"><div class="text">{{ $t('phone') }}:</div><a :href="$t('tel_href')">{{ $t('tel_phone') }}</a></div>
+>>>>>>> 88180802f43c44ad69090d57cade460e9ad2dd50
                   </div>
                   <div v-if="building.use_svg === 1" class="tel"><div class="text">{{ $t('phone') }}:</div><a :href="$t('tel_href')">{{ $t('tel_phone') }}</a></div>
                 </div>
@@ -371,6 +396,12 @@ export default {
     }
     .available-apartments {
       margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      .text {
+        margin-right: 5px;
+        margin-bottom: 0;
+      }
       span {
         display: inline-block;
         font-size: 20px;
