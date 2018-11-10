@@ -11,7 +11,8 @@
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/current-buildings'">{{ $t('current_projects') }}</router-link></h3>
               <div class="ul">
                 <li v-for="building in current" :key="building.id">
-                  <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
+                  <router-link v-if="building.status == 1 && building.use_svg == 1" :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'">{{ building['title_' + $i18n.locale] }}</router-link>
+                  <router-link v-else :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
                 </li>
               </div>
               <h3><router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link></h3>
@@ -23,8 +24,8 @@
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/about'">{{ $t('about_company') }}</router-link></h3>
               <ul>
                 <li><router-link :to="'/' + lang + '/about'">{{ $t('about_us') }}</router-link></li>
-                <li><router-link :to="'/' + lang + '/about' + '#services'">{{ $t('services') }}</router-link></li>
-                <li><a href="">{{ $t('history') }}</a></li>
+                <li><router-link :to="'/' + lang + '/about'">{{ $t('services') }}</router-link></li>
+                <li><router-link :to="'/' + lang + '/about'">{{ $t('history') }}</router-link></li>
               </ul>
               <div class="tel">
                 <a :href="$t('tel_href')" class="tel-box">
