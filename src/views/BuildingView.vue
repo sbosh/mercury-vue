@@ -75,7 +75,10 @@
             </div>
           </div>
           <div class="filter-box">
-            <input type="submit" class="filter-btn" @click="isFiltred = !isFiltred" />
+            <input type="submit" class="filter-btn" @click="
+            isFiltred = !isFiltred
+            filterActive = !filterActive
+            show = !show" />
           </div>
         </div>
       </div>

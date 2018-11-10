@@ -39,11 +39,6 @@
             <div class="col">
               <h3><router-link :to="'/' + lang + '/contacts'">{{ $t('contacts') }}</router-link></h3>
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/about'">{{ $t('about_company') }}</router-link></h3>
-              <ul>
-                <li><router-link :to="'/' + lang + '/about'">{{ $t('about_us') }}</router-link></li>
-                <li><a href="">{{ $t('service') }}</a></li>
-                <li><a href="">{{ $t('history') }}</a></li>
-              </ul>
               <div class="follow-us">
                 <div class="text">{{ $t('follow_us') }}</div>
                 <ul>

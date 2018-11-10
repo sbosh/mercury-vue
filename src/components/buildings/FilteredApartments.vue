@@ -326,7 +326,23 @@ export default {
           width: 100%;
         }
         .info {
-          padding-left: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+          >div {
+            flex: 1 0 50%;
+            box-sizing: border-box;
+            margin: 10px 0 !important;
+            &.sqm,&.price {
+              text-align: right;
+            }
+            &.maisonette {
+              flex: 1 0 100%;
+              text-align: center;
+            }
+          }
         }
       }
     }

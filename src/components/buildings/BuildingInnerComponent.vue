@@ -120,6 +120,17 @@
           </router-link>
         </div>
       </div>
+      <div class="next-building" v-else>
+        <div class="text">{{ $t('prev_building') }}</div>
+        <h2 class="title animate-box">
+          <router-link :to="'/' + lang + '/' + building.prev_building.id + '/' + building.prev_building['slug_' + $i18n.locale]">{{ building.prev_building['title_' + $i18n.locale] }}</router-link>
+        </h2>
+        <div class="img-box">
+          <router-link :to="'/' + lang + '/' + building.prev_building.id + '/' + building.prev_building['slug_' + $i18n.locale]">
+            <img :src="building.prev_building.image" alt="">
+          </router-link>
+        </div>
+      </div>
     </div>
     <footer-component />
   </div>
