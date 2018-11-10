@@ -89,7 +89,7 @@ export default {
     }
   },
   beforeRouteLeave (to, from, next) {
-    this.$el.querySelector('.left-sidebar').style.display = 'none'
+    if (this.$el.querySelector('.left-sidebar')) this.$el.querySelector('.left-sidebar').style.display = 'none'
     next()
   },
   beforeRouteEnter (to, from, next) {

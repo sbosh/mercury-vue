@@ -58,7 +58,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$route.name)
     let anchorlinks = document.querySelectorAll('a[href^="#"]')
     for (let item of anchorlinks) {
       item.addEventListener('click', (e) => {

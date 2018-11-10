@@ -1,6 +1,6 @@
 <template>
-  <div class="main-content">
-    <mq-layout mq="md+"><navinner-component navigation="buildingNav" v-if="building" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
+  <div class="main-content" v-if="building">
+    <mq-layout mq="md+"><navinner-component navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
     <div class="inner-building">
       <div class="inner-building-header">
         <mq-layout mq="sm"><h1 class="page-title" v-if="building">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>

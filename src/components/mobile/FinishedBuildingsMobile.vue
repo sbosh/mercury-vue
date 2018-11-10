@@ -1,5 +1,5 @@
 <template>
-  <div class="building-listing-mobile">
+  <div class="building-listing-mobile" v-if="finished">
     <h1 class="title">{{pageTitle}}</h1>
     <div v-if="finished.length">
       <div class="building-box" v-for="building in finished" :key="building.id">
@@ -32,6 +32,14 @@ export default {
     return {
       buildingsRoute: null
     }
+  },
+  created () {
+    this.$store.commit('startFetching')
+    this.$store.cache.dispatch('fetchFinishedBuildings').then(() => {
+      this.$store.cache.dispatch('fetchFinishedBuildingsPage').then(() => {
+        this.$store.commit('stopFetching')
+      })
+    })
   },
   computed: {
     lang () {

@@ -79,6 +79,9 @@ export default {
       current: state => state.buildings.current
     })
   },
+  created () {
+    this.$store.cache.dispatch('fetchCurrentBuildings')
+  },
   mounted () {
     this.convertSVG()
     let $this = this
