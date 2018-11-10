@@ -233,7 +233,7 @@ export default {
           let originalCoords = []
           let floorData = {
             index,
-            countOfApartments: floor.apartments.data.length,
+            countOfApartments: floor.totalFreeApartments,
             entrance: entrance['title_' + this.$i18n.locale].split('').pop()
           }
           coords.forEach(c => {
