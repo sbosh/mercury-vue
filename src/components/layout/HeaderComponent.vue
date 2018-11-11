@@ -153,7 +153,7 @@ export default {
   bottom: 0;
   z-index: 99998;
   width: 195px;
-  transition-delay: 1s;
+  transition-delay: .5s;
   transition-duration: 1.2s;
   transition-property: all;
   .main-nav-logo {
@@ -209,7 +209,7 @@ export default {
     left: 0;
     height: 100%;
     transform: translateX(100%);
-    transition: all 1s;
+    transition: all .7s;
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
@@ -230,7 +230,7 @@ export default {
       height: 100%;
       width: 85%;
       transform: translateX(50%);
-      transition: all 1.8s;
+      transition: all 1.3s;
       h3, h3 a {
         color: #fff;
         font-size: 24px;
@@ -273,11 +273,11 @@ export default {
         }
         &:nth-child(2){
           transform: translateX(450px);
-          transition: all 1.6s;
+          transition: all 1.4s;
         }
         &:nth-child(3){
           transform: translateX(600px);
-          transition: all 2.2s;
+          transition: all 1.6s;
           border: none;
         }
       }
@@ -597,10 +597,10 @@ export default {
           animation: col3-animation .8s forwards;
         }
         &:nth-child(2){
-          animation: col3-animation 1.8s forwards;
+          animation: col3-animation 1.2s forwards;
         }
         &:nth-child(3){
-          animation: col3-animation 2.8s forwards;
+          animation: col3-animation 1.6s forwards;
         }
       }
     }
