@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import store from '../store'
 import { mapState } from 'vuex'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import FinishedBuildingsMobile from '@/components/mobile/FinishedBuildingsMobile'
@@ -76,11 +77,12 @@ export default {
       }
     }
   },
-  created () {
-    this.$store.commit('startFetching')
-    this.$store.cache.dispatch('fetchFinishedBuildings').then(() => {
-      this.$store.cache.dispatch('fetchFinishedBuildingsPage').then(() => {
-        this.$store.commit('stopFetching')
+  beforeRouteEnter (to, from, next) {
+    store.commit('startFetching')
+    store.cache.dispatch('fetchFinishedBuildingsPage').then(() => {
+      store.cache.dispatch('fetchFinishedBuildings').then(() => {
+        next()
+        store.commit('stopFetching')
       })
     })
   },

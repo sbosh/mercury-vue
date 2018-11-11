@@ -161,6 +161,7 @@ export default {
         store.cache.dispatch('fetchBuildingFloors', to.params.id).then(() => {
           // eslint-disable-next-line
           store.cache.dispatch('fetchBuildingApartments', to.params.id).then(() => {
+            store.commit('stopFetching')
             next()
           })
         })
@@ -228,7 +229,6 @@ export default {
         let entrc = {
           polygons: []
         }
-        store.commit('stopFetching')
 
         const floors = this.$store.getters.getFloorsByEntrance(entrance['slug_' + this.$i18n.locale])
         floors.forEach((floor, index) => {
