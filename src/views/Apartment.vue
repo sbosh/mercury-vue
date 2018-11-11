@@ -843,6 +843,13 @@ export default {
       font-weight: 600;
       outline: none;
       padding-left: 20px;
+      box-shadow: none;
+      background-color: #fff;
+      background-image: url(~@/assets/images/down-arrow.svg);
+      background-repeat: no-repeat;
+      background-position: 96% center;
+      background-size: 13px 13px;
+      appearance: none;
     }
     span {
       color: #8d8d8d;
