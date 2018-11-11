@@ -12,7 +12,7 @@
     </div>
     <div class="apartments-listing">
       <div @mouseenter="hoverFilteredApartment(apartment.degrees)" class="apartments-box" v-if="apartment['slug_' + $i18n.locale] !== 'zavedenie'" v-for="apartment in filtrApartments(priceFrom, priceTo, rooms, available)" :key="apartment.id" :class="[{ sold: apartment.status == 3 },{ reserved: apartment.status == 2 }]">
-        <router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor.id + '/' + apartment.entrance['slug_' + $i18n.locale] + '/' + apartment['slug_' + $i18n.locale]">
+        <router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor['slug_' + $i18n.locale] + '/' + apartment.entrance['slug_' + $i18n.locale] + '/' + apartment['slug_' + $i18n.locale]">
           <img :src="apartment.image" alt="">
           <div v-if="apartment.status == 2" class="status reserved">
             {{ $t('reserved') }}
