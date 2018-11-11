@@ -236,7 +236,14 @@ export default {
       }
     }
   }
-  @media screen and(max-width: 1280px) {}
+  @media screen and(max-width: 1280px) {
+    .news-article {
+      padding-right: 20px;
+      .info-box {
+        padding-right: 20px;
+      }
+    }
+  }
   @media screen and(max-width: 768px) {
     padding: 90px 25px 25px;
     &:before {
@@ -261,6 +268,12 @@ export default {
         .date {
           color: #fff;
         }
+      }
+    }
+    .news-article {
+      padding-right: 0;
+      .info-box {
+        padding-right: 0;
       }
     }
   }
