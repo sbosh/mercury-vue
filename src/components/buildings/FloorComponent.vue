@@ -48,8 +48,7 @@
                 :key="apartment.id"
                 @click="apartmentRoute(apartment['slug_' + $i18n.locale])"
                 v-tooltip="{ content: tooltipContent(apartment), placement: 'top', offset: '0' }">
-                <path :d="apartment.coords"
-                  v-tooltip="{ content: apartmentStatus(apartment.status), show: show, placement: 'auto', classes: 'center-tooltip' }"></path>
+                <path :d="apartment.coords"></path>
               </g>
             </svg>
           </div>
@@ -70,7 +69,6 @@ export default {
   name: 'building-inner-floor',
   data () {
     return {
-      show: false,
       swiperHasRef: false,
       degrees: null
     }
@@ -109,11 +107,6 @@ export default {
   },
   mounted () {
     this.initSwiper()
-    let swiperActiveIndex = document.querySelector('.swiper-slide-active')
-    if (swiperActiveIndex) {
-      console.log('ferhunde')
-      this.show = true
-    }
   },
   updated () {
     this.initSwiper()
