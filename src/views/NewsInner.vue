@@ -18,7 +18,7 @@
             <div class="follow-us">
               <div class="tex">{{ $t('share_text') }}:</div>
               <social-sharing
-                :url="this.$route.fullPath"
+                :url="url"
                 :title="article['title_' + $i18n.locale]"
                 :description="article['announce_' + $i18n.locale]"
                 twitter-user="Mercury99"
@@ -57,6 +57,7 @@ export default {
   },
   data () {
     return {
+      url: 'window.location.pathname',
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 15,
@@ -77,6 +78,9 @@ export default {
         }
       }
     }
+  },
+  created () {
+    console.log(window.location.href)
   },
   computed: {
     ...mapState({
