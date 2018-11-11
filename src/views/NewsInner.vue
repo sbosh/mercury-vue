@@ -78,9 +78,6 @@ export default {
       }
     }
   },
-  created () {
-    console.log(this.$route.fullPath)
-  },
   computed: {
     ...mapState({
       articles: state => state.articles.all
@@ -239,6 +236,7 @@ export default {
       }
     }
   }
+  @media screen and(max-width: 1280px) {}
   @media screen and(max-width: 768px) {
     padding: 90px 25px 25px;
     &:before {

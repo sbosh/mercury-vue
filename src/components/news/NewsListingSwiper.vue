@@ -37,10 +37,12 @@ export default {
         },
         breakpoints: {
           1280: {
-            slidesPerView: 2
+            slidesPerView: 2,
+            spaceBetween: 40
           },
-          768: {
-            slidesPerView: 1
+          992: {
+            slidesPerView: 1,
+            spaceBetween: 0
           }
         }
       }
