@@ -697,7 +697,7 @@ canvas {
     z-index: 9999;
     padding-right: 195px;
     transform: translateX(100%);
-    transition: all .6s;
+    transition: all .3s;
     width: 50%;
     &.active {
       transform: translateX(0);
@@ -708,6 +708,19 @@ canvas {
         padding-right: 0;
         width: 100%;
         position: fixed;
+      }
+      .table {
+        .tbody {
+          .tr {
+            flex-wrap: wrap;
+            padding: 10px 0;
+            .td {
+              width: 50%;
+              flex: 1 0 50%;
+              padding: 5px 0;
+            }
+          }
+        }
       }
     }
   }
