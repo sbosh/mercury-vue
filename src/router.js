@@ -94,7 +94,7 @@ let router = new Router({
     },
     {
       path: '/:lang/news/:id/:slug',
-      name: 'article-inner',
+      name: 'news-inner',
       component: NewsInner
     },
     {

@@ -44,12 +44,13 @@
 </template>
 
 <script>
+import store from '../store'
 import { mapState } from 'vuex'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import NewsListingSwiper from '@/components/news/NewsListingSwiper'
 import FooterComponent from '@/components/layout/FooterComponent.vue'
 export default {
-  name: 'article-inner',
+  name: 'news-inner',
   components: {
     'navinner-component': NavinnerComponent,
     'news-listing-swiper': NewsListingSwiper,
@@ -82,13 +83,17 @@ export default {
   created () {
     console.log(window.location.href)
   },
+  beforeRouteEnter (to, from, next) {
+    // eslint-disable-next-line
+    store.cache.dispatch('fetchArticle', to.params.id).then(() => {
+      next()
+    })
+  },
   computed: {
     ...mapState({
-      articles: state => state.articles.all
-    }),
-    article () {
-      return this.$store.getters.getArticle(Number(this.$route.params.id), this.$route.params.slug)
-    }
+      articles: state => state.articles.all,
+      article: state => state.articles.article
+    })
   }
 }
 </script>

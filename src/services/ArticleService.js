@@ -7,4 +7,9 @@ export default class ArticleService {
     return this.http.get('/posts')
       .catch((error) => { throw new Error(error) })
   }
+
+  getArticle (id) {
+    return this.http.get('/post/' + id)
+      .catch((error) => { throw new Error(error) })
+  }
 }
