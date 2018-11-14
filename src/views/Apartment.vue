@@ -211,7 +211,7 @@ export default {
   opacity: 0;
   visibility: hidden;
   overflow: auto;
-  transition: all .7s;
+  transition: all .4s;
   transform: translateX(-100%);
   .close {
     color: #fff;
@@ -234,10 +234,10 @@ export default {
     margin: 5% 10%;
     background: #fff;
     padding: 5%;
-    transform: translateY(100%);
-    transition-delay: 1s;
+    transform: translateY(150%);
+    transition-delay: .3s;
     transition-property: all;
-    transition-duration: .7s;
+    transition-duration: .3s;
     h3 {
       color: #2c2c2c;
       font-size: 18px;
