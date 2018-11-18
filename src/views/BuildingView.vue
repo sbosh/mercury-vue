@@ -75,7 +75,7 @@
             </div>
           </div>
           <div class="filter-box">
-            <input type="submit" class="filter-btn" @click="
+            <input type="submit" class="filter-btn" :value="$t('search')" @click="
             isFiltred = !isFiltred
             filterActive = !filterActive
             show = !show" />
@@ -531,8 +531,8 @@ canvas {
     background: rgba(0,0,0, .5);
     .vue-slider-component {
       .vue-slider-tooltip {
-        padding: 8px 10px;
-        font-size: 14px;
+        padding: 12px 10px;
+        font-size: 16px;
       }
     }
     &.active {
@@ -541,13 +541,16 @@ canvas {
       bottom: 0;
       z-index: 99999;
       .filter-row {
-        height: 65%;
         width: 100%;
         background: #232323;
         margin-top: auto;
         padding: 20px;
         .filter-box {
           margin: 15px 0;
+          &.price-range {
+            margin: 30px 0;
+            flex-direction: column;
+          }
         }
       }
     }
@@ -556,6 +559,14 @@ canvas {
       .vue-slider-component {
         width: 280px !important;
       }
+    }
+    .filter-btn {
+      font-size: 16px;
+      color: #fff;
+      width: auto;
+      padding-left: 42px;
+      padding-right: 20px;
+      background-position: 14px center;
     }
   }
 }
