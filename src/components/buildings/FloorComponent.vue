@@ -7,8 +7,8 @@
       </div>
       <div class="available-from">
         <div class="text" v-html="$t('available_apartments')"></div>
-        <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalApartments }}</span> /
-        <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span>
+        <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span> /
+        <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalApartments }}</span>
         <div class="input-group">
           <label for="">{{ $t('selected_block') }}:</label>
           <select name="" id="" @change="changeRout">
@@ -31,8 +31,8 @@
           </select>
         </div>
         <div class="right"><div class="text" v-html="$t('available_apartments')"></div>
-          <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalApartments }}</span> /
-          <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span>
+          <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span> /
+          <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalApartments }}</span>
         </div>
       </div>
     </mq-layout>
@@ -48,8 +48,18 @@
                 :key="apartment.id"
                 @click="apartmentRoute(apartment['slug_' + $i18n.locale])"
                 v-tooltip="{ content: tooltipContent(apartment), placement: 'top', offset: '0' }">
-                <path :d="apartment.coords"></path>
+                <path
+                  :id="'text' + apartment.id"
+                  :d="apartment.coords"
+                  v-tooltip="{ content: apartmentStatus(apartment.status), show: activeFloor ? true : false, autoHide: false, placement: 'center', classes: 'center-tooltip' }"></path>
               </g>
+              <text
+                v-for="apartment in floor.apartments.data"
+                :key="apartment.id"
+                style="font-size: 24px;"
+                alignment-baseline="middle">
+                <textPath :xlink:href="'#text' + apartment.id" startOffset="50%" text-anchor="middle">{{apartmentStatus(apartment.status)}}</textPath>
+              </text>
             </svg>
           </div>
         </swiper-slide>
@@ -70,7 +80,8 @@ export default {
   data () {
     return {
       swiperHasRef: false,
-      degrees: null
+      degrees: null,
+      activeFloor: false
     }
   },
   computed: {
@@ -324,6 +335,10 @@ export default {
     g polygon:hover {
       opacity: .7;
     }
+    .sold path {
+      fill: red !important;
+      opacity: .7;
+    }
   }
   .swiper-slide-active {
     .img-box {
@@ -540,7 +555,7 @@ export default {
   .left-sidebar {
     /*transform: translateX(0);*/
     .compass {
-      animation: rotate-animation 1.3s linear;
+      animation: rotate-animation .6s linear;
       img {
         transition: all .4s;
       }
