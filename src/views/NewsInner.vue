@@ -58,7 +58,7 @@ export default {
   },
   data () {
     return {
-      url: 'window.location.pathname',
+      url: window.location.pathname,
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 15,
@@ -81,7 +81,7 @@ export default {
     }
   },
   created () {
-    console.log(window.location.href)
+    console.log(window.location.pathname)
   },
   beforeRouteEnter (to, from, next) {
     // eslint-disable-next-line
