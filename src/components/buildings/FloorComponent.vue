@@ -43,7 +43,6 @@
             <img :src="floor.image" alt="">
             <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
               <g
-                v-bind:class="{sold: apartment.status !== 1}"
                 v-for="apartment in floor.apartments.data"
                 :key="apartment.id"
                 @click="apartmentRoute(apartment['slug_' + $i18n.locale])"
@@ -51,14 +50,15 @@
                 <path
                   :id="'text' + apartment.id"
                   :d="apartment.coords"
+                  v-bind:class="{sold: apartment.status !== 1}"
                   v-tooltip="{ content: apartmentStatus(apartment.status), show: activeFloor ? true : false, autoHide: false, placement: 'center', classes: 'center-tooltip' }"></path>
               </g>
               <text
-                v-for="apartment in floor.apartments.data"
-                :key="apartment.id"
+                v-for="text in floor.apartments.data"
+                :key="text.id"
                 style="font-size: 24px;"
                 alignment-baseline="middle">
-                <textPath :xlink:href="'#text' + apartment.id" startOffset="50%" text-anchor="middle">{{apartmentStatus(apartment.status)}}</textPath>
+                <textPath :xlink:href="'#text' + text.id" startOffset="50%" text-anchor="middle">{{apartmentStatus(text.status)}}</textPath>
               </text>
             </svg>
           </div>
