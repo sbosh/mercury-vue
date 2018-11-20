@@ -48,22 +48,16 @@
                 @click="apartmentRoute(apartment['slug_' + $i18n.locale])"
                 v-tooltip="{ content: tooltipContent(apartment), placement: 'top', offset: '0' }">
                 <path
-                  :id="'text' + apartment.id"
                   :d="apartment.coords"
+                  ref="vtooltip"
                   v-bind:class="{sold: apartment.status !== 1}"
-                  v-tooltip="{ content: apartmentStatus(apartment.status), show: activeFloor ? true : false, autoHide: false, placement: 'center', classes: 'center-tooltip' }"></path>
+                  v-tooltip="{ content: apartmentStatus(apartment.status), show: floor['slug_' + $i18n.locale] == $route.params.floorId  && apartment.status !== 1 ? true : false, placement: 'top', classes: 'center-tooltip', trigger: 'manual', offset: '-100' }"></path>
               </g>
-              <text
-                v-for="text in floor.apartments.data"
-                :key="text.id"
-                style="font-size: 24px;"
-                alignment-baseline="middle">
-                <textPath :xlink:href="'#text' + text.id" startOffset="50%" text-anchor="middle">{{apartmentStatus(text.status)}}</textPath>
-              </text>
             </svg>
           </div>
         </swiper-slide>
       </swiper>
+      <mq-layout mq="sm" class="sold-text" v-if="floors['slug_' + $i18n.local]"><i>{{ $t('red_path_sold') }}</i></mq-layout>
       <div class="swiper-pagination"></div>
     </div>
     <mq-layout mq="sm" class="buttons-mobile">
@@ -81,7 +75,7 @@ export default {
     return {
       swiperHasRef: false,
       degrees: null,
-      activeFloor: false
+      activeFloor: true
     }
   },
   computed: {
@@ -118,6 +112,9 @@ export default {
   },
   mounted () {
     this.initSwiper()
+    for (let path of this.$refs.vtooltip) {
+      path._tooltip.options.autoHide = false
+    }
   },
   updated () {
     this.initSwiper()
@@ -297,6 +294,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  .sold-text {
+    margin-bottom: 15px;
+    color: red;
+    font-size: 10px;
+  }
   .img-box {
     visibility: hidden;
     opacity: 0;
@@ -335,7 +337,14 @@ export default {
     g polygon:hover {
       opacity: .7;
     }
-    .sold path {
+    .sold:hover,
+    .sold:hover path {
+      fill: red !important;
+    }
+  }
+  @media screen and(max-width: 1024px) {
+    .img-box svg .sold,
+    .img-box svg .sold path {
       fill: red !important;
       opacity: .7;
     }
