@@ -51,7 +51,7 @@
                   :d="apartment.coords"
                   ref="vtooltip"
                   v-bind:class="{sold: apartment.status !== 1}"
-                  v-tooltip="{ content: apartmentStatus(apartment.status), show: floor['slug_' + $i18n.locale] == $route.params.floorId  && apartment.status !== 1 ? true : false, placement: 'top', classes: 'center-tooltip', trigger: 'manual', offset: '-100' }"></path>
+                  v-tooltip="{ content: apartmentStatus(apartment.status), show: floor['slug_' + $i18n.locale] == $route.params.floorId  && apartment.status !== 1 ? true : false, placement: 'top', classes: 'center-tooltip', trigger: 'manual', offset: '-110' }"></path>
               </g>
             </svg>
           </div>
@@ -121,7 +121,11 @@ export default {
   },
   methods: {
     tooltipContent (apartment) {
-      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><div class="icons"><div><i class="area-icon"></i> ${apartment.total_area} m²</div> <div><i class="rooms-icon"></i>${apartment.rooms}</div></div> <div class="price">${apartment.price} EUR</div><div class="status">${this.apartmentStatus(apartment.status)}</div>`
+      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><div class="icons"><div><i class="area-icon"></i> ${apartment.total_area} m²</div> <div><i class="rooms-icon"></i>${apartment.rooms}</div></div> <div class="price">${apartment.status !== 1 ? '' : this.formatPrice(apartment.price) + ' EUR'}</div><div class="status">${this.apartmentStatus(apartment.status)}</div>`
+    },
+    formatPrice (value) {
+      let val = (value / 1).toFixed(2).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     },
     apartmentStatus (status) {
       if (status === 1) {

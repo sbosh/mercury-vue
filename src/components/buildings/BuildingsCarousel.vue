@@ -11,7 +11,7 @@
         </div>
       </swiper-slide>
       <div class="buildings-list" v-if="!home">
-        <h3>{{ $t('current_buildings') }}</h3>
+        <h3>{{ $t('current_projects') }}</h3>
         <div class="buildings-titles">
           <div class="building-title" v-for="(building, index) in current" :key="building.id" @mouseenter="changeSwpier(index)">
             <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" v-if="building.use_svg">
@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     changeSwpier (index) {
-      this.$refs.swiper.swiper.slideTo(index)
+      this.$refs.swiper.swiper.slideToLoop(index)
     },
     getSwiperOptions (isHome) {
       let options = {
@@ -56,6 +56,16 @@ export default {
         mousewheel: true,
         keyboard: {
           enabled: true
+        },
+        on: {
+          slideChange: function () {
+            if (isHome) return
+            let buildingTitles = document.querySelectorAll('.building-title')
+            buildingTitles.forEach(buildingTitle => {
+              buildingTitle.classList.remove('active')
+            })
+            buildingTitles[this.realIndex].classList.add('active')
+          }
         }
       }
       if (isHome) {

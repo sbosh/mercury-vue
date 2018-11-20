@@ -54,13 +54,13 @@
       <div class="right">
         <div class="">
           <div class="text" v-if="apartment.status == 1">{{ $t('total_price') }}:</div>
-          <div class="price" v-if="apartment.status == 1">{{ apartment.price }} <div class="currency">{{ $t('euro') }}</div></div>
+          <div class="price" v-if="apartment.status == 1">{{ this.formatPrice(apartment.price) }} <div class="currency">{{ $t('euro') }}</div></div>
           <div class="price available" v-if="apartment.status == 2" >{{ $t('available') }}</div>
           <div class="price sold" v-if="apartment.status == 3" >{{ $t('sold') }}</div>
         </div>
         <div v-if="apartment.status == 1">
           <div class="text"><span>{{ $t('price_per_m') }}</span> m²:</div>
-          <div class="price">{{ apartment.price_m2 }} <div class="currency">{{ $t('euro') }}</div></div>
+          <div class="price">{{ this.formatPrice(apartment.price_m2) }} <div class="currency">{{ $t('euro') }}</div></div>
         </div>
       </div>
     </div>
@@ -147,7 +147,11 @@ export default {
   },
   methods: {
     tooltipContent (apartment) {
-      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><div class="icons"><div><i class="area-icon"></i> ${apartment.total_area} m²</div> <div><i class="rooms-icon"></i>${apartment.rooms}</div></div> <div class="price">${apartment.price} EUR</div><div class="status">${this.apartmentStatus(apartment.status)}</div>`
+      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><div class="icons"><div><i class="area-icon"></i> ${apartment.total_area} m²</div> <div><i class="rooms-icon"></i>${apartment.rooms}</div></div> <div class="price">${apartment.status !== 1 ? '' : this.formatPrice(apartment.price) + ' EUR'}</div><div class="status">${this.apartmentStatus(apartment.status)}</div>`
+    },
+    formatPrice (value) {
+      let val = (value / 1)
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     },
     apartmentStatus (status) {
       if (status === 1) {

@@ -25,20 +25,23 @@
         <input type="text" name="name" v-model="name" class="form-element" :placeholder="$t('your_name') + '*'" />
       </div>
       <div class="form-group">
+        <p class="form-error" v-if="errors.email && errors.email.length" v-text="errors.email"/>
+        <input type="email" name="email" v-model="email" class="form-element" placeholder="Е-mail *" />
+      </div>
+      <div class="form-group">
         <input type="tel" name="" v-model="phone" class="form-element" :placeholder="$t('telephone')">
       </div>
       <!-- <div class="form-group">
         <input type="text" name="company" v-model="company" class="form-element" :placeholder="$t('company_name') + '*'">
       </div> -->
     </div>
-    <br>
     <!-- <h3>{{ $t('information') }}</h3> -->
     <div class="form-row">
-      <div class="form-group">
+     <!--  <div class="form-group">
         <p class="form-error" v-if="errors.email && errors.email.length" v-text="errors.email"/>
         <input type="email" name="email" v-model="email" class="form-element" placeholder="Е-mail *" />
       </div>
-<!--       <div class="form-group">
+      <div class="form-group">
         <select name="about" v-model="about" class="form-element">
           <option value="" selected>{{ $t('about') }}</option>
           <option :value="$t('enquery_for_apartment')">{{ $t('enquery_for_apartment') }}</option>
