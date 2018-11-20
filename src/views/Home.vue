@@ -1,7 +1,7 @@
 <template>
   <div class="main-content">
     <nav-component />
-    <buildings-carousel :home="true" />
+    <buildings-carousel :home="true" :current="current" />
     <div class="home-slider">
       <div class="line"></div>
       <div class="caption">
@@ -47,11 +47,15 @@ export default {
   computed: {
     ...mapState({
       home: state => state.pages.home,
-      articles: state => state.articles.all
+      articles: state => state.articles.all,
+      current: state => state.buildings.current
     }),
     lang () {
       return this.$i18n.locale
     }
+  },
+  created () {
+    this.$store.dispatch('fetchCurrentBuildings')
   }
 }
 </script>

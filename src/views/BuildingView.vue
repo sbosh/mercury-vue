@@ -1,113 +1,111 @@
 <template>
   <div class="main-content">
-    <transition name="fade" v-if="loading">
-      <preloader-component />
-    </transition>
-    <div>
-      <mq-layout mq="md+" class="building-view-header"><navinner-component v-if="building" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
-      <div class="building-apartments">
-        <div class="img-box">
-          <div id="building" :style="'background-image: url(' + building.image + ')'"></div>
-          <div class="flor-info-tooltip">
-            <div class="tooltip-info">
-              <div class="box">
-                <div class="text">{{ $t('floor') }}</div>
-                <div class="number" id="js-floor">8</div>
-              </div>
-              <div class="box">
-                <div class="text">{{ $t('entrance') }}</div>
-                <div class="number" id="js-entrance">8</div>
-              </div>
+    <mq-layout mq="md+" class="building-view-header"><navinner-component v-if="building" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
+    <div class="building-apartments">
+      <div class="img-box">
+        <div id="building" v-if="building" :style="'background-image: url(' + building.image + ')'"></div>
+        <div class="flor-info-tooltip">
+          <div class="tooltip-info">
+            <div class="box">
+              <div class="text">{{ $t('floor') }}</div>
+              <div class="number" id="js-floor">8</div>
             </div>
-            <div class="tooltip-info">
-              <div class="box">
-                <div class="text" v-html="$t('available_apartments')"></div>
-                <div class="number" id="js-apartments">8</div>
-              </div>
+            <div class="box">
+              <div class="text">{{ $t('entrance') }}</div>
+              <div class="number" id="js-entrance">8</div>
+            </div>
+          </div>
+          <div class="tooltip-info">
+            <div class="box">
+              <div class="text" v-html="$t('available_apartments')"></div>
+              <div class="number" id="js-apartments">8</div>
             </div>
           </div>
         </div>
-        <filtered-apartments
-          @clicked="isFiltred = false"
-          :isFiltred="isFiltred"
-          :priceFrom="priceFrom"
-          :priceTo="value"
-          :rooms="rooms"
-          :available="available" />
-        <parking-component :parkingsActive="parkingsActive" @clicked="() => parkingsActive = false" />
-        <div class="filters" v-if="priceFrom" v-bind:class="{ active: filterActive }">
-          <div class="close" @click="() => {
-              filterActive = !filterActive
-              show = !show
-              }"></div>
-          <div class="filter-row">
-            <div class="filter-box">
-              <div class="text">{{ $t('rooms') }}:</div>
+      </div>
+      <filtered-apartments
+        @clicked="isFiltred = false"
+        :isFiltred="isFiltred"
+        :priceFrom="priceFrom"
+        :priceTo="value"
+        :rooms="rooms"
+        :available="available" />
+      <parking-component :parkingsActive="parkingsActive" @clicked="() => parkingsActive = false" />
+      <div class="filters" v-if="priceFrom" v-bind:class="{ active: filterActive }">
+        <div class="close" @click="() => {
+            filterActive = !filterActive
+            show = !show
+            }"></div>
+        <div class="filter-row">
+          <div class="filter-box">
+            <div class="text">{{ $t('rooms') }}:</div>
+          </div>
+          <div class="filter-box">
+            <div class="input-field">
+              <input type="checkbox" id="one" name="rooms" class="checkbox" v-model="rooms" value="1" />
+              <label for="one">1</label>
             </div>
-            <div class="filter-box">
-              <div class="input-field">
-                <input type="checkbox" id="one" name="rooms" class="checkbox" v-model="rooms" value="1" />
-                <label for="one">1</label>
-              </div>
-              <div class="input-field">
-                <input type="checkbox" id="two" name="rooms" class="checkbox" v-model="rooms" value="2" />
-                <label for="two">2</label>
-              </div>
-              <div class="input-field">
-                <input type="checkbox" id="three" name="rooms" class="checkbox" v-model="rooms" value="3" />
-                <label for="three">3</label>
-              </div>
-              <div class="input-field">
-                <input type="checkbox" id="four" name="rooms" class="checkbox" v-model="rooms" value="4" />
-                <label for="four">4+</label>
-              </div>
+            <div class="input-field">
+              <input type="checkbox" id="two" name="rooms" class="checkbox" v-model="rooms" value="2" />
+              <label for="two">2</label>
             </div>
-            <div class="filter-box price-range">
-              <div class="text">{{ $t('select_price') }}:</div>
-              <div class="price">
-                <div class="min">5 000</div>
-                <vue-slider
-                  :show="show"
-                  ref="slider"
-                  v-model="value"
-                  :width="400"
-                  formatter="{value} euro"
-                  :min="priceFrom"
-                  :max="300000"
-                  :interval="5000" />
-                <div class="max">300 000</div>
-              </div>
+            <div class="input-field">
+              <input type="checkbox" id="three" name="rooms" class="checkbox" v-model="rooms" value="3" />
+              <label for="three">3</label>
             </div>
-            <div class="filter-box">
-              <input type="submit" class="filter-btn" @click="isFiltred = !isFiltred" />
+            <div class="input-field">
+              <input type="checkbox" id="four" name="rooms" class="checkbox" v-model="rooms" value="4" />
+              <label for="four">4+</label>
             </div>
+          </div>
+          <div class="filter-box price-range">
+            <div class="text">{{ $t('select_price') }}:</div>
+            <div class="price">
+              <div class="min">5 000</div>
+              <vue-slider
+                :show="show"
+                ref="slider"
+                v-model="value"
+                :width="400"
+                formatter="{value} euro"
+                :min="priceFrom"
+                :max="300000"
+                :interval="5000" />
+              <div class="max">300 000</div>
+            </div>
+          </div>
+          <div class="filter-box">
+            <input type="submit" class="filter-btn" :value="$t('search')" @click="
+            isFiltred = !isFiltred
+            filterActive = !filterActive
+            show = !show" />
           </div>
         </div>
-        <mq-layout mq="sm" class="entrances-mobile">
-          <ul>
-            <li v-for="entrance in buildingEntrances" :key="entrance.id">
-              <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/floor/1/' + entrance['slug_' + $i18n.locale]">{{ entrance['title_' + $i18n.locale] }}</router-link>
-            </li>
-          </ul>
-        </mq-layout>
-        <div class="bottom-options">
-          <div class="building-btn">
-            <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">{{ $t('building_information') }}</router-link></div>
-          </div>
-          <div class="building-filter">
-            <button class="filter-btn" @click="() => {
-              filterActive = !filterActive
-              show = !show
-              }"
-              v-tooltip="{ content: $t('filter_apartments'), placement: 'left', offset: '30', classes: 'left-tooltip' }">
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
-            <button class="parking-btn"
-              @click="parkingsActive = !parkingsActive"
-              v-tooltip="{ content: $t('all_parking'), placement: 'left', offset: '30', classes: 'left-tooltip' }"></button>
-          </div>
+      </div>
+      <mq-layout mq="sm" class="entrances-mobile">
+        <ul>
+          <li v-for="entrance in buildingEntrances" :key="entrance.id">
+            <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/floor/1/' + entrance['slug_' + $i18n.locale]">{{ entrance['title_' + $i18n.locale] }}</router-link>
+          </li>
+        </ul>
+      </mq-layout>
+      <div class="bottom-options">
+        <div class="building-btn">
+          <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">{{ $t('building_information') }}</router-link></div>
+        </div>
+        <div class="building-filter">
+          <button class="filter-btn" @click="() => {
+            filterActive = !filterActive
+            show = !show
+            }"
+            v-tooltip="{ content: $t('filter_apartments'), placement: 'left', offset: '30', classes: 'left-tooltip' }">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <button class="parking-btn"
+            @click="parkingsActive = !parkingsActive"
+            v-tooltip="{ content: $t('all_parking'), placement: 'left', offset: '30', classes: 'left-tooltip' }"></button>
         </div>
       </div>
     </div>
@@ -115,16 +113,16 @@
 </template>
 
 <script>
+import store from '../store'
 import { mapState } from 'vuex'
 import vueSlider from 'vue-slider-component'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import FilteredApartments from '@/components/buildings/FilteredApartments'
 import ParkingComponent from '@/components/buildings/ParkingComponent'
-import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 /* eslint-disable no-undef */
 export default {
   name: 'building-view',
-  components: { NavinnerComponent, vueSlider, FilteredApartments, ParkingComponent, PreloaderComponent },
+  components: { NavinnerComponent, vueSlider, FilteredApartments, ParkingComponent },
   data () {
     return {
       show: false,
@@ -150,20 +148,21 @@ export default {
       jsApartments: null,
       jsFloor: null,
       jsEntrance: null,
-      tooltip: null,
-      loading: true
+      tooltip: null
     }
   },
-  created () {
+  beforeRouteEnter (to, from, next) {
+    store.commit('startFetching')
     // eslint-disable-next-line
-    this.$store.dispatch('fetchBuilding', this.$route.params.id).then(() => {
+    store.dispatch('fetchBuilding', to.params.id).then(() => {
       // eslint-disable-next-line
-      this.$store.dispatch('fetchBuildingEntrances', this.$route.params.id).then(() => {
+      store.cache.dispatch('fetchBuildingEntrances', to.params.id).then(() => {
         // eslint-disable-next-line
-        this.$store.dispatch('fetchBuildingFloors', this.$route.params.id).then(() => {
+        store.cache.dispatch('fetchBuildingFloors', to.params.id).then(() => {
           // eslint-disable-next-line
-          this.$store.dispatch('fetchBuildingApartments', this.$route.params.id).then(() => {
-            this.loading = false
+          store.cache.dispatch('fetchBuildingApartments', to.params.id).then(() => {
+            store.commit('stopFetching')
+            next()
           })
         })
       })
@@ -174,16 +173,13 @@ export default {
       if (val) {
         this.$nextTick(() => this.$refs.slider.refresh())
       }
-    },
-    loading (value) {
-      if (!value) {
-        this.initCanvas()
-      }
     }
+  },
+  mounted () {
+    this.initCanvas()
   },
   methods: {
     initCanvas () {
-      console.log('init canvas')
       this.game = new Phaser.Game(
         1920 * window.devicePixelRatio,
         1080 * window.devicePixelRatio,
@@ -399,12 +395,11 @@ canvas {
   .img-box {
     position: relative;
     height: 100vh;
-    width: 100vw;
     #building {
       position: absolute;
       left: 0;
       top: 0;
-      right: 195px;
+      right: 0;
       bottom: 0;
     }
   }
@@ -536,8 +531,8 @@ canvas {
     background: rgba(0,0,0, .5);
     .vue-slider-component {
       .vue-slider-tooltip {
-        padding: 8px 10px;
-        font-size: 14px;
+        padding: 12px 10px;
+        font-size: 16px;
       }
     }
     &.active {
@@ -546,13 +541,16 @@ canvas {
       bottom: 0;
       z-index: 99999;
       .filter-row {
-        height: 65%;
         width: 100%;
         background: #232323;
         margin-top: auto;
         padding: 20px;
         .filter-box {
           margin: 15px 0;
+          &.price-range {
+            margin: 30px 0;
+            flex-direction: column;
+          }
         }
       }
     }
@@ -562,12 +560,24 @@ canvas {
         width: 280px !important;
       }
     }
+    .filter-btn {
+      font-size: 16px;
+      color: #fff;
+      width: auto;
+      padding-left: 42px;
+      padding-right: 20px;
+      background-position: 14px center;
+    }
   }
 }
 .building-apartments {
   overflow: hidden;
   height: 100vh;
   position: relative;
+  opacity: 0;
+  transition-delay: 1s;
+  transition-duration: .3s;
+  transition-property: opacity;
   .building-btn {
     margin: auto 0 0 0;
   }
@@ -698,7 +708,7 @@ canvas {
     z-index: 9999;
     padding-right: 195px;
     transform: translateX(100%);
-    transition: all .6s;
+    transition: all .3s;
     width: 50%;
     &.active {
       transform: translateX(0);
@@ -709,6 +719,19 @@ canvas {
         padding-right: 0;
         width: 100%;
         position: fixed;
+      }
+      .table {
+        .tbody {
+          .tr {
+            flex-wrap: wrap;
+            padding: 10px 0;
+            .td {
+              width: 50%;
+              flex: 1 0 50%;
+              padding: 5px 0;
+            }
+          }
+        }
       }
     }
   }
@@ -904,6 +927,7 @@ canvas {
 }
 .active-component {
   .building-apartments {
+    opacity: 1;
     .bottom-options .building-filter button,
     .btn-box {
       transform: translate(0);

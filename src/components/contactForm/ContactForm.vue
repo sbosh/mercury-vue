@@ -38,13 +38,13 @@
         <p class="form-error" v-if="errors.email && errors.email.length" v-text="errors.email"/>
         <input type="email" name="email" v-model="email" class="form-element" placeholder="Е-mail *" />
       </div>
-      <div class="form-group">
+<!--       <div class="form-group">
         <select name="about" v-model="about" class="form-element">
           <option value="" selected>{{ $t('about') }}</option>
           <option :value="$t('enquery_for_apartment')">{{ $t('enquery_for_apartment') }}</option>
           <option :value="$t('enquery_for_company')">{{ $t('enquery_for_company') }}</option>
         </select>
-      </div>
+      </div> -->
     </div>
     <div class="form-row">
       <!-- <div class="form-group">

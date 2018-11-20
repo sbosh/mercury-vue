@@ -1,83 +1,81 @@
 <template>
   <div class="floor-plan">
-    <transition name="fade" v-if="loading && !floors.length">
-      <preloader-component />
-    </transition>
-    <div v-else>
-      <mq-layout mq="md+" class="left-sidebar">
-        <div class="top">
-          <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
-          <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="back-btn">{{ $t('back_building') }}</router-link>
-        </div>
-        <div class="available-from">
-          <div class="text" v-html="$t('available_apartments')"></div>
-          <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalApartments }}</span> /
-          <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span>
-          <div class="input-group">
-            <label for="">{{ $t('selected_block') }}:</label>
-            <select name="" id="" @change="changeRout">
-              <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id" :selected="entrance['slug_' + $i18n.locale] === $route.params.slug">
-              {{ entrance['title_' + $i18n.locale] }}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="compass" v-if="floors[Number($route.params.floorId)-1]"><img src="@/assets/images/compass.svg" v-if="floors" :style="{ transform: 'rotate(-' + floors[Number($route.params.floorId)-1].degrees +'deg)' }" alt=""></div>
-      </mq-layout>
-      <mq-layout mq="sm" class="floor-info-mobile">
-        <div class="available-from">
-          <div class="input-group">
-            <label for="">{{ $t('selected_block') }}:</label>
-            <select name="" id="" @change="changeRout">
-              <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id" :selected="entrance['slug_' + $i18n.locale] === $route.params.slug">
-              {{ entrance['title_' + $i18n.locale] }}
-              </option>
-            </select>
-          </div>
-          <div class="right"><div class="text" v-html="$t('available_apartments')"></div>
-            <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalApartments }}</span> /
-            <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span>
-          </div>
-        </div>
-      </mq-layout>
-      <div class="floor-info">
-        <swiper ref="mySwiper" :options="swiperOptions()">
-          <swiper-slide v-for="floor in floors" :key="floor.id">
-            <div class="img-box">
-              <img :src="floor.image" alt="">
-              <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
-                <g
-                  v-bind:class="{sold: apartment.status !== 1}"
-                  v-for="apartment in floor.apartments.data"
-                  :key="apartment.id"
-                  @click="apartmentRoute(apartment['slug_' + $i18n.locale])"
-                  v-tooltip="{ content: tooltipContent(apartment), placement: 'top', offset: '0' }">
-                  <path :d="apartment.coords" fill="red"></path>
-                </g>
-              </svg>
-            </div>
-          </swiper-slide>
-        </swiper>
-        <div class="swiper-pagination"></div>
+    <mq-layout mq="md+" class="left-sidebar">
+      <div class="top">
+        <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
+        <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="back-btn">{{ $t('back_building') }}</router-link>
       </div>
-      <mq-layout mq="sm" class="buttons-mobile">
-        <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="btn">{{ $t('back_building') }}</router-link>
-      </mq-layout>
+      <div class="available-from">
+        <div class="text" v-html="$t('available_apartments')"></div>
+        <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span> /
+        <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalApartments }}</span>
+        <div class="input-group">
+          <label for="">{{ $t('selected_block') }}:</label>
+          <select name="" id="" @change="changeRout">
+            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id" :selected="entrance['slug_' + $i18n.locale] === $route.params.slug">
+            {{ entrance['title_' + $i18n.locale] }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="compass" v-if="floors[Number($route.params.floorId)-1]"><img src="@/assets/images/compass.svg" v-if="floors" :style="{ transform: 'rotate(-' + floors[Number($route.params.floorId)-1].degrees +'deg)' }" alt=""></div>
+    </mq-layout>
+    <mq-layout mq="sm" class="floor-info-mobile">
+      <div class="available-from">
+        <div class="input-group">
+          <label for="">{{ $t('selected_block') }}:</label>
+          <select name="" id="" @change="changeRout">
+            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id" :selected="entrance['slug_' + $i18n.locale] === $route.params.slug">
+            {{ entrance['title_' + $i18n.locale] }}
+            </option>
+          </select>
+        </div>
+        <div class="right"><div class="text" v-html="$t('available_apartments')"></div>
+          <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalFreeApartments }}</span> /
+          <span v-if="floors[Number($route.params.floorId)-1]">{{ floors[Number($route.params.floorId)-1].totalApartments }}</span>
+        </div>
+      </div>
+    </mq-layout>
+    <div class="floor-info">
+      <swiper ref="mySwiper" :options="swiperOptions()">
+        <swiper-slide v-for="floor in floors" :key="floor.id">
+          <div class="img-box">
+            <img :src="floor.image" alt="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+              <g
+                v-for="apartment in floor.apartments.data"
+                :key="apartment.id"
+                @click="apartmentRoute(apartment['slug_' + $i18n.locale])"
+                v-tooltip="{ content: tooltipContent(apartment), placement: 'top', offset: '0' }">
+                <path
+                  :d="apartment.coords"
+                  ref="vtooltip"
+                  v-bind:class="{sold: apartment.status !== 1}"
+                  v-tooltip="{ content: apartmentStatus(apartment.status), show: floor['slug_' + $i18n.locale] == $route.params.floorId  && apartment.status !== 1 ? true : false, placement: 'top', classes: 'center-tooltip', trigger: 'manual', offset: '-100' }"></path>
+              </g>
+            </svg>
+          </div>
+        </swiper-slide>
+      </swiper>
+      <mq-layout mq="sm" class="sold-text" v-if="floors['slug_' + $i18n.local]"><i>{{ $t('red_path_sold') }}</i></mq-layout>
+      <div class="swiper-pagination"></div>
     </div>
+    <mq-layout mq="sm" class="buttons-mobile">
+      <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="btn">{{ $t('back_building') }}</router-link>
+    </mq-layout>
   </div>
 </template>
 
 <script>
+import store from '../../store'
 import { mapState } from 'vuex'
-import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 export default {
   name: 'building-inner-floor',
-  components: { PreloaderComponent },
   data () {
     return {
       swiperHasRef: false,
       degrees: null,
-      loading: true
+      activeFloor: true
     }
   },
   computed: {
@@ -95,27 +93,28 @@ export default {
       return this.$refs.mySwiper.swiper
     }
   },
-  created () {
+  beforeRouteLeave (to, from, next) {
+    if (this.$el.querySelector('.left-sidebar')) this.$el.querySelector('.left-sidebar').style.display = 'none'
+    next()
+  },
+  beforeRouteEnter (to, from, next) {
+    store.commit('startFetching')
     // eslint-disable-next-line
-    this.$store.cache.dispatch('fetchBuildingEntrances', this.$route.params.id).then(() => {
+    store.cache.dispatch('fetchBuildingEntrances', to.params.id).then(() => {
       // eslint-disable-next-line
-      this.$store.cache.dispatch('fetchBuildingFloors', this.$route.params.id).then(() => {
+      store.cache.dispatch('fetchBuildingFloors', to.params.id).then(() => {
         // eslint-disable-next-line
-        this.$store.cache.dispatch('fetchBuildingApartments', this.$route.params.id).then(() => {
-          this.loading = false
+        store.cache.dispatch('fetchBuildingApartments', to.params.id).then(() => {
+          next()
         })
       })
     })
   },
-  beforeRouteUpdate (to, from, next) {
-    next({
-      redirect: {
-        name: 'building-inner-floor'
-      }
-    })
-  },
   mounted () {
     this.initSwiper()
+    for (let path of this.$refs.vtooltip) {
+      path._tooltip.options.autoHide = false
+    }
   },
   updated () {
     this.initSwiper()
@@ -136,6 +135,7 @@ export default {
       }
     },
     initSwiper () {
+      store.commit('stopFetching')
       if (this.$refs.mySwiper) {
         this.$refs.mySwiper.swiper.slideTo(Number(this.$route.params.floorId))
         this.$refs.mySwiper.swiper.on('slideChange', this.handleSlideChange)
@@ -183,6 +183,9 @@ export default {
   font-size: 16px;
   line-height: 20px;
   min-width: 200px;
+  @media screen and(max-width: 1025px) {
+    display: none !important;
+  }
   .icons {
     display: flex;
     align-items: center;
@@ -280,6 +283,9 @@ export default {
   font-size: 10px;
   text-transform: uppercase;
   text-align: center;
+  &:after {
+    display: none;
+  }
 }
 .floor-info {
   height: 100vh;
@@ -288,6 +294,11 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  .sold-text {
+    margin-bottom: 15px;
+    color: red;
+    font-size: 10px;
+  }
   .img-box {
     visibility: hidden;
     opacity: 0;
@@ -324,6 +335,17 @@ export default {
     g:hover rect,
     g:hover,
     g polygon:hover {
+      opacity: .7;
+    }
+    .sold:hover,
+    .sold:hover path {
+      fill: red !important;
+    }
+  }
+  @media screen and(max-width: 1024px) {
+    .img-box svg .sold,
+    .img-box svg .sold path {
+      fill: red !important;
       opacity: .7;
     }
   }
@@ -518,6 +540,13 @@ export default {
       font-weight: 600;
       outline: none;
       padding-left: 20px;
+      box-shadow: none;
+      background-color: #fff;
+      background-image: url(~@/assets/images/down-arrow.svg);
+      background-repeat: no-repeat;
+      background-position: 96% center;
+      background-size: 13px 13px;
+      appearance: none;
     }
     span {
       color: #8d8d8d;
@@ -535,7 +564,7 @@ export default {
   .left-sidebar {
     /*transform: translateX(0);*/
     .compass {
-      animation: rotate-animation 1.3s linear;
+      animation: rotate-animation .6s linear;
       img {
         transition: all .4s;
       }

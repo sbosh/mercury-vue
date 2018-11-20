@@ -39,17 +39,12 @@
             <div class="col">
               <h3><router-link :to="'/' + lang + '/contacts'">{{ $t('contacts') }}</router-link></h3>
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/about'">{{ $t('about_company') }}</router-link></h3>
-              <ul>
-                <li><router-link :to="'/' + lang + '/about'">{{ $t('about_us') }}</router-link></li>
-                <li><a href="">{{ $t('service') }}</a></li>
-                <li><a href="">{{ $t('history') }}</a></li>
-              </ul>
               <div class="follow-us">
                 <div class="text">{{ $t('follow_us') }}</div>
                 <ul>
                   <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
-                  <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
-                  <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li>
+                  <!-- <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
+                  <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li> -->
                 </ul>
               </div>
             </div>
@@ -78,6 +73,9 @@ export default {
     ...mapState({
       current: state => state.buildings.current
     })
+  },
+  created () {
+    this.$store.cache.dispatch('fetchCurrentBuildings')
   },
   mounted () {
     this.convertSVG()
@@ -138,8 +136,8 @@ export default {
   left: 25px;
   padding: 10px 25px 10px 0;
   z-index: 99999;
-  transition-delay: 1s;
-  transition-duration: 1.2s;
+  transition-delay: .5s;
+  transition-duration: .7s;
   transition-property: all;
   display: flex;
   justify-content: space-around;
@@ -235,7 +233,7 @@ export default {
         color: #fff !important;
       }
     }
-  }//toggle-header
+  }/*toggle-header*/
   .lng {
     margin-left: auto;
     visibility: hidden;
@@ -273,7 +271,7 @@ export default {
     right: 0;
     left: 0;
     transform: translateX(100%);
-    transition: all 1.3s;
+    transition: all .7s;
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
@@ -294,7 +292,7 @@ export default {
       height: 100%;
       width: 100%;
       transform: translateX(50%);
-      transition: all 2.4s;
+      transition: all 1.1s;
       h3, h3 a {
         color: #fff;
         font-size: 17px;
@@ -332,15 +330,15 @@ export default {
         padding: 0;
         &:nth-child(1){
           transform: translateX(250px);
-          transition: all 1.9s;
+          transition: all .9s;
         }
         &:nth-child(2){
           transform: translateX(450px);
-          transition: all 2.9s;
+          transition: all 1.3s;
         }
         &:nth-child(3){
           transform: translateX(600px);
-          transition: all 3.9s;
+          transition: all 1.7s;
           border: none;
         }
       }
@@ -427,13 +425,13 @@ export default {
       .col {
         opacity: 1;
         &:nth-child(1){
-          animation: col3-animation .8s forwards;
+          animation: col3-animation .3s forwards;
         }
         &:nth-child(2){
-          animation: col3-animation 1.8s forwards;
+          animation: col3-animation .8s forwards;
         }
         &:nth-child(3){
-          animation: col3-animation 2.8s forwards;
+          animation: col3-animation 1.3s forwards;
         }
       }
     }

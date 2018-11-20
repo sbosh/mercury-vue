@@ -1,63 +1,57 @@
 <template>
   <div class="main-content">
-    <transition name="fade" v-if="loading && !finishedBuildingsPage">
-      <preloader-component />
-    </transition>
-    <div v-else>
-      <mq-layout mq="m+" class="mq-m future-current" v-if="finishedBuildingsPage">
-        <navinner-component :navTitle="this.finishedBuildingsPage['title_' + this.$i18n.locale]" />
-        <div v-if="finished.length">
-          <div class="buildings building-sort">
-            <swiper :options="swiperOptions">
-              <swiper-slide v-for="building in finished" :key="building.id">
-                <div class="building-item">
-                  <div class="img-box">
-                    <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">
-                      <img :src="building.thumb" alt="">
-                    </router-link>
-                  </div>
-                  <div class="caption">
-                    <div class="title-box">
-                      <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
-                      <div class="location-info">{{ building['annonce_' + $i18n.locale] }}</div>
-                      <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">{{ $t('see') }}</router-link></div>
-                    </div>
+    <mq-layout mq="m+" class="mq-m future-current">
+      <navinner-component :navTitle="this.finishedBuildingsPage['title_' + this.$i18n.locale]" />
+      <div v-if="finished.length">
+        <div class="buildings building-sort">
+          <swiper :options="swiperOptions">
+            <swiper-slide v-for="building in finished" :key="building.id">
+              <div class="building-item">
+                <div class="img-box">
+                  <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">
+                    <img :src="building.thumb" alt="">
+                  </router-link>
+                </div>
+                <div class="caption">
+                  <div class="title-box">
+                    <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
+                    <div class="location-info">{{ building['annonce_' + $i18n.locale] }}</div>
+                    <div class="btn-box"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" class="btn">{{ $t('see') }}</router-link></div>
                   </div>
                 </div>
-              </swiper-slide>
-              <div class="dots-paggination"></div>
-            </swiper>
+              </div>
+            </swiper-slide>
+            <div class="dots-paggination"></div>
+          </swiper>
+        </div>
+      </div>
+      <div v-else class="comming-soon-annonunce">
+        <div class="caption">
+          <div class="title-box">
+            <h2 class="title">{{ $t('comming_soon_buildings') }}</h2>
+          </div>
+          <div class="description">
+            <p>{{ $t('comming_soon_description') }}</p>
           </div>
         </div>
-        <div v-else class="comming-soon-annonunce">
-          <div class="caption">
-            <div class="title-box">
-              <h2 class="title">{{ $t('comming_soon_buildings') }}</h2>
-            </div>
-            <div class="description">
-              <p>{{ $t('comming_soon_description') }}</p>
-            </div>
-          </div>
-        </div>
-      </mq-layout>
-      <mq-layout mq="sm">
-        <finishedbuildings-mobile :pageTitle="this.finishedBuildingsPage['title_' + this.$i18n.locale]" />
-      </mq-layout>
-    </div>
+      </div>
+    </mq-layout>
+    <mq-layout mq="sm">
+      <finishedbuildings-mobile :pageTitle="this.finishedBuildingsPage['title_' + this.$i18n.locale]" />
+    </mq-layout>
   </div>
 </template>
 
 <script>
+import store from '../store'
 import { mapState } from 'vuex'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import FinishedBuildingsMobile from '@/components/mobile/FinishedBuildingsMobile'
-import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 export default {
   name: 'finished-buildings',
   components: {
     'navinner-component': NavinnerComponent,
-    'finishedbuildings-mobile': FinishedBuildingsMobile,
-    'preloader-component': PreloaderComponent
+    'finishedbuildings-mobile': FinishedBuildingsMobile
   },
   metaInfo () {
     return {
@@ -66,7 +60,6 @@ export default {
   },
   data () {
     return {
-      loading: true,
       swiperOptions: {
         slidesPerView: 'auto',
         spaceBetween: 0,
@@ -84,9 +77,13 @@ export default {
       }
     }
   },
-  created () {
-    this.$store.cache.dispatch('fetchFinishedBuildings').then(() => {
-      this.loading = false
+  beforeRouteEnter (to, from, next) {
+    store.commit('startFetching')
+    store.cache.dispatch('fetchFinishedBuildingsPage').then(() => {
+      store.cache.dispatch('fetchFinishedBuildings').then(() => {
+        next()
+        store.commit('stopFetching')
+      })
     })
   },
   computed: {

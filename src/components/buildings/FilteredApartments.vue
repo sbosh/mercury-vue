@@ -12,7 +12,7 @@
     </div>
     <div class="apartments-listing">
       <div @mouseenter="hoverFilteredApartment(apartment.degrees)" class="apartments-box" v-if="apartment['slug_' + $i18n.locale] !== 'zavedenie'" v-for="apartment in filtrApartments(priceFrom, priceTo, rooms, available)" :key="apartment.id" :class="[{ sold: apartment.status == 3 },{ reserved: apartment.status == 2 }]">
-        <router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor.id + '/' + apartment.entrance['slug_' + $i18n.locale] + '/' + apartment['slug_' + $i18n.locale]">
+        <router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor['slug_' + $i18n.locale] + '/' + apartment.entrance['slug_' + $i18n.locale] + '/' + apartment['slug_' + $i18n.locale]">
           <img :src="apartment.image" alt="">
           <div v-if="apartment.status == 2" class="status reserved">
             {{ $t('reserved') }}
@@ -317,6 +317,34 @@ export default {
     }
     .apartments-listing {
       padding: 100px 25px 25px;
+      .apartments-box {
+        max-width: 100%;
+        flex-direction: column;
+        border-bottom: 1px solid #cfcfcf;
+        padding-bottom: 15px;
+        >a, .info {
+          width: 100%;
+        }
+        .info {
+          padding: 0;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+          >div {
+            flex: 1 0 50%;
+            box-sizing: border-box;
+            margin: 10px 0 !important;
+            &.sqm,&.price {
+              text-align: right;
+            }
+            &.maisonette {
+              flex: 1 0 100%;
+              text-align: center;
+            }
+          }
+        }
+      }
     }
   }
 }

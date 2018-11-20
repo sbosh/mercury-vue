@@ -13,7 +13,8 @@ const state = {
   current: null,
   finished: [],
   futured: [],
-  hasNewBuilding: false
+  hasNewBuilding: false,
+  loading: false
 }
 
 const actions = {
@@ -58,9 +59,11 @@ const actions = {
     })
   },
   fetchCurrentBuildings ({ commit }) {
+    commit('startFetching')
     return new Promise((resolve, reject) => {
       buildingsService.getCurrentBuildings().then(({ data }) => {
         commit('setCurrentBuildings', data.data)
+        commit('stopFetching')
         resolve()
       })
     })
@@ -98,6 +101,9 @@ const getters = {
     return (slug) => {
       return state.buildingApartments.find(apartment => apartment.slug_en === slug || apartment.slug_bg === slug)
     }
+  },
+  isLoading (state) {
+    return state.loading
   }
 }
 
@@ -131,6 +137,12 @@ const mutations = {
   },
   setNewBuilding (state, hasNewBuilding) {
     state.hasNewBuilding = hasNewBuilding
+  },
+  startFetching (state) {
+    state.loading = true
+  },
+  stopFetching (state) {
+    state.loading = false
   }
 }
 

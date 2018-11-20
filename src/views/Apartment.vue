@@ -1,120 +1,115 @@
 <template>
 <div class="apartment-inner">
-  <transition name="fade" v-if="loading && !apartment">
-    <preloader-component />
-  </transition>
-  <div v-else>
-    <mq-layout mq="md+" class="left-sidebar">
-      <div class="top">
-        <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
-        <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="back-btn">{{ $t('back_building') }}</router-link>
-        <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.floorId + '/' + this.$route.params.slug" class="back-btn">{{ $t('back_floor') }}</router-link>
-      </div>
-      <div class="available-from">
-        <div class="status">
-          <div class="text">{{ $t('status') }}</div>
-          <div v-if="apartment.status == 1" class="available">
-            {{ $t('available') }}
-          </div>
-          <div v-if="apartment.status == 2" class="reserved">
-            {{ $t('reserved') }}
-          </div>
-          <div v-if="apartment.status == 3" class="sold">
-            {{ $t('sold') }}
-          </div>
+  <mq-layout mq="md+" class="left-sidebar">
+    <div class="top">
+      <router-link :to="'/' + lang"><img src="@/assets/images/logo-filter.svg" class="logo" alt=""></router-link>
+      <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="back-btn">{{ $t('back_building') }}</router-link>
+      <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.floorId + '/' + this.$route.params.slug" class="back-btn">{{ $t('back_floor') }}</router-link>
+    </div>
+    <div class="available-from">
+      <div class="status">
+        <div class="text">{{ $t('status') }}</div>
+        <div v-if="apartment.status == 1" class="available">
+          {{ $t('available') }}
         </div>
-        <div class="input-group">
-          <label for="">{{ $t('selected_block') }}:</label>
-          <select name="" id="" @change="changeRout">
-            <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id" :selected="entrance['slug_' + $i18n.locale] === $route.params.slug">
-            {{ entrance['title_' + $i18n.locale] }}
-            </option>
-          </select>
+        <div v-if="apartment.status == 2" class="reserved">
+          {{ $t('reserved') }}
+        </div>
+        <div v-if="apartment.status == 3" class="sold">
+          {{ $t('sold') }}
         </div>
       </div>
-      <div class="floor-plan">
-        <div class="text">{{ $t('floor_layout') }} <br> {{ $t('floor') }}: {{ Number($route.params.floorId) - 1}}</div>
-        <div class="svg-box" v-if="floors">
-            <img :src="floors[Number($route.params.floorId) - 1].image" alt="">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
-              <g
-                :class="{'active': apartment['slug_' + $i18n.locale] === $route.params.apartmentSlug }"
-                v-for="apartment in floors[Number($route.params.floorId) - 1].apartments.data"
-                :key="apartment.id"
-                v-tooltip="{ content: tooltipContent(apartment), placement: 'right-end', offset: '30', classes: 'right-tooltip' }"
-                @click="apartmentRoute(apartment['slug_' + $i18n.locale])">
-                <path :d="apartment.coords" fill="none"></path>
-              </g>
-            </svg>
+      <div class="input-group">
+        <label for="">{{ $t('selected_block') }}:</label>
+        <select name="" id="" @change="changeRout">
+          <option :value="entrance['slug_' + $i18n.locale]" v-for="entrance in buildingEntrances" :key="entrance.id" :selected="entrance['slug_' + $i18n.locale] === $route.params.slug">
+          {{ entrance['title_' + $i18n.locale] }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="floor-plan">
+      <div class="text">{{ $t('floor_layout') }} <br> {{ $t('floor') }}: {{ Number($route.params.floorId)}}</div>
+      <div class="svg-box" v-if="floors">
+          <img :src="floors[Number($route.params.floorId) - 1].image" alt="">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+            <g
+              :class="{'active': apartment['slug_' + $i18n.locale] === $route.params.apartmentSlug }"
+              v-for="apartment in floors[Number($route.params.floorId) -1].apartments.data"
+              :key="apartment.id"
+              v-tooltip="{ content: tooltipContent(apartment), placement: 'right-end', offset: '30', classes: 'right-tooltip' }"
+              @click="apartmentRoute(apartment['slug_' + $i18n.locale])">
+              <path :d="apartment.coords" fill="none"></path>
+            </g>
+          </svg>
+      </div>
+    </div>
+  </mq-layout>
+  <div class="apartment-info">
+    <div class="apartment-header">
+      <div class="left">
+        <div class="title"><h1>{{ apartment['title_' + $i18n.locale] }}</h1></div>
+        <div class="sqm">{{ apartment.total_area }} m²</div>
+      </div>
+      <div class="right">
+        <div class="">
+          <div class="text" v-if="apartment.status == 1">{{ $t('total_price') }}:</div>
+          <div class="price" v-if="apartment.status == 1">{{ apartment.price }} <div class="currency">{{ $t('euro') }}</div></div>
+          <div class="price available" v-if="apartment.status == 2" >{{ $t('available') }}</div>
+          <div class="price sold" v-if="apartment.status == 3" >{{ $t('sold') }}</div>
+        </div>
+        <div v-if="apartment.status == 1">
+          <div class="text"><span>{{ $t('price_per_m') }}</span> m²:</div>
+          <div class="price">{{ apartment.price_m2 }} <div class="currency">{{ $t('euro') }}</div></div>
         </div>
       </div>
-    </mq-layout>
-    <div class="apartment-info">
-      <div class="apartment-header">
-        <div class="left">
-          <div class="title"><h1>{{ apartment['title_' + $i18n.locale] }}</h1></div>
-          <div class="sqm">{{ apartment.total_area }} m²</div>
-        </div>
-        <div class="right">
-          <div class="">
-            <div class="text" v-if="apartment.status == 1">{{ $t('total_price') }}:</div>
-            <div class="price" v-if="apartment.status == 1">{{ apartment.price }} <div class="currency">{{ $t('euro') }}</div></div>
-            <div class="price available" v-if="apartment.status == 2" >{{ $t('available') }}</div>
-            <div class="price sold" v-if="apartment.status == 3" >{{ $t('sold') }}</div>
-          </div>
-          <div v-if="apartment.status == 1">
-            <div class="text"><span>{{ $t('price_per_m') }}</span> m²:</div>
-            <div class="price">{{ apartment.price_m2 }} <div class="currency">{{ $t('euro') }}</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="apartment-content">
-        <div class="right-info">
-          <div class="sidebar">
-            <h3>{{ $t('apartment_information') }}</h3>
-            <div class="text" v-html="apartment['text_' + $i18n.locale]"></div>
-            <mq-layout mq="sm" class="status-mobile">
-              <div class="text">{{ $t('status') }}</div>
-              <div class="status">
-                <div v-if="apartment.status == 2" class="reserved">
-                  {{ $t('reserved') }}
-                </div>
-                <div v-if="apartment.status == 3" class="sold">
-                  {{ $t('sold') }}
-                </div>
-                <div v-if="apartment.status == 1" class="available">
-                  {{ $t('available') }}
-                </div>
+    </div>
+    <div class="apartment-content">
+      <div class="right-info">
+        <div class="sidebar">
+          <h3>{{ $t('apartment_information') }}</h3>
+          <div class="text" v-html="apartment['text_' + $i18n.locale]"></div>
+          <mq-layout mq="sm" class="status-mobile">
+            <div class="text">{{ $t('status') }}</div>
+            <div class="status">
+              <div v-if="apartment.status == 2" class="reserved">
+                {{ $t('reserved') }}
               </div>
-            </mq-layout>
-            <a v-if="apartment.status !== 3" @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
-            <div class="popup" v-bind:class="{ active: contactFormActive }" >
-              <div class="close" @click="contactFormActive = false">{{ $t('close') }}</div>
-              <contact-form />
+              <div v-if="apartment.status == 3" class="sold">
+                {{ $t('sold') }}
+              </div>
+              <div v-if="apartment.status == 1" class="available">
+                {{ $t('available') }}
+              </div>
             </div>
-            <div class="donwload-pdf" v-if="apartment.pdf">
-              <a target="_blank" :href="apartment.pdf" class="btn-pdf">{{ $t('download_pdf') }}</a>
-            </div>
-            <mq-layout mq="sm" class="buttons">
-              <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="btn">{{ $t('back_building') }}</router-link>
-              <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.floorId + '/' + this.$route.params.slug" class="btn">{{ $t('back_floor') }}</router-link>
-            </mq-layout>
+          </mq-layout>
+          <a v-if="apartment.status !== 3" @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
+          <div class="popup" v-bind:class="{ active: contactFormActive }" >
+            <div class="close" @click="contactFormActive = false">{{ $t('close') }}</div>
+            <contact-form />
           </div>
+          <div class="donwload-pdf" v-if="apartment.pdf">
+            <a target="_blank" :href="apartment.pdf" class="btn-pdf">{{ $t('download_pdf') }}</a>
+          </div>
+          <mq-layout mq="sm" class="buttons">
+            <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/' + 'view'" class="btn">{{ $t('back_building') }}</router-link>
+            <router-link :to="'/' + lang + '/' + this.$route.params.id + '/' + this.$route.params.building + '/floor/' + this.$route.params.floorId + '/' + this.$route.params.slug" class="btn">{{ $t('back_floor') }}</router-link>
+          </mq-layout>
         </div>
-        <div class="apartment-floorplan">
-          <div class="compass">
-            <img src="@/assets/images/compass.svg" :style="{ transform: 'rotate(-' + apartment.degrees +'deg)' }" alt="">
-          </div>
-          <div v-if="apartment.mezonet == 1" class="maisonette-info">
-            <swiper :options="swiperOption">
-              <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
-              <swiper-slide><div class="img-box"><viewer><img :src="apartment.image" alt=""></viewer></div></swiper-slide>
-              <swiper-slide><div class="img-box"><viewer><img :src="apartment.image2" alt=""></viewer></div></swiper-slide>
-            </swiper>
-          </div>
-          <div v-else class="img-box">
-            <viewer><img :src="apartment.image" alt=""></viewer>
-          </div>
+      </div>
+      <div class="apartment-floorplan">
+        <div class="compass">
+          <img src="@/assets/images/compass.svg" :style="{ transform: 'rotate(-' + apartment.degrees +'deg)' }" alt="">
+        </div>
+        <div v-if="apartment.mezonet == 1" class="maisonette-info">
+          <swiper :options="swiperOption">
+            <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
+            <swiper-slide><div class="img-box"><viewer><img :src="apartment.image" alt=""></viewer></div></swiper-slide>
+            <swiper-slide><div class="img-box"><viewer><img :src="apartment.image2" alt=""></viewer></div></swiper-slide>
+          </swiper>
+        </div>
+        <div v-else class="img-box">
+          <viewer><img :src="apartment.image" alt=""></viewer>
         </div>
       </div>
     </div>
@@ -123,16 +118,15 @@
 </template>
 
 <script>
+import store from '../store'
 import { mapState } from 'vuex'
 import ContactForm from '@/components/contactForm/ContactForm'
-import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 export default {
   name: 'apartment',
-  components: { ContactForm, PreloaderComponent },
+  components: { ContactForm },
   data () {
     let $this = this
     return {
-      loading: true,
       contactFormActive: false,
       swiperOption: {
         effect: 'fade',
@@ -173,14 +167,16 @@ export default {
       this.$router.replace({ name: 'building-inner-floor', params: { slug: event.target.value, floorId: 1 } })
     }
   },
-  created () {
+  beforeRouteEnter (to, from, next) {
+    store.commit('startFetching')
     // eslint-disable-next-line
-    this.$store.cache.dispatch('fetchBuildingEntrances', this.$route.params.id).then(() => {
+    store.cache.dispatch('fetchBuildingEntrances', to.params.id).then(() => {
       // eslint-disable-next-line
-      this.$store.cache.dispatch('fetchBuildingFloors', this.$route.params.id).then(() => {
+      store.cache.dispatch('fetchBuildingFloors', to.params.id).then(() => {
         // eslint-disable-next-line
-        this.$store.cache.dispatch('fetchBuildingApartments', this.$route.params.id).then(() => {
-          this.loading = false
+        store.cache.dispatch('fetchBuildingApartments', to.params.id).then(() => {
+          next()
+          store.commit('stopFetching')
         })
       })
     })
@@ -215,7 +211,7 @@ export default {
   opacity: 0;
   visibility: hidden;
   overflow: auto;
-  transition: all .7s;
+  transition: all .4s;
   transform: translateX(-100%);
   .close {
     color: #fff;
@@ -238,10 +234,10 @@ export default {
     margin: 5% 10%;
     background: #fff;
     padding: 5%;
-    transform: translateY(100%);
-    transition-delay: 1s;
+    transform: translateY(150%);
+    transition-delay: .3s;
     transition-property: all;
-    transition-duration: .7s;
+    transition-duration: .3s;
     h3 {
       color: #2c2c2c;
       font-size: 18px;
@@ -847,6 +843,13 @@ export default {
       font-weight: 600;
       outline: none;
       padding-left: 20px;
+      box-shadow: none;
+      background-color: #fff;
+      background-image: url(~@/assets/images/down-arrow.svg);
+      background-repeat: no-repeat;
+      background-position: 96% center;
+      background-size: 13px 13px;
+      appearance: none;
     }
     span {
       color: #8d8d8d;

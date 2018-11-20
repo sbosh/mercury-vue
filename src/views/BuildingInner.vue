@@ -5,23 +5,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
-  name: 'building-inner',
-  data () {
-    return {
-      loading: false
-    }
-  },
-  created () {
-    // eslint-disable-next-line
-    // this.$store.cache.dispatch('fetchBuilding', this.$route.params.id).then(() => this.loading = false)
-  },
-  computed: {
-    ...mapState({
-      building: state => state.buildings.building
-    })
-  }
+  name: 'building-inner'
 }
 </script>
 

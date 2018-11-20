@@ -11,7 +11,8 @@
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/current-buildings'">{{ $t('current_projects') }}</router-link></h3>
               <div class="ul">
                 <li v-for="building in current" :key="building.id">
-                  <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
+                  <router-link v-if="building.status == 1 && building.use_svg == 1" :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'">{{ building['title_' + $i18n.locale] }}</router-link>
+                  <router-link v-else :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
                 </li>
               </div>
               <h3><router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link></h3>
@@ -23,8 +24,8 @@
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/about'">{{ $t('about_company') }}</router-link></h3>
               <ul>
                 <li><router-link :to="'/' + lang + '/about'">{{ $t('about_us') }}</router-link></li>
-                <li><router-link :to="'/' + lang + '/about' + '#services'">{{ $t('services') }}</router-link></li>
-                <li><a href="">{{ $t('history') }}</a></li>
+                <li><router-link :to="'/' + lang + '/about'">{{ $t('services') }}</router-link></li>
+                <li><router-link :to="'/' + lang + '/about'">{{ $t('history') }}</router-link></li>
               </ul>
               <div class="tel">
                 <a :href="$t('tel_href')" class="tel-box">
@@ -96,6 +97,9 @@ export default {
       current: state => state.buildings.current
     })
   },
+  created () {
+    this.$store.cache.dispatch('fetchCurrentBuildings')
+  },
   mounted () {
     this.convertSVG()
   },
@@ -147,9 +151,9 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 99999;
+  z-index: 99998;
   width: 195px;
-  transition-delay: 1s;
+  transition-delay: .5s;
   transition-duration: 1.2s;
   transition-property: all;
   .main-nav-logo {
@@ -205,7 +209,7 @@ export default {
     left: 0;
     height: 100%;
     transform: translateX(100%);
-    transition: all 1.3s;
+    transition: all .7s;
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
@@ -226,7 +230,7 @@ export default {
       height: 100%;
       width: 85%;
       transform: translateX(50%);
-      transition: all 2.4s;
+      transition: all 1.3s;
       h3, h3 a {
         color: #fff;
         font-size: 24px;
@@ -263,18 +267,17 @@ export default {
         opacity: 0;
         padding: 0 40px 40px;
         border-right: 1px solid rgba(#979797, .37);
-
         &:nth-child(1){
           transform: translateX(250px);
-          transition: all 1.9s;
+          transition: all 1.1s;
         }
         &:nth-child(2){
           transform: translateX(450px);
-          transition: all 2.9s;
+          transition: all 1.4s;
         }
         &:nth-child(3){
           transform: translateX(600px);
-          transition: all 3.9s;
+          transition: all 1.6s;
           border: none;
         }
       }
@@ -594,10 +597,10 @@ export default {
           animation: col3-animation .8s forwards;
         }
         &:nth-child(2){
-          animation: col3-animation 1.8s forwards;
+          animation: col3-animation 1.2s forwards;
         }
         &:nth-child(3){
-          animation: col3-animation 2.8s forwards;
+          animation: col3-animation 1.6s forwards;
         }
       }
     }

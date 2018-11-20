@@ -21,13 +21,28 @@ const actions = {
     pagesService.getNewsPage().then(({ data }) => commit('setNews', data.data))
   },
   fetchCurrentBuildingsPage ({ commit }) {
-    pagesService.getCurrentBuildingsPage().then(({ data }) => commit('setCurrentBuildingsPage', data.data))
+    return new Promise((resolve, reject) => {
+      pagesService.getCurrentBuildingsPage().then(({ data }) => {
+        commit('setCurrentBuildingsPage', data.data)
+        resolve()
+      })
+    })
   },
   fetchFutureBuildingsPage ({ commit }) {
-    pagesService.getFutureBuildingsPage().then(({ data }) => commit('setFutureBuildingsPage', data.data))
+    return new Promise((resolve, reject) => {
+      pagesService.getFutureBuildingsPage().then(({ data }) => {
+        commit('setFutureBuildingsPage', data.data)
+        resolve()
+      })
+    })
   },
   fetchFinishedBuildingsPage ({ commit }) {
-    pagesService.getFinishedBuildingsPage().then(({ data }) => commit('setFinishedBuildingsPage', data.data))
+    return new Promise((resolve, reject) => {
+      pagesService.getFinishedBuildingsPage().then(({ data }) => {
+        commit('setFinishedBuildingsPage', data.data)
+        resolve()
+      })
+    })
   },
   fetchContactsPage ({ commit }) {
     pagesService.getContactsPage().then(({ data }) => commit('setContacts', data.data))

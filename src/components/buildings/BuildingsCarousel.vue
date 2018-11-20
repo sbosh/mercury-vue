@@ -1,54 +1,45 @@
 <template>
   <div :class="{loading: !current}" class="buildings-carousel">
-    <transition name="fade" v-if="!current">
-      <preloader-component />
-    </transition>
-    <div v-else>
-      <swiper ref="swiper" :options="this.getSwiperOptions(this.home)">
-        <swiper-slide v-for="building in current" :key="building.id">
-          <div class="bg" :style="{ 'background-image': 'url(' + building.image + ')' }">
-            <div class="caption" v-if="!home">
-              <div class="title-box">
-                <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
-              </div>
+    <swiper ref="swiper" :options="this.getSwiperOptions(this.home)">
+      <swiper-slide v-for="building in current" :key="building.id">
+        <div class="bg" :style="{ 'background-image': 'url(' + building.image + ')' }">
+          <div class="caption" v-if="!home">
+            <div class="title-box">
+              <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
             </div>
-          </div>
-        </swiper-slide>
-        <div class="buildings-list" v-if="!home">
-          <h3>{{ currentBuildingsPage['title_' + $i18n.locale] }}</h3>
-          <div class="buildings-titles">
-            <div class="building-title" v-for="(building, index) in current" :key="building.id" @mouseenter="changeSwpier(index)">
-              <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" v-if="building.use_svg">
-                {{ building['title_' + $i18n.locale] }}
-              </router-link>
-              <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" v-else>
-                {{ building['title_' + $i18n.locale] }}
-              </router-link>
-            </div>
-          </div>
-          <div class="buttons">
-            <router-link :to="'/' + lang + '/future-buildings'">{{ $t('future_projects') }}</router-link>
-            <router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link>
           </div>
         </div>
-        <div class="scroll-icon" v-if="!home"><span></span></div>
-      </swiper>
-    </div>
+      </swiper-slide>
+      <div class="buildings-list" v-if="!home">
+        <h3>{{ $t('current_buildings') }}</h3>
+        <div class="buildings-titles">
+          <div class="building-title" v-for="(building, index) in current" :key="building.id" @mouseenter="changeSwpier(index)">
+            <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" v-if="building.use_svg">
+              {{ building['title_' + $i18n.locale] }}
+            </router-link>
+            <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" v-else>
+              {{ building['title_' + $i18n.locale] }}
+            </router-link>
+          </div>
+        </div>
+        <div class="buttons">
+          <router-link :to="'/' + lang + '/future-buildings'">{{ $t('future_projects') }}</router-link>
+          <router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link>
+        </div>
+      </div>
+      <div class="scroll-icon" v-if="!home"><span></span></div>
+    </swiper>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 export default {
   name: 'buildings-carousel',
-  props: ['home', 'pageTitle'],
-  components: { PreloaderComponent },
+  props: ['home', 'pageTitle', 'current'],
   data () {
     return {
       buildingsRoute: null,
-      active: false,
-      loading: true
+      active: false
     }
   },
   methods: {
@@ -79,11 +70,7 @@ export default {
   computed: {
     lang () {
       return this.$i18n.locale
-    },
-    ...mapState({
-      currentBuildingsPage: state => state.pages.currentBuildingsPage,
-      current: state => state.buildings.current
-    })
+    }
   }
 }
 </script>

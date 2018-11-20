@@ -35,6 +35,12 @@ export default {
       buildingsRoute: null
     }
   },
+  created () {
+    this.$store.commit('startFetching')
+    this.$store.cache.dispatch('fetchFuturedBuildings').then(() => {
+      this.$store.commit('stopFetching')
+    })
+  },
   computed: {
     lang () {
       return this.$i18n.locale

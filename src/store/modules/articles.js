@@ -10,6 +10,14 @@ const state = {
 const actions = {
   fetchArticles ({ commit }) {
     articleService.getArticles('/posts').then(({ data }) => commit('setArticles', data.data))
+  },
+  fetchArticle ({ commit }, id) {
+    return new Promise((resolve, reject) => {
+      articleService.getArticle(id).then(({data}) => {
+        commit('setArticle', data.data)
+        resolve()
+      })
+    })
   }
 }
 
@@ -25,6 +33,9 @@ const getters = {
 const mutations = {
   setArticles (state, articles) {
     state.all = articles
+  },
+  setArticle (state, article) {
+    state.article = article
   }
 }
 

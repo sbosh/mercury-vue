@@ -18,7 +18,7 @@
             <div class="follow-us">
               <div class="tex">{{ $t('share_text') }}:</div>
               <social-sharing
-                :url="this.$route.fullPath"
+                :url="url"
                 :title="article['title_' + $i18n.locale]"
                 :description="article['announce_' + $i18n.locale]"
                 twitter-user="Mercury99"
@@ -44,12 +44,13 @@
 </template>
 
 <script>
+import store from '../store'
 import { mapState } from 'vuex'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import NewsListingSwiper from '@/components/news/NewsListingSwiper'
 import FooterComponent from '@/components/layout/FooterComponent.vue'
 export default {
-  name: 'article-inner',
+  name: 'news-inner',
   components: {
     'navinner-component': NavinnerComponent,
     'news-listing-swiper': NewsListingSwiper,
@@ -57,6 +58,7 @@ export default {
   },
   data () {
     return {
+      url: window.location.pathname,
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 15,
@@ -79,15 +81,19 @@ export default {
     }
   },
   created () {
-    console.log(this.$route.fullPath)
+    console.log(window.location.pathname)
+  },
+  beforeRouteEnter (to, from, next) {
+    // eslint-disable-next-line
+    store.cache.dispatch('fetchArticle', to.params.id).then(() => {
+      next()
+    })
   },
   computed: {
     ...mapState({
-      articles: state => state.articles.all
-    }),
-    article () {
-      return this.$store.getters.getArticle(Number(this.$route.params.id), this.$route.params.slug)
-    }
+      articles: state => state.articles.all,
+      article: state => state.articles.article
+    })
   }
 }
 </script>
@@ -239,6 +245,14 @@ export default {
       }
     }
   }
+  @media screen and(max-width: 1280px) {
+    .news-article {
+      padding-right: 20px;
+      .info-box {
+        padding-right: 20px;
+      }
+    }
+  }
   @media screen and(max-width: 768px) {
     padding: 90px 25px 25px;
     &:before {
@@ -263,6 +277,12 @@ export default {
         .date {
           color: #fff;
         }
+      }
+    }
+    .news-article {
+      padding-right: 0;
+      .info-box {
+        padding-right: 0;
       }
     }
   }

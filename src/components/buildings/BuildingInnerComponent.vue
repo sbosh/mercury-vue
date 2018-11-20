@@ -1,118 +1,138 @@
 <template>
-  <div class="main-content">
-    <transition name="fade" v-if="loading">
-      <preloader-component />
-    </transition>
-    <div>
-      <mq-layout mq="md+"><navinner-component navigation="buildingNav" v-if="building" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
-      <div class="inner-building">
-        <div class="inner-building-header">
-          <mq-layout mq="sm"><h1 class="page-title" v-if="building">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
-          <div class="main-img">
-            <router-link v-if="building.status == 1 && building.use_svg == 1" :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'"><img :src="building.image" alt=""></router-link>
-            <img v-else :src="building.image" alt="">
-          </div>
-          <div v-if="building.status == 1 && building.use_svg == 1" class="btn-box">
-            <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">{{ $t('views_scheme') }}</router-link>
-          </div>
+  <div class="main-content" v-if="building">
+    <mq-layout mq="md+"><navinner-component navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
+    <div class="inner-building">
+      <div class="inner-building-header">
+        <mq-layout mq="sm"><h1 class="page-title" v-if="building">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
+        <div class="main-img">
+          <router-link v-if="building.status == 1 && building.use_svg == 1" :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'"><img :src="building.image" alt=""></router-link>
+          <img v-else :src="building.image" alt="">
         </div>
-        <div class="caption animate-box" id="about">
-          <div class="title-box">
-            <h2 class="title" v-html="$t('about_building')"></h2>
-          </div>
-          <div class="text" v-if="building" v-html="building['text_' + $i18n.locale]"></div>
+        <div v-if="building.status == 1 && building.use_svg == 1" class="btn-box">
+          <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" class="btn">{{ $t('views_scheme') }}</router-link>
         </div>
-        <div class="about-complex" v-if="building.status === 1 && building.use_svg === 1">
-          <div class="box-row">
-            <div class="box animate-box">
-              <div class="info">
-                <div class="title">{{ $t('company_name') }}</div>
-                <div class="text">{{ building['title_' + $i18n.locale] }}</div>
-              </div>
-            </div>
-            <div class="box animate-box">
-              <div class="info">
-                <div class="title">{{ $t('floors_count') }}</div>
-                <div class="text">{{ building.floorsCount }}</div>
-              </div>
-            </div>
-            <div class="box animate-box">
-              <div class="info">
-                <div class="title">{{ $t('apartments_count') }}</div>
-                <div class="text">{{ building.totalApartments }}</div>
-              </div>
-            </div>
-            <div class="box animate-box">
-              <div class="info">
-                <div class="title">{{ $t('free_apartments') }}</div>
-                  <div class="text">{{ building.totalFreeApartments }}</div>
-              </div>
-            </div>
-            <div class="box animate-box">
-              <div class="info">
-                <div class="title">{{ $t('finished_date') }}</div>
-                <div class="text">{{ building.year }}</div>
-              </div>
+      </div>
+      <div class="caption animate-box" id="about">
+        <div class="title-box">
+          <h2 class="title" v-html="$t('about_building')"></h2>
+        </div>
+        <div class="text" v-if="building" v-html="building['text_' + $i18n.locale]"></div>
+      </div>
+      <div class="about-complex" v-if="building.status === 1 && building.use_svg === 1">
+        <div class="box-row">
+          <div class="box animate-box">
+            <div class="info">
+              <div class="title">{{ $t('company_name') }}</div>
+              <div class="text">{{ building['title_' + $i18n.locale] }}</div>
             </div>
           </div>
-        </div>
-        <div class="gallery-building" id="gallery" v-if="building">
-          <swiper ref="swiper" :options="swiperOption">
-            <swiper-slide v-for="(image, key) in building.gallery" :key="key">
-              <img :src="image" alt=""><div class="progress-bar"></div>
-            </swiper-slide>
-          </swiper>
-        </div>
-        <div class="location" id="location">
-          <div class="caption animate-box">
-            <div class="title-box">
-              <h2 class="title" v-html="$t('about_location')"></h2>
+          <div class="box animate-box">
+            <div class="info">
+              <div class="title">{{ $t('floors_count') }}</div>
+              <div class="text">{{ building.floorsCount }}</div>
             </div>
           </div>
-          <div class="box-row">
-            <div class="box" v-if="building.facilities" v-for="facility in building.facilities.data" :key="facility.id">
-              <div class="info">
-                <div class="icon"><img :src="facility.image" alt=""></div>
-                <div class="text">{{facility['title_' + $i18n.locale]}}</div>
-              </div>
+          <div class="box animate-box">
+            <div class="info">
+              <div class="title">{{ $t('apartments_count') }}</div>
+              <div class="text">{{ building.totalApartments }}</div>
             </div>
           </div>
-        </div>
-        <div class="map">
-          <div class="img-box">
-            <a :href="building.google_map" target='_blank' class="btn">{{ building['annonce_' + $i18n.locale] }} <span>{{ $t('to_the_location') }}</span></a>
-            <GmapMap
-              :center="{lat:Number(building.map_lat), lng:Number(building.map_lng)}"
-              :zoom="16"
-            >
-              <GmapMarker
-                :position="{lat:Number(building.map_lat), lng:Number(building.map_lng)}"
-                :icon="icon"
-              />
-            </GmapMap>
-            <div class="btn-box"><a :href="building.google_map" target='_blank' class="btn">{{ $t('see_map') }}</a></div>
+          <div class="box animate-box">
+            <div class="info">
+              <div class="title">{{ $t('free_apartments') }}</div>
+                <div class="text">{{ building.totalFreeApartments }}</div>
+            </div>
           </div>
-        </div>
-        <div class="news-inner" id="news">
-          <div class="title">{{ $t('news') }}</div>
-          <div class="news-swiper">
-            <news-listing-swiper :articles="articles" />
-          </div>
-        </div>
-        <div class="next-building" v-if="building.next_building">
-          <div class="text">{{ $t('next_building') }}</div>
-          <h2 class="title animate-box">
-            <router-link :to="'/' + lang + '/' + building.next_building.id + '/' + building.next_building['slug_' + $i18n.locale]">{{ building.next_building['title_' + $i18n.locale] }}</router-link>
-          </h2>
-          <div class="img-box">
-            <router-link :to="'/' + lang + '/' + building.next_building.id + '/' + building.next_building['slug_' + $i18n.locale]">
-              <img :src="building.next_building.image" alt="">
-            </router-link>
+          <div class="box animate-box">
+            <div class="info">
+              <div class="title">{{ $t('finished_date') }}</div>
+              <div class="text">{{ building.year }}</div>
+            </div>
           </div>
         </div>
       </div>
-      <footer-component />
+      <div class="gallery-building" id="gallery" v-if="building">
+        <swiper ref="swiper" :options="swiperOption">
+          <swiper-slide v-for="(image, key) in building.gallery" :key="key">
+            <img :src="image" alt=""><div class="progress-bar"></div>
+          </swiper-slide>
+        </swiper>
+      </div>
+      <div class="location" id="location">
+        <div class="caption animate-box">
+          <div class="title-box">
+            <h2 class="title" v-html="$t('about_location')"></h2>
+          </div>
+        </div>
+        <div class="box-row">
+          <div class="box" v-if="building.facilities" v-for="facility in building.facilities.data" :key="facility.id">
+            <div class="info">
+              <div class="icon"><img :src="facility.image" alt=""></div>
+              <div class="text">{{facility['title_' + $i18n.locale]}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="map">
+        <div class="img-box">
+          <a :href="building.google_map" target='_blank' class="btn">{{ building['annonce_' + $i18n.locale] }} <span>{{ $t('to_the_location') }}</span></a>
+          <GmapMap
+            :center="{lat:Number(building.map_lat), lng:Number(building.map_lng)}"
+            :zoom="16"
+          >
+            <GmapMarker
+              :position="{lat:Number(building.map_lat), lng:Number(building.map_lng)}"
+              :clickable="true"
+              :icon="icon"
+              @click="infoWindow = !infoWindow">
+              <GmapInfoWindow v-if="infoWindow">
+                <div class="map-tooltip">
+                  <img v-if="building.thumb" :src="building.thumb" alt="" />
+                  <h3>{{ building['title_' + $i18n.locale]}}</h3>
+                  <p><span class="text">{{ $t('address') }}:</span>{{ building['annonce_' + $i18n.locale] }}</p>
+                  <div v-if="building.use_svg === 1" class="available-apartments">
+                    <div class="text" v-html="$t('available_apartments') + ':'"></div>
+                    <span><b>{{ building.totalFreeApartments }}</b>/<span>{{ building.totalApartments }}</span></span>
+                  </div>
+                  <div v-if="building.use_svg === 1" class="tel"><div class="text">{{ $t('phone') }}:</div><a :href="$t('tel_href')">{{ $t('tel_phone') }}</a></div>
+                </div>
+              </GmapInfoWindow>
+            </GmapMarker>
+          </GmapMap>
+          <div class="btn-box"><a :href="building.google_map" target='_blank' class="btn">{{ $t('see_map') }}</a></div>
+        </div>
+      </div>
+      <div class="news-inner" id="news">
+        <div class="title">{{ $t('news') }}</div>
+        <div class="news-swiper">
+          <news-listing-swiper :articles="articles" />
+        </div>
+      </div>
+      <div class="next-building" v-if="building.next_building">
+        <div class="text">{{ $t('next_building') }}</div>
+        <h2 class="title animate-box">
+          <router-link :to="'/' + lang + '/' + building.next_building.id + '/' + building.next_building['slug_' + $i18n.locale]">{{ building.next_building['title_' + $i18n.locale] }}</router-link>
+        </h2>
+        <div class="img-box">
+          <router-link :to="'/' + lang + '/' + building.next_building.id + '/' + building.next_building['slug_' + $i18n.locale]">
+            <img :src="building.next_building.image" alt="">
+          </router-link>
+        </div>
+      </div>
+      <div class="next-building" v-else>
+        <div class="text">{{ $t('prev_building') }}</div>
+        <h2 class="title animate-box">
+          <router-link :to="'/' + lang + '/' + building.prev_building.id + '/' + building.prev_building['slug_' + $i18n.locale]">{{ building.prev_building['title_' + $i18n.locale] }}</router-link>
+        </h2>
+        <div class="img-box">
+          <router-link :to="'/' + lang + '/' + building.prev_building.id + '/' + building.prev_building['slug_' + $i18n.locale]">
+            <img :src="building.prev_building.image" alt="">
+          </router-link>
+        </div>
+      </div>
     </div>
+    <footer-component />
   </div>
 </template>
 
@@ -121,19 +141,17 @@ import { mapState } from 'vuex'
 import FooterComponent from '@/components/layout/FooterComponent.vue'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import NewsListingSwiper from '@/components/news/NewsListingSwiper'
-import PreloaderComponent from '@/components/preloader/PreloaderComponent'
 export default {
   name: 'building-inner-component',
   components: {
     'footer-component': FooterComponent,
     'navinner-component': NavinnerComponent,
-    'news-listing-swiper': NewsListingSwiper,
-    'preloader-component': PreloaderComponent
+    'news-listing-swiper': NewsListingSwiper
   },
   data () {
     return {
       icon: require('@/assets/images/pin-build.svg'),
-      loading: true,
+      infoWindow: false,
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 15,
@@ -175,11 +193,11 @@ export default {
     this.loading = true
   },
   created () {
+    this.$store.commit('startFetching')
     this.$store.dispatch('fetchBuilding', this.$route.params.id).then(() => {
-      this.loading = false
-
       this.$refs.swiper.swiper.init()
       this.$refs.swiper.swiper.update()
+      this.$store.commit('stopFetching')
     })
   },
   computed: {
@@ -337,6 +355,61 @@ export default {
   align-items: center;
   padding-bottom: 100px;
   padding-left: 10%;
+  .map-tooltip {
+    h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-family: 'Exo 2', sans-serif;
+    }
+    img {
+      max-width: 300px !important;
+      display: block;
+      margin-bottom: 5px;
+    }
+    p {
+      margin: 0 0 10px 0;
+    }
+    .tel {
+      display: flex;
+      align-items: center;
+      .text {
+        display: inline-block;
+        margin: 0 5px 0 0;
+      }
+      a {
+        color: #333;
+      }
+    }
+    .available-apartments {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      .text {
+        margin-right: 5px;
+        margin-bottom: 0;
+      }
+      span {
+        display: inline-block;
+        font-size: 20px;
+        background: #dfdfdf;
+        color: #333;
+        b {
+          padding: 0 5px;
+        }
+        &:first-of-type {
+          padding: 3px 5px;
+        }
+      }
+    }
+    .text, .tel {
+      font-weight: 600;
+      font-family: Montserrat;
+      margin-bottom: 5px;
+      br {
+        display: none;
+      }
+    }
+  }
   .vue-map-container {
     width: 100%;
     height: 65vh;

@@ -4,9 +4,9 @@
     <div class="error-page">
       <div class="caption">
         <div class="title-box">
-          <h1 class="title">Тази страница нe беше намерена</h1>
+          <h1 class="title">{{ $t('error404_title') }}</h1>
         </div>
-        <h2>404 </h2>
+        <h2>404</h2>
       </div>
     </div>
   </div>
@@ -20,7 +20,7 @@ export default {
   },
   data () {
     return {
-      title: '404 Грешка'
+      title: '404'
     }
   }
 }

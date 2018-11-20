@@ -9,7 +9,7 @@
         <inner-news-nav v-if="navigation === 'newsNav'" />
         <inner-news-breadcrumbs v-if="navigation === 'newsBreadcrumbs'" />
       </mq-layout>
-      <div class="btn-box" v-if="this.$route.name === 'building-inner-component'"><a @click="viewScheme" class="btn">{{ $t('views_scheme') }}</a></div>
+      <div class="btn-box" v-if="this.$route.name === 'building-inner-component' && buildingSvg"><a @click="viewScheme" class="btn">{{ $t('views_scheme') }}</a></div>
       <div class="back-btn" @click="routeBack">{{ $t('back') }}</div>
       <div class="scroll-top" @click="scrollTop"></div>
     </nav>
@@ -26,7 +26,8 @@ export default {
   name: 'navinner-component',
   props: [
     'navigation',
-    'navTitle'
+    'navTitle',
+    'buildingSvg'
   ],
   components: {
     'headroom': headroom,
@@ -57,7 +58,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$route.name)
     let anchorlinks = document.querySelectorAll('a[href^="#"]')
     for (let item of anchorlinks) {
       item.addEventListener('click', (e) => {
