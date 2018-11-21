@@ -16,7 +16,8 @@
         <div class="title-box">
           <h2 class="title" v-html="$t('about_building')"></h2>
         </div>
-        <div class="text" v-if="building" v-html="building['text_' + $i18n.locale]"></div>
+        <div class="text" v-html="building['text_' + $i18n.locale]"></div>
+        <div class="pdf" v-if="building.pdf">{{ building.pdf }}</div>
       </div>
       <div class="about-complex" v-if="building.status === 1 && building.use_svg === 1">
         <div class="box-row">

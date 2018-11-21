@@ -59,11 +59,9 @@ const actions = {
     })
   },
   fetchCurrentBuildings ({ commit }) {
-    commit('startFetching')
     return new Promise((resolve, reject) => {
       buildingsService.getCurrentBuildings().then(({ data }) => {
         commit('setCurrentBuildings', data.data)
-        commit('stopFetching')
         resolve()
       })
     })

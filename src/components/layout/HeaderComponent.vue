@@ -23,9 +23,9 @@
               <h3><router-link :to="'/' + lang + '/contacts'">{{ $t('contacts') }}</router-link></h3>
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/about'">{{ $t('about_company') }}</router-link></h3>
               <ul>
-                <li><router-link :to="'/' + lang + '/about'">{{ $t('about_us') }}</router-link></li>
-                <li><router-link :to="'/' + lang + '/about'">{{ $t('services') }}</router-link></li>
-                <li><router-link :to="'/' + lang + '/about'">{{ $t('history') }}</router-link></li>
+                <li><router-link :to="'/' + lang + '/about#company'">{{ $t('about_us') }}</router-link></li>
+                <li><router-link :to="'/' + lang + '/about#services'">{{ $t('services') }}</router-link></li>
+                <li><router-link :to="'/' + lang + '/about#history'">{{ $t('history') }}</router-link></li>
               </ul>
               <div class="tel">
                 <a :href="$t('tel_href')" class="tel-box">
@@ -588,19 +588,19 @@ export default {
     .main-navigation {
       transform: translateX(0);
       .content {
-        animation: nav-animation 1s forwards;
+        animation: nav-animation 1s forwards alternate;
+        background: #5f5f5f;
       }
-
       .col {
         opacity: 1;
         &:nth-child(1){
-          animation: col3-animation .8s forwards;
+          animation: col3-animation .8s forwards alternate;
         }
         &:nth-child(2){
-          animation: col3-animation 1.2s forwards;
+          animation: col3-animation 1.2s forwards alternate;
         }
         &:nth-child(3){
-          animation: col3-animation 1.6s forwards;
+          animation: col3-animation 1.6s forwards alternate;
         }
       }
     }

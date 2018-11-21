@@ -161,7 +161,6 @@ export default {
         store.cache.dispatch('fetchBuildingFloors', to.params.id).then(() => {
           // eslint-disable-next-line
           store.cache.dispatch('fetchBuildingApartments', to.params.id).then(() => {
-            store.commit('stopFetching')
             next()
           })
         })
@@ -270,7 +269,9 @@ export default {
 
         this.entrances.push(entrc)
       })
+
       this.initTooltip()
+      setTimeout(() => store.commit('stopFetching'), 1000)
     },
     onDown (entranceSlug, florSlug) {
       return () => {
