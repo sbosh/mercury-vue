@@ -250,7 +250,10 @@ export default {
       line-height: 20px;
     }
     p {
-      font-size: 16px;
+      color: #383838;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 23px;
     }
     .img-box {
       margin-bottom: 10px;

@@ -283,6 +283,12 @@ export default {
       padding-right: 0;
       .info-box {
         padding-right: 0;
+        p {
+          color: #383838;
+          font-size: 13px;
+          font-weight: 400;
+          line-height: 23px;
+        }
       }
     }
   }
