@@ -44,7 +44,6 @@
 </template>
 
 <script>
-import store from '../store'
 import { mapState } from 'vuex'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import NewsListingSwiper from '@/components/news/NewsListingSwiper'
