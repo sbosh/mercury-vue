@@ -588,19 +588,18 @@ export default {
     .main-navigation {
       transform: translateX(0);
       .content {
-        animation: nav-animation 1s forwards alternate;
-        background: #5f5f5f;
+        animation: nav-animation 1s 1 linear 0.01s forwards alternate;
       }
       .col {
         opacity: 1;
         &:nth-child(1){
-          animation: col3-animation .8s forwards alternate;
+          animation: col3-animation .7s 1 linear 0.01s forwards alternate;
         }
         &:nth-child(2){
-          animation: col3-animation 1.2s forwards alternate;
+          animation: col3-animation 1.1s 1 linear 0.01s forwards alternate;
         }
         &:nth-child(3){
-          animation: col3-animation 1.6s forwards alternate;
+          animation: col3-animation 1.4s 1 linear 0.01s forwards alternate;
         }
       }
     }

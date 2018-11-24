@@ -53,12 +53,21 @@
           </div>
         </div>
       </div>
-      <div class="gallery-building" id="gallery" v-if="building">
-        <swiper ref="swiper" :options="swiperOption">
-          <swiper-slide v-for="(image, key) in building.gallery" :key="key">
-            <img :src="image" alt=""><div class="progress-bar"></div>
-          </swiper-slide>
-        </swiper>
+      <div class="gallery-building" id="gallery">
+        <mq-layout mq="md+">
+          <swiper ref="swiper" :options="swiperOption">
+            <swiper-slide v-for="(image, key) in building.gallery" :key="key">
+              <img :src="image" alt=""><div class="progress-bar"></div>
+            </swiper-slide>
+          </swiper>
+        </mq-layout>
+        <mq-layout mq="sm">
+          <swiper ref="swiper" :options="swiperOption" v-viewer>
+            <swiper-slide v-for="(image, key) in building.gallery" :key="key">
+              <img :src="image" alt=""><div class="progress-bar"></div>
+            </swiper-slide>
+          </swiper>
+        </mq-layout>
       </div>
       <div class="location" id="location">
         <div class="caption animate-box">
@@ -171,6 +180,13 @@ export default {
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
+        },
+        breakpoints: {
+          768: {
+            loop: false,
+            autoplay: false,
+            spaceBetween: 10
+          }
         }
       }
     }
@@ -677,7 +693,8 @@ export default {
   }
   @media screen and(max-width: 768px) {
     .swiper-container {
-      padding-right: 60px;
+      padding-right: 30px;
+      padding-left: 30px;
     }
     .swiper-slide {
       width: 100%;
@@ -685,6 +702,7 @@ export default {
         right: 25px;
         bottom: 25px;
         left: 25px;
+        display: none;
       }
     }
   }

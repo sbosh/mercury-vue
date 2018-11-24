@@ -321,6 +321,9 @@ export default {
     outline: none;
     resize: none;
     width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    min-height: 30px;
     &:focus {
       border-color: #fa6a02;
     }
@@ -340,9 +343,10 @@ export default {
       background-image: url(~@/assets/images/send.svg);
       background-position: 40px 18px;
       background-repeat: no-repeat;
+      box-shadow: none;
     }
   }
-  textarea {
+  textarea.form-element {
     min-height: 161px;
   }
   &.radio-group {
