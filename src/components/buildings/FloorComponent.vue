@@ -341,9 +341,12 @@ export default {
     g polygon:hover {
       opacity: .7;
     }
+    .sold,
+    .sold path,
     .sold:hover,
     .sold:hover path {
       fill: red !important;
+      opacity: .7;
     }
   }
   @media screen and(max-width: 1024px) {

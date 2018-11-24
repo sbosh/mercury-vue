@@ -127,7 +127,8 @@ export default {
         name: this.name,
         email: this.email,
         phone: this.phone,
-        message: this.message
+        message: this.message,
+        language: this.$route.params.lang
       }
 
       if (this.hasApartment) {
