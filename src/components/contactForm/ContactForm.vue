@@ -70,6 +70,8 @@
 </template>
 
 <script>
+import ContactsService from '@/services/ContactsService'
+import HTTP from '@/api/http'
 export default {
   name: 'contact-form',
   data () {
@@ -86,22 +88,46 @@ export default {
       errors: {
         name: '',
         email: ''
-      }
+      },
+      contactService: null
     }
+  },
+  created () {
+    this.contactService = new ContactsService(HTTP)
   },
   methods: {
     checkForm (e) {
       e.preventDefault()
       this.clearErrorMessages()
 
+      let hasError = false
       if (!this.name || !this.name.length) {
         this.errors.name = 'Това поле е задължително!'
+        hasError = true
       }
       if (!this.email || !this.email.length) {
         this.errors.email = 'Това поле е задължително!'
+        hasError = true
       }
 
-      this.scrollToFirstErrorMessage()
+      if (hasError) {
+        this.scrollToFirstErrorMessage()
+      } else {
+        this.submitForm()
+      }
+    },
+    submitForm () {
+      const formData = JSON.stringify({
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+        message: this.message
+      })
+      this.contactService.submit(formData).then(data => {
+        console.log(data)
+      }).catch((error) => {
+        console.log(error)
+      })
     },
     scrollToFirstErrorMessage () {
       const firstErrorKey = this.getFirstErrorKey()

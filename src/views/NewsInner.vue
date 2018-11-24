@@ -18,9 +18,9 @@
             <div class="follow-us">
               <div class="tex">{{ $t('share_text') }}:</div>
               <social-sharing
-                :url="url"
-                :title="article['title_' + $i18n.locale]"
-                :description="article['announce_' + $i18n.locale]"
+                url="https://www.google.bg/imghp?hl=bg&authuser=0"
+                title="asfasfafasf"
+                description="afgadgagaggaagagagagagagaggaagga"
                 twitter-user="Mercury99"
                 inline-template>
                 <div>
@@ -81,12 +81,9 @@ export default {
     }
   },
   created () {
-    console.log(window.location.href)
-  },
-  beforeRouteEnter (to, from, next) {
-    // eslint-disable-next-line
-    store.cache.dispatch('fetchArticle', to.params.id).then(() => {
-      next()
+    this.$store.commit('startFetching')
+    this.$store.dispatch('fetchArticle', this.$route.params.id).then(() => {
+      this.$store.commit('stopFetching')
     })
   },
   computed: {
