@@ -86,7 +86,7 @@
           <a v-if="apartment.status !== 3" @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
           <div class="popup" v-bind:class="{ active: contactFormActive }" >
             <div class="close" @click="contactFormActive = false">{{ $t('close') }}</div>
-            <contact-form />
+            <contact-form :hasApartment="apartment.id" />
           </div>
           <div class="donwload-pdf" v-if="apartment.pdf">
             <a target="_blank" :href="apartment.pdf" class="btn-pdf">{{ $t('download_pdf') }}</a>

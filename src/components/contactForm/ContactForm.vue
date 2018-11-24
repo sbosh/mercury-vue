@@ -66,6 +66,9 @@
     <div class="form-group">
       <input type="submit" class="send form-element" :value="$t('send')">
     </div>
+    <div class="form-errors">
+      <div class="form-errors-error" v-for="(error, index) in responseErrors" :key="index" v-text="error" />
+    </div>
   </form>
 </template>
 
@@ -74,6 +77,7 @@ import ContactsService from '@/services/ContactsService'
 import HTTP from '@/api/http'
 export default {
   name: 'contact-form',
+  props: ['hasApartment'],
   data () {
     return {
       reason: '',
@@ -89,6 +93,7 @@ export default {
         name: '',
         email: ''
       },
+      responseErrors: [],
       contactService: null
     }
   },
@@ -98,6 +103,7 @@ export default {
   methods: {
     checkForm (e) {
       e.preventDefault()
+      this.responseErrors = []
       this.clearErrorMessages()
 
       let hasError = false
@@ -117,16 +123,33 @@ export default {
       }
     },
     submitForm () {
-      const formData = JSON.stringify({
+      const data = {
         name: this.name,
         email: this.email,
         phone: this.phone,
-        message: this.message
-      })
-      this.contactService.submit(formData).then(data => {
-        console.log(data)
-      }).catch((error) => {
-        console.log(error)
+        message: this.message,
+        language: this.$route.params.lang
+      }
+
+      if (this.hasApartment) {
+        data.apartment_id = this.hasApartment
+      }
+
+      const formData = JSON.stringify(data)
+      this.contactService.submit(formData).then(response => {
+        if (response.status && response.status === 200) {
+          alert('success')
+        }
+      }).catch(({ response }) => {
+        const errors = response.data.errors
+        const errorKeys = Object.keys(errors)
+        if (!errorKeys.length) return
+
+        const messages = []
+        for (let errorKey of errorKeys) {
+          messages.push(errors[errorKey][0])
+        }
+        this.responseErrors = messages
       })
     },
     scrollToFirstErrorMessage () {
