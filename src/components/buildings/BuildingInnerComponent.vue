@@ -584,6 +584,12 @@ export default {
   }
   .box {
     flex: 1 0 50%;
+    .icon {
+      width: 40px;
+      img,svg {
+        max-width: 100%;
+      }
+    }
     .info {
       padding: 15px 0;
       margin-left: 10px;
