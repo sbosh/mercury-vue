@@ -468,7 +468,7 @@ export default {
 }
 .left-sidebar {
   width: 195px;
-  border-right: 1px solid #979797;
+  border-right: 1px solid #e4e4e4;
   background: #f8f8f8;
   position: fixed;
   left: 0;

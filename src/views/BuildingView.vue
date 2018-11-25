@@ -714,6 +714,12 @@ canvas {
     &.active {
       transform: translateX(0);
     }
+    @media screen and(max-width: 1024px) {
+      &.active {
+        width: auto;
+        left: 0;
+      }
+    }
     @media screen and(max-width: 768px) {
       &.active {
         z-index: 99999;

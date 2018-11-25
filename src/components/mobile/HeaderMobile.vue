@@ -329,15 +329,15 @@ export default {
         opacity: 0;
         padding: 0;
         &:nth-child(1){
-          transform: translateX(250px);
+          /*transform: translateX(250px);*/
           transition: all .9s;
         }
         &:nth-child(2){
-          transform: translateX(450px);
+          /*transform: translateX(450px);*/
           transition: all 1.3s;
         }
         &:nth-child(3){
-          transform: translateX(600px);
+          /*transform: translateX(600px);*/
           transition: all 1.7s;
           border: none;
         }
@@ -424,15 +424,15 @@ export default {
       }
       .col {
         opacity: 1;
-        &:nth-child(1){
-          animation: col3-animation .3s forwards;
-        }
-        &:nth-child(2){
-          animation: col3-animation .8s forwards;
-        }
-        &:nth-child(3){
-          animation: col3-animation 1.3s forwards;
-        }
+        // &:nth-child(1){
+        //   animation: col3-animation .3s forwards;
+        // }
+        // &:nth-child(2){
+        //   animation: col3-animation .8s forwards;
+        // }
+        // &:nth-child(3){
+        //   animation: col3-animation 1.3s forwards;
+        // }
       }
     }
   }

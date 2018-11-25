@@ -79,6 +79,11 @@ export default {
       }
     }
   },
+  metaInfo () {
+    return {
+      title: this.article ? this.article['seo_title_' + this.$i18n.locale] : ''
+    }
+  },
   created () {
     this.$store.commit('startFetching')
     this.$store.dispatch('fetchArticle', this.$route.params.id).then(() => {

@@ -74,7 +74,7 @@ export default {
 <style scoped lang="scss">
 .left-sidebar {
   width: 195px;
-  border-right: 1px solid #979797;
+  border-right: 1px solid #e4e4e4;
   position: fixed;
   left: 0;
   top: 0;

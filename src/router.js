@@ -4,6 +4,7 @@ import Meta from 'vue-meta'
 import Home from './views/Home.vue'
 import Error404 from './views/Error404.vue'
 import About from './views/About.vue'
+import Terms from './views/Terms.vue'
 import Contacts from './views/Contacts.vue'
 import News from './views/News.vue'
 import NewsInner from './views/NewsInner.vue'
@@ -96,6 +97,11 @@ let router = new Router({
       path: '/:lang/news/:id/:slug',
       name: 'news-inner',
       component: NewsInner
+    },
+    {
+      path: '/:lang/terms',
+      name: 'terms',
+      component: Terms
     },
     {
       path: '/:lang/*',

@@ -118,6 +118,9 @@ export default {
       animation: bounce-animation .4s linear alternate infinite;
     }
   }
+  @media screen and(max-width: 1024px) {
+    display: none;
+  }
 }
 .active-component {
   .scroll-icon {
@@ -303,6 +306,40 @@ export default {
         .title {
           font-size: 28px;
           line-height: 36px;
+        }
+      }
+    }
+  }
+}
+@media screen and(max-width: 1024px) {
+  .buildings-carousel {
+    .swiper-slide {
+      .caption {
+        max-width: 100%;
+        margin-bottom: 20%;
+      }
+    }
+    .buildings-list {
+      left: 195px;
+      padding: 15px 0;
+      &:before {
+        display: none;
+      }
+      h3 {
+        margin-bottom: 10px;
+      }
+      .buildings-titles {
+        margin-bottom: 15px;
+      }
+      .building-title {
+        a {
+          padding: 10px 0;
+        }
+      }
+      .buttons  {
+        a {
+          width: 100%;
+          text-align: center;
         }
       }
     }
