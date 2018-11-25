@@ -61,7 +61,7 @@
           <div class="filter-box price-range">
             <div class="text">{{ $t('select_price') }}:</div>
             <div class="price">
-              <div class="min">5 000</div>
+              <div class="min">5 000 EUR</div>
               <vue-slider
                 :show="show"
                 ref="slider"
@@ -71,7 +71,7 @@
                 :min="priceFrom"
                 :max="300000"
                 :interval="5000" />
-              <div class="max">300 000</div>
+              <div class="max">300 000 EUR</div>
             </div>
           </div>
           <div class="filter-box">
