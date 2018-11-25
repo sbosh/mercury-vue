@@ -254,15 +254,12 @@ export default {
     top: 0;
     height: 591px;
     background-color: #232323;
-    z-index: 0;
+    z-index: -1;
   }
   .contacts-us {
     background: #fff;
     padding: 70px 110px;
-    position: relative;
-    z-index: 10;
     margin: 0 160px 120px 160px;
-
     h3 {
       color: #2c2c2c;
       font-size: 18px;

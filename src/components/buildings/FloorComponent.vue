@@ -554,6 +554,7 @@ export default {
       background-position: 96% center;
       background-size: 13px 13px;
       appearance: none;
+      border-radius: 0;
     }
     span {
       color: #8d8d8d;

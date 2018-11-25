@@ -6,6 +6,9 @@
           <div class="caption" v-if="!home">
             <div class="title-box">
               <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
+              <div class="description">
+                <p>{{ building['annonce_' + $i18n.locale] }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -16,6 +19,7 @@
           <div class="building-title" v-for="(building, index) in current" :key="building.id" @mouseenter="changeSwpier(index)">
             <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" v-if="building.use_svg">
               {{ building['title_' + $i18n.locale] }}
+              <span class="icon"><img src="@/assets/images/floorplan-icon.svg" alt=""></span>
             </router-link>
             <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" v-else>
               {{ building['title_' + $i18n.locale] }}
@@ -117,11 +121,13 @@ export default {
 }
 .active-component {
   .scroll-icon {
-  transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
   }
- .buildings-list {
-  transform: translateY(0);
- }
+  .buildings-carousel .caption .description,
+  .buildings-list {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 .buildings-list {
   position: absolute;
@@ -169,6 +175,7 @@ export default {
     border-radius: 0;
     opacity: 1;
     display: block;
+    position: relative;
     &:last-child {
       border-bottom: 0;
     }
@@ -177,7 +184,11 @@ export default {
       display: block;
       padding: 20px 0;
       text-decoration: none;
-      display: block;
+      display: flex;
+      align-items: center;
+      .icon {
+        margin-left: 10px;
+      }
       &:before {
         counter-increment: titles;
         content: "0" counters(titles,". 0");
@@ -188,7 +199,7 @@ export default {
         font-weight: 700;
         text-transform: uppercase;
         float: left;
-        margin: 5px 10px 0;
+        margin: 0 10px 0;
       }
     }
     &:hover,
@@ -243,6 +254,16 @@ export default {
     max-width: 50%;
     position: relative;
     z-index: 1000;
+  }
+  .description {
+    transform: translateY(-100px);
+    transition: all .3s;
+    opacity: 0;
+    p {
+      font-size: 18px;
+      color: #fff;
+      font-weight: 500;
+    }
   }
   .swiper-wrapper,
   .swiper-container {

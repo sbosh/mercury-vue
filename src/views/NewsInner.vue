@@ -18,9 +18,9 @@
             <div class="follow-us">
               <div class="tex">{{ $t('share_text') }}:</div>
               <social-sharing
-                url="https://www.google.bg/imghp?hl=bg&authuser=0"
-                title="asfasfafasf"
-                description="afgadgagaggaagagagagagagaggaagga"
+                url="http://veze.bg"
+                title="SHTE TI EBA MAIKATA"
+                description="BOKLIK MRYSEN KITAISKI"
                 twitter-user="Mercury99"
                 inline-template>
                 <div>
@@ -168,6 +168,12 @@ export default {
       color: #2c2c2c;
       margin: 10px 0 15px 0;
     }
+    img {
+      max-width: 100%;
+      height: auto !important;
+      display: block;
+      margin: 10px 0;
+    }
   }
   .nav-inner .header-title {
     margin: 0;
@@ -273,6 +279,11 @@ export default {
         .date {
           color: #fff;
         }
+      }
+    }
+    .info-box {
+      iframe {
+        height: 300px !important;
       }
     }
     .news-article {
