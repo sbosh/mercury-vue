@@ -66,8 +66,21 @@
     <div class="form-group">
       <input type="submit" class="send form-element" :value="$t('send')">
     </div>
-    <div class="form-errors">
-      <div class="form-errors-error" v-for="(error, index) in responseErrors" :key="index" v-text="error" />
+    <div class="form-popup" v-bind:class="{ active: popupActive }" id="form-popup">
+      <div class="form-errors">
+        <div class="info" v-if="!successForm">
+          <div class="icon"><img src="@/assets/images/mail-error.svg" alt=""></div>
+          <h3>{{ $t('error_text') }}</h3>
+          <div class="form-errors-error" v-for="(error, index) in responseErrors" :key="index" v-text="error" />
+        </div>
+        <div class="info" v-else>
+          <div class="icon"><img src="@/assets/images/mail-success.svg" alt=""></div>
+          <h3>{{ $t('success_text') }}</h3>
+        </div>
+        <div class="btn-box">
+          <div @click="popupActive = !popupActive" class="btn">{{ $t('close') }}</div>
+        </div>
+      </div>
     </div>
   </form>
 </template>
@@ -94,7 +107,8 @@ export default {
         email: ''
       },
       responseErrors: [],
-      contactService: null
+      contactService: null,
+      popupActive: false
     }
   },
   created () {
@@ -138,7 +152,8 @@ export default {
       const formData = JSON.stringify(data)
       this.contactService.submit(formData).then(response => {
         if (response.status && response.status === 200) {
-          alert('success')
+          this.popupActive = true
+          this.successForm = true
         }
       }).catch(({ response }) => {
         const errors = response.data.errors
@@ -149,6 +164,8 @@ export default {
         for (let errorKey of errorKeys) {
           messages.push(errors[errorKey][0])
         }
+        this.popupActive = true
+        this.successForm = false
         this.responseErrors = messages
       })
     },
@@ -187,15 +204,71 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.form-error {
-  color: #e41616;
-  font-size: 10px;
-  font-weight: 500;
-  text-align: right;
-  position: absolute;
-  width: 100%;
-  top: -20px;
-  margin: 0;
+.form-popup {
+  z-index: -1;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s;
+  background: rgba(0,0,0,.5);
+  &.active {
+    z-index: 99999;
+    opacity: 1;
+    visibility: visible;
+  }
+  .form-errors {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background: #fff;
+    padding: 50px 40px;
+    text-align: center;
+    max-width: 550px;
+    width: 100%;
+    .icon {
+      margin-bottom: 15px;
+    }
+    h3 {
+      margin-bottom: 30px;
+    }
+    .btn-box {
+      margin: 30px auto 0 auto;
+      .btn {
+        border-color: #fa6a02;
+        color: #000;
+        cursor: pointer;
+        min-width: 180px;
+        &:hover {
+          color: #000;
+        }
+        &:before,&:after {
+          display: none;
+        }
+      }
+    }
+    .form-error {
+      color: #e41616;
+      font-size: 10px;
+      font-weight: 500;
+      text-align: right;
+      position: absolute;
+      width: 100%;
+      top: -20px;
+      margin: 0;
+    }
+  }
+  @media screen and(max-width: 768px) {
+    padding: 20px;
+    .form-errors {
+      width: 80%;
+      padding: 20px;
+    }
+  }
 }
 .form-group {
   position: relative;

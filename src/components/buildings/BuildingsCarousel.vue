@@ -121,11 +121,13 @@ export default {
 }
 .active-component {
   .scroll-icon {
-  transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
   }
- .buildings-list {
-  transform: translateY(0);
- }
+  .buildings-carousel .caption .description,
+  .buildings-list {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 .buildings-list {
   position: absolute;
@@ -254,6 +256,9 @@ export default {
     z-index: 1000;
   }
   .description {
+    transform: translateY(-100px);
+    transition: all .3s;
+    opacity: 0;
     p {
       font-size: 18px;
       color: #fff;

@@ -42,7 +42,7 @@
               <div class="follow-us">
                 <div class="text">{{ $t('follow_us') }}</div>
                 <ul>
-                  <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
+                  <li><a href="https://www.facebook.com/Mercury99Ltd/" target="_blank"><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
                   <!-- <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
                   <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li> -->
                 </ul>
@@ -135,7 +135,7 @@ export default {
   top: 0;
   left: 25px;
   padding: 10px 25px 10px 0;
-  z-index: 99999;
+  z-index: 99998;
   transition-delay: .5s;
   transition-duration: .7s;
   transition-property: all;

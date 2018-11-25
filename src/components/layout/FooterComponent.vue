@@ -16,7 +16,7 @@
       </nav>
     </mq-layout>
     <ul class="footer-bottom-nav">
-      <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
+      <li><a href="https://www.facebook.com/Mercury99Ltd/" target="_blank"><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
 <!--       <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
       <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li> -->
     </ul>
