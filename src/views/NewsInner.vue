@@ -158,6 +158,9 @@ export default {
   .info-box {
     ul li {
       margin-bottom: 8px;
+      color: #363636;
+      font-size: 17px;
+      line-height: 23px;
     }
     ul li,
     p {
@@ -294,12 +297,21 @@ export default {
     .news-article {
       padding-right: 0;
       .info-box {
+        padding-left: 0;
         padding-right: 0;
+        &:after {
+          display: none;
+        }
+        ol, ul {
+          padding-left: 20px;
+        }
+        ol li,
+        ul li,
         p {
           color: #383838;
-          font-size: 13px;
+          font-size: 16px;
           font-weight: 400;
-          line-height: 23px;
+          line-height: 28px;
         }
       }
     }

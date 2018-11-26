@@ -21,7 +21,7 @@
       <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li> -->
     </ul>
     <div class="all-rights">{{ $t('all_rights') }}</div>
-    <div class="created-by"><a href="mailto:imigix2018@gmail.com">{{ $t('created_by') }} Imigix</a></div>
+    <div class="created-by"><a href="mailto:imigix2018@gmail.com">{{ $t('created_by') }} <b>Imigix</b></a></div>
   </footer>
 </template>
 
@@ -213,6 +213,8 @@ footer {
       position: relative;
       left: inherit;
       top: inherit;
+      bottom: inherit;
+      padding: 0;
       transform: none;
       text-align: center;
       a {

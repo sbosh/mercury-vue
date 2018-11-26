@@ -125,7 +125,7 @@ export default {
     },
     formatPrice (value) {
       let val = (value / 1)
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
     },
     apartmentStatus (status) {
       if (status === 1) {
@@ -298,6 +298,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 195px;
+  padding-right: 350px;
   .sold-text {
     margin-bottom: 15px;
     color: red;
@@ -307,9 +309,9 @@ export default {
     visibility: hidden;
     opacity: 0;
     transition: all .3s;
-    margin: 0 440px 0 220px;
-    position: relative;
+    margin: 0 auto;
     max-width: 1200px;
+    position: relative;
     img {
       max-width: 100%;
       position: relative;
