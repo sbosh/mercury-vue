@@ -93,6 +93,7 @@ export default {
   props: ['hasApartment'],
   data () {
     return {
+      successForm: '',
       reason: '',
       name: null,
       company: null,

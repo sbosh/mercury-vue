@@ -37,7 +37,7 @@ Vue.use(headroom)
 Vue.use(VueMq, {
   breakpoints: {
     sm: 768,
-    md: 1280,
+    md: 1024,
     lg: Infinity
   }
 })

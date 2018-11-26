@@ -396,6 +396,20 @@ export default {
         }
       }
     }
+    @media screen and(max-width: 1024px) {
+      .content {
+        .cols {
+          padding: 60px 20px 40px 20px;
+        }
+        h3, h3 a {
+           font-size: 20px;
+           line-height: 30px;
+        }
+        .col {
+          padding: 0 20px 20px;
+        }
+      }
+    }
   }//main-navigation
   .tel {
     width: 100%;

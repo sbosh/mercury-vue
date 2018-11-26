@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <mq-layout mq="m+" class="mq-m future-current" v-if="futureBuildingsPage">
+    <mq-layout mq="md+" class="mq-m future-current" v-if="futureBuildingsPage">
       <navinner-component :navTitle="this.futureBuildingsPage['title_' + this.$i18n.locale]" />
       <div v-if="futured.length">
         <div class="buildings building-sort">
@@ -122,6 +122,11 @@ export default {
     width: 360px;
     background-color: #232323;
     z-index: 0;
+  }
+  @media screen and(max-width: 1024px) {
+    &:before {
+      width: 200px;
+    }
   }
 }
 .dots-paggination {
@@ -254,6 +259,17 @@ export default {
           margin-right: 18px;
         }
       }
+    }
+  }
+  @media screen and(max-width:1024px){
+    flex-direction: column;
+    .img-box {
+      width: 100%;
+      height: 40vh;
+      margin-bottom: 20px;
+    }
+    .caption {
+      width: 100%;
     }
   }
 }

@@ -161,7 +161,7 @@ footer {
     margin-right: auto;
     display: table;
   }
-  .created-by{
+  .created-by {
     position: absolute;
     left: -60px;
     top: 190px;
@@ -181,6 +181,20 @@ footer {
         margin: 8px 0 0 5px;
         float: right;
         transition: all .3s;
+      }
+    }
+  }
+  @media screen and(max-width: 1024px) {
+    .created-by {
+      left: 0;
+      top: inherit;
+      bottom: 40px;
+      right: 0;
+      transform: rotate(0);
+      text-align: center;
+      padding-right: 195px;
+      a:after {
+        display: none;
       }
     }
   }

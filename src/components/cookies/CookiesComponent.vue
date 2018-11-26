@@ -1,17 +1,24 @@
 <template>
-    <div class="cookies-box">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni rem numquam error voluptate pariatur a, molestias sit, distinctio vel quia minima quis necessitatibus! Similique praesentium voluptate atque vero eius voluptates.
-      <div id="agree" @click="agreeCookies()">agree</div>
-    </div>
+  <div class="cookies-box">
+    <h3>{{ $t('this_site_use_cookies') }}</h3>
+    <p>{{ $t('cookies_text') }}</p>
+    <div id="agree">{{ $t('i_agree') }}</div>
+    <router-link :to="'/' + lang + '/terms'">{{ $t('terms') }}</router-link>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'cookies-box'
+  name: 'cookies-box',
+  computed: {
+    lang () {
+      return this.$i18n.locale
+    }
+  }
 }
 </script>
 
-<style>
+<style lang="scss">
 .cookies-box {
   position: fixed;
   right: 195px;
@@ -22,5 +29,21 @@ export default {
   width: 300px;
   color: #fff;
   display: none !important;
+  h3 {
+    padding-left: 40px;
+    background: url('~@/assets/images/cookie-icon.svg') no-repeat left center;
+  }
+  p {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+  }
+  #agree {
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px 0 0 0;
+    border: 1px solid #fff;
+    display: inline-block;
+  }
 }
 </style>

@@ -124,7 +124,7 @@ export default {
       return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><div class="icons"><div><i class="area-icon"></i> ${apartment.total_area} m²</div> <div><i class="rooms-icon"></i>${apartment.rooms}</div></div> <div class="price">${apartment.status !== 1 ? '' : this.formatPrice(apartment.price) + ' EUR'}</div><div class="status">${this.apartmentStatus(apartment.status)}</div>`
     },
     formatPrice (value) {
-      let val = (value / 1).toFixed(2).replace('.', ',')
+      let val = (value / 1)
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     },
     apartmentStatus (status) {
@@ -468,7 +468,7 @@ export default {
 }
 .left-sidebar {
   width: 195px;
-  border-right: 1px solid #979797;
+  border-right: 1px solid #e4e4e4;
   background: #f8f8f8;
   position: fixed;
   left: 0;
