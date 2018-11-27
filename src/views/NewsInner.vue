@@ -87,7 +87,9 @@ export default {
   created () {
     this.$store.commit('startFetching')
     this.$store.dispatch('fetchArticle', this.$route.params.id).then(() => {
-      this.$store.commit('stopFetching')
+      this.$store.dispatch('fetchArticles').then(() => {
+        this.$store.commit('stopFetching')
+      })
     })
   },
   computed: {
