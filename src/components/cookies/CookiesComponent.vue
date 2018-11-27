@@ -110,5 +110,24 @@ export default {
     font-weight: 600;
     padding: 15px 20px;
   }
+  @media screen and(max-width:768px) {
+    padding: 16px;
+    left: 0;
+    .close {
+      right: 10px;
+      top: 10px;
+    }
+    h3 {
+      font-size: 20px;
+    }
+    .read-more {
+      margin-top: 10px;
+    }
+    .read-more,
+    #agree {
+      display: flex;
+      justify-content: center;
+    }
+  }
 }
 </style>
