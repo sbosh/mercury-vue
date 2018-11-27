@@ -58,25 +58,6 @@ export default {
       title: this.finishedBuildingsPage ? this.finishedBuildingsPage['seo_title_' + this.$i18n.locale] : ''
     }
   },
-  data () {
-    return {
-      swiperOptions: {
-        slidesPerView: 'auto',
-        spaceBetween: 0,
-        effect: 'fade',
-        speed: 3000,
-        loop: true,
-        mousewheel: true,
-        pagination: {
-          el: '.dots-paggination',
-          clickable: true,
-          renderBullet (index, className) {
-            return `<div class="${className}">${index + 1}</div>`
-          }
-        }
-      }
-    }
-  },
   beforeRouteEnter (to, from, next) {
     store.commit('startFetching')
     store.cache.dispatch('fetchFinishedBuildingsPage').then(() => {
@@ -87,6 +68,33 @@ export default {
     })
   },
   computed: {
+    swiperOptions () {
+      if (this.finished.length > 1) {
+        return {
+          slidesPerView: 'auto',
+          spaceBetween: 0,
+          effect: 'fade',
+          speed: 3000,
+          loop: true,
+          mousewheel: true,
+          pagination: {
+            el: '.dots-paggination',
+            clickable: true,
+            renderBullet (index, className) {
+              return `<div class="${className}">${index + 1}</div>`
+            }
+          }
+        }
+      }
+      return {
+        slidesPerView: 'auto',
+        spaceBetween: 0,
+        effect: 'fade',
+        speed: 3000,
+        loop: false,
+        mousewheel: false
+      }
+    },
     lang () {
       return this.$i18n.locale
     },
@@ -110,16 +118,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  &:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 360px;
-    background-color: #232323;
-    z-index: 0;
-  }
+  background-color: #232323;
   @media screen and(max-width: 1024px) {
     &:before {
       width: 200px;
@@ -191,7 +190,7 @@ export default {
   .caption {
     width: 50%;
     .location-info {
-      color: #484b47;
+      color: #ababab;
       font-size: 16px;
       font-weight: 600;
       background-image: url(../assets/images/location-pin.svg);
@@ -215,7 +214,7 @@ export default {
       transition-property: all;
     }
     .title, .title a {
-      color: #2c2c2c;
+      color: #fff;
       font-family: "Exo 2";
       font-size: 42px;
       font-weight: 700;
@@ -234,13 +233,13 @@ export default {
       transition-property: all;
       margin: 0;
       .btn {
-        color: #4a4a4a;
+        color: #fff;
         border-color: #fa6a02;
         &:after {
-          background: #4a4a4a;
+          background: #fff;
         }
         &:before {
-          border-color: transparent transparent transparent #4a4a4a;
+          border-color: transparent transparent transparent #fff;
         }
       }
     }

@@ -151,7 +151,7 @@ export default {
     },
     formatPrice (value) {
       let val = (value / 1)
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
     },
     apartmentStatus (status) {
       if (status === 1) {

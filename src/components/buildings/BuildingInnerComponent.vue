@@ -936,11 +936,12 @@ export default {
         p {
           column-count: 1;
           color: #383838;
-          font-size: 13px;
+          font-size: 16px;
           font-weight: 400;
-          line-height: 23px;
+          line-height: 28px;
           margin: 0;
           max-width: 100%;
+          text-align: justify;
         }
       }
     }
