@@ -1,6 +1,6 @@
 <template>
   <div class="main-content" v-if="building">
-    <mq-layout mq="md+"><navinner-component navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
+    <mq-layout mq="md+" class="black-nav"><navinner-component navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
     <div class="inner-building">
       <div class="inner-building-header">
         <mq-layout mq="sm"><h1 class="page-title" v-if="building">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
@@ -866,7 +866,7 @@ export default {
     display: block;
   }
   @media screen and(max-width: 768px) {
-    padding: 0 0 0 25px;
+    padding: 20px 0 0 25px;
     margin-bottom: 40px;
     &:before {
       display: none;
@@ -892,6 +892,9 @@ export default {
       }
     }
   }
+  @media screen and(max-width: 600px) {
+    padding-top: 0;
+  }
 }
 .inner-building {
   padding: 0 195px 0 0;
@@ -912,7 +915,7 @@ export default {
     }
   }
   @media screen and(max-width: 768px) {
-    padding: 0;
+    padding: 0 195px 0 0;
     .caption {
       .title-box {
         padding-left: 40px;
@@ -945,6 +948,9 @@ export default {
         }
       }
     }
+  }
+  @media screen and(max-width: 600px) {
+    padding: 0;
   }
 }
 </style>

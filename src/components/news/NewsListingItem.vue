@@ -6,7 +6,6 @@
     </div>
     <div class="info-box">
       <h3 class="article-title"><router-link :to="'/' + $i18n.locale + '/news/' + id + '/' + link">{{ title }}</router-link></h3>
-      <p>{{ description }}</p>
       <div class="link"><router-link :to="'/' + $i18n.locale + '/news/' + id + '/' + link">{{ $t('read_more') }}</router-link></div>
     </div>
   </article>

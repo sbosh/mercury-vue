@@ -118,7 +118,7 @@ export default {
       top: 10px;
     }
     h3 {
-      font-size: 20px;
+      font-size: 16px;
     }
     .read-more {
       margin-top: 10px;
@@ -127,6 +127,18 @@ export default {
     #agree {
       display: flex;
       justify-content: center;
+      padding: 10px;
+      font-size: 10px;
+    }
+  }
+  @media screen and(max-width:600px) {
+    padding-bottom: 6px;
+    padding-top: 8px;
+    h3 {
+      font-size: 12px;
+      min-height: 25px;
+      line-height: 25px;
+      margin-bottom: 10px;
     }
   }
 }

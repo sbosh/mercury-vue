@@ -1,10 +1,12 @@
 <template>
   <div class="main-content about-us">
-    <mq-layout mq="md+"><navinner-component navigation="aboutNav" :navTitle="about['title_' + $i18n.locale]" /></mq-layout>
+    <mq-layout mq="md+" class="black-nav"><navinner-component navigation="aboutNav" :navTitle="about['title_' + $i18n.locale]" /></mq-layout>
     <mq-layout mq="sm" class="mobile-header"><h1 class="title">{{about['title_' + $i18n.locale]}}</h1></mq-layout>
-    <company-component id="company" />
-    <service-component id="services" />
-    <history-component id="history" />
+    <div class="about-content">
+      <company-component id="company" />
+      <service-component id="services" />
+      <history-component id="history" />
+    </div>
     <footer-component />
   </div>
 </template>
@@ -37,6 +39,36 @@ export default {
 </script>
 
 <style lang="scss">
+@media screen and(max-width: 768px){
+  .black-nav {
+    background: #232323;
+    .headroom {
+      margin-bottom: 0;
+    }
+  }
+}
+.about-us {
+  @media screen and(max-width: 768px){
+    .about-content {
+      margin-top: -1px;
+      padding-top: 25px;
+      padding-right: 195px;
+      .company-component:before {
+        margin-top: -30px;
+      }
+    }
+  }
+  @media screen and(max-width: 600px){
+    .about-content {
+      margin-top: -1px;
+      padding-top: 25px;
+      padding-right: 0;
+      .company-component:before {
+        height: 200px;
+      }
+    }
+  }
+}
 .mobile-header {
   background: #232323;
   padding: 90px 25px 25px;

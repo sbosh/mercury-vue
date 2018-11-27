@@ -1,7 +1,7 @@
 <template>
   <div class="main-content">
+    <mq-layout mq="md+" class="black-nav"><navinner-component navigation="newsBreadcrumbs"/></mq-layout>
     <div class="news-inner-article">
-      <navinner-component navigation="newsBreadcrumbs"/>
       <div class="container" v-if="article">
         <div class="caption">
           <div class="box-title">
@@ -266,7 +266,7 @@ export default {
     }
   }
   @media screen and(max-width: 768px) {
-    padding: 90px 25px 25px;
+    padding: 30px 210px 25px 25px;
     &:before {
       height: 250px;
     }
@@ -314,9 +314,13 @@ export default {
           font-size: 16px;
           font-weight: 400;
           line-height: 28px;
+          text-align: justify;
         }
       }
     }
+  }
+  @media screen and(max-width: 600px) {
+    padding: 100px 25px 25px;
   }
 }
 </style>
