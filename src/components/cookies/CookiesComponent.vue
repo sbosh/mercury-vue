@@ -17,7 +17,11 @@ export default {
   },
   mounted () {
     // eslint-disable-next-line
-    setTimeout(() => this.show = true, 1000)
+    setTimeout(() => {
+      if (!this.getCookie('John')) {
+        this.show = true
+      }
+    }, 1000)
   },
   computed: {
     lang () {
