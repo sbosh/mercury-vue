@@ -122,6 +122,9 @@ export default {
       }
     }
   }
+  @media screen and(max-width: 768px){
+    right: 195px;
+  }
 }
 .line {
   background-color: rgba(#979797, .37);

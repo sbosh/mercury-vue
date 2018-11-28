@@ -1,7 +1,7 @@
 <template>
   <div class="main-content">
+    <mq-layout mq="md+" class="black-nav"><navinner-component :navTitle="this.futureBuildingsPage['title_' + this.$i18n.locale]" /></mq-layout>
     <mq-layout mq="md+" class="mq-m future-current" v-if="futureBuildingsPage">
-      <navinner-component :navTitle="this.futureBuildingsPage['title_' + this.$i18n.locale]" />
       <div v-if="futured.length">
         <div class="buildings building-sort">
           <swiper :options="swiperOptions">
@@ -278,6 +278,14 @@ export default {
     }
     .caption {
       width: 100%;
+    }
+  }
+  @media screen and(max-width: 768px) {
+    padding-left: 0;
+    .title-box {
+      .title, .title a {
+        font-size: 32px;
+      }
     }
   }
 }

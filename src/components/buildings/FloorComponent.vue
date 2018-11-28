@@ -351,13 +351,6 @@ export default {
       opacity: .7;
     }
   }
-  @media screen and(max-width: 1024px) {
-    .img-box svg .sold,
-    .img-box svg .sold path {
-      fill: red !important;
-      opacity: .7;
-    }
-  }
   .swiper-slide-active {
     .img-box {
       visibility: visible;
@@ -412,11 +405,40 @@ export default {
       }
     }
   }
+  @media screen and(max-width: 1024px) {
+    .img-box svg .sold,
+    .img-box svg .sold path {
+      fill: red !important;
+      opacity: .7;
+    }
+    .swiper-pagination.swiper-pagination-bullets {
+      right: 60px;
+      .swiper-pagination-bullet {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 24px;
+      }
+    }
+  }
   @media screen and(max-width: 768px) {
     padding: 0 25px 25px;
     display: block;
-    height: auto;
-    min-height: 50vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .swiper-pagination.swiper-pagination-bullets {
+      margin-right: 210px;
+    }
+    .swiper-container {
+      margin-right: auto;
+      margin-left: 0;
+    }
+    .swiper-container,
+    .swiper-slide {
+      width: 68vw !important;
+    }
     .img-box {
       padding-right: 0;
       margin-bottom: 30px;
@@ -465,6 +487,16 @@ export default {
           }
         }
       }
+    }
+  }
+  @media screen and(max-width: 600px) {
+    height: auto;
+    min-height: 50vh;
+    .swiper-pagination.swiper-pagination-bullets {
+      margin-right: auto;
+    }
+    .swiper-container, .swiper-slide {
+      width: inherit !important;
     }
   }
 }
@@ -566,6 +598,26 @@ export default {
       &:first-of-type {
         color: #000;
         font-weight: 600;
+      }
+    }
+  }
+  @media screen and(max-width:768px) {
+    width: auto;
+    right: 195px;
+    bottom: inherit;
+    flex-direction: row;
+    .top {
+      .back-btn {
+        width: 150px;
+      }
+    }
+    .available-from {
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    .compass {
+      img {
+        width: 100px;
       }
     }
   }
