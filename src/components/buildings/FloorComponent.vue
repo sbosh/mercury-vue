@@ -51,7 +51,7 @@
                   :d="apartment.coords"
                   ref="vtooltip"
                   v-bind:class="{sold: apartment.status !== 1}"
-                  v-tooltip="{ content: apartmentStatus(apartment.status), show: floor['slug_' + $i18n.locale] == $route.params.floorId  && apartment.status !== 1 ? true : false, placement: 'top', classes: 'center-tooltip', trigger: 'manual', offset: '-100' }"></path>
+                  v-tooltip="{ content: apartmentStatus(apartment.status), show: floor['slug_' + $i18n.locale] == $route.params.floorId && apartment.status !== 1 ? true : false, placement: 'top', classes: 'center-tooltip', trigger: 'manual', offset: '-100' }"></path>
               </g>
             </svg>
           </div>
