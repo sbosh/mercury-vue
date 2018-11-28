@@ -85,7 +85,7 @@
           </mq-layout>
           <a v-if="apartment.status !== 3" @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
           <div class="popup" v-bind:class="{ active: contactFormActive }" >
-            <div class="close" @click="contactFormActive = false">{{ $t('close') }}</div>
+            <div class="close-popup" @click="contactFormActive = false">{{ $t('close') }}</div>
             <contact-form :hasApartment="apartment.id" />
           </div>
           <div class="donwload-pdf" v-if="apartment.pdf">
@@ -217,15 +217,18 @@ export default {
   overflow: auto;
   transition: all .4s;
   transform: translateX(-100%);
-  .close {
-    color: #fff;
-    font-size: 20px;
+  .close-popup {
+    color: red;
+    font-size: 0;
     font-weight: 500;
     padding: 30px;
     cursor: pointer;
-    position: fixed;
-    right: 0;
-    top: 0;
+    position: absolute;
+    top: 5%;
+    right: 15%;
+    z-index: 999;
+    background: #000 url(../assets/images/close-apms-icon.svg) no-repeat center center;
+    background-size: 20px;
   }
   .popup-title {
     font-size: 24px;
@@ -235,7 +238,10 @@ export default {
     margin-top: 3%;
   }
   form {
-    margin: 5% 10%;
+    position: absolute;
+    top: 5%;
+    left: 15%;
+    right: 15%;
     background: #fff;
     padding: 5%;
     transform: translateY(150%);
@@ -707,16 +713,31 @@ export default {
     }
   }
   @media screen and (max-width: 768px ) {
-    margin-top: 190px;
+    margin-top: 220px;
     padding-right: 195px;
     .left-sidebar {
-      .top {
-        .back-btn {
-          display: none;
+      flex-direction: column;
+      border-bottom: 1px solid #dfdfdf;
+      .available-from {
+        margin: 0;
+        display: flex;
+        .input-group {
+          margin: 0 0 0 57px;
+          width: 350px;
         }
       }
       .floor-plan {
         display: none;
+      }
+      .top {
+        display: flex;
+        align-items: center;
+        .logo {
+          margin-right: 50px;
+        }
+        .back-btn {
+          margin: 0 5px;
+        }
       }
     }
   }

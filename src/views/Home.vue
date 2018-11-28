@@ -80,7 +80,6 @@ export default {
       font-size: 14px;
       font-weight: 400;
       transition: all .3s;
-
       .icon {
         width: 31px;
         height: 26px;
@@ -89,7 +88,6 @@ export default {
         float: left;
         margin-right: 15px;
       }
-
       .text {
         color: #8d8d8d;
         font-family: Montserrat;
@@ -102,7 +100,7 @@ export default {
         padding-left: 18px;
         margin-left: auto;
         display: block;
-
+        width: 200px;
         &:before {
           content: '';
           display: inline-block;

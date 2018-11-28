@@ -1,7 +1,7 @@
 <template>
   <mq-layout mq="md+">
     <nav class="nav">
-      <router-link :to="'/' + lang" class="inner-logo"><img src="@/assets/images/logo-white.svg" alt=""></router-link>
+      <router-link :to="'/' + lang" class="inner-logo"><img src="@/assets/images/logo-inner.svg" alt=""></router-link>
     </nav>
   </mq-layout>
 </template>

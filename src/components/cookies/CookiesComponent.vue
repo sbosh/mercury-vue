@@ -129,14 +129,12 @@ export default {
     }
     .read-more,
     #agree {
-      display: flex;
-      justify-content: center;
       padding: 10px;
       font-size: 10px;
     }
   }
   @media screen and(max-width:600px) {
-    padding-bottom: 6px;
+    padding-bottom: 10px;
     padding-top: 8px;
     h3 {
       font-size: 12px;

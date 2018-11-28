@@ -92,6 +92,25 @@ footer {
         list-style: none;
         width: 33.33%;
         text-align: center;
+        position: relative;
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: #fa6a02;
+          transition: all .3s;
+        }
+        &:hover {
+          &:after {
+            width: 100%;
+          }
+          a {
+            color: #fff;
+          }
+        }
         a {
           text-decoration: none;
           padding: 20px;

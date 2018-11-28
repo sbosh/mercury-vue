@@ -156,6 +156,10 @@ export default {
         text-decoration: none;
         padding: 15px;
         display: block;
+        transition: all .3s;
+        &:hover {
+          color: #dadada;
+        }
       }
       ul {
         position: absolute;
