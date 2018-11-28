@@ -15,7 +15,7 @@
       </div> -->
     </div>
     <div class="description">
-      <p>{{ $t('about_company_description') }}</p>
+      <p v-html="$t('about_company_description')"></p>
       <br>
       <!-- <blockquote>{{ $t('about_company_blockquote') }}</blockquote> -->
     </div>
