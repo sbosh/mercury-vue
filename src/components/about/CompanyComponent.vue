@@ -3,23 +3,21 @@
     <div class="caption">
       <div class="title-box">
         <h1 class="title">{{ $t('about_company') }}</h1>
-        <h2>{{ $t('about_company_annonce') }}</h2>
+        <!-- <h2>{{ $t('about_company_annonce') }}</h2> -->
       </div>
     </div>
-    <div class="img-box">
+    <!-- <div class="img-box">
       <img src="@/assets/images/about-team.jpg" alt="">
-    </div>
+    </div> -->
     <div class="caption">
-      <div class="title-box">
+      <!-- <div class="title-box">
         <h3 class="title">{{ $t('about_company_caption') }}</h3>
-      </div>
+      </div> -->
     </div>
     <div class="description">
       <p>{{ $t('about_company_description') }}</p>
       <br>
-      <blockquote >
-        {{ $t('about_company_blockquote') }}
-      </blockquote>
+      <!-- <blockquote>{{ $t('about_company_blockquote') }}</blockquote> -->
     </div>
   </div>
 </template>
@@ -32,9 +30,19 @@ export default {
 
 <style lang="scss" scoped>
 .company-component {
-  background-image: linear-gradient(#232323 50%, #fff 50%);
+  //background-image: linear-gradient(#232323 10%, #fff 90%);
   padding-top: 200px;
   padding-right: 195px;
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 140px;
+    background: #232323;
+    z-index: 0;
+  }
   .caption {
     margin-bottom: 50px;
     .title-box {
