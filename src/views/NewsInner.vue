@@ -1,7 +1,7 @@
 <template>
   <div class="main-content">
+    <mq-layout mq="md+" class="black-nav"><navinner-component navigation="newsBreadcrumbs"/></mq-layout>
     <div class="news-inner-article">
-      <navinner-component navigation="newsBreadcrumbs"/>
       <div class="container" v-if="article">
         <div class="caption">
           <div class="box-title">
@@ -18,9 +18,9 @@
             <div class="follow-us">
               <div class="tex">{{ $t('share_text') }}:</div>
               <social-sharing
-                :url="url"
-                :title="article['title_' + $i18n.locale]"
-                :description="article['announce_' + $i18n.locale]"
+                url="window.location.href"
+                title="test title"
+                description="test description"
                 twitter-user="Mercury99"
                 inline-template>
                 <div>
@@ -44,7 +44,6 @@
 </template>
 
 <script>
-import store from '../store'
 import { mapState } from 'vuex'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import NewsListingSwiper from '@/components/news/NewsListingSwiper'
@@ -58,7 +57,7 @@ export default {
   },
   data () {
     return {
-      url: window.location.pathname,
+      url: window.location.href,
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 15,
@@ -80,13 +79,17 @@ export default {
       }
     }
   },
-  created () {
-    console.log(window.location.pathname)
+  metaInfo () {
+    return {
+      title: this.article ? this.article['seo_title_' + this.$i18n.locale] : ''
+    }
   },
-  beforeRouteEnter (to, from, next) {
-    // eslint-disable-next-line
-    store.cache.dispatch('fetchArticle', to.params.id).then(() => {
-      next()
+  created () {
+    this.$store.commit('startFetching')
+    this.$store.dispatch('fetchArticle', this.$route.params.id).then(() => {
+      this.$store.dispatch('fetchArticles').then(() => {
+        this.$store.commit('stopFetching')
+      })
     })
   },
   computed: {
@@ -157,6 +160,9 @@ export default {
   .info-box {
     ul li {
       margin-bottom: 8px;
+      color: #363636;
+      font-size: 17px;
+      line-height: 23px;
     }
     ul li,
     p {
@@ -171,6 +177,12 @@ export default {
       font-family: Montserrat;
       color: #2c2c2c;
       margin: 10px 0 15px 0;
+    }
+    img {
+      max-width: 100%;
+      height: auto !important;
+      display: block;
+      margin: 10px 0;
     }
   }
   .nav-inner .header-title {
@@ -254,7 +266,7 @@ export default {
     }
   }
   @media screen and(max-width: 768px) {
-    padding: 90px 25px 25px;
+    padding: 30px 210px 25px 25px;
     &:before {
       height: 250px;
     }
@@ -279,12 +291,36 @@ export default {
         }
       }
     }
+    .info-box {
+      iframe {
+        height: 300px !important;
+      }
+    }
     .news-article {
       padding-right: 0;
       .info-box {
+        padding-left: 0;
         padding-right: 0;
+        &:after {
+          display: none;
+        }
+        ol, ul {
+          padding-left: 20px;
+        }
+        ol li,
+        ul li,
+        p {
+          color: #383838;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 28px;
+          text-align: justify;
+        }
       }
     }
+  }
+  @media screen and(max-width: 600px) {
+    padding: 100px 25px 25px;
   }
 }
 </style>

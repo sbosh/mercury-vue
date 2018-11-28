@@ -54,13 +54,13 @@
       <div class="right">
         <div class="">
           <div class="text" v-if="apartment.status == 1">{{ $t('total_price') }}:</div>
-          <div class="price" v-if="apartment.status == 1">{{ apartment.price }} <div class="currency">{{ $t('euro') }}</div></div>
+          <div class="price" v-if="apartment.status == 1">{{ this.formatPrice(apartment.price) }} <div class="currency">{{ $t('euro') }}</div></div>
           <div class="price available" v-if="apartment.status == 2" >{{ $t('available') }}</div>
           <div class="price sold" v-if="apartment.status == 3" >{{ $t('sold') }}</div>
         </div>
         <div v-if="apartment.status == 1">
           <div class="text"><span>{{ $t('price_per_m') }}</span> m²:</div>
-          <div class="price">{{ apartment.price_m2 }} <div class="currency">{{ $t('euro') }}</div></div>
+          <div class="price">{{ this.formatPrice(apartment.price_m2) }} <div class="currency">{{ $t('euro') }}</div></div>
         </div>
       </div>
     </div>
@@ -86,7 +86,7 @@
           <a v-if="apartment.status !== 3" @click="contactFormActive = !contactFormActive" class="btn">{{ $t('send_request') }}</a>
           <div class="popup" v-bind:class="{ active: contactFormActive }" >
             <div class="close" @click="contactFormActive = false">{{ $t('close') }}</div>
-            <contact-form />
+            <contact-form :hasApartment="apartment.id" />
           </div>
           <div class="donwload-pdf" v-if="apartment.pdf">
             <a target="_blank" :href="apartment.pdf" class="btn-pdf">{{ $t('download_pdf') }}</a>
@@ -147,7 +147,11 @@ export default {
   },
   methods: {
     tooltipContent (apartment) {
-      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><div class="icons"><div><i class="area-icon"></i> ${apartment.total_area} m²</div> <div><i class="rooms-icon"></i>${apartment.rooms}</div></div> <div class="price">${apartment.price} EUR</div><div class="status">${this.apartmentStatus(apartment.status)}</div>`
+      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><div class="icons"><div><i class="area-icon"></i> ${apartment.total_area} m²</div> <div><i class="rooms-icon"></i>${apartment.rooms}</div></div> <div class="price">${apartment.status !== 1 ? '' : this.formatPrice(apartment.price) + ' EUR'}</div><div class="status">${this.apartmentStatus(apartment.status)}</div>`
+    },
+    formatPrice (value) {
+      let val = (value / 1)
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
     },
     apartmentStatus (status) {
       if (status === 1) {
@@ -658,6 +662,7 @@ export default {
             font-size: 17px;
             font-weight: 600;
             text-transform: none;
+            margin-bottom: 20px;
           }
         }
         .buttons {
@@ -702,12 +707,27 @@ export default {
     }
   }
   @media screen and (max-width: 768px ) {
-    margin-top: 90px;
+    margin-top: 190px;
+    padding-right: 195px;
+    .left-sidebar {
+      .top {
+        .back-btn {
+          display: none;
+        }
+      }
+      .floor-plan {
+        display: none;
+      }
+    }
+  }
+  @media screen and (max-width: 600px ) {
+    margin-top: 100px;
+    padding-right: 0;
   }
 }
 .left-sidebar {
   width: 195px;
-  border-right: 1px solid #979797;
+  border-right: 1px solid #e4e4e4;
   background: #f8f8f8;
   position: fixed;
   left: 0;
@@ -850,6 +870,7 @@ export default {
       background-position: 96% center;
       background-size: 13px 13px;
       appearance: none;
+      border-radius: 0;
     }
     span {
       color: #8d8d8d;
@@ -861,6 +882,27 @@ export default {
         font-weight: 600;
       }
     }
+  }
+  @media screen and(max-width:768px) {
+    width: auto;
+    right: 195px;
+    bottom: inherit;
+    flex-direction: row;
+    .top {
+      .back-btn {
+        width: 150px;
+      }
+    }
+    .available-from {
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    .compass {
+      img {
+        width: 100px;
+      }
+    }
+    .floor-plan {}
   }
 }
 </style>

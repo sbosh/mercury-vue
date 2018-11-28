@@ -22,11 +22,12 @@
             <div class="col">
               <h3><router-link :to="'/' + lang + '/contacts'">{{ $t('contacts') }}</router-link></h3>
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/about'">{{ $t('about_company') }}</router-link></h3>
-              <ul>
-                <li><router-link :to="'/' + lang + '/about'">{{ $t('about_us') }}</router-link></li>
-                <li><router-link :to="'/' + lang + '/about'">{{ $t('services') }}</router-link></li>
-                <li><router-link :to="'/' + lang + '/about'">{{ $t('history') }}</router-link></li>
-              </ul>
+              <br>
+              <!-- <ul>
+                <li><router-link :to="'/' + lang + '/about#company'">{{ $t('about_us') }}</router-link></li>
+                <li><router-link :to="'/' + lang + '/about#services'">{{ $t('services') }}</router-link></li>
+                <li><router-link :to="'/' + lang + '/about#history'">{{ $t('history') }}</router-link></li>
+              </ul> -->
               <div class="tel">
                 <a :href="$t('tel_href')" class="tel-box">
                   <div class="icon"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></div>
@@ -37,7 +38,7 @@
               <div class="follow-us">
                 <div class="text">{{ $t('follow_us') }}</div>
                 <ul>
-                  <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
+                  <li><a href="https://www.facebook.com/Mercury99Ltd/" target="_blank"><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
 <!--                   <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
                   <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li> -->
                 </ul>
@@ -66,7 +67,7 @@
         <span>{{ $t('menu') }}</span>
       </button>
       <ul class="social">
-        <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
+        <li><a href="https://www.facebook.com/Mercury99Ltd/" target="_blank"><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
 <!--         <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
         <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li> -->
       </ul>
@@ -396,6 +397,28 @@ export default {
         }
       }
     }
+    @media screen and(max-width: 1024px) {
+      .content {
+        .cols {
+          padding: 60px 20px 40px 20px;
+        }
+        h3, h3 a {
+           font-size: 20px;
+           line-height: 30px;
+        }
+        .col {
+          padding: 0 20px 20px;
+        }
+      }
+    }
+    @media screen and(max-width: 768px) {
+      .main-nav-logo img {
+        max-width: 100px;
+      }
+      .content {
+        width: 100%;
+      }
+    }
   }//main-navigation
   .tel {
     width: 100%;
@@ -588,19 +611,18 @@ export default {
     .main-navigation {
       transform: translateX(0);
       .content {
-        animation: nav-animation 1s forwards alternate;
-        background: #5f5f5f;
+        animation: nav-animation 1s 1 forwards;
       }
       .col {
         opacity: 1;
         &:nth-child(1){
-          animation: col3-animation .8s forwards alternate;
+          animation: col3-animation .7s 1 forwards;
         }
         &:nth-child(2){
-          animation: col3-animation 1.2s forwards alternate;
+          animation: col3-animation 1.1s 1 forwards;
         }
         &:nth-child(3){
-          animation: col3-animation 1.6s forwards alternate;
+          animation: col3-animation 1.4s 1 forwards;
         }
       }
     }

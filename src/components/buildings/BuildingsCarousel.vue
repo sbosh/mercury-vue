@@ -6,16 +6,20 @@
           <div class="caption" v-if="!home">
             <div class="title-box">
               <h2 class="title"><router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link></h2>
+              <div class="description">
+                <p>{{ building['annonce_' + $i18n.locale] }}</p>
+              </div>
             </div>
           </div>
         </div>
       </swiper-slide>
       <div class="buildings-list" v-if="!home">
-        <h3>{{ $t('current_buildings') }}</h3>
+        <h3>{{ $t('current_projects') }}</h3>
         <div class="buildings-titles">
           <div class="building-title" v-for="(building, index) in current" :key="building.id" @mouseenter="changeSwpier(index)">
             <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" v-if="building.use_svg">
               {{ building['title_' + $i18n.locale] }}
+              <span class="icon"><img src="@/assets/images/floorplan-icon.svg" alt=""></span>
             </router-link>
             <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]" v-else>
               {{ building['title_' + $i18n.locale] }}
@@ -44,7 +48,7 @@ export default {
   },
   methods: {
     changeSwpier (index) {
-      this.$refs.swiper.swiper.slideTo(index)
+      this.$refs.swiper.swiper.slideToLoop(index)
     },
     getSwiperOptions (isHome) {
       let options = {
@@ -56,6 +60,16 @@ export default {
         mousewheel: true,
         keyboard: {
           enabled: true
+        },
+        on: {
+          slideChange: function () {
+            if (isHome) return
+            let buildingTitles = document.querySelectorAll('.building-title')
+            buildingTitles.forEach(buildingTitle => {
+              buildingTitle.classList.remove('active')
+            })
+            buildingTitles[this.realIndex].classList.add('active')
+          }
         }
       }
       if (isHome) {
@@ -104,14 +118,19 @@ export default {
       animation: bounce-animation .4s linear alternate infinite;
     }
   }
+  @media screen and(max-width: 1024px) {
+    display: none;
+  }
 }
 .active-component {
   .scroll-icon {
-  transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
   }
- .buildings-list {
-  transform: translateY(0);
- }
+  .buildings-carousel .caption .description,
+  .buildings-list {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 .buildings-list {
   position: absolute;
@@ -159,6 +178,7 @@ export default {
     border-radius: 0;
     opacity: 1;
     display: block;
+    position: relative;
     &:last-child {
       border-bottom: 0;
     }
@@ -167,7 +187,11 @@ export default {
       display: block;
       padding: 20px 0;
       text-decoration: none;
-      display: block;
+      display: flex;
+      align-items: center;
+      .icon {
+        margin-left: 10px;
+      }
       &:before {
         counter-increment: titles;
         content: "0" counters(titles,". 0");
@@ -178,7 +202,7 @@ export default {
         font-weight: 700;
         text-transform: uppercase;
         float: left;
-        margin: 5px 10px 0;
+        margin: 0 10px 0;
       }
     }
     &:hover,
@@ -234,6 +258,16 @@ export default {
     position: relative;
     z-index: 1000;
   }
+  .description {
+    transform: translateY(-100px);
+    transition: all .3s;
+    opacity: 0;
+    p {
+      font-size: 18px;
+      color: #fff;
+      font-weight: 500;
+    }
+  }
   .swiper-wrapper,
   .swiper-container {
     height: 100vh;
@@ -272,6 +306,40 @@ export default {
         .title {
           font-size: 28px;
           line-height: 36px;
+        }
+      }
+    }
+  }
+}
+@media screen and(max-width: 1024px) {
+  .buildings-carousel {
+    .swiper-slide {
+      .caption {
+        max-width: 100%;
+        margin-bottom: 20%;
+      }
+    }
+    .buildings-list {
+      left: 195px;
+      padding: 15px 0;
+      &:before {
+        display: none;
+      }
+      h3 {
+        margin-bottom: 10px;
+      }
+      .buildings-titles {
+        margin-bottom: 15px;
+      }
+      .building-title {
+        a {
+          padding: 10px 0;
+        }
+      }
+      .buttons  {
+        a {
+          width: 100%;
+          text-align: center;
         }
       }
     }

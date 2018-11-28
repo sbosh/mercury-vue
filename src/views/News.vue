@@ -1,7 +1,8 @@
 <template>
   <div class="main-content">
+    <mq-layout mq="md+" class="black-nav"><navinner-component :navTitle="news['title_' + $i18n.locale]" /></mq-layout>
+    <mq-layout mq="sm" class="mobile-header"><h1 class="title">{{ $t('news') }}</h1></mq-layout>
     <div class="all-news">
-      <navinner-component :navTitle="news['title_' + $i18n.locale]" />
       <div class="container">
         <news-listing :articles="articles" />
       </div>
@@ -108,7 +109,7 @@ export default {
     }
   }
   @media screen and(max-width: 768px) {
-    padding: 90px 25px 25px;
+    padding: 30px 195px 25px 25px;
     &:before {
       height: 250px;
     }
@@ -122,6 +123,13 @@ export default {
       .date {
         color: #fff;
       }
+    }
+  }
+  @media screen and(max-width: 600px) {
+    padding: 0 25px 25px;
+    margin-top: -1px;
+    &:before {
+      height: 50px;
     }
   }
 }

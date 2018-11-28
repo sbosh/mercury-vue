@@ -8,16 +8,18 @@
     <transition :name="transitionName" mode="out-in" @beforeLeave="beforeLeave" @enter="enter" @afterEnter="afterEnter">
       <router-view :key="$route.fullPath" />
     </transition>
+    <CookiesComponent />
   </div>
 </template>
 <script>
 import PreloaderComponent from '@/components/preloader/PreloaderComponent'
+import CookiesComponent from '@/components/cookies/CookiesComponent'
 import HeaderComponent from '@/components/layout/HeaderComponent'
 import HeaderMobile from '@/components/mobile/HeaderMobile'
 const DEFAULT_TRANSITION = 'fade'
 export default {
   name: 'app',
-  components: { HeaderComponent, HeaderMobile, PreloaderComponent },
+  components: { HeaderComponent, HeaderMobile, PreloaderComponent, CookiesComponent },
   metaInfo: {
     title: 'MERCURY 99',
     titleTemplate: '%s | Building Company'

@@ -61,7 +61,7 @@
           <div class="filter-box price-range">
             <div class="text">{{ $t('select_price') }}:</div>
             <div class="price">
-              <div class="min">5 000</div>
+              <div class="min">5 000 EUR</div>
               <vue-slider
                 :show="show"
                 ref="slider"
@@ -71,7 +71,7 @@
                 :min="priceFrom"
                 :max="300000"
                 :interval="5000" />
-              <div class="max">300 000</div>
+              <div class="max">300 000 EUR</div>
             </div>
           </div>
           <div class="filter-box">
@@ -392,19 +392,6 @@ canvas {
     }
   }
 }
-.building-apartments {
-  .img-box {
-    position: relative;
-    height: 100vh;
-    #building {
-      position: absolute;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-    }
-  }
-}
 .filters {
   position: absolute;
   left: 40px;
@@ -579,6 +566,17 @@ canvas {
   transition-delay: 1s;
   transition-duration: .3s;
   transition-property: opacity;
+  .img-box {
+    position: relative;
+    height: 100vh;
+    #building {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
   .building-btn {
     margin: auto 0 0 0;
   }
@@ -714,6 +712,12 @@ canvas {
     &.active {
       transform: translateX(0);
     }
+    @media screen and(max-width: 1024px) {
+      &.active {
+        width: auto;
+        left: 0;
+      }
+    }
     @media screen and(max-width: 768px) {
       &.active {
         z-index: 99999;
@@ -838,6 +842,7 @@ canvas {
   @media screen and(max-width: 768px) {
     height: auto;
     min-height: 100vh;
+    padding-right: 195px;
     .img-box {
       height: auto;
       width: 100%;
@@ -894,6 +899,9 @@ canvas {
       }
     }
   }
+  @media screen and(max-width: 600px) {
+    padding-right: 0px;
+  }
 }
 .entrances-mobile {
   padding: 10px;
@@ -925,6 +933,12 @@ canvas {
 }
 .building-view-header {
   z-index: 1000;
+  @media screen and(max-width: 768px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
 }
 .active-component {
   .building-apartments {

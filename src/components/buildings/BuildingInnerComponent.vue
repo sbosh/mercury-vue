@@ -1,6 +1,6 @@
 <template>
   <div class="main-content" v-if="building">
-    <mq-layout mq="md+"><navinner-component navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
+    <mq-layout mq="md+" class="black-nav"><navinner-component navigation="buildingNav" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
     <div class="inner-building">
       <div class="inner-building-header">
         <mq-layout mq="sm"><h1 class="page-title" v-if="building">{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
@@ -16,7 +16,8 @@
         <div class="title-box">
           <h2 class="title" v-html="$t('about_building')"></h2>
         </div>
-        <div class="text" v-if="building" v-html="building['text_' + $i18n.locale]"></div>
+        <div class="text" v-html="building['text_' + $i18n.locale]"></div>
+        <div class="pdf" v-if="building.pdf">{{ building.pdf }}</div>
       </div>
       <div class="about-complex" v-if="building.status === 1 && building.use_svg === 1">
         <div class="box-row">
@@ -52,12 +53,21 @@
           </div>
         </div>
       </div>
-      <div class="gallery-building" id="gallery" v-if="building">
-        <swiper ref="swiper" :options="swiperOption">
-          <swiper-slide v-for="(image, key) in building.gallery" :key="key">
-            <img :src="image" alt=""><div class="progress-bar"></div>
-          </swiper-slide>
-        </swiper>
+      <div class="gallery-building" id="gallery">
+        <mq-layout mq="md+">
+          <swiper ref="swiper" :options="swiperOption">
+            <swiper-slide v-for="(image, key) in building.gallery" :key="key">
+              <img :src="image" alt=""><div class="progress-bar"></div>
+            </swiper-slide>
+          </swiper>
+        </mq-layout>
+        <mq-layout mq="sm">
+          <swiper ref="swiper" :options="swiperOption" v-viewer>
+            <swiper-slide v-for="(image, key) in building.gallery" :key="key">
+              <img :src="image" alt=""><div class="progress-bar"></div>
+            </swiper-slide>
+          </swiper>
+        </mq-layout>
       </div>
       <div class="location" id="location">
         <div class="caption animate-box">
@@ -121,13 +131,13 @@
         </div>
       </div>
       <div class="next-building" v-else>
-        <div class="text">{{ $t('prev_building') }}</div>
+        <div class="text">{{ $t('next_building') }}</div>
         <h2 class="title animate-box">
-          <router-link :to="'/' + lang + '/' + building.prev_building.id + '/' + building.prev_building['slug_' + $i18n.locale]">{{ building.prev_building['title_' + $i18n.locale] }}</router-link>
+          <router-link :to="'/' + lang + '/' + 5 + '/' + building.first_building['slug_' + $i18n.locale]">{{ building.first_building['title_' + $i18n.locale] }}</router-link>
         </h2>
         <div class="img-box">
-          <router-link :to="'/' + lang + '/' + building.prev_building.id + '/' + building.prev_building['slug_' + $i18n.locale]">
-            <img :src="building.prev_building.image" alt="">
+          <router-link :to="'/' + lang + '/' + 5 + '/' + building.first_building['slug_' + $i18n.locale]">
+            <img :src="building.first_building.image" alt="">
           </router-link>
         </div>
       </div>
@@ -170,6 +180,13 @@ export default {
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
+        },
+        breakpoints: {
+          768: {
+            loop: false,
+            autoplay: false,
+            spaceBetween: 10
+          }
         }
       }
     }
@@ -567,6 +584,12 @@ export default {
   }
   .box {
     flex: 1 0 50%;
+    .icon {
+      width: 40px;
+      img,svg {
+        max-width: 100%;
+      }
+    }
     .info {
       padding: 15px 0;
       margin-left: 10px;
@@ -676,7 +699,8 @@ export default {
   }
   @media screen and(max-width: 768px) {
     .swiper-container {
-      padding-right: 60px;
+      padding-right: 30px;
+      padding-left: 30px;
     }
     .swiper-slide {
       width: 100%;
@@ -684,6 +708,7 @@ export default {
         right: 25px;
         bottom: 25px;
         left: 25px;
+        display: none;
       }
     }
   }
@@ -841,7 +866,7 @@ export default {
     display: block;
   }
   @media screen and(max-width: 768px) {
-    padding: 0 0 0 25px;
+    padding: 20px 0 0 25px;
     margin-bottom: 40px;
     &:before {
       display: none;
@@ -867,6 +892,9 @@ export default {
       }
     }
   }
+  @media screen and(max-width: 600px) {
+    padding-top: 0;
+  }
 }
 .inner-building {
   padding: 0 195px 0 0;
@@ -887,7 +915,7 @@ export default {
     }
   }
   @media screen and(max-width: 768px) {
-    padding: 0;
+    padding: 0 195px 0 0;
     .caption {
       .title-box {
         padding-left: 40px;
@@ -911,14 +939,18 @@ export default {
         p {
           column-count: 1;
           color: #383838;
-          font-size: 13px;
+          font-size: 16px;
           font-weight: 400;
-          line-height: 23px;
+          line-height: 28px;
           margin: 0;
           max-width: 100%;
+          text-align: justify;
         }
       }
     }
+  }
+  @media screen and(max-width: 600px) {
+    padding: 0;
   }
 }
 </style>

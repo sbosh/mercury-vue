@@ -28,8 +28,9 @@
             <div class="col">
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/current-buildings'">{{ $t('current_projects') }}</router-link></h3>
               <ul>
-                <li v-for="building in current" :key="building.id" >
-                  <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
+                <li v-for="building in current" :key="building.id">
+                  <router-link v-if="building.status == 1 && building.use_svg == 1" :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'">{{ building['title_' + $i18n.locale] }}</router-link>
+                  <router-link v-else :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
                 </li>
               </ul>
               <h3><router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link></h3>
@@ -42,7 +43,7 @@
               <div class="follow-us">
                 <div class="text">{{ $t('follow_us') }}</div>
                 <ul>
-                  <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
+                  <li><a href="https://www.facebook.com/Mercury99Ltd/" target="_blank"><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
                   <!-- <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
                   <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li> -->
                 </ul>
@@ -79,17 +80,11 @@ export default {
   },
   mounted () {
     this.convertSVG()
-    let $this = this
-    let deleteLink = document.querySelectorAll('a')
-    for (let i = 0; i < deleteLink.length; i++) {
-      deleteLink[i].addEventListener('click', function () {
-        $this.isActive = false
-      })
-    }
   },
   watch: {
     '$route' (to, from) {
-      if (to.name === 'home' || to.name === 'buildings') {
+      this.isActive = false
+      if (to.name === 'home' || to.name === 'current-buildings') {
         this.$el.querySelector('.main-nav').classList.add('home-header')
       } else {
         this.$el.querySelector('.main-nav').classList.remove('home-header')
@@ -135,7 +130,7 @@ export default {
   top: 0;
   left: 25px;
   padding: 10px 25px 10px 0;
-  z-index: 99999;
+  z-index: 99998;
   transition-delay: .5s;
   transition-duration: .7s;
   transition-property: all;
@@ -329,15 +324,15 @@ export default {
         opacity: 0;
         padding: 0;
         &:nth-child(1){
-          transform: translateX(250px);
+          /*transform: translateX(250px);*/
           transition: all .9s;
         }
         &:nth-child(2){
-          transform: translateX(450px);
+          /*transform: translateX(450px);*/
           transition: all 1.3s;
         }
         &:nth-child(3){
-          transform: translateX(600px);
+          /*transform: translateX(600px);*/
           transition: all 1.7s;
           border: none;
         }
@@ -424,15 +419,15 @@ export default {
       }
       .col {
         opacity: 1;
-        &:nth-child(1){
-          animation: col3-animation .3s forwards;
-        }
-        &:nth-child(2){
-          animation: col3-animation .8s forwards;
-        }
-        &:nth-child(3){
-          animation: col3-animation 1.3s forwards;
-        }
+        // &:nth-child(1){
+        //   animation: col3-animation .3s forwards;
+        // }
+        // &:nth-child(2){
+        //   animation: col3-animation .8s forwards;
+        // }
+        // &:nth-child(3){
+        //   animation: col3-animation 1.3s forwards;
+        // }
       }
     }
   }

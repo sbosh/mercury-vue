@@ -51,7 +51,7 @@
                   :d="apartment.coords"
                   ref="vtooltip"
                   v-bind:class="{sold: apartment.status !== 1}"
-                  v-tooltip="{ content: apartmentStatus(apartment.status), show: floor['slug_' + $i18n.locale] == $route.params.floorId && apartment.status !== 1 ? true : false, placement: 'top', classes: 'center-tooltip', trigger: 'manual', offset: '-100' }"></path>
+                  v-tooltip="{ content: apartmentStatus(apartment.status), show: floor['slug_' + $i18n.locale] == $route.params.floorId  && apartment.status !== 1 ? true : false, placement: 'top', classes: 'center-tooltip', trigger: 'manual', offset: '-110' }"></path>
               </g>
             </svg>
           </div>
@@ -121,7 +121,11 @@ export default {
   },
   methods: {
     tooltipContent (apartment) {
-      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><div class="icons"><div><i class="area-icon"></i> ${apartment.total_area} m²</div> <div><i class="rooms-icon"></i>${apartment.rooms}</div></div> <div class="price">${apartment.price} EUR</div><div class="status">${this.apartmentStatus(apartment.status)}</div>`
+      return `<h4>${apartment['title_' + this.$i18n.locale]}</h4><div class="icons"><div><i class="area-icon"></i> ${apartment.total_area} m²</div> <div><i class="rooms-icon"></i>${apartment.rooms}</div></div> <div class="price">${apartment.status !== 1 ? '' : this.formatPrice(apartment.price) + ' EUR'}</div><div class="status">${this.apartmentStatus(apartment.status)}</div>`
+    },
+    formatPrice (value) {
+      let val = (value / 1)
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
     },
     apartmentStatus (status) {
       if (status === 1) {
@@ -294,6 +298,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 195px;
+  padding-right: 350px;
   .sold-text {
     margin-bottom: 15px;
     color: red;
@@ -303,9 +309,9 @@ export default {
     visibility: hidden;
     opacity: 0;
     transition: all .3s;
-    margin: 0 440px 0 220px;
-    position: relative;
+    margin: 0 auto;
     max-width: 1200px;
+    position: relative;
     img {
       max-width: 100%;
       position: relative;
@@ -337,14 +343,10 @@ export default {
     g polygon:hover {
       opacity: .7;
     }
+    .sold,
+    .sold path,
     .sold:hover,
     .sold:hover path {
-      fill: red !important;
-    }
-  }
-  @media screen and(max-width: 1024px) {
-    .img-box svg .sold,
-    .img-box svg .sold path {
       fill: red !important;
       opacity: .7;
     }
@@ -403,11 +405,40 @@ export default {
       }
     }
   }
+  @media screen and(max-width: 1024px) {
+    .img-box svg .sold,
+    .img-box svg .sold path {
+      fill: red !important;
+      opacity: .7;
+    }
+    .swiper-pagination.swiper-pagination-bullets {
+      right: 60px;
+      .swiper-pagination-bullet {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 24px;
+      }
+    }
+  }
   @media screen and(max-width: 768px) {
     padding: 0 25px 25px;
     display: block;
-    height: auto;
-    min-height: 50vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .swiper-pagination.swiper-pagination-bullets {
+      margin-right: 210px;
+    }
+    .swiper-container {
+      margin-right: auto;
+      margin-left: 0;
+    }
+    .swiper-container,
+    .swiper-slide {
+      width: 68vw !important;
+    }
     .img-box {
       padding-right: 0;
       margin-bottom: 30px;
@@ -458,10 +489,20 @@ export default {
       }
     }
   }
+  @media screen and(max-width: 600px) {
+    height: auto;
+    min-height: 50vh;
+    .swiper-pagination.swiper-pagination-bullets {
+      margin-right: auto;
+    }
+    .swiper-container, .swiper-slide {
+      width: inherit !important;
+    }
+  }
 }
 .left-sidebar {
   width: 195px;
-  border-right: 1px solid #979797;
+  border-right: 1px solid #e4e4e4;
   background: #f8f8f8;
   position: fixed;
   left: 0;
@@ -547,6 +588,7 @@ export default {
       background-position: 96% center;
       background-size: 13px 13px;
       appearance: none;
+      border-radius: 0;
     }
     span {
       color: #8d8d8d;
@@ -556,6 +598,26 @@ export default {
       &:first-of-type {
         color: #000;
         font-weight: 600;
+      }
+    }
+  }
+  @media screen and(max-width:768px) {
+    width: auto;
+    right: 195px;
+    bottom: inherit;
+    flex-direction: row;
+    .top {
+      .back-btn {
+        width: 150px;
+      }
+    }
+    .available-from {
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    .compass {
+      img {
+        width: 100px;
       }
     }
   }

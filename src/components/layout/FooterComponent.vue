@@ -16,12 +16,12 @@
       </nav>
     </mq-layout>
     <ul class="footer-bottom-nav">
-      <li><a href=""><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
+      <li><a href="https://www.facebook.com/Mercury99Ltd/" target="_blank"><img src="@/assets/images/fb-icon.svg" class="svg" alt=""></a></li>
 <!--       <li><a href=""><img src="@/assets/images/yt-icon.svg" class="svg" alt=""></a></li>
       <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li> -->
     </ul>
     <div class="all-rights">{{ $t('all_rights') }}</div>
-    <div class="created-by"><a href="mailto:imigix2018@gmail.com">{{ $t('created_by') }} Imigix</a></div>
+    <div class="created-by"><a href="mailto:imigix2018@gmail.com">{{ $t('created_by') }} <b>Imigix</b></a></div>
   </footer>
 </template>
 
@@ -161,7 +161,7 @@ footer {
     margin-right: auto;
     display: table;
   }
-  .created-by{
+  .created-by {
     position: absolute;
     left: -60px;
     top: 190px;
@@ -184,8 +184,22 @@ footer {
       }
     }
   }
+  @media screen and(max-width: 1024px) {
+    .created-by {
+      left: 0;
+      top: inherit;
+      bottom: 40px;
+      right: 0;
+      transform: rotate(0);
+      text-align: center;
+      padding-right: 195px;
+      a:after {
+        display: none;
+      }
+    }
+  }
   @media screen and(max-width: 768px) {
-    padding: 45px 25px 20px 25px;
+    padding: 45px 195px 20px 25px;
     .footer-bottom-nav {
       border-bottom: 1px solid rgba(#fff, .25);
       padding-bottom: 30px;
@@ -199,6 +213,8 @@ footer {
       position: relative;
       left: inherit;
       top: inherit;
+      bottom: inherit;
+      padding: 0;
       transform: none;
       text-align: center;
       a {
@@ -211,6 +227,9 @@ footer {
         }
       }
     }
+  }
+  @media screen and(max-width: 600px) {
+    padding: 45px 25px 20px 25px;
   }
 }
 </style>

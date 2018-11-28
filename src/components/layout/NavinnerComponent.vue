@@ -58,6 +58,16 @@ export default {
     }
   },
   mounted () {
+    if (this.$route.hash) {
+      setTimeout(() => {
+        let target = document.querySelector(this.$route.hash)
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        })
+        history.pushState(null, null, this.$route.hash)
+      }, 800)
+    }
     let anchorlinks = document.querySelectorAll('a[href^="#"]')
     for (let item of anchorlinks) {
       item.addEventListener('click', (e) => {
@@ -245,17 +255,34 @@ export default {
     right: inherit !important;
     margin-bottom: 20px;
     .nav-inner {
-      padding-right: 0;
       .header-title {
-        margin-left: 0;
+        margin-left: 20px;
       }
       .back-btn {
         margin-right: 0;
+      }
+      .mr-auto {
+        display: none;
       }
     }
   }
   .headroom--not-top .scroll-top {
     display: none;
+  }
+  .headroom--unpinned {
+    .header-title .title {
+      display: none;
+    }
+  }
+}
+@media screen and(max-width: 600px) {
+  .headroom {
+    .nav-inner {
+      padding-right: 0;
+      .header-title {
+        margin-left: 0;
+      }
+    }
   }
 }
 </style>

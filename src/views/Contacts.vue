@@ -1,7 +1,8 @@
 <template>
   <div class="main-content" v-if="contacts">
+    <mq-layout mq="md+"><navinner-component :navTitle="contacts['title_' + $i18n.locale]"  /></mq-layout>
+    <mq-layout mq="sm" class="mobile-header"><h1 class="title">{{contacts['title_' + $i18n.locale]}}</h1></mq-layout>
     <div class="contacts-page">
-      <navinner-component :navTitle="contacts['title_' + $i18n.locale]"  />
       <div class="contacts-us">
         <contact-form />
       </div>
@@ -254,15 +255,12 @@ export default {
     top: 0;
     height: 591px;
     background-color: #232323;
-    z-index: 0;
+    z-index: -1;
   }
   .contacts-us {
     background: #fff;
     padding: 70px 110px;
-    position: relative;
-    z-index: 10;
     margin: 0 160px 120px 160px;
-
     h3 {
       color: #2c2c2c;
       font-size: 18px;
@@ -285,11 +283,15 @@ export default {
     }
   }
   @media screen and(max-width: 768px) {
-    padding: 90px 25px 25px;
+    padding: 148px 210px 25px 25px;
+    margin-top: -148px;
     .contacts-us {
       margin: 0 -25px;
       padding: 20px;
     }
+  }
+  @media screen and(max-width: 600px) {
+    padding: 148px 25px 25px 25px;
   }
 }
 .form-row:not(.radio-checkbox-row) {
@@ -310,6 +312,16 @@ export default {
 .form-group {
   margin-bottom: 20px;
   width: 100%;
+  position: relative;
+  .form-error {
+    position: absolute;
+    right: 0;
+    top: -16px;
+    color: red;
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+  }
   .form-element {
     padding: 21px 20px;
     border: 1px solid #d0d0d0;
@@ -321,6 +333,9 @@ export default {
     outline: none;
     resize: none;
     width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    min-height: 30px;
     &:focus {
       border-color: #fa6a02;
     }
@@ -340,10 +355,19 @@ export default {
       background-image: url(~@/assets/images/send.svg);
       background-position: 40px 18px;
       background-repeat: no-repeat;
+      box-shadow: none;
+      border-radius: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      -webkit-border-radius: 0;
     }
   }
-  textarea {
+  textarea.form-element {
     min-height: 161px;
+    border-radius: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
   }
   &.radio-group {
     input[type=radio]{
