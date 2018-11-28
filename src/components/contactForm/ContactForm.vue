@@ -1,5 +1,5 @@
 <template>
-  <form @submit="checkForm" method="POST" action="">
+  <form @submit="checkForm" method="POST" action="" id="contact_form">
     <!-- <h3>{{ $t('write_us') }}</h3>
     <div class="form-row radio-checkbox-row">
       <div class="form-group radio-group">
@@ -155,6 +155,10 @@ export default {
         if (response.status && response.status === 200) {
           this.popupActive = true
           this.successForm = true
+          this.name = ''
+          this.email = ''
+          this.phone = ''
+          this.message = ''
         }
       }).catch(({ response }) => {
         const errors = response.data.errors

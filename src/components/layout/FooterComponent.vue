@@ -199,7 +199,7 @@ footer {
     }
   }
   @media screen and(max-width: 768px) {
-    padding: 45px 25px 20px 25px;
+    padding: 45px 195px 20px 25px;
     .footer-bottom-nav {
       border-bottom: 1px solid rgba(#fff, .25);
       padding-bottom: 30px;
@@ -227,6 +227,9 @@ footer {
         }
       }
     }
+  }
+  @media screen and(max-width: 600px) {
+    padding: 45px 25px 20px 25px;
   }
 }
 </style>

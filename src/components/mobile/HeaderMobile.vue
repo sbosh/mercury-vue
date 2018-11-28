@@ -28,8 +28,9 @@
             <div class="col">
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/current-buildings'">{{ $t('current_projects') }}</router-link></h3>
               <ul>
-                <li v-for="building in current" :key="building.id" >
-                  <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
+                <li v-for="building in current" :key="building.id">
+                  <router-link v-if="building.status == 1 && building.use_svg == 1" :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'">{{ building['title_' + $i18n.locale] }}</router-link>
+                  <router-link v-else :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
                 </li>
               </ul>
               <h3><router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link></h3>
@@ -79,17 +80,11 @@ export default {
   },
   mounted () {
     this.convertSVG()
-    let $this = this
-    let deleteLink = document.querySelectorAll('a')
-    for (let i = 0; i < deleteLink.length; i++) {
-      deleteLink[i].addEventListener('click', function () {
-        $this.isActive = false
-      })
-    }
   },
   watch: {
     '$route' (to, from) {
-      if (to.name === 'home' || to.name === 'buildings') {
+      this.isActive = false
+      if (to.name === 'home' || to.name === 'current-buildings') {
         this.$el.querySelector('.main-nav').classList.add('home-header')
       } else {
         this.$el.querySelector('.main-nav').classList.remove('home-header')

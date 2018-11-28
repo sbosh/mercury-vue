@@ -410,6 +410,14 @@ export default {
         }
       }
     }
+    @media screen and(max-width: 768px) {
+      .main-nav-logo img {
+        max-width: 100px;
+      }
+      .content {
+        width: 100%;
+      }
+    }
   }//main-navigation
   .tel {
     width: 100%;

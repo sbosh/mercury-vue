@@ -662,6 +662,7 @@ export default {
             font-size: 17px;
             font-weight: 600;
             text-transform: none;
+            margin-bottom: 20px;
           }
         }
         .buttons {
@@ -706,7 +707,22 @@ export default {
     }
   }
   @media screen and (max-width: 768px ) {
-    margin-top: 90px;
+    margin-top: 190px;
+    padding-right: 195px;
+    .left-sidebar {
+      .top {
+        .back-btn {
+          display: none;
+        }
+      }
+      .floor-plan {
+        display: none;
+      }
+    }
+  }
+  @media screen and (max-width: 600px ) {
+    margin-top: 100px;
+    padding-right: 0;
   }
 }
 .left-sidebar {
@@ -866,6 +882,27 @@ export default {
         font-weight: 600;
       }
     }
+  }
+  @media screen and(max-width:768px) {
+    width: auto;
+    right: 195px;
+    bottom: inherit;
+    flex-direction: row;
+    .top {
+      .back-btn {
+        width: 150px;
+      }
+    }
+    .available-from {
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    .compass {
+      img {
+        width: 100px;
+      }
+    }
+    .floor-plan {}
   }
 }
 </style>
