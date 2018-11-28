@@ -9,11 +9,11 @@
     <!-- <div class="img-box">
       <img src="@/assets/images/about-team.jpg" alt="">
     </div> -->
-    <div class="caption">
-      <!-- <div class="title-box">
+    <!--<div class="caption">
+       <div class="title-box">
         <h3 class="title">{{ $t('about_company_caption') }}</h3>
-      </div> -->
-    </div>
+      </div>
+    </div>-->
     <div class="description">
       <p v-html="$t('about_company_description')"></p>
       <br>
@@ -118,6 +118,7 @@ export default {
       top: 0;
       height: 360px;
       background: #232323;
+      display: none;
     }
     .img-box {
       margin-bottom: 25px;
@@ -130,6 +131,7 @@ export default {
     .caption {
       margin-left: -25px;
       margin-bottom: 30px;
+      display: none;
       .title-box {
         padding-left: 45px;
         h3.title {

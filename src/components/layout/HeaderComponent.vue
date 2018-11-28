@@ -22,11 +22,12 @@
             <div class="col">
               <h3><router-link :to="'/' + lang + '/contacts'">{{ $t('contacts') }}</router-link></h3>
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/about'">{{ $t('about_company') }}</router-link></h3>
-              <ul>
+              <br>
+              <!-- <ul>
                 <li><router-link :to="'/' + lang + '/about#company'">{{ $t('about_us') }}</router-link></li>
                 <li><router-link :to="'/' + lang + '/about#services'">{{ $t('services') }}</router-link></li>
                 <li><router-link :to="'/' + lang + '/about#history'">{{ $t('history') }}</router-link></li>
-              </ul>
+              </ul> -->
               <div class="tel">
                 <a :href="$t('tel_href')" class="tel-box">
                   <div class="icon"><img src="@/assets/images/phone-icon.svg" class="svg" alt=""></div>
