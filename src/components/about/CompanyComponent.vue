@@ -49,11 +49,15 @@ export default {
       h1.title {
         color: #6e6e6e;
         font-family: "Fira Sans";
-        font-size: 17px;
-        font-weight: 400;
-        line-height: 23px;
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 30px;
+        text-transform: uppercase;
         &:after {
           border-color: #fa6a02;
+        }
+        &:before {
+          background: #fa6a02;
         }
       }
       h3.title {
