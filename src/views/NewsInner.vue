@@ -18,9 +18,9 @@
             <div class="follow-us">
               <div class="tex">{{ $t('share_text') }}:</div>
               <social-sharing
-                url="http://veze.bg"
-                title="SHTE TI EBA MAIKATA"
-                description="BOKLIK MRYSEN KITAISKI"
+                url="window.location.href"
+                title="test title"
+                description="test description"
                 twitter-user="Mercury99"
                 inline-template>
                 <div>
