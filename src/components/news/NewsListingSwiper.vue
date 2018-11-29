@@ -1,6 +1,6 @@
 <template>
   <div class="news-swiper">
-    <swiper ref="newsListingSwiper" :options="swiperOption">
+    <swiper ref="newsListingSwiper" :options="swiperOptions">
       <swiper-slide v-for="article in articles" :key="article.id" >
         <news-listing-item
           :id="article.id"
@@ -23,34 +23,60 @@ export default {
     'news-listing-item': NewsListingItem
   },
   props: ['articles'],
-  data () {
-    return {
-      swiperOption: {
-        speed: 500,
-        slidesPerView: 2,
-        spaceBetween: 100,
-        watchSlidesVisibility: true,
-        init: false,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
-        },
-        breakpoints: {
-          1280: {
-            slidesPerView: 2,
-            spaceBetween: 40
+  mounted () {
+    this.$refs.newsListingSwiper.swiper.init()
+    this.$refs.newsListingSwiper.swiper.update()
+  },
+  computed: {
+    swiperOptions () {
+      if (this.articles.length > 2) {
+        return {
+          speed: 500,
+          slidesPerView: 2,
+          spaceBetween: 100,
+          watchSlidesVisibility: true,
+          init: false,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true
           },
-          992: {
-            slidesPerView: 1,
-            spaceBetween: 0
+          breakpoints: {
+            1280: {
+              slidesPerView: 2,
+              spaceBetween: 40
+            },
+            768: {
+              slidesPerView: 1,
+              spaceBetween: 0
+            }
+          }
+        }
+      } else {
+        return {
+          speed: 500,
+          slidesPerView: 2,
+          spaceBetween: 100,
+          watchSlidesVisibility: true,
+          init: false,
+          allowTouchMove: false,
+          breakpoints: {
+            1280: {
+              slidesPerView: 2,
+              spaceBetween: 40
+            },
+            768: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+              allowTouchMove: true,
+              pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+              }
+            }
           }
         }
       }
     }
-  },
-  mounted () {
-    this.$refs.newsListingSwiper.swiper.init()
-    this.$refs.newsListingSwiper.swiper.update()
   }
 }
 </script>

@@ -106,6 +106,9 @@
                     <span><b>{{ building.totalFreeApartments }}</b>/<span>{{ building.totalApartments }}</span></span>
                   </div>
                   <div v-if="building.use_svg === 1" class="tel"><div class="text">{{ $t('phone') }}:</div><a :href="$t('tel_href')">{{ $t('tel_phone') }}</a></div>
+                  <div v-if="building.status == 1 && building.use_svg == 1" class="scheme">
+                    <router-link :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'" class="link">{{ $t('views_scheme') }}</router-link>
+                  </div>
                 </div>
               </GmapInfoWindow>
             </GmapMarker>
@@ -558,7 +561,6 @@ export default {
 }//map
 .location {
   padding-top: 100px;
-  padding-bottom: 100px;
   .caption {
     margin-bottom: 100px;
     visibility: hidden;
@@ -581,6 +583,7 @@ export default {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 50px;
   }
   .box {
     flex: 1 0 50%;
@@ -657,6 +660,7 @@ export default {
     img {
       display: block;
       max-width: 100%;
+      width: 100%;
       transition: all .3s;
     }
     .progress-bar {

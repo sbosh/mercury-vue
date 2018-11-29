@@ -17,7 +17,11 @@ export default {
   },
   mounted () {
     // eslint-disable-next-line
-    setTimeout(() => this.show = true, 1000)
+    setTimeout(() => {
+      if (!this.getCookie('John')) {
+        this.show = true
+      }
+    }, 1000)
   },
   computed: {
     lang () {
@@ -125,14 +129,12 @@ export default {
     }
     .read-more,
     #agree {
-      display: flex;
-      justify-content: center;
       padding: 10px;
       font-size: 10px;
     }
   }
   @media screen and(max-width:600px) {
-    padding-bottom: 6px;
+    padding-bottom: 10px;
     padding-top: 8px;
     h3 {
       font-size: 12px;

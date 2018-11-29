@@ -9,12 +9,12 @@
             </div>
             <div class="col">
               <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/current-buildings'">{{ $t('current_projects') }}</router-link></h3>
-              <div class="ul">
+              <ul class="ul">
                 <li v-for="building in current" :key="building.id">
                   <router-link v-if="building.status == 1 && building.use_svg == 1" :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale] + '/view'">{{ building['title_' + $i18n.locale] }}</router-link>
                   <router-link v-else :to="'/' + lang + '/' + building.id + '/' + building['slug_' + $i18n.locale]">{{ building['title_' + $i18n.locale] }}</router-link>
                 </li>
-              </div>
+              </ul>
               <h3><router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link></h3>
               <h3><router-link :to="'/' + lang + '/future-buildings'">{{ $t('future_projects') }}</router-link></h3>
               <h3><router-link :to="'/' + lang + '/news'">{{ $t('news') }}</router-link></h3>
@@ -241,6 +241,37 @@ export default {
       }
       h3 {
         margin-bottom: 43px;
+        position: relative;
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: #fa6a02;
+          transition: all .3s;
+        }
+        &:hover {
+          &:after {
+            width: 100%;
+          }
+        }
+      }
+      .ul {
+        li {
+          margin-bottom: 5px;
+          a {
+            transition: all .3s;
+            padding: 6px 0;
+            display: block;
+          }
+          &:hover {
+            a {
+              color: #fff;
+            }
+          }
+        }
       }
       .margin-bottom-0 {
         margin-bottom: 0;
@@ -382,11 +413,8 @@ export default {
         margin: 13px 0 30px 0;
         padding: 0;
         list-style: none;
-
         li,.box {
           display: block;
-          margin-bottom: 16px;
-
           a {
             color: #8d8d8d;
             font-family: 'Fira Sans', sans-serif;
@@ -559,11 +587,13 @@ export default {
     padding: 0;
     margin: 0 0 20px 0;
     text-align: center;
-
     li {
       list-style: none;
       dispaly: inline-block;
-
+      transition: all .3s;
+      &:hover {
+        opacity: .7;
+      }
       a {
         display: block;
         padding: 17px;
@@ -589,6 +619,10 @@ export default {
       margin: 0;
       padding: 0;
       list-style: none;
+      transition: all .3s;
+      &:hover {
+        opacity: .7;
+      }
       a {
         color: #000;
         font-size: 12px;

@@ -856,6 +856,9 @@ canvas {
         background-position: center center;
         height: 58vh;
         overflow: hidden;
+        canvas {
+          height: 58vh !important;
+        }
       }
     }
     .bottom-options {
