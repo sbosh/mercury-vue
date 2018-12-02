@@ -46,7 +46,7 @@
             </div>
           </div>
           <ul class="created-by">
-            <li class="imigix">Created by <a href="">Imigix</a></li>
+            <li class="imigix">Created by <a href="http://imigix.com/" target="_blank">Imigix</a></li>
           </ul>
         </div>
       </div>

@@ -1,33 +1,31 @@
 <template>
-  <div class="main-content terms">
-    <mq-layout mq="md+"><navinner-component :navTitle="$t('terms')" /></mq-layout>
-    <mq-layout mq="sm" class="mobile-header"><h1 class="title">{{ $t('terms') }}</h1></mq-layout>
-    <div class="tersm-container">
-      <h1>Lorem ipsum dolor sit amet.</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas quam, similique ratione unde laudantium assumenda repudiandae quaerat totam incidunt. Quasi qui, aperiam, impedit quod deleniti eaque fuga at. Laudantium, sed.</p>
-      <ol>
-        <li><a href="">Test 1</a></li>
-        <li><a href="">Test 2</a></li>
-        <li><a href="">Test 3</a></li>
-        <li><a href="">Test 4</a></li>
-      </ol>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim fugit dolorem, ea. Sed earum totam voluptate enim, illo quis alias ut magnam? Nesciunt dolore ullam molestias, excepturi doloremque, vero cupiditate.</p>
-      <ul>
-        <li>Test 1</li>
-        <li>Test 2</li>
-        <li>Test 3</li>
-        <li>Test 4</li>
-      </ul>
-    </div>
+  <div class="main-content terms" v-if="terms">
+    <mq-layout mq="md+"><navinner-component :navTitle="terms['title_' + $i18n.locale]" /></mq-layout>
+    <mq-layout mq="sm" class="mobile-header"><h1 class="title">{{ terms['title_' + $i18n.locale] }}</h1></mq-layout>
+    <div class="tersm-container" v-html="terms['text_' + $i18n.locale]"></div>
     <footer-component />
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import FooterComponent from '@/components/layout/FooterComponent'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 export default {
   name: 'terms',
-  components: { FooterComponent, NavinnerComponent }
+  components: { FooterComponent, NavinnerComponent },
+  metaInfo () {
+    return {
+      title: this.terms ? this.terms['seo_title_' + this.$i18n.locale] : ''
+    }
+  },
+  computed: {
+    lang () {
+      return this.$i18n.locale
+    },
+    ...mapState({
+      terms: state => state.pages.terms
+    })
+  }
 }
 </script>
 

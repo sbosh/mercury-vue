@@ -53,5 +53,6 @@ new Vue({
     this.$store.cache.dispatch('fetchNewsPage')
     this.$store.cache.dispatch('fetchContactsPage')
     this.$store.cache.dispatch('fetchAboutPage')
+    this.$store.cache.dispatch('fetchTermsPage')
   }
 }).$mount('#app')
