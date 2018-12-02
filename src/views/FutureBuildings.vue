@@ -25,13 +25,15 @@
           </swiper>
         </div>
       </div>
-      <div v-else class="comming-soon-annonunce">
-        <div class="caption">
-          <div class="title-box">
-            <h2 class="title">{{ $t('comming_soon_buildings') }}</h2>
-          </div>
-          <div class="description">
-            <p>{{ $t('comming_soon_description') }}</p>
+      <div v-else class="comming-soon">
+        <div class="box-row">
+          <div class="left"><div class="thumb-box"><img src="@/assets/images/future-building.svg" alt=""></div></div>
+          <div class="right">
+            <div class="caption">
+              <div class="title-box">
+                <h2 class="title">{{ $t('comming_soon') }}</h2>
+              </div>
+            </div>
           </div>
         </div>
       </div>

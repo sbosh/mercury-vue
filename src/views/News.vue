@@ -1,5 +1,5 @@
 <template>
-  <div class="main-content">
+  <div class="main-content" v-if="news">
     <mq-layout mq="md+" class="black-nav"><navinner-component :navTitle="news['title_' + $i18n.locale]" /></mq-layout>
     <mq-layout mq="sm" class="mobile-header"><h1 class="title">{{ $t('news') }}</h1></mq-layout>
     <div class="all-news">
@@ -39,11 +39,15 @@ export default {
     window.addEventListener('scroll', function () {
       for (let index = 0; index < animateBox.length; index++) {
         let windowBottom = animateBox[index].getBoundingClientRect().bottom
-        if (windowBottom - window.innerHeight <= 0) {
+        if (windowBottom - window.innerHeight <= 250) {
           animateBox[index].classList.add('visible')
         }
       }
     })
+  },
+  created () {
+    this.$store.dispatch('fetchNewsPage')
+    this.$store.dispatch('fetchArticles')
   }
 }
 </script>
@@ -109,7 +113,7 @@ export default {
     }
   }
   @media screen and(max-width: 768px) {
-    padding: 30px 195px 25px 25px;
+    padding: 30px 205px 25px 25px;
     &:before {
       height: 250px;
     }

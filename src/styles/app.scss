@@ -315,3 +315,77 @@ h1,h2,h3,h4,h5,h6 {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
+.comming-soon {
+  padding-top: 50px;
+  padding-left: 95px;
+  padding-right: 195px;
+  min-height: 100vh;
+  display: flex;
+  background: #232323;
+  .box-row {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 70vh;
+    margin: auto;
+    .left {
+      background: #3c3c3c;
+    }
+    .left,
+    .right {
+      flex: 1 0 50%;
+      max-width: 50%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  @media screen and (max-width: 1365px) {
+    padding-left: 25px;
+  }
+  @media screen and (max-width: 1024px) {
+    .caption {
+      .title-box {
+        padding-left: 90px;
+        .title {
+          font-size: 30px;
+          line-height: 36px;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding-left: 25px;
+    padding-right: 205px;
+    padding-top: 0;
+    padding: 0 205px 30px 25px;
+    flex-direction: column;
+    .box-row {
+      flex-direction: column-reverse;
+      .caption {
+        margin-left: -150px;
+      }
+      margin: 0;
+      .left,
+      .right {
+        flex: 1 0 100%;
+        max-width: 100%;
+      }
+    }
+  }
+  @media screen and(max-width: 600px){
+    min-height: inherit;
+    padding: 0;
+    h2 {
+      color: #fff;
+    }
+    .thumb-box {
+      text-align: center;
+      margin: 40px 0;
+    }
+  }
+}

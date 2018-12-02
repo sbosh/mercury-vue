@@ -249,7 +249,7 @@ export default {
         cursor: pointer;
         min-width: 180px;
         &:hover {
-          color: #000;
+          color: #fff;
         }
         &:before,&:after {
           display: none;
