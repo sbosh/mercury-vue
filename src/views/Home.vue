@@ -85,6 +85,7 @@ export default {
         height: 26px;
         display: inline-block;
         background: url(../assets/images/news-icon.svg) no-repeat center;
+        background-size: 100%;
         float: left;
         margin-right: 15px;
       }

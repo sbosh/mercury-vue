@@ -13,8 +13,9 @@
         </div>
       </div>
     </div>
-    <div v-else>
-      <h2>{{ $t('comming_soon_buildings') }}</h2>
+    <div v-else class="comming-soon">
+      <h2>{{ $t('comming_soon') }}</h2>
+      <div class="thumb-box"><img src="@/assets/images/future-building.svg" alt=""></div>
     </div>
     <div class="outher-buildings">
       <div class="buttons">

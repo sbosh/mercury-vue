@@ -227,8 +227,12 @@ export default {
     top: 5%;
     right: 15%;
     z-index: 999;
-    background: #000 url(../assets/images/close-apms-icon.svg) no-repeat center center;
+    background: url(../assets/images/cancel.svg) no-repeat center center;
     background-size: 20px;
+    transition: all .3s;
+    &:hover {
+      transform: rotate(180deg);
+    }
   }
   .popup-title {
     font-size: 24px;
@@ -276,6 +280,17 @@ export default {
     form {
       margin-left: 10px;
       margin-right: 10px;
+    }
+  }
+  @media screen and(max-width: 600px) {
+    .close-popup {
+      right: 5%;
+    }
+    form {
+      margin-left: 0;
+      margin-right: 0;
+      left: 5%;
+      right: 5%;
     }
   }
 }

@@ -203,7 +203,7 @@ export default {
     window.addEventListener('scroll', function () {
       for (let index = 0; index < animateBox.length; index++) {
         let windowBottom = animateBox[index].getBoundingClientRect().bottom
-        if (windowBottom - window.innerHeight <= 0) {
+        if (windowBottom - window.innerHeight <= 250) {
           animateBox[index].classList.add('visible')
         }
       }
