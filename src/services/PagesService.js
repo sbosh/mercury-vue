@@ -37,4 +37,9 @@ export default class PagesService {
     return this.http.get('/page/type/about')
       .catch((error) => { throw new Error(error) })
   }
+
+  getTermsPage () {
+    return this.http.get('/page/type/history')
+      .catch((error) => { throw new Error(error) })
+  }
 }
