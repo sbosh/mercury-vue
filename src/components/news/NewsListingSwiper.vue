@@ -119,6 +119,11 @@ export default {
         transform: translateX(0);
         opacity: 1;
       }
+      &:hover {
+        img {
+          transform: translateX(0) scale(1.1);
+        }
+      }
     }
   }
 }
@@ -158,7 +163,7 @@ export default {
       display: block;
       transform: translateX(-150%);
       transition-delay: .2s;
-      transition-duration: .6s;
+      transition-duration: .3s;
       transition-property: all;
       opacity: 0;
     }
@@ -216,6 +221,10 @@ export default {
     line-height: 23px;
     text-decoration: none;
     margin-bottom: 12px;
+    transition: all .2s;
+    &:hover {
+      color: #fa6902;
+    }
   }
   p {
     color: #8d8d8d;
@@ -233,6 +242,7 @@ export default {
       text-transform: uppercase;
       text-decoration: none;
       position: relative;
+      transition: all .2s;
       &:after {
         content: '';
         width: 0;
@@ -242,6 +252,9 @@ export default {
         border-color: transparent transparent transparent #fa6902;
         display: inline-block;
         margin: 0 0 0 10px;
+      }
+      &:hover {
+        color: #111;
       }
     }
   }

@@ -854,10 +854,10 @@ canvas {
         bottom: inherit;
         background-size: cover;
         background-position: center center;
-        height: 58vh;
+        height: 50vh;
         overflow: hidden;
         canvas {
-          height: 58vh !important;
+          height: 50vh !important;
         }
       }
     }

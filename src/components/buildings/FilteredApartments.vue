@@ -104,6 +104,7 @@ export default {
     padding: 20px 10px;
     text-align: center;
     cursor: pointer;
+    transition: all .2s;
     &:before {
       content: '';
       width: 19px;
@@ -111,6 +112,9 @@ export default {
       background: url(~@/assets/images/back-arrow-gray.svg) no-repeat center;
       display: inline-block;
       transform: rotate(90deg);
+    }
+    &:hover {
+      background-color: #e2e2e2;
     }
   }
   .available-from {

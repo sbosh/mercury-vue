@@ -381,6 +381,9 @@ export default {
       text-transform: uppercase;
       color: #000000;
       opacity: 1;
+      &:hover {
+        color: #8d8d8d;
+      }
       .floor {
         opacity: 0;
         transform: rotate(90deg) translateY(-50%);
@@ -539,6 +542,7 @@ export default {
     text-align: center;
     cursor: pointer;
     text-decoration: none;
+    transition: all .2s;
     &:before {
       content: '';
       width: 19px;
@@ -546,6 +550,9 @@ export default {
       background: url(~@/assets/images/back-arrow-gray.svg) no-repeat center;
       display: inline-block;
       transform: rotate(90deg);
+    }
+    &:hover {
+      background-color: #e2e2e2;
     }
   }
   .available-from {

@@ -241,19 +241,24 @@ export default {
       }
       h3 {
         margin-bottom: 43px;
-        position: relative;
-        &:after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background: #fa6a02;
-          transition: all .3s;
+        a {
+          position: relative;
+          &:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #fa6a02;
+            transition: all .3s;
+          }
+        }
+        .router-link-active:before {
+          width: 100%;
         }
         &:hover {
-          &:after {
+          a:before {
             width: 100%;
           }
         }
@@ -265,6 +270,9 @@ export default {
             transition: all .3s;
             padding: 6px 0;
             display: block;
+          }
+          .router-link-active {
+            color: #fff;
           }
           &:hover {
             a {
