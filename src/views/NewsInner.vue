@@ -248,6 +248,9 @@ export default {
         color: #2c2c2c;
         line-height: 26px;
         margin-bottom: 10px;
+        &:hover {
+          color: #fa6902;
+        }
       }
     }
     .swiper-pagination {

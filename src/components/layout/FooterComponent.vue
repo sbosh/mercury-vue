@@ -93,24 +93,6 @@ footer {
         width: 33.33%;
         text-align: center;
         position: relative;
-        &:after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background: #fa6a02;
-          transition: all .3s;
-        }
-        &:hover {
-          &:after {
-            width: 100%;
-          }
-          a {
-            color: #fff;
-          }
-        }
         a {
           text-decoration: none;
           padding: 20px;
@@ -127,6 +109,24 @@ footer {
         font-size: 20px;
         font-weight: 600;
       }
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #fa6a02;
+        transition: all .3s;
+      }
+      &:hover {
+        &:after {
+          width: 100%;
+        }
+        a {
+          color: #fff;
+        }
+      }
     }
   }
   .footer-second-nav {
@@ -136,6 +136,9 @@ footer {
         color: #8d8d8d;
         font-size: 16px;
         font-weight: 500;
+        &:hover {
+          color: #fff;
+        }
       }
     }
   }//second-footer-nav

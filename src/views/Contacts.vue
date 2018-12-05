@@ -360,6 +360,12 @@ export default {
       appearance: none;
       -webkit-appearance: none;
       -webkit-border-radius: 0;
+      transition: all .3s;
+      text-transform: uppercase;
+      font-weight: 600;
+      &:hover {
+        background-color: #d85c02;
+      }
     }
   }
   textarea.form-element {

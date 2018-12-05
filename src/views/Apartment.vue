@@ -795,6 +795,7 @@ export default {
     text-align: left;
     cursor: pointer;
     margin-top: 10px;
+    transition: all .3s;
     &:before {
       content: '';
       width: 19px;
@@ -802,6 +803,9 @@ export default {
       background: url(~@/assets/images/back-arrow-gray.svg) no-repeat center;
       display: inline-block;
       transform: rotate(90deg);
+    }
+    &:hover {
+      background-color: #e2e2e2;
     }
   }
   .floor-plan {

@@ -16,7 +16,10 @@
         <div class="title-box">
           <h2 class="title" v-html="$t('about_building')"></h2>
         </div>
-        <div class="text" v-html="building['text_' + $i18n.locale]"></div>
+        <div class="text" v-html="building['text_' + $i18n.locale]" v-bind:class="{ active: learnMore }"></div>
+        <mq-layout mq="sm" class="learn-more">
+          <button @click="learnMore = !learnMore" v-bind:class="{ active: learnMore }"><span>{{ $t('learn_more') }}</span>{{ $t('close') }}</button>
+        </mq-layout>
         <div class="pdf" v-if="building.pdf">{{ building.pdf }}</div>
       </div>
       <div class="about-complex" v-if="building.status === 1 && building.use_svg === 1">
@@ -75,8 +78,8 @@
             <h2 class="title" v-html="$t('about_location')"></h2>
           </div>
         </div>
-        <div class="box-row">
-          <div class="box" v-if="building.facilities" v-for="facility in building.facilities.data" :key="facility.id">
+        <div class="box-row" v-if="building.facilities.length > 0">
+          <div class="box" v-for="facility in building.facilities.data" :key="facility.id">
             <div class="info">
               <div class="icon"><img :src="facility.image" alt=""></div>
               <div class="text">{{facility['title_' + $i18n.locale]}}</div>
@@ -165,6 +168,7 @@ export default {
     return {
       icon: require('@/assets/images/pin-build.svg'),
       infoWindow: false,
+      learnMore: false,
       swiperOption: {
         slidesPerView: 'auto',
         spaceBetween: 15,
@@ -264,6 +268,9 @@ export default {
       opacity: 1;
     }
     &:hover {
+      a {
+        color: #000;
+      }
       &:after {
         width: 15%;
         margin-left: 50px;
@@ -304,14 +311,17 @@ export default {
     justify-content: flex-end;
     margin-top: 55px;
     background: #000;
+    overflow: hidden;
     img {
       transition: all .3s;
       opacity: .6;
       max-width: 100%;
+      display: block;
     }
     &:hover {
       img {
         opacity: 1;
+        transform: scale(1.1);
       }
     }
 
@@ -347,6 +357,9 @@ export default {
 .news-inner {
   padding: 80px;
   background-color: #232323;
+  .news-article .link a:hover {
+    color: #fff;
+  }
   .title {
     color: #fff;
     font-size: 24px;
@@ -562,11 +575,11 @@ export default {
 .location {
   padding-top: 100px;
   .caption {
-    margin-bottom: 100px;
     visibility: hidden;
     opacity: 0;
     transform: translateX(-100%);
     transition: all .2s;
+    margin-bottom: 50px;
     &.visible {
       transform: translateX(0);
       visibility: visible;
@@ -584,6 +597,7 @@ export default {
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 50px;
+    margin-top: 50px;
   }
   .box {
     flex: 1 0 50%;
@@ -729,6 +743,58 @@ export default {
 }
 #about {
   margin-bottom: 100px;
+  @media screen and(max-width: 600px) {
+    margin-bottom: 40px;
+    .text {
+      height: 38vh;
+      overflow: hidden;
+      position: relative;
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: rgba(255,255,255,0);
+        background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.37) 37%, rgba(248,248,248,0.83) 83%, rgba(248,248,248,0.9) 90%, rgba(248,248,248,1) 100%);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,0)), color-stop(37%, rgba(255,255,255,0.37)), color-stop(83%, rgba(248,248,248,0.83)), color-stop(90%, rgba(248,248,248,0.9)), color-stop(100%, rgba(248,248,248,1)));
+        background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.37) 37%, rgba(248,248,248,0.83) 83%, rgba(248,248,248,0.9) 90%, rgba(248,248,248,1) 100%);
+        background: -o-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.37) 37%, rgba(248,248,248,0.83) 83%, rgba(248,248,248,0.9) 90%, rgba(248,248,248,1) 100%);
+        background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.37) 37%, rgba(248,248,248,0.83) 83%, rgba(248,248,248,0.9) 90%, rgba(248,248,248,1) 100%);
+        background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.37) 37%, rgba(248,248,248,0.83) 83%, rgba(248,248,248,0.9) 90%, rgba(248,248,248,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f8f8f8', GradientType=0 );
+      }
+      &.active {
+        height: auto;
+        &:after {
+          display: none;
+        }
+      }
+    }
+    .learn-more {
+      text-align: center;
+      button {
+        padding: 10px 20px;
+        border: none;
+        box-shadow: none;
+        outline: none;
+        background: none;
+        font-size: 0;
+        text-transform: uppercase;
+        font-family: "Fira Sans";
+        span {
+          font-size: 14px;
+        }
+        &.active {
+          font-size: 14px;
+          span {
+            font-size: 0;
+          }
+        }
+      }
+    }
+  }
 }
 .about-complex {
   padding: 0 90px;
@@ -865,9 +931,16 @@ export default {
       padding: 42px 30px;
     }
   }
-  .main-img img {
-    max-width: 100%;
-    display: block;
+  .main-img {
+    overflow: hidden;
+    img {
+      max-width: 100%;
+      display: block;
+      transition: all .3s;
+    }
+    &:hover img {
+      transform: scale(1.1);
+    }
   }
   @media screen and(max-width: 768px) {
     padding: 20px 0 0 25px;

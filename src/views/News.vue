@@ -95,6 +95,13 @@ export default {
   }
   .news-article {
     margin-bottom: 70px;
+    .img-box {
+      &:hover {
+        img {
+          transform: translateX(0) scale(1.1) !important;
+        }
+      }
+    }
     &:first-child {
       .date {
         color: #fff;
