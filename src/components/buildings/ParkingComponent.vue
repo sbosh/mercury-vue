@@ -4,12 +4,15 @@
       <div class="close" @click="closed"></div>
       <div class="table">
         <div class="thead">
-          <div class="tr">
+          <mq-layout mq="md+" class="tr">
             <div class="th">{{ $t('parking_lot') }}</div>
             <div class="th">{{ $t('clear_area') }}:</div>
             <div class="th">{{ $t('price') }}:</div>
             <div class="th">{{ $t('status') }}:</div>
-          </div>
+          </mq-layout>
+          <mq-layout mq="sm" class="tr">
+            <div class="th">{{ $t('all_parking') }}</div>
+          </mq-layout>
         </div>
         <div class="tbody">
           <div class="tr" v-for="parking in buildingParkings" :key="parking.id">

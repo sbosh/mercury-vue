@@ -78,7 +78,7 @@
             <h2 class="title" v-html="$t('about_location')"></h2>
           </div>
         </div>
-        <div class="box-row" v-if="building.facilities.length > 0">
+        <div class="box-row" v-if="building.facilities">
           <div class="box" v-for="facility in building.facilities.data" :key="facility.id">
             <div class="info">
               <div class="icon"><img :src="facility.image" alt=""></div>
