@@ -2,23 +2,29 @@
   <div class="main-content">
     <mq-layout mq="md+" class="building-view-header"><navinner-component v-if="building" :navTitle="building['title_' + $i18n.locale]" /></mq-layout>
     <div class="building-apartments">
+      <mq-layout mq="sm" class="mobile-building-title"><h1>{{ building['title_' + $i18n.locale] }}</h1></mq-layout>
       <div class="img-box">
         <div id="building" v-if="building" :style="'background-image: url(' + building.image + ')'"></div>
         <div class="flor-info-tooltip">
           <div class="tooltip-info">
             <div class="box">
+              <div class="number" id="js-floor"></div>
               <div class="text">{{ $t('floor') }}</div>
-              <div class="number" id="js-floor">8</div>
             </div>
             <div class="box">
+              <div class="number" id="js-entrance"></div>
               <div class="text">{{ $t('entrance') }}</div>
-              <div class="number" id="js-entrance">8</div>
+            </div>
+          </div>
+          <div class="tooltip-info apartments-count">
+            <div class="box">
+              <div class="text" v-html="$t('available_apartments')"></div>
+              <div class="number" id="js-apartments"></div>
             </div>
           </div>
           <div class="tooltip-info">
             <div class="box">
-              <div class="text" v-html="$t('available_apartments')"></div>
-              <div class="number" id="js-apartments">8</div>
+              <router-link :to="floorRoute" class="btn">{{ $t('back_floor') }}</router-link>
             </div>
           </div>
         </div>
@@ -126,6 +132,7 @@ export default {
   data () {
     return {
       show: false,
+      floorRoute: '',
       value: 300000,
       available: true,
       parkingsActive: false,
@@ -198,16 +205,18 @@ export default {
       this.jsApartments = document.getElementById('js-apartments')
       this.jsFloor = document.getElementById('js-floor')
       this.jsEntrance = document.getElementById('js-entrance')
-      window.onmousemove = (e) => {
-        if (this.insidePoly) {
-          let x = (e.clientX - this.tooltip.offsetWidth / 2) + 'px'
-          let y = (e.clientY + 50) + 'px'
+      if (window.innerWidth > 1024) {
+        window.onmousemove = (e) => {
+          if (this.insidePoly) {
+            let x = (e.clientX - this.tooltip.offsetWidth / 2) + 'px'
+            let y = (e.clientY + 50) + 'px'
 
-          this.tooltip.style.display = 'block'
-          this.tooltip.style.top = y
-          this.tooltip.style.left = x
-        } else {
-          this.tooltip.style.display = 'none'
+            this.tooltip.style.display = 'block'
+            this.tooltip.style.top = y
+            this.tooltip.style.left = x
+          } else {
+            this.tooltip.style.display = 'none'
+          }
         }
       }
     },
@@ -254,7 +263,7 @@ export default {
           graphics.inputEnabled = true
           graphics.input.useHandCursor = true
 
-          graphics.events.onInputDown.add(this.onDown(entrance['slug_' + this.$i18n.locale], floor['slug_' + this.$i18n.locale]), this)
+          graphics.events.onInputDown.add(this.onDown(entrance['slug_' + this.$i18n.locale], floor['slug_' + this.$i18n.locale], eIndex, floorData, floor.id, poly), this)
           graphics.events.onInputOver.add(this.onOver(eIndex, floorData, floor.id), this)
           graphics.events.onInputOut.add(this.onOut(eIndex, floorData), this)
 
@@ -273,13 +282,38 @@ export default {
       this.initTooltip()
       setTimeout(() => store.commit('stopFetching'), 1000)
     },
-    onDown (entranceSlug, florSlug) {
-      return () => {
-        this.$router.push({ name: 'building-inner-floor', params: { slug: entranceSlug, floorId: florSlug } })
+    onDown (entranceSlug, floorSlug, eIndex, floorData, id, poly) {
+      return (e) => {
+        if (window.innerWidth < 1025) {
+          console.log(e, this.game.input)
+          let x = (this.game.input.activePointer.clientX - this.tooltip.offsetWidth / 2) + 'px'
+          let y = (this.game.input.activePointer.clientY + 50) + 'px'
+          this.tooltip.style.display = 'block'
+          this.tooltip.style.top = y
+          this.tooltip.style.left = x
+          this.jsApartments.innerText = floorData.countOfApartments
+          this.jsFloor.innerText = floorData.index + 1
+          this.jsEntrance.innerText = floorData.entrance
+          this.insidePoly = true
+          this.game.add.tween(this.entrances[eIndex].polygons[floorData.index]).to({ alpha: 0.5 }, 200, 'Linear', true)
+          this.floorRoute = `/${this.$i18n.locale}/${this.$route.params.id}/${this.$route.params.building}/floor/${floorSlug}/${entranceSlug}`
+          this.hidePolygons()
+          return
+        }
+        this.$router.push({ name: 'building-inner-floor', params: { slug: entranceSlug, floorId: floorSlug } })
       }
+    },
+    hidePolygons () {
+      this.entrances.forEach(entrance => {
+        const activePolygons = entrance.polygons.filter(poly => poly.alpha)
+        activePolygons.forEach(poly => {
+          this.game.add.tween(poly).to({ alpha: 0 }, 200, 'Linear', true)
+        })
+      })
     },
     onOver (eIndex, floorData, id) {
       return () => {
+        if (window.innerWidth <= 1024) return
         this.jsApartments.innerText = floorData.countOfApartments
         this.jsFloor.innerText = floorData.index + 1
         this.jsEntrance.innerText = floorData.entrance
@@ -294,10 +328,14 @@ export default {
       }
     },
     scaleGame () {
-      this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT
-      this.game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
+      let scaleDevice = Phaser.ScaleManager.EXACT_FIT
+      if (window.innerWidth < 1025) {
+        scaleDevice = Phaser.ScaleManager.SHOW_ALL
+      }
+      this.game.scale.fullScreenScaleMode = scaleDevice
+      this.game.scale.scaleMode = scaleDevice
 
-      this.game.scale.setMinMax(360, 480)
+      this.game.scale.setMinMax(320, 180)
 
       Phaser.Canvas.setImageRenderingCrisp(this.game.canvas)
       Phaser.Canvas.setSmoothingEnabled(this.game.context, false)
@@ -326,9 +364,12 @@ export default {
 
 <style lang="scss">
 canvas {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  @media screen and(min-width: 1025px) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  // height: 480px !important;
 }
 .flor-info-tooltip {
   position: absolute;
@@ -353,28 +394,48 @@ canvas {
   .tooltip-info {
     display: flex;
     align-items: center;
-    &:last-child {
+    &.apartments-count {
      border-top: 1px solid #cfcfcf;
+     margin-bottom: 10px;
      margin-top: 10px;
      padding-top: 10px;
       .box {
         width: 100%;
+        .number {
+          margin-left: 0;
+          margin-right: 10px;
+        }
+      }
+    }
+    &:last-child {
+      .box {
+        padding-left: 0;
+        padding-right: 0;
       }
     }
     .box {
       text-align: center;
       padding: 0 20px;
-      width: 50%;
+      width: 100%;
       display: flex;
       flex-direction: row-reverse;
       align-items: center;
       justify-content: flex-start;
+      .btn {
+        background: #fa6a02;
+        padding: 14px 10px;
+        text-align: center;
+        width: 100%;
+        margin: 0;
+        &:after,&:before {
+          display: none;
+        }
+      }
       .text {
         font-family: 'Montserrat', sans-serif;
         font-weight: 600;
         font-size: 12px;
         color: #333;
-        margin-left: 10px;
         br {
           display: none;
         }
@@ -384,10 +445,22 @@ canvas {
         font-weight: 700;
         color: #000;
         font-size: 26px;
+        margin-left: 10px;
         font-family: 'Exo 2', sans-serif;
       }
       &+.box {
         border-left: 1px solid #cfcfcf;
+      }
+    }
+  }
+  @media screen and(max-width:992px) {
+    padding: 20px 10px 10px;
+    .tooltip-info {
+      .box {
+        padding: 0 10px;
+        .number {
+          font-size: 16px;
+        }
       }
     }
   }
@@ -839,7 +912,7 @@ canvas {
       }
     }
   }
-  @media screen and(max-width: 768px) {
+  @media screen and(max-width: 1024px) {
     height: auto;
     min-height: 100vh;
     padding-right: 195px;
@@ -854,10 +927,10 @@ canvas {
         bottom: inherit;
         background-size: cover;
         background-position: center center;
-        height: 50vh;
+        // height: 50vh;
         overflow: hidden;
         canvas {
-          height: 50vh !important;
+          // height: 50vh !important;
         }
       }
     }
@@ -904,6 +977,23 @@ canvas {
   }
   @media screen and(max-width: 600px) {
     padding-right: 0px;
+    // padding-top: 92px;
+    // background: #232323;
+    .mobile-building-title {
+      padding-left: 10px;
+      padding-right: 10px;
+      padding: 0;
+      h1 {
+        color: #fff;
+        font-family: 'Exo 2', sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 20px;
+        display: none;
+      }
+    }
   }
 }
 .entrances-mobile {
