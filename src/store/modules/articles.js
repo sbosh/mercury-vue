@@ -4,7 +4,7 @@ import HTTP from '@/api/http'
 const articleService = new ArticleService(HTTP)
 
 const state = {
-  all: null,
+  all: [],
   article: null
 }
 
@@ -28,6 +28,11 @@ const getters = {
       return state.all.find(article => article.id === id && article.slug_en === slug) ||
         state.all.find(article => article.id === id && article.slug_bg === slug)
     }
+  },
+  getSwiperArticles (state) {
+    let articles = Array.from(state.all.slice())
+    articles.splice(8)
+    return articles
   }
 }
 

@@ -10,7 +10,7 @@
           :link="article['slug_' + $i18n.locale]"
           :date="article.date" />
       </swiper-slide>
-      <div class="swiper-pagination" slot="pagination"></div>
+      <div class="news-swiper-pagination" slot="pagination"></div>
     </swiper>
   </div>
 </template>
@@ -37,7 +37,7 @@ export default {
           watchSlidesVisibility: true,
           init: false,
           pagination: {
-            el: '.swiper-pagination',
+            el: '.news-swiper-pagination',
             clickable: true
           },
           breakpoints: {
@@ -69,7 +69,7 @@ export default {
               spaceBetween: 0,
               allowTouchMove: true,
               pagination: {
-                el: '.swiper-pagination',
+                el: '.news-swiper-pagination',
                 clickable: true
               }
             }
@@ -87,8 +87,9 @@ export default {
   .swiper-container {
     padding-bottom: 70px;
   }
-  .swiper-pagination {
+  .news-swiper-pagination {
     text-align: left;
+    position: absolute;
     .swiper-pagination-bullet {
       opacity: 1;
       padding: 10px 0;

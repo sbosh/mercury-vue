@@ -122,7 +122,7 @@
       <div class="news-inner" id="news">
         <div class="title">{{ $t('news') }}</div>
         <div class="news-swiper">
-          <news-listing-swiper :articles="articles" />
+          <news-listing-swiper :articles="swiperArticles" />
         </div>
       </div>
       <div class="next-building" v-if="building.next_building">
@@ -153,7 +153,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import FooterComponent from '@/components/layout/FooterComponent.vue'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import NewsListingSwiper from '@/components/news/NewsListingSwiper'
@@ -228,6 +228,9 @@ export default {
     lang () {
       return this.$i18n.locale
     },
+    ...mapGetters({
+      swiperArticles: 'getSwiperArticles'
+    }),
     ...mapState({
       articles: state => state.articles.all,
       building: state => state.buildings.building
@@ -366,10 +369,10 @@ export default {
     font-weight: 600;
     margin-bottom: 80px;
   }
-  .news-swiper .swiper-pagination .swiper-pagination-bullet:before {
+  .news-swiper .news-swiper-pagination .swiper-pagination-bullet:before {
     background: #9e9e9e;
   }
-  .news-swiper .swiper-pagination .swiper-pagination-bullet-active:before {
+  .news-swiper .news-swiper-pagination .swiper-pagination-bullet-active:before {
     background: #fff;
   }
   @media screen and(max-width: 767px) {

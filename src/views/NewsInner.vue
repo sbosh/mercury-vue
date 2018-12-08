@@ -34,7 +34,7 @@
         <div class="related-news">
           <h3>{{ $t('related_news') }}</h3>
           <div class="news-swiper">
-            <news-listing-swiper :articles="articles.filter(a => a.id !== article.id)" />
+            <news-listing-swiper :articles="swiperArticles.filter(a => a.id !== article.id)" />
           </div>
         </div>
       </div>
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import NavinnerComponent from '@/components/layout/NavinnerComponent'
 import NewsListingSwiper from '@/components/news/NewsListingSwiper'
 import FooterComponent from '@/components/layout/FooterComponent.vue'
@@ -57,26 +57,7 @@ export default {
   },
   data () {
     return {
-      url: window.location.href,
-      swiperOption: {
-        slidesPerView: 'auto',
-        spaceBetween: 15,
-        speed: 1000,
-        loop: true,
-        slideToClickedSlide: true,
-        autoplay: {
-          delay: 7000,
-          disableOnInteraction: false
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-        }
-      }
+      url: window.location.href
     }
   },
   metaInfo () {
@@ -93,6 +74,9 @@ export default {
     })
   },
   computed: {
+    ...mapGetters({
+      swiperArticles: 'getSwiperArticles'
+    }),
     ...mapState({
       articles: state => state.articles.all,
       article: state => state.articles.article
