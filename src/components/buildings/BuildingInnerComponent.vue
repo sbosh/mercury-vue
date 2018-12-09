@@ -16,7 +16,7 @@
         <div class="title-box">
           <h2 class="title" v-html="$t('about_building')"></h2>
         </div>
-        <div class="text" v-html="building['text_' + $i18n.locale]" v-bind:class="{ active: learnMore }"></div>
+        <div class="text" v-bind:class="{ active: learnMore }" v-html="building['text_' + $i18n.locale]"></div>
         <mq-layout mq="sm" class="learn-more">
           <button @click="learnMore = !learnMore" v-bind:class="{ active: learnMore }"><span>{{ $t('learn_more') }}</span>{{ $t('close') }}</button>
         </mq-layout>
@@ -746,10 +746,30 @@ export default {
 }
 #about {
   margin-bottom: 100px;
+  .text {
+    .prices {
+      color: #fa6a02;
+      text-decoration: none;
+      &:before {
+        content: '';
+        width: 50px;
+        height: 50px;
+        background-color: #fff;
+        background-image: url('~@/assets/images/arrow-pdf.svg');
+        background-size: 20px;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 50%;
+        margin-right: 10px;
+        margin-bottom: -17px;
+        display: inline-block;
+      }
+    }
+  }
   @media screen and(max-width: 600px) {
     margin-bottom: 40px;
     .text {
-      height: 38vh;
+      height: 37vh;
       overflow: hidden;
       position: relative;
       &:after {
