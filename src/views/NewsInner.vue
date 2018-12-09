@@ -15,7 +15,7 @@
           </div>
           <div class="info-box">
             <p v-html="article['text_' + $i18n.locale]"></p>
-            <div class="follow-us">
+            <div class="follow-us" style="display: none;">
               <div class="tex">{{ $t('share_text') }}:</div>
               <social-sharing
                 url="window.location.href"

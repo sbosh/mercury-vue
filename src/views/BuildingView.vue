@@ -22,7 +22,7 @@
               <div class="number" id="js-apartments"></div>
             </div>
           </div>
-          <div class="tooltip-info">
+          <div class="tooltip-info button-info">
             <div class="box">
               <router-link :to="floorRoute" class="btn">{{ $t('back_floor') }}</router-link>
             </div>
@@ -335,7 +335,7 @@ export default {
       this.game.scale.fullScreenScaleMode = scaleDevice
       this.game.scale.scaleMode = scaleDevice
 
-      this.game.scale.setMinMax(320, 180)
+      this.game.scale.setMinMax(480, 270)
 
       Phaser.Canvas.setImageRenderingCrisp(this.game.canvas)
       Phaser.Canvas.setSmoothingEnabled(this.game.context, false)
@@ -394,9 +394,11 @@ canvas {
   .tooltip-info {
     display: flex;
     align-items: center;
+    &.button-info {
+      display: none;
+    }
     &.apartments-count {
      border-top: 1px solid #cfcfcf;
-     margin-bottom: 10px;
      margin-top: 10px;
      padding-top: 10px;
       .box {
@@ -426,7 +428,7 @@ canvas {
         padding: 14px 10px;
         text-align: center;
         width: 100%;
-        margin: 0;
+        margin: 10px 0 0 0;
         &:after,&:before {
           display: none;
         }
@@ -451,6 +453,11 @@ canvas {
       &+.box {
         border-left: 1px solid #cfcfcf;
       }
+    }
+  }
+  @media screen and(max-width: 1024px) {
+    .tooltip-info.button-info {
+      display: block;
     }
   }
   @media screen and(max-width:992px) {

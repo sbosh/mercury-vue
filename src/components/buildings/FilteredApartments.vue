@@ -27,14 +27,14 @@
         <div class="info">
           <div class="maisonette" v-if="apartment.mezonet === 1">{{ $t('maisonette') }}</div>
           <div class="title"><h3><router-link :to="'/' + $i18n.locale + '/' + $route.params.id + '/' + $route.params.building + '/floor/' + apartment.floor.id + '/' + apartment.entrance['slug_' + $i18n.locale] + '/' + apartment['slug_' + $i18n.locale]">{{ apartment['title_' + $i18n.locale] }}</router-link></h3></div>
-          <div class="sqm">{{ apartment.total_area }} mq<sup>2</sup></div>
+          <div class="sqm">{{ apartment.total_area }} m<sup>2</sup></div>
           <div class="floor-entrance">
             <div class="entrance">{{ apartment.entrance['title_' + $i18n.locale] }}</div>
             <div class="floor">{{ $t('floor') }} {{ apartment.floor['title_' + $i18n.locale] }}</div>
           </div>
           <div class="price" v-if="apartment.status == 2 || apartment.status == 1">
             <div class="text">{{ $t('price') }}:</div>
-            {{ apartment.price }} <span>eur</span>
+            {{ apartment.price }} <span>EUR</span>
           </div>
         </div>
       </div>
