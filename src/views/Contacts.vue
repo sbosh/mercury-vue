@@ -35,11 +35,11 @@
           <div class="tabs-container">
             <div id="tab1" v-if="tab1">
               <GmapMap
-                :center="{lat:42.676590, lng:23.320476}"
-                :zoom="14"
+                :center="{lat:42.666287, lng:23.295239}"
+                :zoom="16"
               >
                 <GmapMarker
-                  :position="{lat:42.676590, lng:23.320476}"
+                  :position="{lat:42.666287, lng:23.295239}"
                   :icon="icon"
                 />
               </GmapMap>
@@ -47,7 +47,7 @@
             <div id="tab2" v-if="tab2">
               <GmapMap
                 :center="{lat:42.687657, lng:27.705927}"
-                :zoom="14"
+                :zoom="16"
               >
                 <GmapMarker
                   :position="{lat:42.687657, lng:27.705927}"
