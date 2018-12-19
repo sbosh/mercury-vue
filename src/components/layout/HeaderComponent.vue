@@ -18,11 +18,11 @@
               <h3><router-link :to="'/' + lang + '/finished-buildings'">{{ $t('completed_projects') }}</router-link></h3>
               <h3><router-link :to="'/' + lang + '/future-buildings'">{{ $t('future_projects') }}</router-link></h3>
               <h3><a href="http://mercury99.com/" target="_blank">{{ $t('vacant_property') }}</a></h3>
-              <h3><router-link :to="'/' + lang + '/news'">{{ $t('news') }}</router-link></h3>
             </div>
             <div class="col">
-              <h3><router-link :to="'/' + lang + '/contacts'">{{ $t('contacts') }}</router-link></h3>
-              <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/about'">{{ $t('about_company') }}</router-link></h3>
+              <h3><router-link :to="'/' + lang + '/about'">{{ $t('about_company') }}</router-link></h3>
+              <h3><router-link :to="'/' + lang + '/news'">{{ $t('news') }}</router-link></h3>
+              <h3 class="margin-bottom-0"><router-link :to="'/' + lang + '/contacts'">{{ $t('contacts') }}</router-link></h3>
               <br>
               <!-- <ul>
                 <li><router-link :to="'/' + lang + '/about#company'">{{ $t('about_us') }}</router-link></li>
