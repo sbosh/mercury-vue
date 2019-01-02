@@ -21,7 +21,7 @@
       <li><a href=""><img src="@/assets/images/ln-icon.svg" class="svg" alt=""></a></li> -->
     </ul>
     <div class="all-rights">{{ $t('all_rights') }}</div>
-    <div class="created-by"><a href="http://imigix.com/" target="_blank">{{ $t('created_by') }} <b>Imigix</b></a></div>
+    <div class="created-by"><a href="https://grindwebstudio.com" target="_blank">{{ $t('created_by') }} <b>Grind Web Studio</b></a></div>
   </footer>
 </template>
 
