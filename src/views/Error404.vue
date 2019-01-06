@@ -1,12 +1,15 @@
 <template>
   <div class="main-content">
-    <navinner-component :navTitle="title" />
+    <mq-layout mq="md+" class="black-nav"><navinner-component :navTitle="title" /></mq-layout>
     <div class="error-page">
       <div class="caption">
         <div class="title-box">
           <h1 class="title">{{ $t('error404_title') }}</h1>
         </div>
         <h2>404</h2>
+        <div class="btn-box">
+          <router-link :to="'/' + lang" class="btn">{{ $t('home_page') }}</router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -21,6 +24,11 @@ export default {
   data () {
     return {
       title: '404'
+    }
+  },
+  computed: {
+    lang () {
+      return this.$i18n.locale
     }
   }
 }
@@ -64,6 +72,28 @@ export default {
       background: #979797;
       display: inline-block;
       margin-right: 70px;
+    }
+  }
+  @media screen and(max-width: 1024px) {
+    h2 {
+      font-size: 120px;
+    }
+  }
+  @media screen and(max-width: 768px) {
+    .caption {
+      padding-right: 0;
+    }
+    h2 {
+      font-size: 60px;
+      &:before {
+        display: none;
+      }
+    }
+    .title-box {
+      padding-left: 90px;
+      .title {
+        font-size: 26px;
+      }
     }
   }
 }
