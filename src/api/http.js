@@ -1,13 +1,13 @@
 import axios from 'axios'
 export default (() => {
   const instance = axios.create({
-    baseURL: 'http://mercury-api.imigix.com/api',
+    baseURL: 'http://api.mercury99.bg/api',
     withCredentials: false,
     headers: {
       'Accept': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer mitko'
+      'Authorization': 'Bearer 0889260962'
     }
   })
 
