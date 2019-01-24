@@ -58,10 +58,12 @@
           <div class="price reserved" v-if="apartment.status == 2" >{{ $t('reserved') }}</div>
           <div class="price sold" v-if="apartment.status == 3" >{{ $t('sold') }}</div>
         </div>
+        <!--
         <div v-if="apartment.status == 1">
           <div class="text"><span>{{ $t('price_per_m') }}</span> m²:</div>
           <div class="price">{{ this.formatPrice(apartment.price_m2) }} <div class="currency">{{ $t('euro') }}</div></div>
         </div>
+        -->
       </div>
     </div>
     <div class="apartment-content">
